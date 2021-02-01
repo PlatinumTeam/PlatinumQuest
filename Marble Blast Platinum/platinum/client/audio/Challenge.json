@@ -1,0 +1,18 @@
+{
+	"alarm": "F",
+	"alarm_timeout": "F",
+	"checkpoint": "F",
+	"firewrks": "F",
+	"gotDiamond": "F",
+	"gotAllDiamonds": "F",
+	"missinggems": "F",
+	"easter": "B_flat",
+	"easterfound": "B_flat",
+	"spawn": "B_flat",
+	"opponentDiamond": "A",
+	"gotDiamond1": "F",
+	"gotDiamond2": "F",
+	"gotDiamond5": "F",
+	"gotDiamond10": "F",
+	"jeef": "salty"
+}

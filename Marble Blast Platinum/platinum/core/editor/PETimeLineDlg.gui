@@ -1,0 +1,521 @@
+//-----------------------------------------------------------------------------
+// Portions Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Torque Game Engine
+//
+// Portions Copyright (c) 2001 GarageGames.Com
+//-----------------------------------------------------------------------------
+
+if ($EXEC::PeTimeLineDlg::GUI)
+	return;
+$EXEC::PeTimeLineDlg::GUI = 1;
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(PeTimeLineDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "490 343";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+
+	new GuiWindowCtrl(PETWindow) {
+		profile = "GuiWindowProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "0 0";
+		extent = "490 343";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		text = "Particle Timeline";
+		maxLength = "255";
+		resizeWidth = "1";
+		resizeHeight = "1";
+		canMove = "1";
+		canClose = "1";
+		canMinimize = "1";
+		canMaximize = "1";
+		minSize = "50 50";
+		closeCommand = "RootGui.popDialog(PETimelineDlg);";
+
+		new GuiTextCtrl(PETEditInfo) {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "185 168";
+			extent = "68 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Editing Node 2";
+			maxLength = "255";
+		};
+		new GuiControl() {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "5 26";
+			extent = "480 141";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiBitmapCtrl(PETTimeline) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "19 14";
+				extent = "385 77";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				wrap = "0";
+
+				new GuiBitmapButtonCtrl(PETNode1) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 8";
+					extent = "40 16";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PETimelineDlg.setActiveNode(1);";
+					helpTag = "0";
+					text = " Node 1";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					wrap = "0";
+				};
+				new GuiBitmapButtonCtrl(PETNode2) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 23";
+					extent = "40 16";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PETimelineDlg.setActiveNode(2);";
+					helpTag = "0";
+					text = " Node 2";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					wrap = "0";
+				};
+				new GuiBitmapButtonCtrl(PETNode3) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 38";
+					extent = "40 16";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PETimelineDlg.setActiveNode(3);";
+					helpTag = "0";
+					text = " Node 3";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					wrap = "0";
+				};
+				new GuiBitmapButtonCtrl(PETNode4) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 53";
+					extent = "40 16";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PETimelineDlg.setActiveNode(4);";
+					helpTag = "0";
+					text = " Node 4";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					wrap = "0";
+				};
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "173 120";
+				extent = "78 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Timeline Position";
+				maxLength = "255";
+			};
+			new GuiSliderCtrl(PETTime) {
+				profile = "GuiSliderProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "19 94";
+				extent = "385 44";
+				minExtent = "8 2";
+				visible = "1";
+				command = "PETimelineDlg.updateTime();";
+				helpTag = "0";
+				range = "0.000000 1.000000";
+				ticks = "50";
+				value = "1";
+			};
+			new GuiTextEditSliderCtrl(PETNumNodes) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "419 71";
+				extent = "34 19";
+				minExtent = "8 2";
+				visible = "1";
+				command = "PETimelineDlg.updateNodes();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+				format = "%3.0f";
+				range = "2 4";
+				increment = "1";
+			};
+			new GuiMLTextCtrl() {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "408 37";
+				extent = "69 28";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+				defaultText = "# of\n nodes to use";
+			};
+		};
+		new GuiControl() {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "150 213";
+			extent = "34 34";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiControl(PETColor) {
+				profile = "GuiWindowProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "1 1";
+				extent = "32 32";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new DebugView() {
+					profile = "GuiComic128Profile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "-23 -45";
+					extent = "157 157";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					maxLength = "255";
+					useTimeStamps = "0";
+				};
+				new DebugView() {
+					profile = "GuiComic128Profile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "-38 -51";
+					extent = "157 157";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					maxLength = "255";
+					useTimeStamps = "0";
+				};
+				new DebugView() {
+					profile = "GuiComic128Profile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "-3 -47";
+					extent = "157 157";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					maxLength = "255";
+					useTimeStamps = "0";
+				};
+			};
+		};
+		new GuiSliderCtrl(PETColorR) {
+			profile = "GuiSliderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "32 185";
+			extent = "110 35";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateColor();";
+			helpTag = "0";
+			range = "0.000000 1.000000";
+			ticks = "10";
+			value = "0";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15 185";
+			extent = "8 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "R";
+			maxLength = "255";
+		};
+		new GuiSliderCtrl(PETColorG) {
+			profile = "GuiSliderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "32 220";
+			extent = "110 35";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateColor();";
+			helpTag = "0";
+			range = "0.000000 1.000000";
+			ticks = "10";
+			value = "0";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15 220";
+			extent = "8 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "G";
+			maxLength = "255";
+		};
+		new GuiSliderCtrl(PETColorB) {
+			profile = "GuiSliderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "32 255";
+			extent = "110 35";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateColor();";
+			helpTag = "0";
+			range = "0.000000 1.000000";
+			ticks = "10";
+			value = "0";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15 255";
+			extent = "8 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "B";
+			maxLength = "255";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15 289";
+			extent = "8 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "A";
+			maxLength = "255";
+		};
+		new GuiSliderCtrl(PETColorA) {
+			profile = "GuiSliderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "32 289";
+			extent = "110 35";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateAlpha(); PETColorA.LastValue = PETColorA.getValue();";
+			helpTag = "0";
+			range = "0.000000 1.000000";
+			ticks = "10";
+			value = "1";
+		};
+		new GuiSliderCtrl(PETSize) {
+			profile = "GuiSliderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "306 182";
+			extent = "110 35";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateSize(); PETSize.LastValue = PETSize.getValue();";
+			helpTag = "0";
+			range = "0.000000 5.000000";
+			ticks = "10";
+			value = "1";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "276 182";
+			extent = "21 18";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Size";
+			maxLength = "255";
+		};
+		new GuiTextEditSliderCtrl(PETSize2) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "418 182";
+			extent = "16 19";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateSize(1);";
+			helpTag = "0";
+			maxLength = "255";
+			maxPixelWidth = "0";
+			historySize = "0";
+			password = "0";
+			tabComplete = "0";
+			sinkAllKeyEvents = "0";
+			format = "%3.2f";
+			range = "0 5";
+			increment = "0.1";
+		};
+		new GuiTextEditSliderCtrl(PETAlpha2) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "145 290";
+			extent = "16 19";
+			minExtent = "8 2";
+			visible = "1";
+			command = "PETimelineDlg.updateAlpha(1);";
+			helpTag = "0";
+			maxLength = "255";
+			maxPixelWidth = "0";
+			historySize = "0";
+			password = "0";
+			tabComplete = "0";
+			sinkAllKeyEvents = "0";
+			format = "%3.2f";
+			range = "0 1";
+			increment = "0.05";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "304 315";
+			extent = "55 19";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Accept";
+			command = "PETimelineDlg::exportData(); RootGui.popDialog(PETimelineDlg);";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "424 315";
+			extent = "55 19";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Cancel";
+			command = "PETimelineDlg::restoreData(); RootGui.popDialog(PETimelineDlg);";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "364 315";
+			extent = "55 19";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			command = "PETimelineDlg::exportData();";
+			text = "Apply";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiCheckBoxCtrl() {
+			profile = "GuiCheckBoxProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "340 290";
+			extent = "140 21";
+			minExtent = "8 8";
+			visible = "1";
+			variable = "$PETimeline::ApplyInstantly";
+			helpTag = "0";
+			text = "Apply Changes Instantly";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---

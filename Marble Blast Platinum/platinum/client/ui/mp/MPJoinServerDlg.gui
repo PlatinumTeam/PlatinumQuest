@@ -1,0 +1,814 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+if (!isObject(MPJoinServerListProfile)) new GuiControlProfile(MPJoinServerListProfile : GuiTextListProfile) {
+	fontType = $DefaultFont;
+	fontSize = 18;
+	fontColorHL = "51 51 51 255";
+	fontColorNA = "153 153 153";
+	fontColors[0] = "0 0 0 255";
+	fontColors[6] = "0 102 204 255";
+	fontColors[7] = "0 0 0 255";
+	fontColors[8] = "102 0 0 255";
+	fillColor = "0 0 0 0";
+	fillColorHL = "0 0 0 51";
+};
+
+//--- OBJECT WRITE BEGIN ---
+new GuiChunkedBitmapCtrl(MPJoinServerDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	useVariable = "0";
+	tile = "0";
+		_guiSize = "800 600";
+		defaultControl = "MPJoinServerList";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "20 65";
+		extent = "759 469";
+		minExtent = "41 41";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(MPJoinHostGame) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "529 397";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPJoinServerDlg.hostMission();";
+			helpTag = "0";
+			text = "Host";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlUp = "MPJoinServerList";
+				controlLeft = "MPJoinRefresh";
+				controlRight = "MPJoinJoinServer";
+		};
+		new GuiBorderButtonCtrl(MPJoinRefresh) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "285 397";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPJoinServerDlg.query();";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/join/refresh.png";
+				bitmapRotation = "0";
+				tooltip = "Refresh";
+				controlUp = "MPJoinServerList";
+				controlLeft = "MPJoinDirectConnect";
+				controlRight = "MPJoinHostGame";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "524 52";
+			extent = "213 350";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "GuiPhilScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 12";
+				extent = "189 326";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiMLTextCtrl(MPJoinserverInfo) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "185 132";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+		};
+		new GuiMLTextCtrl(MPJoinTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "56 20";
+			extent = "647 36";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 52";
+			extent = "513 350";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(MPJoinStatusTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "17 308";
+				extent = "479 27";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 40";
+				extent = "487 269";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPJoinServerList) {
+					profile = "MPJoinServerListProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "487 46";
+					minExtent = "8 8";
+					visible = "1";
+					command = "serverSelect();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "20 310 375 430";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+						controlDown = "MPJoinExit";
+				};
+			};
+			new GuiMLTextCtrl(MPJoinListTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "17 16";
+				extent = "487 22";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "18 17";
+				extent = "14 19";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./join/lock";
+				wrap = "0";
+					tooltip = "Password Protected Server";
+			};
+		};
+		new GuiBorderButtonCtrl(MPJoinExit) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "27 397";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPJoinServerDlg.exit();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlUp = "MPJoinServerList";
+				controlRight = "MPJoinDirectConnect";
+		};
+		new GuiBorderButtonCtrl(MPJoinDirectConnect) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "121 397";
+			extent = "164 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPJoinServerDlg.directConnect();";
+			helpTag = "0";
+			text = "Direct Connect";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlUp = "MPJoinServerList";
+				controlLeft = "MPJoinExit";
+				controlRight = "MPJoinRefresh";
+		};
+		new GuiBorderButtonCtrl(MPJoinJoinServer) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "638 397";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPJoinServerDlg.join();";
+			helpTag = "0";
+			text = "Join";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlUp = "MPJoinServerList";
+				controlLeft = "MPJoinHostGame";
+		};
+	};
+	new GuiBitmapCtrl(MPJoinPasswordPop) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 0";
+		extent = "800 600";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "~/client/ui/exit/black";
+		wrap = "0";
+
+		new GuiControl() {
+			profile = "PQWindowProfile";
+			horizSizing = "center";
+			vertSizing = "center";
+			position = "146 199";
+			extent = "508 192";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiBorderButtonCtrl(MPJoinPasswordJoin) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "387 120";
+				extent = "94 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPJoinServerDlg.joinPassword();";
+				helpTag = "0";
+				text = "Join";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiMLTextCtrl(MPJoinPasswordTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "22 28";
+				extent = "463 36";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiControl() {
+				profile = "PQTextboxBorderProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "33 76";
+				extent = "442 38";
+				minExtent = "21 21";
+				visible = "1";
+				helpTag = "0";
+			};
+			new GuiTextEditCtrl(MPJoinPassword) {
+				profile = "PQTextboxProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "37 80";
+				extent = "434 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPJoinServerDlg.updatePassword();";
+				altCommand = "MPJoinServerDlg.joinPassword();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				escapeCommand = "MPJoinServerDlg.cancelPassword();";
+				historySize = "0";
+				password = "1";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiCheckBoxCtrl(MPJoinShowPassword) {
+				profile = "PQCheckboxProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "160 129";
+				extent = "148 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPJoinServerDlg.updatePassword();";
+				helpTag = "0";
+				text = "Show Password";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiBorderButtonCtrl() {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "27 120";
+				extent = "94 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPJoinServerDlg.cancelPassword();";
+				helpTag = "0";
+				text = "Cancel";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+// the field where the index is referenced inside of the update function below
+$Master::ServerRowIndexField = 4;
+
+//----------------------------------------
+function MPJoinServerDlg::onWake(%this) {
+	// Double check the status. Tried setting this the control
+	// inactive to start with, but that didn't seem to work.
+	MPJoinJoinServer.setActive(false);
+	%this.joining = false;
+
+	serverSelect();
+	%this.update();
+	%this.query();
+	%this.popPassword();
+
+	serverSelect();
+
+	if (%this.spinInterval $= "")
+		%this.spinInterval = %this.interval(40, "updateSpinner");
+}
+
+function MPJoinServerDlg::updateSpinner(%this) {
+	if (!%this.isAwake())
+		return;
+	if (%this.loading || (MPJoinRefresh.bitmapRotation % 180) > 0) {
+		MPJoinRefresh.bitmapRotation -= 10;
+		MPJoinRefresh.bitmapRotation += 180;
+		MPJoinRefresh.bitmapRotation %= 180;
+	}
+}
+
+//----------------------------------------
+function MPJoinServerDlg::query(%this) {
+	MPJoinRefresh.setActive(false);
+	%this.loading = true;
+
+	if (%this.querying) {
+		%this.querying = false;
+		%this.schedule(500, "query");
+		return;
+	}
+
+	MPJoinServerList.clearSelection();
+
+	%this.queried = true;
+	%this.querying = true;
+	%this.progress = 0;
+
+	%this.queryStatus = 0;
+	%this.queryMaxServers = 1;
+
+	%this.update();
+	%this.queryGG();
+}
+
+//----------------------------------------
+function MPJoinServerDlg::queryGG(%this) {
+	portInit($Pref::Server::Port);
+
+	//Use our master
+
+	if ($pref::Master[0] $= "2:master.garagegames.com:28002")
+		$pref::Master[0] = "2:marbleblast.com:29000";
+
+	if ($pref::Master[0] $= "2:marbleblast.com:29000")
+		$pref::Master[0] = "2:master.marbleblast.com:29000";
+
+	$Client::GameTypeQuery = "Any";
+	$Client::MissionTypeQuery = "Any";
+
+	%this.queried = true;
+	queryMasterServer(
+		28000,      // lanPort for local queries
+		0,          // Query flags
+		$Client::GameTypeQuery,       // gameTypes
+		$Client::MissionTypeQuery,    // missionType
+		0,          // minPlayers
+		100,        // maxPlayers
+		0,          // maxBots
+		2,          // regionMask
+		0,          // maxPing
+		100,        // minCPU
+		0           // filterFlags
+	);
+}
+
+//----------------------------------------
+function MPJoinServerDlg::cancel(%this) {
+	cancelServerQuery();
+	if (%this.querying) {
+		queryFinish();
+	}
+}
+
+//----------------------------------------
+function MPJoinServerDlg::join(%this) {
+	$MP::ServerPassword = "";
+
+	cancelServerQuery();
+	%id = MPJoinServerList.getSelectedId();
+
+	%serverType = getField(MPJoinServerList.getRowTextById(%id), $Master::ServerRowIndexField + 1);
+	%index = getField(MPJoinServerList.getRowTextById(%id), $Master::ServerRowIndexField);
+
+	switch (%serverType) {
+	case 1:
+		// Server from GG master server
+		// The server info index is stored in the row along with the
+		// rest of displayed info.
+		if (setServerInfo(%index)) {
+			//Ugly gameType hack
+			%gameTypeInfo = $ServerInfo::GameType;
+			if (getField(%gameTypeInfo, 4) && %password $= "") {
+				//Password required
+				%this.pushPassword($ServerInfo::Address);
+			} else
+				joinServer($ServerInfo::Address, $LB::Username, $MP::ServerPassword);
+		}
+	case 2:
+		// Favorited server
+		%foo = bar; //TODO: Figure this out eventually?
+	}
+}
+
+//----------------------------------------
+function MPJoinServerDlg::exit(%this) {
+	%this.cancel();
+	RootGui.setContent(LBChatGui);
+}
+
+//----------------------------------------
+
+function MPJoinServerDlg::pushPassword(%this, %ip, %invalid) {
+	%this.joinIP = %ip;
+	MPJoinPasswordPop.setVisible(true);
+	MPJoinPasswordTitle.setText("<bold:32><just:center>" @(%invalid ? "Invalid Password" : "Password Required"));
+	MPJoinPassword.setValue("");
+	MPJoinShowPassword.setValue(false);
+	%this.updatePassword();
+}
+
+function MPJoinServerDlg::updatePassword(%this) {
+	MPJoinPassword.password = !MPJoinShowPassword.getValue();
+	MPJoinPasswordJoin.setActive(MPJoinPassword.getValue() !$= "");
+	$MP::ServerPassword = MPJoinPassword.getValue();
+}
+
+function MPJoinServerDlg::cancelPassword(%this) {
+	%this.popPassword();
+}
+
+function MPJoinServerDlg::joinPassword(%this) {
+	//So apparently this method gets the event for pressing enter on the GUI,
+	// and keeps trying to join blank servers. Let's not.
+	if (%this.joinIP $= "") {
+		%this.join();
+		return;
+	}
+
+	joinServer(%this.joinIP, $LB::Username, $MP::ServerPassword);
+	%this.joinIP = "";
+
+	%this.cancelPassword();
+}
+
+function MPJoinServerDlg::popPassword(%this) {
+	MPJoinPasswordPop.setVisible(false);
+	MPJoinShowPassword.setValue(false);
+	%this.updatePassword();
+}
+
+//----------------------------------------
+
+function MPJoinServerDlg::directConnect(%this) {
+	if ($MP::EnableDirectConnect)
+		RootGui.pushDialog(MPDirectConnectDlg);
+}
+
+//----------------------------------------
+
+function MPJoinServerDlg::hostMission(%this) {
+	if ($Game::Offline)
+		return;
+	PlayMissionGui.startServer();
+}
+
+//----------------------------------------
+function MPJoinServerDlg::update(%this) {
+	// Copy the servers into the server list.
+	%selected = MPJoinServerList.getSelectedId();
+	if (%selected < 0)
+		%selected = 0;
+
+	while (isObject(MPJoinLockIcon)) {
+		MPJoinLockIcon.delete();
+	}
+	MPJoinServerList.clear();
+
+	MPJoinlistTitle.setText("<font:20><tab:20,310,375,430>\tServer Name\tPlayers\tMode\tPing");
+	MPJoinTitle.setText("<bold:32><just:center>Server List");
+
+	// we are setting new values for these.
+	deleteVariables("$Master::RowInfo*");
+
+	%sc = getServerCount();
+	for (%i = 0; %i < %sc; %i++) {
+		setServerInfo(%i);
+		%loading = $ServerInfo::State $= "";
+		if (%loading) {
+
+			%row = clipPx("", 18, "[Loading] " @ $ServerInfo::Name, 290, true) TAB
+					 "" TAB
+					 "" TAB
+					 "" TAB
+					 %i TAB // ServerInfo index stored also
+					 1; // From gg master server
+
+			$Master::RowInfo[%i] = %row;
+			MPJoinServerList.addRow(%i, %row);
+
+			//Loading, can't join yet
+			MPJoinServerList.setRowActive(%i, 0);
+		} else {
+			%gameTypeInfo = $ServerInfo::GameType;
+			%row = ($ServerInfo::Dedicated ? "\c6" : "") @
+					 clipPx("", 18, "[" @ $ServerInfo::State @ "] " @ $ServerInfo::Name, 290, true) TAB
+					 $ServerInfo::PlayerCount SPC "/" SPC $ServerInfo::MaxPlayers TAB
+					 clipPx("", 18, getField($ServerInfo::GameType, 1), 50, true) TAB
+					 $ServerInfo::Ping TAB
+					 %i TAB // ServerInfo index stored also
+					 1; // From gg master server
+
+			$Master::RowInfo[%i] = %row;
+			MPJoinServerList.addRow(%i, %row);
+		}
+	}
+	MPJoinServerList.sort(0, true);
+
+	for (%i = 0; %i < %sc; %i++) {
+		setServerInfo(%i);
+		%loading = $ServerInfo::State $= "";
+		%gameTypeInfo = $ServerInfo::GameType;
+		if (!%loading) {
+			// password on server?
+			if (getField(%gameTypeInfo, 4)) {
+				MPJoinServerList.getGroup().add(new GuiBitmapCtrl(MPJoinLockIcon) {
+					profile = "GuiDefaultProfile";
+					position = "5" SPC 1 + MPJoinServerList.getRowNumById(%i) * 23;
+					extent = "14 19";
+					bitmap = "~/client/ui/mp/join/" @ ($ServerInfo::Dedicated ? "lock_dedicated" : "lock");
+				});
+			}
+		}
+	}
+	//Favorite Servers go here?
+	// *laughs*...
+
+	//Use \c1 for favorite servers
+	// bahahah
+
+	MPJoinServerList.setSelectedById(%selected);
+	MPJoinServerList.scrollVisible(0);
+
+	MPJoinJoinServer.setActive(MPJoinServerList.rowCount() > 0 && !%this.joining);
+	MPJoinDirectConnect.setActive(!%this.joining);
+	MPJoinHostGame.setActive(!%this.joining);
+	MPJoinExit.setActive(!%this.joining);
+}
+
+//----------------------------------------
+function onServerQueryStatus(%status, %msg, %value) {
+	// Update query status
+	// States: start, update, ping, query, done
+	// value = % (0-1) done for ping and query states
+
+	%fontStatus = "<font:24><just:center>";
+
+	switch$ (%status) {
+	case "start":
+		// set status
+		MPJoinStatusTitle.setText(%fontStatus @ "Starting Query...");
+
+		// inform
+		MPJoinServerInfo.setText("<font:24><just:center>Select a Server");
+
+		while (isObject(MPJoinLockIcon)) {
+			MPJoinLockIcon.delete();
+		}
+		MPJoinServerList.clear();
+		MPJoinServerDlg.loading = true;
+		MPJoinRefresh.setActive(false);
+		MPJoinServerDlg.update();
+	case "ping":
+		%done = mCeil(%value * 100);
+		MPJoinStatusTitle.setText(%fontStatus @ "Pinging Servers...(" @ %done @ "% complete)");
+		MPJoinServerDlg.update();
+	case "query":
+		%done = mCeil(%value * 100);
+		MPJoinStatusTitle.setText(%fontStatus @ "Querying Servers (" @ %done @ "% complete)");
+		MPJoinServerDlg.update();
+	case "done":
+		MPJoinStatusTitle.setText(%fontStatus @ %msg);
+		MPJoinServerDlg.update();
+		MPJoinServerDlg.loading = false;
+		MPJoinRefresh.setActive(true);
+	}
+}
+
+//----------------------------------------
+
+function queryFinish() {
+	if (!MPJoinServerDlg.isAwake())
+		return;
+
+	MPJoinServerDlg.querying = false;
+	MPJoinServerDlg.update();
+}
+
+//-----------------------------------------------------------------------------
+
+function serverSelect() {
+	%index = MPJoinServerList.rowCount() ? MPJoinServerList.getSelectedId() : -1;
+	//name - players - mode - ping - idx - type
+	if (%index >= 0 && MPJoinServerList.isRowActive(%index)) {
+		%serverIdx  = getField(MPJoinServerList.getRowTextById(%index), $Master::ServerRowIndexField);
+		%serverType = getField(MPJoinServerList.getRowTextById(%index), $Master::ServerRowIndexField + 1);
+
+//      echo("Index is" SPC %serverIdx);
+//      echo("Type is" SPC %serverType);
+
+		//Server Type getting
+		if (%serverType == 1) {
+			setServerInfo(%serverIdx);
+			%title = $ServerInfo::Name;
+			%dedicated = $ServerInfo::Dedicated;
+			%desc = $ServerInfo::Info;
+			%host = "";
+		}
+
+		MPJoinServerInfo.setText("<font:24><just:center>" @ %title NL "<font:18><color:333333>" @ (%dedicated ? "Dedicated Server" : "Hosted By" SPC %host) NL "" NL "<color:000000><just:left>" @ %desc);
+		MPJoinServerInfo.forceReflow();
+	} else {
+		MPJoinServerInfo.setText("<font:24><just:center>Select a Server");
+	}
+	MPJoinJoinServer.setActive(MPJoinServerList.getSelectedId() >= 0 && !%this.joining);
+}
+
+//-----------------------------------------------------------------------------
+// Behold!
+
+// JoinServer(IP, Username)
+//
+// Vars:
+//    IP: The IP address or DNS for the server, WITH THE PORT
+//    Username: The ingame username displayed on the server
+//    Password: The password for the server, if any
+
+function joinServer(%ip, %username, %password) {
+//   echo("Connecting to" SPC %ip);
+
+	//Don't let us join blank servers
+	if (%ip $= "")
+		return;
+
+	if ($Game::Menu) {
+		menuDestroyServer();
+		menuSetMission($Menu::MissionFile);
+	}
+
+	LBMessage("Joining Server...");
+	Canvas.repaint();
+
+	echo("Join server: " @ %ip);
+
+	MPJoinServerDlg.joining = true;
+	MPJoinServerDlg.address = %ip;
+	MPJoinServerDlg.joinIP = %ip;
+	MPJoinServerDlg.update();
+
+	// We should probably force this for LB play
+	if (lb())
+		%username = $LB::Username;
+
+	//Setting these is important
+	$Server::ServerType = "MultiPlayer";
+	$Server::Hosting = false;
+	$playingDemo = false; // For some reason, this isn't reset.
+
+	//Update this before we join so we get the right skin
+	MarbleSelectDlg.loadPrefs();
+
+	while (isObject(ServerConnection))
+		ServerConnection.delete();
+	new GameConnection(ServerConnection);
+	ServerConnection.setConnectArgs(%username, %password, MarbleSelectDlg.getSelection(), "bologna");
+	ServerConnection.setJoinPassword(%password);
+	ServerConnection.connect(%ip);
+
+	RootGroup.add(new SimSet(MissionGroup));
+
+	PlayMissionGui.init();
+	$Client::NeedInit = true;
+}

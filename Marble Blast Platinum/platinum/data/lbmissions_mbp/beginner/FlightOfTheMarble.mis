@@ -1,0 +1,314 @@
+// UT Tip: Get from the first diamond to the second by using one Gyrocopter item only.
+// Rep. by Matan
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         level = "7";
+         startHelpText = "The Gyrocopter can be used in many ways.\nLearn the basics!";
+         ultimateTime = "11000";
+         name = "Flight of the Marble";
+         artist = "Ian";
+         desc = "Use the Gyrocopter item to fly!";
+         music = "Seaside Revisited.ogg";
+         type = "beginner";
+         goldTime = "13000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -2.19536e+38 -2.19536e+38";
+      fogVolume2 = "-1 -2.2087e+38 -2.19536e+38";
+      fogVolume3 = "-1 -2.18196e+38 -2.16867e+38";
+      materialList = "~/data/skies/Beginner/Beginner_Sky.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222204871403647643306393613037507444736.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -219535990253541534601988090029785743360.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -214193076221289989668889361412515692544.000000";
+   };
+   new Sun() {
+      direction = "0.4817261 0.4817261 -0.7320382";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new Item() {
+      position = "10 30 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         showHelpOnPickup = "1";
+   };
+   new StaticShape(StartPoint) {
+      position = "39.708 9.99774 0.25";
+      rotation = "0 0 -1 90.5273";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new Item() {
+      position = "-105 10 -10.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger(Bounds) {
+      position = "-124 60 -35";
+      rotation = "1 0 0 0";
+      scale = "180 90 100";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "0 0 -1 89.99999";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_MBP/FlightOfTheMarble.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "-61 10 -14.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-100 10 -10.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape(EndPoint) {
+      position = "-93 10 -30.25";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger() {
+      position = "24.1573 43.0169 0.152204";
+      rotation = "1 0 0 0";
+      scale = "1 75 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Use the Gyrocopter item to fly across the gap!";
+   };
+   new Trigger() {
+      position = "-68.0157 46.0567 -14.8524";
+      rotation = "1 0 0 0";
+      scale = "1 75 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "While the Gyrocopter is active, you will be able to jump much higher!";
+   };
+   new Item() {
+      position = "10 -10 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger() {
+      position = "-104.275 45.9109 -10.5799";
+      rotation = "1 0 0 0";
+      scale = "1 75 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "The Gyrocopter will slow your fall. Spin the marble in mid-air to float down to the shelf with the finish!";
+   };
+   new Item() {
+      position = "-67 -10 -15";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-67 30 -15";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-92.2 8.6 -24.85";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Item() {
+      position = "17.8 10 15.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1.25";
+      dataBlock = "easterEgg";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-69.6 22.4 -14.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignUp";
+   };
+   new StaticShape() {
+      position = "-69.6 37.4 -14.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignUp";
+   };
+   new StaticShape() {
+      position = "-69.6 -16.8 -14.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignUp";
+   };
+   new StaticShape() {
+      position = "-69.6 -2.8 -14.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignUp";
+   };
+   new StaticShape() {
+      position = "-110 8.2 -10.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignDown";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "64.91337 -47.30718 45.86124";
+         rotation = "0.5815202 0.2728585 -0.7664089 62.95213";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+      };
+      new StaticShape(CameraPath2) {
+         position = "40.7751 -51.141 33.96546";
+         rotation = "0.6391497 0.241632 -0.7301382 54.7486";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "4200";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+      };
+      new StaticShape(CameraPath3) {
+         position = "0.7922557 -50.8843 16.70638";
+         rotation = "0.647242 0.2031347 -0.7347205 46.26093";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "4000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+      };
+      new StaticShape(CameraPath4) {
+         position = "-31.80743 -46.24012 4.983003";
+         rotation = "0.5946774 0.1577146 -0.7883432 37.18739";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "4000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-58.43731 -39.61712 -2.542718";
+         rotation = "0.5838704 0.1393696 -0.7997947 33.2356";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-116.1701 14.91294 -7.490032";
+         rotation = "0.07653406 -0.1172111 0.9901536 114.2323";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "5000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+      };
+      new StaticShape(CameraPath7) {
+         position = "-108.6782 11.62222 -9.454789";
+         rotation = "0.07653406 -0.1172111 0.9901536 114.2323";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

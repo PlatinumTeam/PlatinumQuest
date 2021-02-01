@@ -1,0 +1,195 @@
+// UT Tip: You can loop exit straight to the finish!
+// Rep. by Phil and Pablo
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         startHelpText = "Use the Super Speeds ahead to your advantage!";
+         music = "Endurance.ogg";
+         type = "Intermediate";
+         desc = "Loops have never been so much fun! ";
+         ultimateTime = "7500";
+         artist = "Andrew";
+         goldTime = "11000";
+         name = "Loop Exits";
+         level = "17";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 7.45949e-31 1.3684e-38";
+      fogVolume2 = "-1 1.07208e-14 8.756e-14";
+      fogVolume3 = "-1 5.1012e-10 2.05098e-08";
+      materialList = "~/data/skies/Intermediate/Intermediate_Sky.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+   };
+   new Sun() {
+      direction = "0.638261 0.459006 -0.61801";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_MBP/LoopExits.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "-3 3 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new Item() {
+      position = "-3 24 0.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3 28 0.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3 260 4.75";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape(EndPoint) {
+      position = "-3 291.03 52.59";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-31 327 -5";
+      rotation = "1 0 0 0";
+      scale = "54 346 116";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "-2.7 58.93 47.09";
+      rotation = "1 0 0 0";
+      scale = "1 1 1.25";
+      dataBlock = "easterEgg";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-3 291.03 61.49";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger(loop1) {
+      position = "-6.45364 12.8631 0.425557";
+      rotation = "1 0 0 0";
+      scale = "7 2 3";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "After activating the Super Speeds, exit the loop on either side to send you high, far, and fast!";
+   };
+   new Trigger(loop2) {
+      position = "-6.40849 32.132 0.40719";
+      rotation = "1 0 0 0";
+      scale = "7 2 3";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Do a loop exit to make it to the next loop ahead.";
+   };
+   new Trigger(loop3) {
+      position = "-17.274 240.955 4.16493";
+      rotation = "1 0 0 0";
+      scale = "30 2 50";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Do a loop exit to make it to the finish on top of the loop.";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "24.78884 -21.45495 6.478804";
+         rotation = "-0.2591901 -0.06255205 -0.9637986 28.1158";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            placed = "1";
+            useRotation = "1";
+            timeToNext = "15000";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath2) {
+         position = "24.78884 228.545 6.478804";
+         rotation = "-0.2591901 -0.06255205 -0.9637986 28.1158";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            placed = "1";
+            useRotation = "1";
+            timeToNext = "5000";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath3) {
+         position = "24.78884 228.545 6.478804";
+         rotation = "-0.2591901 -0.06255205 -0.9637986 28.1158";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            placed = "1";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

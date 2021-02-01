@@ -1,0 +1,181 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPTeamInviteDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "270 160";
+		extent = "259 279";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 207";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamInviteDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamInviteButton) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "138 207";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamInviteDlg.invite();";
+			helpTag = "0";
+			text = "Invite";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPTeamInviteTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "9 17";
+			extent = "240 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "22 44";
+			extent = "215 168";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "189 142";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPTeamInviteList) {
+					profile = "PQTextListProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "189 8";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPTeamInviteDlg.updateActive();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPTeamInviteDlg::open(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPTeamInviteDlg::close(%this) {
+	RootGui.popDialog(%this);
+}
+
+function MPTeamInviteDlg::onWake(%this) {
+	// Title
+	MPTeamInviteTitle.setText("<bold:28><just:center>Invite Players");
+	%this.updatePlayerList();
+	%this.updateActive();
+}
+
+function MPTeamInviteDlg::updateActive(%this) {
+	%player = getField(MPTeamInviteList.getRowTextById(MPTeamInviteList.getSelectedId()), 1);
+	MPTeamInviteButton.setActive(%player !$= "");
+}
+
+function MPTeamInviteDlg::updatePlayerList(%this) {
+	MPTeamInviteList.clear();
+
+	%count = PlayerList.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%player = PlayerList.getEntry(%i).name;
+		if (%player $= "")
+			continue;
+
+		if (!TeamPlayerList.containsEntryAtField(%player, 0))
+			MPTeamInviteList.addRow(%i, LBResolveName(%player, true) TAB %player);
+	}
+	MPTeamInviteList.sort(0, true);
+
+	MPTeamInviteList.setSelectedRow(0);
+	MPTeamInviteButton.setActive(%count > 0);
+}
+
+function MPTeamInviteDlg::invite(%this) {
+	%player = getField(MPTeamInviteList.getRowTextById(MPTeamInviteList.getSelectedId()), 1);
+	commandToServer('TeamInvite', %player);
+	%this.close();
+}

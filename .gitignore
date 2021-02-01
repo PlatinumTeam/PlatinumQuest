@@ -1,0 +1,70 @@
+# General filetypes
+*.backup.gui
+*.blend*
+*.cha
+*.dll
+*.dmp
+*.dso
+*.dylib
+*.exe
+*.exp
+*.hop
+*.i64
+*.id0
+*.id1
+*.id2
+*.ilk
+*.lib
+*.lo
+*.log
+*.nam
+*.o
+*.ogv
+*.orig
+*.pak
+*.pdb
+*.Plo
+*.Po
+*.so
+*.sublime*
+*.tar
+*.tgz
+*.til
+*.tlog
+*.torsion.*
+*.xcuserdatad
+*.idb
+
+# Filenames
+banlist.cs
+banlist.txt
+clipboard.gui
+config.cs
+Contents
+lbprefs.cs
+Makefile
+mbpPrefs.cs
+newObject.cs
+prefs.cs
+redundancycheck.cs
+screenshot_*.png
+testMission.mis
+WEprefs.cs
+DeleteDSOs.bat
+
+# Specific paths
+Marble Blast Platinum/packages
+Marble Blast Platinum/platinum/data/interiors-custom
+Marble Blast Platinum/platinum/data/missions/custom
+Marble Blast Platinum/platinum/data/stats
+Marble Blast Platinum/plugins
+MBExtender/build
+Marble Blast Platinum/marbleblast.torsion
+Marble Blast Platinum.app
+*.psd
+vv*.txt
+cla.txt
+Marble Blast Platinum/platinum/json
+Marble Blast Platinum/platinum/leaderboards/avatars/avatar*
+Marble Blast Platinum/platinum/client/ui/lb/avatars/avatar*
+Marble Blast Platinum/platinum/data/recordings

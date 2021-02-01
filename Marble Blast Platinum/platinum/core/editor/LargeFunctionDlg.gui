@@ -1,0 +1,539 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+if (isObject(LargeFunctionDlg))
+	LargeFunctionDlg.delete();
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LargeFunctionDlg) {
+	profile = "GuiModelessDialogProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	acceptMW = 1;
+
+	new GuiWindowCtrl(LFDFN) {
+		profile = "GuiWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "2 2";
+		extent = "635 475";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		text = "Function: ";
+		maxLength = "4096";
+		resizeWidth = "0";
+		resizeHeight = "0";
+		canMove = "1";
+		canClose = "1";
+		canMinimize = "1";
+		canMaximize = "1";
+		minSize = "50 50";
+		closeCommand = "RootGui.popDialog(LargeFunctionDlg);";
+
+		new GuiScrollCtrl(LFDW) {
+			profile = "GuiBorderlessScrollProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "6 26";
+			extent = "623 420";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "dynamic";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(LFDWScroll) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "600 3000";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+		new GuiButtonCtrl(StoolParty020) {
+			profile = "GuiButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "547 449";
+			extent = "80 20";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LargeFunctionDlg.accept();";
+			helpTag = "0";
+			text = "Accept";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiButtonCtrl(StoolParty021) {
+			profile = "GuiButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "463 449";
+			extent = "80 20";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(LargeFunctionDlg);";
+			helpTag = "0";
+			text = "Cancel";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+//todo: delete key isn't mapped to editor anymore when using dialog (normally does quick restart) (possibly add guis to editorGui to stop it?)
+
+function LargeFunctionDlg::test(%gui) {
+	// Load up features to test
+	%gui.init("testFunctionToCall", "Generic Title", 1);
+	%gui.addNote("HELLO WORLD", 0);
+	%gui.addNote("HELLO WORLD", 1);
+	%gui.addNote("HELLO WORLD", 2);
+	%gui.addNote("HELLO WORLD", 3);
+	%gui.addTextEditField(TextEdit1, "Example TextEdit Field", "Default Text", 50, 4);
+	%gui.addTextEditField(TextEdit2, "Example TextEdit Field", "Default Text", 100, 3);
+	%gui.addTextEditField(TextEdit3, "Example TextEdit Field", "Default Text", 150, 2);
+	%gui.addTextEditField(TextEdit4, "Example TextEdit Field", "Default Text", 200, 1);
+	%gui.addCheckBox(CheckBox1, "Example Checkbox", 0, 1);
+	%gui.addCheckBox(CheckBox2, "Example Checkbox", 1, 2);
+	%gui.addCheckBox(CheckBox3, "Example Checkbox", 0, 3);
+	%gui.addCheckBox(CheckBox4, "Example Checkbox", 1, 4);
+	%gui.addSlider(Slider1, "Example Slider", "0 50", 25, 1, 1);
+	%gui.addSlider(Slider2, "Example Slider", "0 100", 40, 2, 0);
+	%gui.addSlider(Slider3, "Example Slider", "0 150", 3, 3, 1);
+	%gui.addSlider(Slider4, "Example Slider", "0 200", 168, 4, 0);
+	%gui.addDropMenu(Menu1, "Example Menu", 0, "Choice1\tChoice1\nChoice2\tChoice2\nChoice3\tChoice3\n*Choice4\tChoice4");
+	%gui.addDropMenu(Menu2, "Example Menu", 1, "Choice1\tChoice1\nChoice2\tChoice2\n*Choice3\tChoice3\nChoice4\tChoice4");
+	%gui.addDropMenu(Menu3, "Example Menu", 2, "Choice1\tChoice1\nChoice2\tChoice2\nChoice3\tChoice3\nChoice4\tChoice4");
+	%gui.addDropMenu(Menu4, "Example Menu", 3, "*Choice1\tChoice1\nChoice2\tChoice2\nChoice3\tChoice3\nChoice4\tChoice4");
+}
+
+function testFunctionToCall(%gui) {
+	echo("in callback");
+	%gui.cleanup();
+}
+
+// init
+//
+// %callback: name of the function you want to call upon accepting changes
+// %title: set the text of the window title bar
+// %handleErrors: whether or not your %callback function should check for errors (assert).
+//                if this is the case, your %callback function must call LargeFunctionDlg.cleanup();
+//
+
+function LargeFunctionDlg::init(%gui, %callback, %title, %handleErrors) {
+	if (%callback $= "") {
+		error("LargeFunctionDlg::init: no callback function name given");
+		return;
+	}
+	while (LFDWScroll.getCount() > 0)
+		LFDWScroll.getObject(0).delete();  //clear objects from last time
+	if (!isObject(SingleValueGui))
+		exec2("SingleValueGui");
+	%gui.yposition = 3;
+	LFDWScroll.position = "0 0";
+	LFDFN.setText(%title);
+	%gui.callback = %callback;
+	%gui.handleErrors = !!%handleErrors;
+	RootGui.pushDialog(%gui);
+}
+
+function LargeFunctionDlg::accept(%gui) {
+	%callback = %gui.callback;
+
+	eval(%gui.callback @ "(" @ %gui @ ");");
+
+	if (!%gui.handleErrors)
+		RootGui.popDialog(LargeFunctionDlg);
+}
+
+function LargeFunctionDlg::cleanup(%gui) {
+	RootGui.popDialog(LargeFunctionDlg);
+}
+
+function LargeFunctionDlg::SingleValueEdit(%gui, %obj) {
+	if (!isObject(%obj)) {
+		PED.error("LargeFunctionDlg::SVEdit() " SPC %obj SPC "not an object!");
+		return;
+	}
+	SingleValueGui.open(%gui, "Value", %obj.getValue(), vectorAdd(Canvas.getCursorPos(), "-50 -5"));
+	%gui.LastSVEditObject = %obj;
+}
+
+function LargeFunctionDlg::svcallback(%gui, %ignore, %value) {
+	%gui.LastSVEditObject.setValue(%value);
+}
+
+//-- Begin GUIcontrol build functions -------------------------------
+
+//addTextEditField:
+//
+//%name: name of the gui ctrl
+//%title: short description
+//%default: default value this gui ctrl should have
+//%xExtent: length of the textedit field
+//%tabs: how many tabs to move over from the left
+//
+
+function LargeFunctionDlg::addTextEditField(%gui, %name, %title, %default, %xExtent, %tabs) {
+	if (%xExtent < 10)
+		%xExtent = 250;
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiTextEditCtrl(%name) {
+		profile = "GuiTextEditProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 265 + (25 * %tabs) SPC %gui.yposition;
+		extent = %xExtent SPC "18";
+		minExtent = "8 8";
+		visible = "1";
+		variable = "";
+		command = "";
+		maxLength = "4096";
+		maxPixelWidth = "0";
+		historySize = "0";
+		password = "0";
+		tabComplete = "0";
+		sinkAllKeyEvents = "0";
+	};
+	%gui2 = new GuiTextCtrl() {
+		profile = "GuiTextProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "15" SPC %gui.yposition;
+		extent = "100 18";
+		minExtent = "8 8";
+		visible = "1";
+		text = %title;
+		maxLength = "4096";
+	};
+	LFDWScroll.add(%gui1);
+	LFDWScroll.add(%gui2);
+
+	%gui1.setValue(%default);
+	%gui.yposition += 15;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+//addTimeEditField:
+//
+//%name: name of the gui ctrl
+//%title: short description
+//%default: default value this gui ctrl should have
+//%xExtent: length of the timeedit field
+//%tabs: how many tabs to move over from the left
+//
+
+function LargeFunctionDlg::addTimeEditField(%gui, %name, %title, %default, %xExtent, %tabs) {
+	if (%xExtent < 10)
+		%xExtent = 250;
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiTextEditCtrl(%name) {
+		profile = "GuiTextEditProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 265 + (25 * %tabs) SPC %gui.yposition;
+		extent = %xExtent SPC "18";
+		minExtent = "8 8";
+		visible = "1";
+		variable = "";
+		command = "";
+		maxLength = "4096";
+		maxPixelWidth = "0";
+		historySize = "0";
+		password = "0";
+		tabComplete = "0";
+		sinkAllKeyEvents = "0";
+		TimeEntryCtrl = "1";
+	};
+	%gui2 = new GuiTextCtrl() {
+		profile = "GuiTextProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "15" SPC %gui.yposition;
+		extent = "100 18";
+		minExtent = "8 8";
+		visible = "1";
+		text = %title;
+		maxLength = "4096";
+	};
+	LFDWScroll.add(%gui1);
+	LFDWScroll.add(%gui2);
+
+	%gui1.setValue(%default);
+	%gui.yposition += 15;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+//addCheckBox:
+//
+//%name: name of the gui ctrl
+//%title: short description
+//%default: default value this gui ctrl should have
+//%tabs: how many tabs to move over from the left
+//
+
+function LargeFunctionDlg::addCheckBox(%gui, %name, %title, %default, %tabs) {
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiCheckBoxCtrl(%name) {
+		profile = "GuiCheckBoxProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 15 + (%tabs * 25) SPC %gui.yposition;
+		extent = "585 24";
+		minExtent = "8 8";
+		visible = "1";
+		variable = "";
+		command = %name @ "::onPressed(" @ %name @ "," @ %gui @ ");";
+		text = %title;
+		groupNum = "-1";
+		buttonType = "ToggleButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+	%gui1.setValue(!!%default);
+	LFDWScroll.add(%gui1);
+	%gui.yposition += 15;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+//addSlider:
+//
+//%name: name of the gui ctrl
+//%title: short description
+//%range: 2-word string, min and max value
+//%default: default value this gui ctrl should have
+//%tabs: how many tabs to move over from the left
+//%useSVButton: allow users to click & set value with keyboard
+//
+
+function LargeFunctionDlg::addSlider(%gui, %name, %title, %range, %default, %tabs, %useSVButton) {
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiSliderCtrl(%name) {
+		profile = "GuiSliderProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 110 + (%tabs * 25) SPC %gui.yposition + 5;
+		extent = "110 35";
+		minExtent = "8 2";
+		visible = "1";
+		command = "";
+		range = %range;
+		ticks = "10";
+		value = %default;
+	};
+	if (%useSVButton) {
+		%gui2 = new GuiButtonCtrl() {
+			profile = "ClearButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15" SPC %gui.yposition + 10;
+			extent = "100 18";
+			minExtent = "8 2";
+			visible = "1";
+			command = "LargeFunctionDlg.SingleValueEdit(" @ %name @ ");";
+			text = %title;
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			maxLength = "4096";
+		};
+	} else {
+		%gui2 = new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "15" SPC %gui.yposition + 10;
+			extent = "100 18";
+			minExtent = "8 8";
+			visible = "1";
+			text = %title;
+			maxLength = "4096";
+		};
+	}
+	LFDWScroll.add(%gui1);
+	LFDWScroll.add(%gui2);
+
+	%gui.yposition += 35;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+//addDropMenu:
+//
+//%name: name of the gui ctrl
+//%title: short description
+//%tabs: how many tabs to move over from the left
+//%choices: menu choices, in format value \t display \n value \t display...
+//          add a star * at the front of the choice you want to be default
+//
+
+function LargeFunctionDlg::addDropMenu(%gui, %name, %title, %tabs, %choices, %default) {
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiPopUpMenuCtrl(%name) {
+		profile = "GuiPopUpMenuProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 110 + (%tabs * 25) SPC %gui.yposition;
+		extent = "101 20";
+		minExtent = "8 8";
+		visible = "1";
+		text = "Select difficulty";
+		maxLength = "4096";
+		maxPopupHeight = "200";
+	};
+	%gui2 = new GuiTextCtrl() {
+		profile = "GuiTextProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "15" SPC %gui.yposition + 2;
+		extent = "100 18";
+		minExtent = "8 8";
+		visible = "1";
+		text = %title;
+		maxLength = "4096";
+	};
+	%defaultIdx = -1;
+	for (%i = 0; %i < getRecordCount(%choices); %i++) {
+		%record = getRecord(%choices, %i);
+		%value = getField(%record, 0);
+		%name = getField(%record, 1);
+
+		if (getSubStr(%value, 0, 1) $= "*" && %defaultIdx == -1)
+			%defaultIdx = %i;
+		if (%value $= %default)
+			%defaultIdx = %i;
+
+		%gui1.add(%name, %i);
+		%gui1._value[%name] = %value;
+		%gui1._name[%value] = %name;
+	}
+	%gui1.setSelected(%defaultIdx);
+	LFDWScroll.add(%gui1);
+	LFDWScroll.add(%gui2);
+	%gui.yposition += 30;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+function GuiPopUpMenuCtrl::getValue(%this) {
+	%value = Parent::getValue(%this);
+	if (%this._value[%value] !$= "") {
+		return %this._value[%value];
+	}
+	return %value;
+}
+
+function GuiPopUpMenuCtrl::setValue(%this, %value) {
+	if (%this._name[%value] !$= "") {
+		%value = %this._name[%value];
+	}
+	Parent::setValue(%this, %value);
+}
+
+//addNote:
+//
+//%name: name of the gui ctrl
+//%text: note text
+//%tabs: how many tabs to move over from the left
+//
+
+function LargeFunctionDlg::addNote(%gui, %text, %tabs) {
+	%gui1 = new GuiTextCtrl() {
+		profile = "GuiTextProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 15 + (25 * %tabs) SPC %gui.yposition;
+		extent = "100 18";
+		minExtent = "8 8";
+		visible = "1";
+		text = %text;
+		maxLength = "4096";
+	};
+	LFDWScroll.add(%gui1);
+	%gui.yposition += 15;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}
+
+//addButton:
+//
+//%name: name of the gui ctrl
+//%title: text on button
+//%tabs: how many tabs to move over from the left
+//
+//calls %name::onPressed(%name, %gui);
+//
+
+function LargeFunctionDlg::addButton(%gui, %name, %title, %tabs) {
+	if (isObject(%name)) {
+		error("LargeFunctionDlg: object " @ %name @ " already exists!");
+		return;
+	}
+	%gui1 = new GuiButtonCtrl(%name) {
+		profile = "GuiButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 15 + (%tabs * 25) SPC %gui.yposition + 2;
+		extent = textLen(%title, "Arial", 14) + 24 SPC 20;
+		minExtent = "8 8";
+		visible = "1";
+		variable = "";
+		command = %name @ "::onPressed(" @ %name @ "," @ %gui @ ");";
+		text = %title;
+		groupNum = "-1";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+	LFDWScroll.add(%gui1);
+	%gui.yposition += 20;
+	LFDWScroll.setExtent(600 SPC(%gui.yposition + 10));
+}

@@ -1,0 +1,809 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(MarbleSelectDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		listIndex["platinum/data/shapes/balls/pack.json"] = 0;
+		listIndex["platinum/data/shapes/balls/pack1/pack.json"] = 1;
+		listIndex["platinum/data/shapes/balls/pack2/pack.json"] = 2;
+		listIndex["platinum/data/shapes/balls/pack3/pack.json"] = 8;
+		listIndex["platinum/data/shapes_pq/Marbles/PQ Classic/pack.json"] = 3;
+		listIndex["platinum/data/shapes_pq/Marbles/Sports/pack.json"] = 4;
+		listIndex["platinum/data/shapes_pq/Marbles/Fruit/pack.json"] = 5;
+		listIndex["platinum/data/shapes_pq/Marbles/Abstract/pack.json"] = 6;
+		listIndex["platinum/data/shapes_pq/Marbles/Solid Colors/pack.json"] = 7;
+		defaultControl = "MS_Close";
+		commandCancel = "RootGui.popDialog(MarbleSelectDlg); PlayMissionGui.showBody();";
+		commandLeft = "MarbleSelectDlg.prev();";
+		commandRight = "MarbleSelectDlg.next();";
+		commandLSLeft = "MarbleSelectDlg.prev();";
+		commandLSRight = "MarbleSelectDlg.next();";
+		commandRSLeft = "MarbleSelectDlg.prevCat();";
+		commandRSRight = "MarbleSelectDlg.nextCat();";
+		commandRepeatLeft = true;
+		commandRepeatRight = true;
+		commandRepeatLSLeft = true;
+		commandRepeatLSRight = true;
+		commandRepeatRSLeft = true;
+		commandRepeatRSRight = true;
+		commandNameLSLeft = "Prev";
+		commandNameLSRight = "Next";
+		commandNameRSLeft = "Prev Category";
+		commandNameRSRight = "Next Category";
+
+	new GuiControl(PM_MarbleSelect) {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "111 73";
+		extent = "418 333";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "134 216";
+			extent = "150 1";
+			minExtent = "8 1";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./play/extras/extraslineh";
+			wrap = "0";
+		};
+		new GuiObjectView(MS_marbleViewer) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "121 32";
+			extent = "175 175";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			cameraZRot = "0";
+			forceFOV = "0";
+			skin = "base";
+			cameraRotX = "0";
+			cameraZRotSpeed = "0.001";
+			orbitDistance = "1.34641";
+			autoSize = "1";
+		};
+		new GuiMLTextCtrl(MS_TitleText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "102 16";
+			extent = "213 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MS_MarbleText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "49 182";
+			extent = "320 22";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MS_CategoryText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "49 225";
+			extent = "320 22";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MS_Next) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "346 171";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MarbleSelectDlg.next();";
+			accelerator = "right";
+			helpTag = "0";
+			text = "Next";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright";
+				bitmapRotation = "180";
+		};
+		new GuiBorderButtonCtrl(MS_Prev) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 171";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MarbleSelectDlg.prev();";
+			accelerator = "left";
+			helpTag = "0";
+			text = "Prev";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright";
+		};
+		new GuiBorderButtonCtrl(MS_PrevCat) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 216";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MarbleSelectDlg.prevCat();";
+			accelerator = "shift left";
+			helpTag = "0";
+			text = "Prev";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright";
+		};
+		new GuiBorderButtonCtrl(MS_Close) {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "162 261";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(MarbleSelectDlg); PlayMissionGui.showBody();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MS_NextCat) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "346 216";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MarbleSelectDlg.nextCat();";
+			accelerator = "shift right";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright";
+				bitmapRotation = "180";
+		};
+		new GuiCheckBoxCtrl(MS_NormalSizeCheck) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "33 270";
+			extent = "130 30";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			text = "Normal Size";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MarbleSelectDlg::init(%this) {
+	%this.lists = array(MarbleSelectListsArray);
+
+	%this.generateOfficialMarbleList();
+	%this.generateCustomMarbleList();
+	%this.lists.sort(sortMarbleList);
+
+	// Sets default marble selection
+	%this.onWake();
+}
+
+function sortMarbleList(%a, %b) {
+	%aIndex = (%a.file $= "" ? "" : MarbleSelectDlg.listIndex[%a.file]);
+	%bIndex = (%b.file $= "" ? "" : MarbleSelectDlg.listIndex[%b.file]);
+
+	//Both are custom, so sort by name
+	if (%aIndex $= "" && %bIndex $= "") {
+		return stricmp(%a.name, %b.name) < 0;
+	}
+	//One custom, one official
+	if (%aIndex $= "") { //B is official so it comes first
+		return false;
+	}
+	if (%bIndex $= "") { //A is official so it comes first
+		return true;
+	}
+	//Both are official, sort by order
+	return %aIndex < %bIndex;
+}
+
+function MarbleSelectDlg::getMarbleList(%this, %name) {
+	for (%i = 0; %i < %this.lists.getSize(); %i ++) {
+		%list = %this.lists.getEntry(%i);
+		if (%list.name $= %name) {
+			return %list;
+		}
+	}
+	return -1;
+}
+
+function MarbleSelectDlg::addMarbleList(%this, %list) {
+	if (isObject(%this.getMarbleList(%list.name))) {
+		error("Marble pack " @ %list.name @ " already exists.");
+		return false;
+	}
+	%this.lists.addEntry(%list);
+	return true;
+}
+
+function MarbleSelectDlg::loadMarblePack(%this, %file) {
+	%parsed = jsonParse(fread(%file));
+	if (!isObject(%parsed)) {
+		error("Couldn't load marble pack: " @ %file);
+		return;
+	}
+	%parsed.file = %file;
+	%parsed.base = filePath(%file);
+	%parsed.skins = false;
+	if (!%this.addMarbleList(%parsed)) {
+		error("Couldn't load marble pack: " @ %file);
+		return;
+	}
+	echo("Loaded marble pack: " @ %file);
+}
+
+function MarbleSelectDlg::generateOfficialMarbleList(%this) {
+	%spec = $usermods @ "/data/shapes/balls/*.json";
+	for (%file = findFirstFile(%spec); %file !$= ""; %file = findNextFile(%spec)) {
+		%this.loadMarblePack(%file, true);
+	}
+	%spec = $usermods @ "/data/shapes_pq/marbles/*.json";
+	for (%file = findFirstFile(%spec); %file !$= ""; %file = findNextFile(%spec)) {
+		%this.loadMarblePack(%file, true);
+	}
+}
+
+function MarbleSelectDlg::generateCustomMarbleList(%this) {
+	if (!isObject(CustomMarbleListGroup))
+		RootGroup.add(new SimGroup(CustomMarbleListGroup));
+	%spec = $usermods @ "/data/custom_marbles/*.json";
+	for (%file = findFirstFile(%spec); %file !$= ""; %file = findNextFile(%spec)) {
+		%this.loadMarblePack(%file, false);
+	}
+
+	%regex = $usermods @ "/data/custom_marbles/*.dts";
+
+	// This searches backwards. Shame.
+	%_files = 0;
+	for (%file = findFirstFile(%regex); %file !$= ""; %file = findNextFile(%regex))
+		%_file[%_files ++] = %file;
+
+	// Oddly enough, doing %var++ in torque increments it FIRST, then returns the incremented number.
+	// In c++, that happens in the opposite order
+	for (%i = %_files; %i > 0; %i --) {
+		%file = %_file[%i];
+
+		// File attributes
+		%shapeName = fileBase(%file);
+		%shapePath = filePath(%file);
+
+		// Get which category it belongs to
+		%category = fileBase(%shapePath);
+		if (%category $= "custom_marbles")
+			%category = "Uncategorized";
+
+//		echo("New marble:" SPC %file);
+//		echo("Shapepath:" SPC %shapePath);
+//		echo("Category:" SPC %category);
+
+		// If it doens't have a category array assigned yet, create one!
+		%list = %this.getMarbleList(%category);
+		if (!isObject(%list)) {
+			// List metadata
+			%list = new ScriptObject() {
+				name = %category;
+				base = %shapePath;
+				skins = false;
+				marbles = array(MarbleSelectListMarblesArray);
+			};
+			CustomMarbleListGroup.add(%list);
+			%this.addMarbleList(%list);
+		}
+
+		// Skin is always base for custom shape files
+		%skin = "base";
+
+		// ball-superball allows for custom skins, be sure to set the metadata
+		if (%shapeName $= "ball-superball") {
+			%list.skins = true;
+			continue;
+		}
+
+		// Insert the skin into the array
+		%array = new ScriptObject() {name = upperFirst(%shapeName); shape = %shapeName @ ".dts"; skin = %skin; };
+		CustomMarbleListGroup.add(%array);
+		%list.marbles.addEntry(%array);
+	}
+
+	// Iterate through and find skins
+	for (%i = 0; %i < %this.lists.getSize(); %i ++) {
+		%list = %this.lists.getEntry(%i);
+		if (%list.skins) {
+			//devecho("MarbleSelect :: Iterating for skins in category" SPC %category);
+			%skinregex  = %list.base @ "/*.marble.png";
+			%skinregex2 = %list.base @ "/*.marble.jpg";
+
+			// AREN'T BACKWARDS SEARCHES FUN?!
+			%_files = 0;
+			for (%file = findFirstFile(%skinregex);  %file !$= ""; %file = findNextFile(%skinregex))
+				%_file[%_files ++] = %file;
+			for (%file = findFirstFile(%skinregex2); %file !$= ""; %file = findNextFile(%skinregex2))
+				%_file[%_files ++] = %file;
+
+			for (%j = %_files; %j > 0; %j --) {
+				%file = %_file[%j];
+
+				// Don't mix these up
+				if (filePath(%file) !$= %list.base)
+					continue;
+
+				// File attributes
+				%skin = fileBase(%file);
+				%shapeName = "ball-superball.dts";
+
+				// Insert the skin into the array
+				%array = new ScriptObject() {name = upperFirst(fileBase(%skin)); shape = %shapeName; skin = fileBase(%skin); };
+				CustomMarbleListGroup.add(%array);
+				%list.marbles.addEntry(%array);
+			}
+		}
+		devecho("MarbleSelect :: Category" SPC %list.name SPC "(" @ %i @ ")" SPC "Has" SPC %list.marbles.getSize() SPC "Entries!");
+	}
+}
+
+// When the GUI is shown
+function MarbleSelectDlg::onWake(%this) {
+	//Try to center this GUI, but don't overlap the dropdowns
+	%width = getWord(PM_MarbleSelect.getExtent(), 0);
+	%x = (getWord(Canvas.getExtent(), 0) / 2) - (%width / 2);
+	//Magic number: Width of the level select tabs
+	if (%x < 395) {
+		%x = 395;
+	}
+	%x += 5;
+	PM_MarbleSelect.setPosition(%x SPC getWord(PM_MarbleSelect.getPosition(), 1));
+
+	%this.loadPrefs();
+}
+
+function MarbleSelectDlg::loadPrefs(%this) {
+	if (mp()) {
+		// Load prefs, search for skins and marbles
+		// Default values so we don't get errors on the first run
+		if ($MPPref::marbleCategory $= "" || $MPPref::marbleIndex $= "") {
+			$MPPref::marbleCategory = "PQ Classic";
+			$MPPref::marbleIndex = 0;
+			$MPPref::marbleNormalize = true;
+		}
+		if ($MPPref::marbleCategory $= "Official Marbles") {
+			$MPPref::marbleCategory = "MBP Official";
+		}
+
+		%category  = $MPPref::marbleCategory;
+		%marbleNum = $MPPref::marbleIndex;
+		%normalize = $MPPref::marbleNormalize;
+	} else if (lb()) {
+		// Load prefs, search for skins and marbles
+		// Default values so we don't get errors on the first run
+		if ($LBPref::marbleCategory $= "" || $LBPref::marbleIndex $= "") {
+			$LBPref::marbleCategory = "PQ Classic";
+			$LBPref::marbleIndex = 0;
+			$LBPref::marbleNormalize = true;
+		}
+		if ($LBPref::marbleCategory $= "Official Marbles") {
+			$LBPref::marbleCategory = "MBP Official";
+		}
+
+		%category  = $LBPref::marbleCategory;
+		%marbleNum = $LBPref::marbleIndex;
+		%normalize = $LBPref::marbleNormalize;
+	} else {
+		// Load prefs, search for skins and marbles
+		// Default values so we don't get errors on the first run
+		if ($pref::marbleCategory $= "" || $pref::marbleIndex $= "") {
+			$pref::marbleCategory = "PQ Classic";
+			$pref::marbleIndex = 0;
+			$pref::marbleNormalize = true;
+		}
+		if ($pref::marbleCategory $= "Official Marbles") {
+			$pref::marbleCategory = "MBP Official";
+		}
+
+		%category  = $pref::marbleCategory;
+		%marbleNum = $pref::marbleIndex;
+		%normalize = $pref::marbleNormalize;
+	}
+
+	MS_NormalSizeCheck.setValue(%normalize);
+
+	echo("Marble select prefs:");
+	echo("   Category: " @ %category);
+	echo("   Shape: " @ %shape);
+	echo("   Skin: " @ %skin);
+
+	%this.category = %category;
+
+	%list = %this.getMarbleList(%category);
+	if (!isObject(%list)) {
+		%this.selectCategory("MBP Official");
+		ASSERT("Marble not Found!", "The previously selected custom marble was not found. The category it was in no longer exists.");
+		return;
+	}
+
+	%this.categoryChoice = %this.lists.getIndex(%list);
+	echo("   Category Index: " @ %this.categoryChoice);
+	%this.selectCategory(%category);
+
+	// Figure out which number it was
+	%list = %this.getMarbleList(%category);
+	if (!isObject(%list)) {
+		%this.selectCategory("MBP Official");
+		ASSERT("Marble not Found!", "The previously selected custom marble was not found. The category it was in is inaccessible.");
+		return;
+	}
+
+	%this.selectMarble(%marbleNum);
+	devecho("Actually succeeded in selecting a custom marble!");
+}
+
+// When the GUI is hidden
+function MarbleSelectDlg::onSleep(%this) {
+	%this.savePrefs();
+	savePrefs();
+	if (lb()) {
+		statsRecordMarbleSelection();
+	}
+	if (isObject(ServerConnection)) {
+		commandToServer('UpdateMarble', %this.getSelection());
+	}
+}
+
+function MarbleSelectDlg::savePrefs(%this) {
+	if (mp()) {
+		// Save prefs for referencing later
+		$MPPref::marbleCategory  = %this.category;
+		$MPPref::marbleIndex     = %this.marbleChoice;
+		$MPPref::marbleNormalize = MS_NormalSizeCheck.getValue();
+	} else if (lb()) {
+		// Save prefs for referencing later
+		$LBPref::marbleCategory  = %this.category;
+		$LBPref::marbleIndex     = %this.marbleChoice;
+		$LBPref::marbleNormalize = MS_NormalSizeCheck.getValue();
+	} else {
+		// Save prefs for referencing later
+		$pref::marbleCategory  = %this.category;
+		$pref::marbleIndex     = %this.marbleChoice;
+		$pref::marbleNormalize = MS_NormalSizeCheck.getValue();
+	}
+}
+
+// Used from other scripts, gets the custom marble data
+function MarbleSelectDlg::getSelection(%this) {
+	// Get the category list of marbles
+	%list = %this.getMarbleList(%this.category);
+
+	// Get the base directory from the array
+	%base = %list.base;
+
+	// Get the array for the selected marble
+	%marble = %list.marbles.getEntry(%this.marbleChoice);
+
+	// Apply it to the marble pref
+	%shapeName = %marble.shape;
+	%shapeFile = %base @ "/" @ %shapeName;
+
+	// Does it have a normalized size?
+	%shapeNormalSize = %marble.normalize;
+
+	if (!%shapeNormalSize) {
+		%shapeNormalSize = MS_NormalSizeCheck.getValue();
+	}
+
+	// And return it
+	return %shapeFile TAB %marble.skin TAB %shapeNormalSize TAB %marble.shaderV TAB %marble.shaderF;
+}
+
+// Update the interface
+function MarbleSelectDlg::update(%this) {
+	// Gui controls:
+	// MS_TitleText - Title text (above the marble), used for category names
+	// MS_MarbleText - Marble text (below the marble), used for marble skin/shape names
+	// MS_MarbleViewer - Marble object view
+
+	MS_TitleText.setText("<bold:28><just:center>Choose Your Marble!");
+	MS_CategoryText.setText("<bold:20><just:center>Category: <font:20>" @ upperFirst(%this.category));
+
+	// Get the category list of marbles
+	%list = %this.getMarbleList(%this.category);
+
+	// Get the array for the selected marble
+	%marble = %list.marbles.getEntry(%this.marbleChoice);
+
+	// Get the marble shapefile from the array
+	%base = %list.base;
+
+	%shapeName = %marble.shape;
+	%shapeFile = %base @ "/" @ %shapeName;
+
+	%shapeSkin = %marble.skin;
+	%shapeTitle = %marble.name;
+
+	MS_NextCat.setVisible(%this.lists.getSize() > 1);
+	MS_PrevCat.setVisible(%this.lists.getSize() > 1);
+
+	if (isFile(%shapeFile)) {
+		MS_MarbleViewer.setModel(%shapeFile, %shapeSkin);
+
+		MS_MarbleText.setText("<font:20><just:center>" @ upperFirst(%shapeTitle));
+
+		%normalize = %marble.normalize;
+		MS_NormalSizeCheck.setVisible(!%normalize);
+	} else {
+		error("MarbleSelect :: Tried to set shapefile to" SPC %shapeFile SPC "but file does not exist.");
+		MS_MarbleViewer.setEmpty();
+	}
+}
+
+// When a new marble is selected
+function MarbleSelectDlg::selectMarble(%this, %marble) {
+	%this.marbleChoice = %marble;
+	%this.update();
+	%this.savePrefs();
+}
+
+// When a new category is selected
+function MarbleSelectDlg::selectCategory(%this, %category) {
+	// Get the category array for referencing
+	%list = %this.getMarbleList(%category);
+
+	if (!isObject(%list)) {
+		error("MarbleSelect :: Tried to set category" SPC %category SPC "but category does not exist.");
+		return;
+	}
+
+	// Set it as selected
+	%this.category = %category;
+
+	// When switching categories, we want to select the first marble in that category
+	%this.selectMarble(0);
+
+	devecho("New category with name" SPC %category SPC "count" SPC %list.marbles.getSize());
+}
+
+// Selects the next marble
+function MarbleSelectDlg::next(%this) {
+	// Increment
+	%choice = %this.marbleChoice + 1;
+
+	// Wrap around
+	if (%choice >= %this.getMarbleList(%this.category).marbles.getSize())
+		%choice = 0;
+
+	// Set
+	%this.selectMarble(%choice);
+}
+
+// Selects the previous marble
+function MarbleSelectDlg::prev(%this) {
+	// Decrement
+	%choice = %this.marbleChoice - 1;
+
+	// Wrap around
+	if (%choice < 0)
+		%choice = %this.getMarbleList(%this.category).marbles.getSize() - 1;
+
+	// If we're still below zero, the category only has one marble
+	if (%choice < 0)
+		%choice = 0;
+
+	// Set
+	%this.selectMarble(%choice);
+}
+
+// Selects the next category
+function MarbleSelectDlg::nextCat(%this) {
+	// Increment
+	%choice = %this.categoryChoice + 1;
+
+	// Wrap around
+	if (%choice >= %this.lists.getSize())
+		%choice = 0;
+
+	// Var because we don't set it
+	%this.categoryChoice = %choice;
+
+	%list = %this.lists.getEntry(%choice);
+
+	// Set
+	%this.selectCategory(%list.name);
+}
+
+// Selects the previous category
+function MarbleSelectDlg::prevCat(%this) {
+	// Decrement
+	%choice = %this.categoryChoice - 1;
+
+	// Wrap around
+	if (%choice < 0)
+		%choice = %this.lists.getSize() - 1;
+
+	// If we're still below zero, the category only has one marble
+	if (%choice < 0)
+		%choice = 0;
+
+	// Var because we don't set it
+	%this.categoryChoice = %choice;
+
+	%list = %this.lists.getEntry(%choice);
+
+	// Set
+	%this.selectCategory(%list.name);
+}
+
+function MarbleSelectDlg::getOnlineMarbleId(%this) {
+	// Get the category list of marbles
+	%list = %this.getMarbleList(%this.category);
+
+	// Get the array for the selected marble
+	%marble = %list.marbles.getEntry(%this.marbleChoice);
+
+	return %marble.id;
+}
+
+function MarbleSelectDlg::setOnlineMarbleList(%this, %parsed) {
+	if (!isObject(OnlineMarbleListGroup))
+		RootGroup.add(new SimGroup(OnlineMarbleListGroup));
+
+	%this.lists = array(MarbleSelectListsArray);
+
+	//Add all of the categories
+	%count = %parsed.categories.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%category = %parsed.categories.getEntry(%i);
+		%id = %category.id;
+		%name = %category.name;
+		%base = strReplace(%category.file_base, "~", $usermods);
+		%list = new ScriptObject() {
+			name = %name;
+			id = %id;
+			base = %base;
+			skins = false;
+			marbles = array(MarbleSelectListMarblesArray);
+		};
+		OnlineMarbleListGroup.add(%list);
+		%this.addMarbleList(%list);
+
+		devecho("Got new marble category: " @ %name @ ", base " @ %base @ " id " @ %id);
+	}
+
+	//Add all of the missions
+	%count = %parsed.marbles.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%marble = %parsed.marbles.getEntry(%i);
+		%id = %marble.id;
+		%category = %marble.category_id;
+		%name = %marble.name;
+		%shape = %marble.shape_file;
+		%skin = %marble.skin;
+
+		//Get list by id
+		%list = -1;
+		for (%j = 0; %j < MarbleSelectDlg.lists.getSize(); %j ++) {
+			%test = MarbleSelectDlg.lists.getEntry(%j);
+			if (%test.id == %category) {
+				%list = %test;
+				break;
+			}
+		}
+
+		%listName = %list.name;
+
+		devecho("Got new marble: " @ %name @ " list " @ %listName @ " shape " @ %shape @ " skin " @ %skin);
+
+		%entry = new ScriptObject() {
+			name = %name;
+			shape = %shape;
+			skin = %skin;
+			normalize = true;
+			id = %id;
+			shaderV = %marble.shaderV;
+			shaderF = %marble.shaderF;
+		};
+		OnlineMarbleListGroup.add(%entry);
+		%list.marbles.addEntry(%entry);
+	}
+
+	%parsed.recurseDelete();
+
+	// Sets default marble selection
+	%this.onWake();
+}
+
+function MarbleSelectDlg::setOnlineMarbleId(%this, %id) {
+	%marbleId = getWord(%id, 1);
+
+	%listName = %this.list["name-id", getWord(%id, 0)];
+	%this.selectCategory(%listName);
+
+	%list = %this.list[%listName];
+	%count = %list.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%entry = %list.getEntry(%i);
+		if (%entry.id == %marbleId) {
+			//Yep
+			%this.selectMarble(%i);
+		}
+	}
+}
+
+// Detach
+MarbleSelectDlg.init();

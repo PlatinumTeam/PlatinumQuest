@@ -1,0 +1,119 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(GuiControllerBorderProfile) {
+	border = false;
+	hasBitmapArray = true;
+	bitmap = "./menu/controller-selection.png";
+	modal = false;
+};
+
+new GuiControlProfile(GuiControllerButtonsPanelProfile) {
+	opaque = true;
+	fillColor = "0 0 0 190";
+};
+
+new GuiControlProfile(GuiControllerButtonsTextProfile : GuiTextProfile) {
+	fontColor = "255 255 255 255";
+	fontType = $DefaultFont["Bold"];
+	fontSize = "24";
+};
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(ControllerGui) {
+	profile = "GuiModelessDialogProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		noControls = "1";
+		noCursor = "1";
+		customCommand["GuiSliderCtrl", "RSRight"] = true;
+		customCommand["GuiSliderCtrl", "RSLeft"] = true;
+		customCommand["GuiScrollCtrl", "Up"] = true;
+		customCommand["GuiScrollCtrl", "Down"] = true;
+		customCommand["GuiScrollCtrl", "Left"] = true;
+		customCommand["GuiScrollCtrl", "Right"] = true;
+		customCommand["GuiRadioCtrl", "Select"] = true;
+		customCommand["GuiCheckBoxCtrl", "Select"] = true;
+		customCommand["GuiTextListCtrl", "Select"] = true;
+		customCommand["GuiTextListCtrl", "Cancel"] = true;
+		customCommand["GuiTextListCtrl", "Up"] = true;
+		customCommand["GuiTextListCtrl", "Down"] = true;
+		customCommand["GuiTextListCtrl", "RSUp"] = true;
+		customCommand["GuiTextListCtrl", "RSDown"] = true;
+		customCommandRepeat["GuiSliderCtrl", "RSRight"] = true;
+		customCommandRepeat["GuiSliderCtrl", "RSLeft"] = true;
+		customCommandRepeat["GuiScrollCtrl", "Up"] = true;
+		customCommandRepeat["GuiScrollCtrl", "Down"] = true;
+		customCommandRepeat["GuiScrollCtrl", "Left"] = true;
+		customCommandRepeat["GuiScrollCtrl", "Right"] = true;
+		customCommandRepeat["GuiTextListCtrl", "Up"] = true;
+		customCommandRepeat["GuiTextListCtrl", "Down"] = true;
+		customCommandRepeat["GuiTextListCtrl", "RSUp"] = true;
+		customCommandRepeat["GuiTextListCtrl", "RSDown"] = true;
+
+		customCommandName["GuiSliderCtrl", "RSRight"] = "Increase";
+		customCommandName["GuiSliderCtrl", "RSLeft"] = "Decrease";
+
+		//These make way too many things show up
+		//customCommandName["GuiScrollCtrl", "Up"] = "Scroll Up";
+		//customCommandName["GuiScrollCtrl", "Down"] = "Scroll Down";
+		//customCommandName["GuiScrollCtrl", "Left"] = "Scroll Left";
+		//customCommandName["GuiScrollCtrl", "Right"] = "Scroll Right";
+		customCommandName["GuiRadioCtrl", "Select"] = "Select";
+		customCommandName["GuiCheckBoxCtrl", "Select"] = "Toggle";
+		customCommandName["GuiTextListCtrl", "Select"] = "Change";
+		customCommandName["GuiTextListCtrl", "RSUp"] = "Up";
+		customCommandName["GuiTextListCtrl", "RSDown"] = "Down";
+
+		customControlPadding["GuiScrollCtrl"] = 10; //Technically 10px is the width of the highlight arrows
+		customControlPadding["GuiTextListCtrl"] = 6;
+		customControlPadding["GuiRadioCtrl"] = 6;
+		customControlPadding["GuiCheckBoxCtrl"] = 6;
+		customControlPadding["GuiSliderCtrl"] = 6;
+
+	new GuiBitmapBorderCtrl(ControllerHighlight) {
+		profile = "GuiControllerBorderProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "21 57";
+		extent = "516 258";
+		minExtent = "0 0";
+		visible = "1";
+		helpTag = "0";
+	};
+	new GuiControl(ControllerButtons) {
+		profile = "GuiControllerButtonsPanelProfile";
+		horizSizing = "width";
+		vertSizing = "top";
+		position = "0 455";
+		extent = "640 25";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+	};
+};
+//--- OBJECT WRITE END ---

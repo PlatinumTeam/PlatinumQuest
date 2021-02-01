@@ -1,0 +1,307 @@
+//-----------------------------------------------------------------------------
+// Portions Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Torque Game Engine
+//
+// Portions Copyright (c) 2001 GarageGames.Com
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+
+new GuiControl(ConsoleDlg) {
+	profile = "GuiDefaultProfile";
+		disableControls = "1";
+
+	new GuiWindowCtrl() {
+		profile = "GuiWindowProfile";
+		position = "0 0";
+		extent = "643 373";
+		text = "Console";
+
+		new GuiScrollCtrl() {
+			profile = "GuiScrollProfile";
+			position = "0 0";
+			extent = "640 330";
+			hScrollBar = "alwaysOn";
+			vScrollBar = "alwaysOn";
+			horizSizing = "width";
+			vertSizing = "height";
+
+			new GuiConsole("testArrayCtrl") {
+				profile = "GuiConsoleProfile";
+				position = "0 0";
+			};
+		};
+
+		new GuiTextEditCtrl("ConsoleEntry") {
+			profile = "GuiTextEditProfile";
+			position = "0 350";
+			extent = "640 20";
+			altCommand = "ConsoleEntry::eval();";
+			horizSizing = "width";
+			vertSizing = "top";
+		};
+		new GuiButtonCtrl(ConsoleTrace) {
+			profile = "GuiButtonProfile";
+			vertSizing = "top";
+			position = "0 330";
+			extent = "50 20";
+			visible = "1";
+			variable = "$tracing";
+			command = "ctrace();";
+			text = "Trace";
+			buttonType = "ToggleButton";
+		};
+		new GuiButtonCtrl(ConsoleSetModPaths) {
+			profile = "GuiButtonProfile";
+			vertSizing = "top";
+			position = "50 330";
+			extent = "50 20";
+			visible = "1";
+			text = "Reload FS";
+			command = "setModPaths($modPath);";
+			buttonType = "PushButton";
+		};
+		new GuiButtonCtrl(ConsoleDebug) {
+			profile = "GuiButtonProfile";
+			vertSizing = "top";
+			position = "100 330";
+			extent = "50 20";
+			visible = "1";
+			variable = "$DEBUG";
+			text = "Debug";
+			buttonType = "ToggleButton";
+		};
+		new GuiButtonCtrl(ConsoleEEnabled) {
+			profile = "GuiButtonProfile";
+			vertSizing = "top";
+			position = "150 330";
+			extent = "50 20";
+			visible = "1";
+			text = "Editor";
+			buttonType = "ToggleButton";
+			command = "toggleConsoleEditor();";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+$ConsoleActive = false;
+
+function ConsoleEntry::eval() {
+	%text = ConsoleEntry.getValue();
+	if (%text $= "")
+		return;
+
+	// disable console during leaderboard usage
+	///      keep $LB as that is for the login screen
+	if (lb()) {
+		warn("Console usage is disabled during the leaderboards.");
+		warn("We do not want cheaters in a non-cheating environment.");
+		warn("Exit the leaderboards to re-enable the console.");
+		warn("Thank you,");
+		warn("   ~The Platinum Team");
+		ConsoleEntry.setValue("");
+		return;
+	}
+
+	// Don't allow them to use the following commands.
+	// i rewrote part of this to make it easier to understand
+	%testExpr = strlwr(%text);
+	%invalid[0] = "$"@"c"@"r"@"c"; // $crc
+	%invalid[1] = "$"@"g"@"a"@"m"@"e"@":"@":"; // $game::
+	%invalid[2] = "$"@"l"@"b"; // $lb
+	%invalid[3] = "."@"d"@"u"@"m"@"p"; // .dump
+	%invalid[4] = "e"@"v"@"a"@"l"; // eval
+	%invalid[5] = "c"@"a"@"l"@"l"; // call
+	%invalid[6] = "t"@"r"@"e"@"e"; // tree
+	%invalid[7] = "g"@"u"@"i"@"e"@"d"@"i"@"t"; // guiedit
+	%invalid[8] = "e"@"x"@"e"@"c"; // exec
+	%invalid[9] = "w"@"i"@"n"@"c"@"o"@"n"@"s"@"o"@"l"@"e"; // winconsole
+	%invalid[10] = "d"@"b"@"g"@"S"@"e"@"t"@"P"@"a"@"r"@"a"@"m"@"e"@"t"@"e"@"r"@"s"; // dbgSetParameters
+	%invalid[11] = "t"@"e"@"l"@"n"@"e"@"t"@"S"@"e"@"t"@"P"@"a"@"r"@"a"@"m"@"e"@"t"@"e"@"r"@"s"; // telnetSetParameters
+
+	if (stripos(%testExpr, "testcheats") != -1) {
+		echo("Enabling editor for you. Here's the variable in case you care about that:");
+		%testExpr = "$Editor::Enabled = 1;";
+		%text = "$Editor::Enabled = 1;";
+
+		remind("Opening the editor will not save times!", $ReminderDlg::EditorNoSave);
+	}
+
+	echo("\c3$ " @ %text);
+	for (%i = 0; %i < 12; %i ++) {
+		if (stripos(%testExpr,%invalid[%i]) != -1) {
+			//echo("\c5Forbidden command.");
+			echo("\c2Syntax error in input.");
+			ConsoleEntry.setValue("");
+			return;
+		}
+	}
+
+   $Game::Offline = true; //No LB access if you use the console
+   MenuOnlineButton.setActive(false);
+
+	%cheatExpr = strReplace(%testExpr, " ", "_");
+	if (isFunction("cheat_" @ %cheatExpr)) {
+		call("cheat_" @ %cheatExpr);
+		ConsoleEntry.setValue("");
+		return;
+	}
+
+	eval(%text);
+	ConsoleEntry.setValue("");
+
+	ConsoleTrace.setValue($tracing);
+	ConsoleDebug.setValue($DEBUG);
+	ConsoleEEnabled.setValue($Editor::Enabled);
+}
+
+function ctrace() {
+	trace($tracing);
+}
+
+function ToggleConsole(%make) {
+	if (%make) {
+		if ($ConsoleActive) {
+			// This gives errors on macos
+			if ($enableDirectInput && $platform !$= "macos")
+				activateKeyboard();
+			RootGui.popDialog(ConsoleDlg);
+			$ConsoleActive = false;
+			if (ControllerGui.isJoystick()) {
+				ControllerGui.selectControl($ConsoleLast);
+			}
+		} else {
+			// disable console during leaderboard usage
+			///      keep $LB as that is for the login screen
+			if (lb() || $LB) {
+				ConsoleEntry.setVisible(0);
+			} else {
+				ConsoleEntry.setVisible(1);
+			}
+
+			if (ControllerGui.isJoystick()) {
+				$ConsoleLast = ControllerGui.control;
+			}
+
+			// This gives errors on macos
+			if ($enableDirectInput && $platform !$= "macos")
+				deactivateKeyboard();
+			RootGui.pushDialog(ConsoleDlg, 99);
+			$ConsoleActive = true;
+
+			ConsoleTrace.setValue($tracing);
+			ConsoleDebug.setValue($DEBUG);
+			ConsoleEEnabled.setValue($Editor::Enabled);
+
+			remind("Using console commands will disable playing online until you restart your game.", $ReminderDlg::OnlineNoLB);
+		}
+	}
+}
+
+function toggleConsoleEditor() {
+	$Editor::Enabled = !$Editor::Enabled;
+	if (lb()) {
+		$Editor::Enabled = false;
+		echo("I'm not sure what you were expecting.");
+	}
+	ConsoleEEnabled.setValue($Editor::Enabled);
+}
+
+// This is here because mapping two keys to the same function
+// causes the first key to be unmapped. This is an attempt to fix the win7 bug
+// (fixed below) and keep support for other OSes
+
+function toggleConsole2(%make) {
+	toggleConsole(%make);
+}
+
+// adding console binding here
+// The GUI editor binding is in GuiEditorGui, so I've done similar for the console
+GlobalActionMap.bind(keyboard, tilde, toggleConsole);
+
+// readding this because tilde support is gone on windows 7
+GlobalActionMap.bind(keyboard, pageUp, toggleConsole2);
+
+
+function cheat_win() {
+	if ($Client::GameRunning) {
+		//Yay!
+		echo("Congratulations! You found a cheat code!");
+		startFireWorks(ServerConnection.getControlObject());
+
+		$Cheats::Activated = true;
+		endGameSetup();
+	} else {
+		error("Can't exactly win a game you're not playing.");
+	}
+}
+function cheat_party() {
+	//:D
+	doParty();
+}
+function cheat_challenges() {
+	// no
+	alxPlay(LBNope);
+}
+function cheat_motherlode() {
+	$Cheats::Activated = true;
+	for (%i = 0; %i < 50; %i ++) {
+		schedule(%i * 250, 0, cml);
+	}
+}
+function cml() {
+	if (!lb()) {
+		LocalClientConnection.onFoundGem(getRandom(1, 5));
+	}
+}
+function cheat_0073735963() {
+	$Cheats::Activated = true;
+	//Right to the end!
+	menuLoadStartMission("platinum/data/missions_pq/bonus/Puzzle11Nightmare.mcs");
+}
+function cheat_waitAreYouCheatingAtCheatingWTF() {
+	echo("Yes, I see you.");
+}
+function cheat_joj() {
+	if (canSupportPostFX()) {
+		enablePostFX();
+		reloadPostFX();
+		setPostFXShader("platinum/data/shaders/postfxV.glsl", "platinum/data/shaders/jojF.glsl");
+	} else {
+		echo("Turn on shaders and try again ;)");
+	}
+}
+function cheat_sv_cheats_1() {
+	echo("FYI: Have you tried using the \"editor\" button? We added it for a reason, you know.");
+	echo("If you want to edit official levels to look for secrets, go ahead I guess.");
+	$Editor::Enabled = 1;
+}
+function cheat_sv_cheats_0() {
+	echo("Seriously? You're doing this again after you got the berating the first time?");
+	echo("I'll have you know this is _not_ the Source engine and those commands would not be valid");
+	echo("without these ridiculous hard-coded cheat messages.");
+	$Editor::Enabled = 0;
+}
+

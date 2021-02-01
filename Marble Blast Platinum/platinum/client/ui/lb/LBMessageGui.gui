@@ -1,0 +1,123 @@
+//-----------------------------------------------------------------------------
+// LBMessageGui.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LBMessageGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	commandCancel = "LBMessageCallback();";
+	commandNameCancel = "Cancel";
+
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "0 0";
+		extent = "640 480";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQWindowProfile";
+			horizSizing = "center";
+			vertSizing = "center";
+			position = "67 96";
+			extent = "505 287";
+			minExtent = "61 61";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(LBMessageText) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "relative";
+				vertSizing = "relative";
+				position = "6 136";
+				extent = "484 32";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBorderButtonCtrl(LBMessageCancel) {
+				profile = "PQButtonProfile";
+				horizSizing = "center";
+				vertSizing = "top";
+				position = "205 210";
+				extent = "94 45";
+				minExtent = "8 8";
+				visible = "0";
+				command = "LBMessageCallback();";
+				accelerator = "escape";
+				helpTag = "0";
+				text = "Cancel";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiMLTextCtrl(LBMessageTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "44 26";
+				extent = "416 56";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+// show the message
+function LBMessage(%message, %cancelCmd, %hideBack) {
+	LBMessageTitle.setText("<bold:48><just:center>Please Wait");
+	%style = "<bold:28><just:center>";
+	LBMessageText.setText(%style @ %message);
+	LBMessageCancel.setVisible(%cancelCmd !$= "");
+	LBMessageCancel.callback = %cancelCmd;
+	if (%hideBack)
+		RootGui.pushDialog(LBMessageGui);
+	else
+		RootGui.setContent(LBMessageGui);
+}
+
+function LBMessageCallback() {
+	eval(LBMessageCancel.callback);
+	LBMessageCancel.setVisible(0);
+	LBMessageCancel.callback = "";
+}

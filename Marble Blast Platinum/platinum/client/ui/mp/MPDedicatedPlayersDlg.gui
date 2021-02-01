@@ -1,0 +1,206 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPDedicatedPlayersDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "260 127";
+		extent = "279 346";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "92 274";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedPlayersDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "23 55";
+			extent = "234 179";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 13";
+				extent = "208 153";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPDedicatedPlayersOnlineList) {
+					profile = "GuiMPPlayerlistProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "208 8";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPDedicatedPlayersDlg.updateButtons();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiMLTextCtrl(MPDedicatedPlayersTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "39 19";
+			extent = "201 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MPDedicatedPlayersKick) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "28 229";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedPlayersDlg.kick();";
+			helpTag = "0";
+			text = "Kick";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "255 204 204";
+		};
+		new GuiBorderButtonCtrl(MPDedicatedPlayersHost) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "122 229";
+			extent = "130 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedPlayersDlg.makeHost();";
+			helpTag = "0";
+			text = "Make Host";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "204 255 204";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPDedicatedPlayersDlg::show(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPDedicatedPlayersDlg::close(%this) {
+	RootGui.popDialog(%this);
+	PlayMissionGui.showBody();
+}
+
+function MPDedicatedPlayersDlg::onWake(%this) {
+	MPDedicatedPlayersTitle.setText("<bold:28><just:center>Player List");
+	%this.updatePlayerList();
+	%this.updateButtons();
+}
+
+function MPDedicatedPlayersDlg::updatePlayerList(%this) {
+	MPDedicatedPlayersOnlineList.clear();
+
+	%count = $MP::ClientIndexMax;
+	for (%i = 0; %i <= %count; %i ++) {
+		%player = PlayerList.getEntry(%i).name;
+		if (%player $= "")
+			continue;
+		if (%player $= $LB::Username)
+			continue;
+
+		MPDedicatedPlayersOnlineList.addRow(%i, LBResolveName(%player, true) TAB %player);
+	}
+	MPDedicatedPlayersOnlineList.sort(0, true);
+	MPDedicatedPlayersOnlineList.setSelectedRow(0);
+}
+
+function MPDedicatedPlayersDlg::updateButtons(%this) {
+	MPDedicatedPlayersKick.setActive(MPDedicatedPlayersOnlineList.rowCount() && (MPDedicatedPlayersOnlineList.getSelectedId() != -1));
+	MPDedicatedPlayersHost.setActive(MPDedicatedPlayersOnlineList.rowCount() && (MPDedicatedPlayersOnlineList.getSelectedId() != -1));
+}
+
+function MPDedicatedPlayersDlg::kick(%this) {
+	%selected = MPDedicatedPlayersOnlineList.getRowTextById(MPDedicatedPlayersOnlineList.getSelectedId());
+	%name = getField(%selected, 1);
+	// Tell the server to kick them
+	commandToServer('KickUser', %name);
+}
+
+function MPDedicatedPlayersDlg::makeHost(%this) {
+	%selected = MPDedicatedPlayersOnlineList.getRowTextById(MPDedicatedPlayersOnlineList.getSelectedId());
+	%name = getField(%selected, 1);
+	// Tell the server to kick them
+	commandToServer('MakeHost', %name);
+}

@@ -1,0 +1,51 @@
+//-----------------------------------------------------------------------------
+// Halloween mode
+//
+// Copyright (c) 2015 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+ModeInfoGroup.add(new ScriptObject(ModeInfo_ghosts) {
+	class = "ModeInfo_ghosts";
+	superclass = "ModeInfo";
+
+	identifier = "ghosts";
+	file = "spooky";
+
+	name = "Spooky Ghosts";
+	desc = "Oooooooooout of bounds";
+
+	hide = 1;
+	hasMissions = 0;
+});
+
+function ClientMode_ghosts::onLoad(%this) {
+	echo("[Mode" SPC %this.name @ " Client]: Loaded!");
+}
+
+// show the fear message if ur spooked by a ghos
+function clientCmd3Spooky5Me() {
+	//PlayGui.setMessage("outOfBounds",2000);
+	// since the oob message appears to be "broken", i'll hack it in my way
+	cancel(CenterMessageDlg.timer);
+	CenterMessageDlg.setBitmap($userMods @ "/client/ui/game/state/fear.png",true);
+	CenterMessageDlg.setVisible(true);
+	CenterMessageDlg.timer = CenterMessageDlg.schedule(2000,"setVisible",false);
+}

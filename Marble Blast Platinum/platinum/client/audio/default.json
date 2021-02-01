@@ -1,0 +1,17 @@
+{
+	"alarm": "A",
+	"alarm_timeout": "A",
+	"checkpoint": "D",
+	"firewrks": "D",
+	"gotDiamond": "D",
+	"gotAllDiamonds": "D",
+	"missinggems": "D",
+	"easter": "E",
+	"easterfound": "E",
+	"spawn": "E",
+	"opponentDiamond": "F_sharp",
+	"gotDiamond1": "F_sharp",
+	"gotDiamond2": "D",
+	"gotDiamond5": "A",
+	"gotDiamond10": "C_sharp"
+}

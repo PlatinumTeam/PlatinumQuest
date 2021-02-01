@@ -1,0 +1,785 @@
+//-----------------------------------------------------------------------------
+// Portions Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Torque Game Engine
+//
+// Portions Copyright (c) 2001 GarageGames.Com
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(WorldEditorSettingsDlg) {
+	profile = "GuiModelessDialogProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+
+	new GuiWindowCtrl() {
+		profile = "GuiWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "90 15";
+		extent = "459 448";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		text = "WorldEditor Settings";
+		maxLength = "255";
+		resizeWidth = "0";
+		resizeHeight = "0";
+		canMove = "1";
+		canClose = "0";
+		canMinimize = "0";
+		canMaximize = "0";
+		minSize = "50 50";
+		closeCommand = "RootGui.popDialog(WorldEditorSettingsDlg);";
+
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "133 415";
+			extent = "80 20";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(WorldEditorSettingsDlg);";
+			helpTag = "0";
+			text = "OK";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiControl(WESettingsGeneralTab) {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "231 27";
+			extent = "220 210";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 10";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.planarMovement";
+				command = "EWorldEditor.planarMovement = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Planar Movement";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 36";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.boundingBoxCollision";
+				command = "EWorldEditor.boundingBoxCollision = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Collide With Object\'s Bounding Box";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 88";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.axisGizmoActive";
+				command = "EWorldEditor.axisGizmoActive = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Axis Gizmo Active";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 62";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.objectsUseBoxCenter";
+				command = "EWorldEditor.objectsUseBoxCenter = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Objects Use Box Center";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 123";
+				extent = "83 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Min Scale Factor:";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 146";
+				extent = "83 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Min Scale Factor:";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "104 123";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.minScaleFactor";
+				command = "EWorldEditor.minScaleFactor = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "104 146";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.maxScaleFactor";
+				command = "EWorldEditor.maxScaleFactor = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 178";
+				extent = "80 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Visible Distance:";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "104 178";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "pref::Editor::visibleDistance";
+				command = "$pref::Editor::visibleDistance = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+		};
+		new GuiControl(WESettingsDisplayTab) {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "7 27";
+			extent = "220 210";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 10";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.renderPlane";
+				command = "EWorldEditor.renderPlane = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Render Plane";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 37";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.renderPlaneHashes";
+				command = "EWorldEditor.renderPlaneHashes = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Render Plane Hashes";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 64";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.renderObjText";
+				command = "EWorldEditor.renderObjText = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Render Object Text";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 119";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.renderSelectionBox";
+				command = "EWorldEditor.renderSelectionBox = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Render Selection Box";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "93 151";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.planeDim";
+				command = "EWorldEditor.planeDim = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "18 151";
+				extent = "59 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Plane Extent";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "18 175";
+				extent = "44 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Grid Size";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "93 175";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.gridSize";
+				command = "EWorldEditor.gridSize = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 90";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.renderObjHandle";
+				command = "EWorldEditor.renderObjHandle = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Render Object Handle";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+		};
+		new GuiControl(WESettingsSnapTab) {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "231 312";
+			extent = "220 127";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "22 39";
+				extent = "44 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Grid Size";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "97 39";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.gridSize";
+				command = "EWorldEditor.gridSize = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 10";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.snapToGrid";
+				command = "EWorldEditor.snapToGrid = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Snap To Grid";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 66";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.snapRotations";
+				command = "EWorldEditor.snapRotations = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Snap Rotations";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "22 95";
+				extent = "56 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Snap Angle";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "97 95";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.rotationSnap";
+				command = "EWorldEditor.rotationSnap = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+		};
+		new GuiControl(WESettingsMouseTab) {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "7 241";
+			extent = "220 166";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 10";
+				extent = "200 24";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.showMousePopupInfo";
+				command = "EWorldEditor.showMousePopupInfo = $ThisControl.getValue();";
+				helpTag = "0";
+				text = "Show Mouse Popup Info";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 35";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.mouseMoveScale";
+				command = "EWorldEditor.mouseMoveScale = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 60";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.mouseRotateScale";
+				command = "EWorldEditor.mouseRotateScale = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 85";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.mouseScaleScale";
+				command = "EWorldEditor.mouseScaleScale = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 60";
+				extent = "61 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Rotate Scale";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 85";
+				extent = "57 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Scale Scale";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 35";
+				extent = "56 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Move Scale";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "12 110";
+				extent = "84 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Create Gem Type";
+				maxLength = "255";
+			};
+			new GuiPopUpMenuCtrl(WESD_GemType) {
+				profile = "GuiPopUpMenuProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 110";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.gemType";
+				command = "EWorldEditor.gemType = WESD_GemType.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPopupHeight = "200";
+					_value0 = "normal";
+					_value1 = "pq";
+					_value2 = "fancy";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "GuiCheckBoxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "10 130";
+				extent = "200 30";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.descriptiveFieldNames";
+				command = "EWorldEditor.descriptiveFieldNames = $ThisControl.getValue(); EditorInspector.inspector.inspect(EditorInspector.object, EWorldEditor.descriptiveFieldNames);";
+				helpTag = "0";
+				text = "Descriptive Inspector Field Names";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+		};
+		new GuiControl(WESettingsMiscTab) {
+			profile = "GuiWindowProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "231 241";
+			extent = "220 65";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "9 35";
+				extent = "78 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Project Distance";
+				maxLength = "255";
+			};
+			new GuiTextCtrl() {
+				profile = "GuiTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "9 9";
+				extent = "89 18";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Gizmo Screen Len";
+				maxLength = "255";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 35";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.projectDistance";
+				command = "EWorldEditor.projectDistance = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextEditCtrl() {
+				profile = "GuiTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "101 9";
+				extent = "107 18";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "EWorldEditor.axisGizmoMaxScreenLen";
+				command = "EWorldEditor.axisGizmoMaxScreenLen = $ThisControl.getValue();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "16 415";
+			extent = "106 20";
+			minExtent = "8 8";
+			visible = "1";
+			command = "WorldEditorSettingsDlg.reset();";
+			helpTag = "0";
+			text = "Reset to Default";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+WESD_GemType.add("normal", 0); WESD_GemType._value[0] = "normal";
+WESD_GemType.add("pq", 1);     WESD_GemType._value[1] = "pq";
+WESD_GemType.add("fancy", 2);  WESD_GemType._value[2] = "fancy";
+
+function WorldEditorSettingsDlg::onWake(%this) {
+	WESD_GemType.setValue(EWorldEditor.gemType);
+}
+
+function WorldEditorSettingsDlg::reset(%this) {
+	MessageBoxYesNo("Reset Settings?", "You cannot undo this action.", "WESD_Reset();", "");
+}
+
+function WESD_Reset() {
+	//Empty prefs
+	fwrite(expandFilename($Editor::PrefsFile), "");
+	deleteVariables("$WEpref::*");
+
+	//Reload defaults
+	EditorGui.getPrefs();
+	EditorGui.setPrefs();
+
+	//Update UI
+	Canvas.popDialog(WorldEditorSettingsDlg);
+	Canvas.pushDialog(WorldEditorSettingsDlg);
+}

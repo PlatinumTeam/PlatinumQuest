@@ -1,0 +1,12 @@
+{
+  "identifier": "snowball",
+  "name": "Winterfest",
+  "author": "Platinum Team",
+  "description": "Holiday cheer!",
+  "timer_color": {
+    "normal": "160 210 255 255",
+    "stopped": "160 255 210 255",
+    "danger": "230 200 255 255"
+  },
+  "hidden": true
+}

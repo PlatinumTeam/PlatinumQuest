@@ -1,0 +1,163 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LoadingGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "1024 768";
+
+	new GuiControl(LoadingBody) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "-119 87";
+		extent = "1038 425";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "height";
+			position = "100 170";
+			extent = "838 256";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./loading/loading_main_text";
+			wrap = "0";
+		};
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "208 0";
+			extent = "622 93";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./loading/loading_title";
+			wrap = "0";
+		};
+		new GuiMLTextCtrl(LoadingTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "305 16";
+			extent = "456 65";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:56><just:center>Loading...";
+				unformattedText = "<bold:56><just:center>Loading...";
+		};
+		new GuiMLTextCtrl(LoadingMessage) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "169 180";
+			extent = "700 96";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:28><just:left>Tip: Your game is broken. You may want to re-install.";
+				unformattedText = "<bold:28>Trivia: If you say \'Marble Blast PlatinumQuest\', Matan will be thrown into a raging fit. PlatinumQuest does not have \'Marble Blast\' in front of it.";
+		};
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "51 109";
+			extent = "118 118";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./loading/loading_helpbubble";
+			wrap = "0";
+		};
+		new GuiControl(LoadingProgressBar) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "100 392";
+			extent = "838 34";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "838 34";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./loading/loading_main_text";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "838 34";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./loading/loading_main_text";
+				wrap = "0";
+			};
+		};
+		new GuiMLTextCtrl(LoadingProgressMessage) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "169 390";
+			extent = "700 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:28><just:left>Progress: Loading Progress Message... 0%";
+				unformattedText = "<bold:28>Loading Levels...<just:right>100%";
+		};
+	};
+};
+//--- OBJECT WRITE END ---

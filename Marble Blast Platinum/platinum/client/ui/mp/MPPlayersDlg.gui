@@ -1,0 +1,329 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPPlayersDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "185 127";
+		extent = "429 346";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "167 274";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPPlayersDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "23 71";
+			extent = "198 163";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 13";
+				extent = "172 137";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPPlayersOnlineList) {
+					profile = "GuiMPPlayerlistProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "172 23";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPPlayersDlg.updateButtons();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl(MPPlayersUnban) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "265 229";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPPlayersDlg.unban();";
+			helpTag = "0";
+			text = "Unban";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPPlayersKick) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "28 229";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPPlayersDlg.kick();";
+			helpTag = "0";
+			text = "Kick";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "255 204 204";
+		};
+		new GuiBorderButtonCtrl(MPPlayersBan) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "122 229";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPPlayersDlg.ban();";
+			helpTag = "0";
+			text = "Ban";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "255 204 204";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "211 71";
+			extent = "196 163";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 13";
+				extent = "170 137";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPPlayersBannedList) {
+					profile = "GuiMPPlayerlistProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "184 8";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPPlayersDlg.updateButtons();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiMLTextCtrl(MPPlayersTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "21 19";
+			extent = "388 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPPlayersListTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "23 51";
+			extent = "198 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPPlayersBannedTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "211 51";
+			extent = "196 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPPlayersDlg::show(%this) {
+	if ($Server::_Dedicated) {
+		MPDedicatedPlayersDlg.show();
+		return;
+	}
+
+	RootGui.pushDialog(%this);
+}
+
+function MPPlayersDlg::close(%this) {
+	RootGui.popDialog(%this);
+	PlayMissionGui.showBody();
+}
+
+function MPPlayersDlg::onWake(%this) {
+	MPPlayersTitle.setText("<bold:28><just:center>Player List");
+	MPPlayersListTitle.setText("<bold:24><just:center>Online Players");
+	MPPlayersBannedTitle.setText("<bold:24><just:center>Banned Players");
+	%this.updatePlayerList();
+	%this.updateButtons();
+}
+
+function MPPlayersDlg::updatePlayerList(%this) {
+	if ($Server::_Dedicated) {
+		MPDedicatedPlayersDlg.updatePlayerList();
+		return;
+	}
+
+	MPPlayersOnlineList.clear();
+
+	%count = $MP::ClientIndexMax;
+	for (%i = 0; %i <= %count; %i ++) {
+		%player = PlayerList.getEntry(%i).name;
+		if (%player $= "")
+			continue;
+		if (%player $= $LB::Username)
+			continue;
+
+		MPPlayersOnlineList.addRow(%i, LBResolveName(%player, true) TAB %player);
+	}
+	MPPlayersOnlineList.sort(0, true);
+	MPPlayersOnlineList.setSelectedRow(0);
+
+	MPPlayersBannedList.clear();
+
+	tryCreateBanlist();
+
+	%count = BanList.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%player = getRecord(BanList.getEntry(%i), 0);
+		if (%player $= "")
+			continue;
+		if (%player $= $LB::Username)
+			continue;
+
+		MPPlayersBannedList.addRow(%i, LBResolveName(%player, true) TAB %player);
+	}
+	MPPlayersBannedList.sort(0, true);
+	MPPlayersBannedList.setSelectedRow(0);
+}
+
+function MPPlayersDlg::updateButtons(%this) {
+	MPPlayersKick.setActive(MPPlayersOnlineList.rowCount() && (MPPlayersOnlineList.getSelectedId() != -1));
+	MPPlayersBan.setActive(MPPlayersOnlineList.rowCount() && (MPPlayersOnlineList.getSelectedId() != -1));
+	MPPlayersUnban.setActive(MPPlayersBannedList.rowCount() && (MPPlayersBannedList.getSelectedId() != -1));
+}
+
+
+function MPPlayersDlg::kick(%this) {
+	%selected = MPPlayersOnlineList.getRowTextById(MPPlayersOnlineList.getSelectedId());
+	%name = getField(%selected, 1);
+	// Tell the server to kick them
+	commandToServer('KickUser', %name);
+}
+
+function MPPlayersDlg::ban(%this) {
+	%selected = MPPlayersOnlineList.getRowTextById(MPPlayersOnlineList.getSelectedId());
+	%name = getField(%selected, 1);
+	// Tell the server to ban them
+	commandToServer('BanUser', %name);
+}
+
+function MPPlayersDlg::unban(%this) {
+	%selected = MPPlayersBannedList.getRowTextById(MPPlayersBannedList.getSelectedId());
+	%name = getField(%selected, 1);
+	// Tell the server to unban them
+	commandToServer('UnbanUser', %name);
+}

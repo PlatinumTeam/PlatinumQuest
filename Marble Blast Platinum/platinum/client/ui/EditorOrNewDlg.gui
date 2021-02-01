@@ -1,0 +1,265 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(EditorOrNewDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "./exit/black";
+	wrap = "0";
+		_guiSize = "640 480";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "110 69";
+		extent = "420 342";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 270";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "EON_Cancel();";
+			helpTag = "0";
+			text = "Cancel";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(EON_EditButton) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "252 270";
+			extent = "141 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "EON_Edit();";
+			helpTag = "0";
+			text = "Edit Selected";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "121 270";
+			extent = "131 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "EON_Create();";
+			helpTag = "0";
+			text = "Create New";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(EON_Title) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "14 17";
+			extent = "392 36";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:32><just:center>Select a Mission to Edit";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "22 53";
+			extent = "376 56";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiTextEditCtrl(EON_SearchBox) {
+				profile = "PQTextboxProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 14";
+				extent = "317 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "EON_Search();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "332 12";
+				extent = "32 32";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./search/search";
+				wrap = "0";
+			};
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "22 88";
+			extent = "376 187";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl(EON_Scroll) {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "350 161";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiTextListCtrl(EON_MissionList) {
+					profile = "PQTextListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "330 900";
+					minExtent = "8 8";
+					visible = "1";
+					command = "EON_SelectMission();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function EditorOrNewDlg::onWake(%this) {
+	EON_SearchBox.setText("");
+	EON_EditButton.setActive(0);
+	EON_Search();
+}
+
+function EON_Search() {
+	%search = EON_SearchBox.getValue();
+
+	EON_MissionList.clear();
+
+	%spec = "*/data/missions/custom/*";
+	for (%file = findFirstMission(%spec); %file !$= ""; %file = findNextMission(%spec)) {
+		%info = getMissionInfo(%file, true);
+		%base = fileBase(%file) @ fileExt(%file);
+
+		if (%search $= "" || stripos(%info.name, %search) != -1 || stripos(%base, %search) != -1) {
+			EON_MissionList.addRow(EON_MissionList.rowCount(), %info.name SPC "(" @ %base @ ")" TAB %file);
+		}
+	}
+	EON_MissionList.sort(0);
+	EON_MissionList.setSelectedRow(0);
+	EON_EditButton.setActive(EON_MissionList.rowCount() > 0);
+}
+
+function EON_Create() {
+	Editor::loadFunctions();
+	cnmbutton();
+}
+
+function EON_SelectMission() {
+	EON_EditButton.setActive(1);
+}
+
+function EON_Cancel() {
+	RootGui.popDialog(EditorOrNewDlg);
+	PlayMissionGui.showBody();
+}
+
+function EON_Edit() {
+	PlayMissionGui.showBody();
+
+	%id = EON_MissionList.getSelectedId();
+	%row = EON_MissionList.getRowTextById(%id);
+	%file = getField(%row, 1);
+
+	$Game::Menu = 0;
+
+	// We need to start a server if one isn't already running
+	if ($Server::ServerType $= "") {
+		createServer("SinglePlayer", %file);
+		loadMission(%file, true);
+		%conn = new GameConnection(ServerConnection);
+		RootGroup.add(ServerConnection);
+		%conn.setConnectArgs($LB::Username, "", MarbleSelectDlg.getSelection(), "bologna");
+		%conn.setJoinPassword($MPPref::Server::Password);
+		%conn.connectLocal();
+	} else {
+		loadMission(%file);
+	}
+
+	$Editor::Enabled = 1;
+	$Editor::Opened = 1;
+	if (!isObject(Editor)) {
+		Editor::create();
+		MissionCleanup.add(Editor);
+	}
+
+	EditorGui.loadingMission = true;
+}

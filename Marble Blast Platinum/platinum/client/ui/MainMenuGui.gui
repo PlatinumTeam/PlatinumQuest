@@ -1,0 +1,466 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(MenuButtonProfile : PQButtonProfile) {
+	fontType = "HelveticaNeueLTStd-BdCnO";
+	fontSize = "60";
+	fontColor = "0 0 0 255";
+	fontColorNA = "108 108 108 255";
+	justify = "left";
+	bitmap = "./menu/menu";
+	hasBitmapArray = false;
+};
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(MainMenuGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "800 600";
+		defaultControl = "MenuPlayButton";
+		tile = "0";
+		useVariable = "0";
+
+	new GuiBitmapCtrl(MenuCircle1) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "0 0";
+		extent = "116 720";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "./menu/bgcircle-large.png";
+		wrap = "0";
+	};
+	new GuiBitmapCtrl(MenuCircle2) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "left";
+		vertSizing = "top";
+		position = "1045 600";
+		extent = "260 145";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "./menu/bgcircle-small.png";
+		wrap = "0";
+	};
+	new GuiBitmapButtonTextCtrl(MenuOnlineButton) {
+		profile = "MenuButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "75 268";
+		extent = "500 84";
+		minExtent = "8 8";
+		visible = "1";
+		command = "initLeaderboards();";
+		helpTag = "0";
+		text = "           Online";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+		bitmap = "./menu/menu";
+			controlUp = "MenuPlayButton";
+			controlDown = "MenuOptionsButton";
+	};
+	new GuiBitmapButtonTextCtrl(MenuQuitButton) {
+		profile = "MenuButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "75 538";
+		extent = "500 85";
+		minExtent = "8 8";
+		visible = "1";
+		command = "quit();";
+		accelerator = "escape";
+		helpTag = "0";
+		text = "           Quit";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+		bitmap = "./menu/menu";
+			controlUp = "MenuReplaysButton";
+	};
+	new GuiBitmapButtonTextCtrl(MenuPlayButton) {
+		profile = "MenuButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "75 178";
+		extent = "500 84";
+		minExtent = "8 8";
+		visible = "1";
+		command = "MainMenuGui.play();";
+		accelerator = "enter";
+		helpTag = "0";
+		text = "           Play";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+		bitmap = "./menu/menu";
+			controlDown = "MenuOnlineButton";
+	};
+	new GuiBitmapCtrl(MenuTitle) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "56 57";
+		extent = "864 114";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "./menu/bgtitle.png";
+		wrap = "0";
+	};
+	new GuiMLTextCtrl(VersionText) {
+		profile = "GuiMLTextProfile";
+		horizSizing = "left";
+		vertSizing = "top";
+		position = "655 564";
+		extent = "92 36";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		lineSpacing = "2";
+		allowColorChars = "0";
+		maxChars = "-1";
+			noInvert = "1";
+	};
+	new GuiMLTextCtrl(VersionSub) {
+		profile = "GuiMLTextProfile";
+		horizSizing = "left";
+		vertSizing = "top";
+		position = "750 573";
+		extent = "70 21";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		lineSpacing = "2";
+		allowColorChars = "0";
+		maxChars = "-1";
+			noInvert = "1";
+	};
+	new GuiBitmapButtonTextCtrl(MenuOptionsButton) {
+		profile = "MenuButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "75 358";
+		extent = "500 84";
+		minExtent = "8 8";
+		visible = "1";
+		command = "OptionsGui.show(\"menu\");";
+		helpTag = "0";
+		text = "           Options";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+		bitmap = "./menu/menu";
+			controlUp = "MenuOnlineButton";
+			controlDown = "MenuReplaysButton";
+	};
+	new GuiBitmapButtonTextCtrl(MenuReplaysButton) {
+		profile = "MenuButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "75 448";
+		extent = "500 84";
+		minExtent = "8 8";
+		visible = "1";
+		command = "PlayDemoGui.open(0);";
+		helpTag = "0";
+		text = "           Replays";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+		bitmap = "./menu/menu";
+			controlUp = "MenuOptionsButton";
+			controlDown = "MenuQuitButton";
+	};
+	new GuiTextEditCtrl(MenuPartyEdit) {
+		profile = "GuiTextEditProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "-100 -100";
+		extent = "10 10";
+		minExtent = "8 8";
+		visible = "1";
+		command = "checkParty();";
+		altCommand = "checkParty();";
+		helpTag = "0";
+		maxLength = "255";
+		maxPixelWidth = "0";
+		historySize = "0";
+		password = "0";
+		tabComplete = "0";
+		sinkAllKeyEvents = "0";
+	};
+
+	//DON'T JUDGE ME-- IT WORKS
+	new GuiControl(HackyFixZone) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "10000 10000";
+		extent = "100 100";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		useVariable = "0";
+		tile = "0";
+
+		//Disabled versions of the checkboxes so the bitmaps load as soon as possible
+		new GuiCheckBoxCtrl() {
+			profile = "PQCheckboxProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiCheckBoxCtrl() {
+			profile = "PQCheckboxDisableProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiCheckBoxCtrl() {
+			profile = "PQCheckboxLargeProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiCheckBoxCtrl() {
+			profile = "PQCheckboxLargeDisableProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiRadioCtrl() {
+			profile = "PQRadioProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiRadioCtrl() {
+			profile = "PQRadioDisableProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "0 0";
+			extent = "100 100";
+			minExtent = "8 8";
+			visible = "1";
+			command = "";
+			helpTag = "0";
+			text = "Bugs!";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MainMenuGui::onWake(%this) {
+	%this.schedule(10, fixSizing);
+
+	if (!$pref::noVersionCheck && !$madeVersionCheck) {
+		statsGetServerVersion();
+		$madeVersionCheck = true;
+	}
+
+	if (!$pref::FadeIn) {
+		$pref::FadeIn=true;
+		%bob = new GuiFadeinBitmapCtrl() {
+			profile = "GuiTransparencyInnerProfile";
+			extent = "640 480";
+			horizSizing = "width";
+			vertSizing = "height";
+			fadeInTime = 1000;
+			waitTime = 0;
+			fadeOutTime = 0;
+			done = false;
+		};
+
+		Canvas.add(%bob);
+
+		%bob.schedule(2000, delete);
+	}
+
+	// if engine modifications are not being used
+	// don't let the client play the game!!!
+	if (!$PluginSystemInit) {
+		// mac don't use exe files, vary the message error code!
+		if ($platform $= "macos")
+			%message = "Please use the launcher to launch PlatinumQuest. If this error persists, contact the Platinum Team for support.";
+		else
+			%message = "Please launch the game using the launcher. If this error persists, contact the Platinum Team for support.";
+		MessageBoxOK("Engine Failure", %message, "quit();");
+		return;
+	}
+
+	VersionText.setText(shadow("2 2", "0000007f") @ "<color:ffffff><just:right><bold:32>" @ $THIS_VERSION_NAME);
+	VersionSub.setText(shadow("1 1", "0000007f") @ "<color:ffffff><font:18>" @ $THIS_VERSION_SUB);
+
+	if ($pref::Input::ControlDevice $= "") {
+		//Check if we have a joystick present
+		if (isJoystickDetected()) {
+			MessageBoxYesNo("Joystick Detected", "Do you want to use it to control your marble instead of the keyboard?" @
+				"\n\nSee the \"Controls\" section of the options menu to change this.", "$pref::Input::ControlDevice = \"Joystick\";savePrefs();enableControllerUI();", "$pref::Input::ControlDevice = \"Keyboard\";savePrefs();");
+		} else {
+			$pref::Input::ControlDevice = "Keyboard";
+			savePrefs();
+		}
+	} else if ($pref::Input::ControlDevice $= "Joystick" && !isJoystickDetected()) {
+			MessageBoxYesNo("No Joystick Detected", "Do you want to switch to keyboard controls?" @
+				"\n\nSee the \"Controls\" section of the options menu to change this.", "$pref::Input::ControlDevice = \"Keyboard\";savePrefs();", "");
+	} else if ($pref::Input::ControlDevice $= "Joystick" && isJoystickDetected()) {
+		if (getJoystickName(0) $= "default" && $pref::Input::DefaultJoystickWarning $= "") {
+			$pref::Input::DefaultJoystickWarning = true;
+			MessageBoxOk("Unknown Joystick Type", "There is no configuration for this type of joystick. Using a generic Xbox 360 mapping." @
+				"\n\nSee platinum/client/config for available configurations.");
+		}
+		enableControllerUI();
+	}
+	if ($pref::OpenALWarning $= "" && alGetString("AL_VENDOR") $= "Apple Computer Inc." && $platform $= "windows") { // Good chance they're on a WineSkin / Crossover
+		MessageBoxOk("OpenAL Notice", "We\'re sorry for the inconvenience, but in some cases, sound effects have been reported to not work with WinE / CrossOver. " @
+		             "Some or all sounds do not play, although menu music should still work. " @
+		             "You can find instructions for fixing this <a:marbleblast.proboards.com/post/177578>at this link</a>." NL
+		             "If you are not on WinE/Crossover, or if your sounds work, you can disregard this message.");
+		$pref::OpenALWarning = true;
+	}
+
+	MenuOnlineButton.setActive(!$Game::Offline);
+	%this.schedule(1000, checkScriptError);
+
+	setDiscordStatus("Main Menu");
+}
+
+function MainMenuGui::checkScriptError(%this) {
+	if ($ScriptError !$= "") {
+		MessageBoxOk("Script Error", $ScriptError);
+	}
+}
+
+function MainMenuGui::fixSizing(%this) {
+	if (%this.isAwake())
+		%this.schedule(getWord(getResolution(), 0) == 640 ? 10 : 100, fixSizing);
+	MenuCircle1.setExtent((getWord(Canvas.getExtent(), 1) * 154 / 948) SPC getWord(Canvas.getExtent(), 1));
+	MenuCircle2.setExtent((getWord(Canvas.getExtent(), 1) * 343 / 948) SPC(getWord(Canvas.getExtent(), 1) * 191 / 948));
+	MenuCircle2.setPosition(VectorAdd(VectorSub(Canvas.getExtent(), MenuCircle2.getExtent()), "25 25"));
+}
+
+function MainMenuGui::play(%this) {
+	if (getWord(getResolution(), 0) & 1 || getWord(getResolution(), 1) & 1) {
+		MessageBoxYesNo("Weird Resolution", "What type of resolution is " @ getResolution() @ ". You may have some problems.", "justPlayAlready();", "");
+	} else {
+		justPlayAlready();
+	}
+}
+
+function justPlayAlready() {
+	PlayMissionGui.open();
+}
+
+function checkParty() {
+	if (MenuPartyEdit.getValue() $= "party") {
+		doParty();
+	}
+}
+
+function doParty() {
+	cancel($party);
+	MenuTitle.bitmapColor = HSVtoRGB($party++, 1, 1);
+	MenuTitle.bitmapRotation = $party;
+	$TimeColor["normal"] = MenuTitle.bitmapColor;
+	$party = schedule(10, 0, doParty);
+
+	%last = Canvas.getObject(Canvas.getCount() - 1);
+	pppparty(%last);
+}
+
+function pppparty(%obj) {
+	for (%i = 0; %i < %obj.getCount(); %i ++) {
+		%sub = %obj.getObject(%i);
+		if (%sub.getClassName() $= "GuiBorderButtonCtrl") {
+			%sub.borderColor = HSVtoRGB($party + (%sub.getId() * 30), 1, 1);
+		}
+		pppparty(%sub);
+	}
+}

@@ -1,0 +1,296 @@
+// UT Tip: Take a leap of faith!
+// Rep. by Matan
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         level = "8";
+         startHelpText = "The teleport is used to transport you to different locations in a level.";
+         ultimateTime = "14000";
+         name = "Teleport Training";
+         artist = "Andrew";
+         desc = "Learn to use the teleport!";
+         music = "Astrolabe.ogg";
+         type = "Beginner";
+         goldTime = "20000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.900000 0.900000 0.900000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/Beginner/Beginner_Sky.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.5445079 0.439467 -0.7144089";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         locked = "true";
+         position = "0 0 0";
+   };
+   new Trigger(Bounds) {
+      position = "-50.0267 96.215 473.902";
+      rotation = "1 0 0 0";
+      scale = "130 120 200";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape(StartPoint) {
+      position = "9.1824 -11.6243 481.32";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape() {
+      position = "8.24118 42.5204 543.754";
+      rotation = "0 0 -1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new StaticShape(EndPoint) {
+      position = "8.09861 41.8579 538.32";
+      rotation = "0 0 -1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Item() {
+      position = "-29.9645 78.3751 587.792";
+      rotation = "1 0 0 0";
+      scale = "1 1 1.2";
+      dataBlock = "easterEgg";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger(OOB) {
+      position = "-31.5084 77.9638 569.333";
+      rotation = "1 0 0 0";
+      scale = "70 70 1";
+      dataBlock = "OutOfBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger(congrats) {
+      position = "-18.5231 82.7078 588.459";
+      rotation = "1 0 0 0";
+      scale = "4 9 6";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Congratulations! You just made your first teleport!";
+   };
+   new Trigger(teleport1) {
+      position = "5.65943 26.9479 485.86";
+      rotation = "1 0 0 0";
+      scale = "7 2 6";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "This is a teleport pad. Roll onto it to be transported to a different location in this level!";
+   };
+   new TSStatic() {
+      position = "9.32892 41.9561 485.76";
+      rotation = "0 0 1 180";
+      scale = "1 1 1";
+      shapeName = "~/data/lbinteriors_MBP/teleportpad.dts";
+         destination = "dest1";
+   };
+   new Trigger(teleport2) {
+      position = "3.39432 69.3957 588.466";
+      rotation = "1 0 0 0";
+      scale = "7 2 6";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "However, you won\'t necessarily use a teleport pad to teleport.";
+   };
+   new Trigger(teleport3) {
+      position = "3.24745 51.4062 588.466";
+      rotation = "1 0 0 0";
+      scale = "7 2 6";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Jump on the small brown platform!";
+   };
+   new TSStatic() {
+      position = "-24.1856 78.5 588.57";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      shapeName = "~/data/lbinteriors_MBP/teleportpad.dts";
+   };
+   new InteriorInstance() {
+      position = "6.23549 71.2358 539.764";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_MBP/TeleportTraining.dif";
+      showTerrainInside = "0";
+   };
+   new Trigger() {
+      position = "5.29696 45.0694 485.932";
+      rotation = "1 0 0 0";
+      scale = "8 8 4";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         destination = "SecondFloor";
+   };
+   new Trigger(SecondFloor) {
+      position = "-24.75 80 589";
+      rotation = "1 0 0 0";
+      scale = "2 2 2";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "6.1 41.325 588.7";
+      rotation = "1 0 0 0";
+      scale = "1.8 1.8 2";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         destination = "FinalFloor";
+   };
+   new Trigger(FinalFloor) {
+      position = "57.63 41.68 531.7";
+      rotation = "1 0 0 0";
+      scale = "2 2 2";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "26.7202 -36.54889 504.6541";
+         rotation = "0.738165 0.1320242 -0.6615756 30.25616";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+      };
+      new StaticShape(CameraPath2) {
+         position = "21.53191 -20.78702 498.3903";
+         rotation = "0.7491462 0.1052596 -0.6539881 24.2508";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+      };
+      new StaticShape(CameraPath3) {
+         position = "17.43069 -4.011085 494.1554";
+         rotation = "0.6581969 0.0675039 -0.7498133 15.57706";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+      };
+      new StaticShape(CameraPath4) {
+         position = "13.85417 15.29209 491.3614";
+         rotation = "0.5220447 0.04042112 -0.8519598 10.38587";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-23.41195 80.76004 604.5108";
+         rotation = "0.1740334 -0.416197 0.8924642 139.0703";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-16.24361 79.56506 598.6569";
+         rotation = "0.105005 -0.4045205 0.9084807 153.4616";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3700";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+      };
+      new StaticShape(CameraPath7) {
+         position = "-8.887976 75.241 590.0972";
+         rotation = "0.09037262 -0.47849 0.8734301 161.2651";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3600";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+      };
+      new StaticShape(CameraPath8) {
+         position = "-1.97577 72.583 581.409";
+         rotation = "0.07872903 -0.5324843 0.8427705 165.7944";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

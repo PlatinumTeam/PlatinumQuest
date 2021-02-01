@@ -1,0 +1,413 @@
+//-----------------------------------------------------------------------------
+// LBLoginGui.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LBLoginGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		defaultControl = "LBLoginButton";
+		commandCancel = "leaveLeaderboards();";
+		commandNameCancel = "Home";
+
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "0 0";
+		extent = "640 480";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQWindowProfile";
+			horizSizing = "center";
+			vertSizing = "center";
+			position = "64 96";
+			extent = "505 287";
+			minExtent = "61 61";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(LBLoginUsernameTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "35 90";
+				extent = "110 32";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBorderButtonCtrl(LBLoginCreate) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "121 215";
+				extent = "161 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.pushDialog(LBRegisterDlg);";
+				helpTag = "0";
+				text = "Create Account";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlLeft = "LBLoginLeave";
+				controlRight = "LBLoginGuest";
+			};
+			new GuiBorderButtonCtrl(LBLoginLeave) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "27 215";
+				extent = "94 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "leaveLeaderboards();";
+				helpTag = "0";
+				text = "Home";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlRight = "LBLoginCreate";
+			};
+			new GuiMLTextCtrl(LBLoginPlayers) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "37 185";
+				extent = "191 23";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBorderButtonCtrl(LBLoginButton) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "380 215";
+				extent = "98 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBLoginGui.retries = 0;LBLoginGui.login();";
+				helpTag = "0";
+				text = "Log In";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlLeft = "LBLoginGuest";
+			};
+			new GuiControl() {
+				profile = "PQTextboxBorderProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "148 135";
+				extent = "328 38";
+				minExtent = "21 21";
+				visible = "1";
+				helpTag = "0";
+			};
+			new GuiControl() {
+				profile = "PQTextboxBorderProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "148 89";
+				extent = "328 38";
+				minExtent = "21 21";
+				visible = "1";
+				helpTag = "0";
+			};
+			new GuiTextEditCtrl(LBLoginUsername) {
+				profile = "PQTextboxProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "153 93";
+				extent = "316 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBLoginGui.enableLogin();";
+				altCommand = "LBLoginGui.login();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "-1";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiTextEditCtrl(LBLoginPassword) {
+				profile = "PQTextboxProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "153 138";
+				extent = "316 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBLoginGui.enableLogin();";
+				altCommand = "LBLoginGui.login();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "-1";
+				historySize = "0";
+				password = "1";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+			new GuiMLTextCtrl(LBLoginPasswordTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "35 135";
+				extent = "110 32";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiCheckBoxCtrl() {
+				profile = "PQCheckboxProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "284 186";
+				extent = "186 27";
+				minExtent = "8 8";
+				visible = "1";
+				variable = "$LBPref::RememberPassword";
+				command = "LBLoginGui.enableLogin();";
+				helpTag = "0";
+				text = "Remember Password?";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiBorderButtonCtrl(LBLoginGuest) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "282 215";
+				extent = "98 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBLoginGui.guestLogin();";
+				helpTag = "0";
+				text = "Guest";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlLeft = "LBLoginCreate";
+				controlRight = "LBLoginButton";
+			};
+			new GuiMLTextCtrl(LBLoginTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "157 22";
+				extent = "191 56";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function LBLoginGui::onWake(%this) {
+	if ($Game::Offline) {
+		closeLeaderboards();
+		return;
+	}
+
+	$LB::Guest = false; // we aren't a guest if we are a user!
+	LBLoginUsername.setText("");
+	LBLoginPassword.setText("");
+
+	LBLoginUsernameTitle.setText("<bold:28>Username:");
+	LBLoginPasswordTitle.setText("<bold:28>Password:");
+	LBLoginTitle.setText("<bold:48><just:center>Log In");
+
+	// remember username
+	%this.rememberUsername();
+	%this.checkServer();
+	%this.enableLogin();
+
+	MainMenuGui.checkScriptError();
+}
+
+// this enables/disables the login button,
+//       we make sure that both the username and password fields
+//       are not empty
+function LBLoginGui::enableLogin(%this) {
+	%username = LBLoginUsername.getValue();
+	%password = LBLoginPassword.getValue();
+	%enable = false;
+	if (%username !$= "" && %password !$= "")
+		%enable = true;
+	LBLoginButton.setActive(%enable && %this.online);
+	LBLoginGuest.setActive(%this.online);
+	LBLoginCreate.setActive(%this.online && !%this.checking);
+
+	LBLoginButton.setActive(!%this.checking && %this.online);
+	LBLoginGuest.setActive(!%this.checking && %this.online);
+
+	LBLoginPlayers.setText("<bold:21><just:left>" @(%this.checking ? "Requesting Status..." : (%this.online ? %this.players SPC "Player" @(%this.players == 1 ? "" : "s") @ " Online" : %this.error)));
+
+	$LBPref::Username = %username;
+	if ($LBPref::RememberPassword)
+		$LBPref::Password = strEnc(%password, 2);
+
+	$LB::Password2 = garbledeguck(%password);
+
+	ControllerGui.updateButtons();
+}
+
+// remember username code here
+function LBLoginGui::rememberUsername(%this) {
+	LBLoginPassword.makeFirstResponder(false);
+
+	%username = $LBPref::Username;
+
+	//If they have a stored username
+	if (%username !$= "") {
+		LBLoginUsername.setText(%username);
+
+		//Select the password field
+		LBLoginPassword.makeFirstResponder(true);
+
+		//If they're remembering a password
+		if ($LBPref::RememberPassword) {
+
+			//We gotta decrypt it...
+			%password = strDec($LBPref::Password, 2);
+			if (%password !$= "")
+				LBLoginPassword.setText(%password);
+		}
+	}
+}
+
+// login button
+function LBLoginGui::login(%this, %auto) {
+	if (!%auto && (!%this.online || %this.checking))
+		return;
+
+	pauseMusic();
+	$LB::FriendListCount = 0;
+
+	if (%auto) {
+		$LB::Username = $LBPref::AutoLoginUsername;
+		$LB::Password = strDec($LBPref::AutoLoginPassword, 2);
+	} else {
+		$LB::Username = LBLoginUsername.getValue();
+		$LB::Password = LBLoginPassword.getValue();
+	}
+
+	// Don't show our password, dummies
+	traceGuard();
+		$LB::Password2 = garbledeguck($LB::Password);
+	traceGuardEnd();
+
+	// remembering
+	$LBPref::Username = $LB::Username;
+
+	// log into the leaderboards!
+	$LB::LoggedIn = false;
+	LBconnect();
+
+	setTimeScale(1.0);
+}
+
+function LBLoginGui::guestLogin(%this) {
+	LBguestConnect();
+	LBMessage("Connecting...", "LBdisconnect();");
+}
+
+// leave button
+function leaveLeaderboards() {
+	closeLeaderboards();
+	RootGui.setContent(MainMenuGui);
+	playShellMusic();
+}
+
+//-----------------------------------------------------------------------------
+
+function LBLoginGui::checkServer(%this) {
+	if (%this.checking)
+		%this.error = "Still trying...";
+
+	%this.checking = true;
+	%this.enableLogin();
+
+	statsGetServerStatus();
+
+	$LB::CheckSch = %this.schedule(10000, "checkServer");
+}
+
+function LBLoginGui::onServerStatus(%this, %parsed) {
+	cancel($LB::CheckSch);
+
+	echo("Server status: " @ %parsed);
+	%this.checking = false;
+	%this.players = %parsed.players;
+
+	//Online only if we can actually log in
+	%this.online = false;
+
+	//So check that
+	if (%parsed.online $= "true") { //Weak typing apparently doesn't cast "true" to true??
+		if ($MP::RevisionOn >= %parsed.version) {
+			%this.error = "";
+			%this.online = true;
+		} else {
+			%this.error = "Update Required!";
+		}
+	} else {
+		%this.error = "Server is Closed";
+	}
+
+	//Update interface
+	%this.enableLogin();
+}

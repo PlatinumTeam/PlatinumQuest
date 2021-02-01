@@ -1,0 +1,456 @@
+//-----------------------------------------------------------------------------
+// LBAchievementsDlg.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//If you're looking for the achievement list that used to be here, it's now on
+// the database. Bother someone to make an achievement list page.
+
+//--- OBJECT WRITE BEGIN ---
+new GuiChunkedBitmapCtrl(LBAchievementsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	useVariable = "0";
+	tile = "0";
+		_guiSize = "800 600";
+		defaultControl = "LBachiev_scroll";
+		commandSelect = "RootGui.popDialog(LBAchievementsDlg);";
+		commandCancel = "RootGui.popDialog(LBAchievementsDlg);";
+		commandLT = "LBAchievementsDlg.prevCategory();";
+		commandRT = "LBAchievementsDlg.nextCategory();";
+		commandNameSelect = "Close";
+		commandNameLT = "Prev Category";
+		commandNameRT = "Next Category";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "132 55";
+		extent = "535 490";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "86 371";
+			extent = "363 46";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiBorderButtonCtrl(LBAchiev_SingleplayerCategory) {
+				profile = "PQButtonPillLeftProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "0 0";
+				extent = "140 47";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBAchievementsDlg.selectCategory(\"Single Player\");";
+				helpTag = "0";
+				text = "  Single Player";
+				groupNum = "1";
+				buttonType = "RadioButton";
+				repeatPeriod = "450";
+				repeatDecay = "0.958";
+			};
+			new GuiBorderButtonCtrl(LBAchiev_MultiplayerCategory) {
+				profile = "PQButtonPillCenterProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "140 0";
+				extent = "120 47";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBAchievementsDlg.selectCategory(\"Multiplayer\");";
+				helpTag = "0";
+				text = "Multiplayer";
+				groupNum = "1";
+				buttonType = "RadioButton";
+				repeatPeriod = "450";
+				repeatDecay = "0.958";
+			};
+			new GuiBorderButtonCtrl(LBAchiev_EventCategory) {
+				profile = "PQButtonPillRightProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "260 0";
+				extent = "103 47";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBAchievementsDlg.selectCategory(\"Event\");";
+				helpTag = "0";
+				text = "Events  ";
+				groupNum = "1";
+				buttonType = "RadioButton";
+				repeatPeriod = "450";
+				repeatDecay = "0.958";
+			};
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiComic24Profile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "161 17";
+			extent = "213 29";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "220 418";
+			extent = "95 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(LBAchievementsDlg);";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(LBAchiev_LoadingText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "26 19";
+			extent = "482 36";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiScrollCtrl(LBachiev_scroll) {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "13 60";
+			extent = "509 309";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "dynamic";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(LBachiev_parentContainer) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "509 2904";
+				minExtent = "1 1";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiControl(LBachiev_chatContainer) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "125 0";
+					extent = "368 2904";
+					minExtent = "1 1";
+					visible = "1";
+					helpTag = "0";
+
+					new GuiMLTextCtrl(LBachiev_maintext) {
+						profile = "GuiMLTextProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "368 2904";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "5";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+				new GuiControl(LBachiev_container) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "125 2904";
+					minExtent = "1 1";
+					visible = "1";
+					helpTag = "0";
+				};
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+//-----------------------------------------------------------------------------
+// this is going to be a nightmare to code, because there are SOOOOO
+// many achievements!
+//-----------------------------------------------------------------------------
+
+function LBAchievementsDlg::show(%this, %user, %list) {
+	if (%user $= "")
+		%user = $LB::Username;
+	%this.user = %user;
+
+	RootGui.pushDialog(%this);
+	statsGetPlayerAchievements(%user);
+
+	if (%list $= "")
+		%list = %this.achievementList.categoryNames.getEntry(0);
+	%this.selectCategory(%list);
+}
+
+function LBAchievementsDlg::onSleep(%this) {
+	%this.user = "";
+	PlayMissionGui.showBody();
+}
+
+function LBAchievementsDlg::prevCategory(%this) {
+	switch$ (%this.list) {
+		case "Single Player": %this.selectCategory("Event");
+		case "Multiplayer": %this.selectCategory("Single Player");
+		case "Event": %this.selectCategory("Multiplayer");
+	}
+}
+
+function LBAchievementsDlg::nextCategory(%this) {
+	switch$ (%this.list) {
+		case "Single Player": %this.selectCategory("Multiplayer");
+		case "Multiplayer": %this.selectCategory("Event");
+		case "Event": %this.selectCategory("Single Player");
+	}
+}
+
+function LBAchievementsDlg::selectCategory(%this, %list) {
+	%this.list = %list;
+
+	// pop gui button
+	LBAchiev_SingleplayerCategory.setValue(false);
+	LBAchiev_MultiplayerCategory.setValue(false);
+	LBAchiev_EventCategory.setValue(false);
+	switch$ (%list) {
+	case "Single Player":
+		LBAchiev_SingleplayerCategory.setValue(true);
+	case "Multiplayer":
+		LBAchiev_MultiplayerCategory.setValue(true);
+	case "Event":
+		LBAchiev_EventCategory.setValue(true);
+	default:
+		error("PLEASE IMPLEMENT POP BUTTON!!!!");
+	}
+
+	%this.generateAchList(%list);
+	%this.update();
+}
+
+$LB::Achievement::ImageExtentX = 125;
+
+function LBAchievementsDlg::getBitmapPath(%this, %list, %i) {
+	%cat = %this.achievementList.categories.getFieldValue(%list);
+	%achiev = %this.achievementList.achievements.getFieldValue(%list).getEntry(%i);
+	return strReplace(%cat.bitmap_path, "~", $usermods) @ %achiev.index;
+}
+
+function LBAchievementsDlg::generateAchList(%this, %list) {
+	while (LBachiev_container.getCount())
+		LBachiev_container.getObject(0).delete();
+
+	for (%i = 0; %i < %this.achievementList.achievements.getFieldValue(%this.list).getSize(); %i++) {
+		%achiev = %this.achievementList.achievements.getFieldValue(%this.list).getEntry(%i);
+		%name = "LBachiev_bitmap" @ %i;
+		%lockName = "LBachiev_lock" @ %i;
+		%position = "3" SPC (%i * 53);
+		%extent = %achiev.bitmap_extent;
+		%position = VectorRound(VectorAdd(%position, VectorScale(VectorSub("113 44", %extent), 0.5)));
+		%gui = new GuiBitmapCtrl(%name) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = %position;
+			extent = %extent;
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			bitmap = %this.getBitmapPath(%this.list, %i);
+			wrap = "0";
+		};
+		%lock = new GuiBitmapCtrl(%lockName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "36" SPC (%i * 53);
+			extent = "44 44";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			bitmap = "platinum/client/ui/achiev/lock.png";
+			wrap = "0";
+		};
+		LBachiev_container.add(%gui);
+		LBachiev_container.add(%lock);
+	}
+
+	// reposition gui controls.
+	// hardcoded values FTW
+	%xScroll = (getWord(LBachiev_scroll.getExtent(), 0) - $LB::Achievement::ImageExtentX) - 15;
+	%yExtent = (%i * 53);
+	LBachiev_container.resize(0, 0, $LB::Achievement::ImageExtentX, %yExtent);
+	LBachiev_chatContainer.resize($LB::Achievement::ImageExtentX, 0, %xScroll, %yExtent);
+	LBachiev_parentContainer.resize(0, 0, getWord(LBachiev_scroll.getExtent(), 0), %yExtent);
+	LBachiev_container.setVisible(false);
+}
+
+function LBAchievementsDlg::update(%this) {
+	%lineLength = 368;
+
+	%list = %this.achievementList.achievements.getFieldValue(%this.list);
+
+	for (%i = 0; %i < %list.getSize(); %i ++) {
+		%bitmap = "LBachiev_bitmap" @ %i;
+		%bitmap.setVisible(false);
+	}
+	LBAchiev_maintext.setText("");
+	if (!isObject(%this.playerAchievements[%this.user]))
+		LBAchiev_LoadingText.setText("<font:32><just:center>Loading...");
+	else {
+		LBAchiev_LoadingText.setText("<font:32><just:center>" @(%this.user $= $LB::Username ? "My" : LBResolveName(%this.user, true) @ "\'s") SPC "Achievements");
+
+		LBachiev_maintext.setText("<font:Arial Bold:14>");
+
+		%yPosition = 0;
+		%constant = 5;
+		for (%i = 0; %i < %list.getSize(); %i ++) {
+			%achiev = %list.getEntry(%i);
+
+			%title = %achiev.title;
+			%award = %achiev.rating;
+			%descr = %achiev.description;
+
+			%has = %this.playerAchievements[%this.user].containsEntry(%achiev.id);
+
+
+			%offset = (%i == 0 ? 0 : %constant);
+			%extent = %achiev.bitmap_extent;
+			%position = VectorRound(VectorAdd("3" SPC (%yPosition - %offset), VectorScale(VectorSub("113 44", %extent), 0.5)));
+			%lockPos = "36" SPC (%yPosition - %offset);
+
+			%bitmap = "LBachiev_bitmap" @ %i;
+			%bitmap.setVisible(%has);
+			%bitmap.setPosition(%position);
+			%bitmap.setBitmap(%this.getBitmapPath(%this.list, %i));
+
+			%lock = "LBachiev_lock" @ %i;
+			%lock.setVisible(!%has);
+			%lock.setPosition(%lockPos);
+
+			%line = "<lmargin:0><bold:25>" @ (%has ? "<color:008800>" : "<color:000000>") @
+			        %title @ "<just:right><bold:20>" @
+			        (%award ? formatCommas(%award) SPC "Points" : "") @
+			        "\n<just:left><lmargin:10><font:17>" @ %descr @ "<font:Arial:10>\n\n";
+
+			LBachiev_maintext.addText(%line, true);
+			LBachiev_maintext.forceReflow();
+			%yPosition = getWord(LBachiev_maintext.getExtent(), 1);
+		}
+
+		LBachiev_container.setVisible(true);
+
+		%yExtent = getWord(LBachiev_maintext.getExtent(), 1);
+		LBachiev_container.setExtent($LB::Achievement::ImageExtentX SPC %yExtent);
+		LBachiev_chatContainer.resize($LB::Achievement::ImageExtentX, 0, %lineLength, %yExtent);
+		LBachiev_maintext.setExtent(%lineLength SPC %yExtent);
+		LBachiev_parentContainer.setExtent(getWord(LBachiev_scroll.getExtent(), 0) SPC %yExtent);
+	}
+}
+
+function LBAchievementsDlg::onAchievementListUpdate(%this, %list) {
+	%this.achievementList = %list;
+}
+
+function LBAchievementsDlg::onPlayerAchievementsUpdate(%this, %parsed) {
+	%this.playerAchievements[%parsed.username] = %parsed.achievements;
+	%this.update();
+}
+
+function LBAchievementsDlg::onGrantAchievement(%this, %id) {
+	//Iterate all achievements
+	for (%i = 0; %i < %this.achievementList.categoryNames.getSize(); %i ++) {
+		%catName = %this.achievementList.categoryNames.getEntry(%i);
+
+		%cat = %this.achievementList.achievements.getFieldValue(%catName);
+		for (%j = 0; %j < %cat.getSize(); %j ++) {
+			%ach = %cat.getEntry(%j);
+			if (%ach.id == %id) {
+				//Show it off
+				%text = %ach.title;
+				%bitmap = %this.getBitmapPath(%catName, %j);
+				%extent = %ach.bitmap_extent;
+
+				echo("Got achievement: " @ %text);
+				%this.playerAchievements[$LB::Username].addEntry(%id);
+
+				if (%extent !$= "44 44") {
+					//TODO: Resize the old bitmaps to not be stupid
+					return;
+				}
+
+				addAchievementMessage(%text, %bitmap, %extent);
+				alxPlay(GetAchievement);
+
+				return;
+			}
+		}
+	}
+	//Don't have it?
+	statsGetAchievementList();
+	if (%this.triedReschedule[%id] !$= "") {
+		if (%this.achievementList == %this.triedReschedule[%id]) {
+			%this.schedule(1000, "onGrantAchievement", %id);
+		}
+		return;
+	}
+	%this.triedReschedule[%id] = %this.achievementList;
+	%this.schedule(1000, "onGrantAchievement", %id);
+}

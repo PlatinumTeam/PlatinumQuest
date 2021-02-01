@@ -1,0 +1,766 @@
+//--- INFO BEGIN ---
+//Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
+function MP_PQ_KingOfTheMarblespooky_GetMissionInfo() {
+	return
+new ScriptObject() {
+		name = "King of the Ghosts";
+		type = "Beginner";
+		level = "2";
+		desc = "Succumb to the ghosts that haunt this tiny place. I mean seriously they are pissed because they are so territorial and they must compete for room here. Blame Aayrl for this!";
+		artist = "Spooky Version by Matan";
+		music = "Halloween Trance.ogg";
+		game = "PlatinumQuest";
+		gameMode = "spooky Hunt";
+		time = "120000";
+		maxGemsPerSpawn = "4";
+		radiusFromGem = "15";
+		CustomRadarRule = $Radar::Flags::Gems;
+		alarmStartTime = "10";
+		easterEgg = "0";
+		blast = "1";
+		gems = "12";
+		gems1 = "0";
+		gems10 = "0";
+		gems2 = "0";
+		gems5 = "0";
+		interior0 = $usermods @ "/data/multiplayer/interiors/spooky/KingOfTheMarbleHalloween.dif";
+		interiors = "1";
+		maxScore = "0";
+		platinumScore0 = "30";
+		platinumScore1 = "40";
+		score0 = "10";
+		score1 = "20";
+		ultimateScore0 = "55";
+		ultimateScore1 = "80";
+		ghostsPerPlayer = "4";
+};
+}
+//--- INFO END ---
+//--- UNLOCK BEGIN ---
+//In the event that you want this mission to be locked by a function, here's
+// where you should put that. Just uncomment this function and fill it out:
+//function unlock_MissionNameHere(%mission) { //%mission is the MissionInfo
+//	return true; //True if the mission is unlocked
+//}
+//--- UNLOCK END ---
+//Don't continue loading if this just wants the mission info
+if ($loadingMissionInfo) return;
+//--- CLIENT SCRIPTS BEGIN ---
+//Put any scripts that will be loaded on all clients (in MP / SP) here.
+// Note: these will be loaded by dedicated servers too, so be sure to test for
+// $Server::Dedicated before creating any GUI.
+
+//--- CLIENT SCRIPTS END ---
+//Don't continue loading if this is a client (non-server)
+if (!$Server::Hosting || $Server::_Dedicated) return;
+//--- SERVER PREMISSION SCRIPTS BEGIN ---
+//These scripts will be loaded by the server only, before the mission is created.
+// This is a great place to put custom datablocks.
+
+//--- SERVER PREMISSION SCRIPTS END ---
+//--- MISSION BEGIN ---
+function MP_PQ_KingOfTheMarblespooky_LoadMission() {
+	return
+new SimGroup(MissionGroup) {
+
+	new StaticShape() {
+		position = "-25.25 -13.98 24";
+		rotation = "1 0 0 90.0002";
+		scale = "2 2 2";
+		dataBlock = "Cobwebs";
+	};
+	new StaticShape() {
+		position = "-25 23.75 16.25";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights9U";
+	};
+	new StaticShape() {
+		position = "-40.0536 15.1206 16.7607";
+		rotation = "0 0 -1 90";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights9U";
+	};
+	new StaticShape() {
+		position = "-10.2446 15.2554 16.75";
+		rotation = "0 0 -1 90";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights9U";
+	};
+	new StaticShape() {
+		position = "-24.9515 6.21222 15.9503";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights9U";
+	};
+	new Item() {
+		position = "-13.2 9.2 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "BlastItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-25.2 15 21.1";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "MegaMarbleItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-31.2 27 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "BlastItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new MissionArea(MissionArea) {
+		area = "-360 -648 720 1296";
+		flightCeiling = "300";
+		flightCeilingRange = "20";
+			locked = "true";
+	};
+	new Sky(Sky) {
+		position = "336 136 0";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		cloudHeightPer[0] = "0";
+		cloudHeightPer[1] = "0";
+		cloudHeightPer[2] = "0";
+		cloudSpeed1 = "0.0001";
+		cloudSpeed2 = "0.0002";
+		cloudSpeed3 = "0.0003";
+		visibleDistance = "10000";
+		useSkyTextures = "1";
+		renderBottomTexture = "1";
+		SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+		fogDistance = "300";
+		fogColor = "0.600000 0.600000 0.600000 1.000000";
+		fogVolume1 = "-1 7.45949e-031 1.3684e-038";
+		fogVolume2 = "-1 1.07208e-014 8.756e-014";
+		fogVolume3 = "-1 5.1012e-010 2.05098e-008";
+		materialList = "~/data/skies/Spooky Clouds/spookycloudy.dml";
+		windVelocity = "1 0 0";
+		windEffectPrecipitation = "0";
+		noRenderBans = "1";
+		fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+		fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+		fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+			sphereBack = $usermods @ "/data/shapes/skies/wintry/back.png";
+			sphereFront = $usermods @ "/data/shapes/skies/wintry/front.png";
+	};
+	new Sun() {
+		direction = "0.573201 0.275357 -0.771764";
+		color = "0.850000 0.820000 0.730000 1.000000";
+		ambient = "0.300000 0.300000 0.400000 1.000000";
+	};
+	new StaticShape() {
+		position = "0 0 0";
+		rotation = "1 0 0 0";
+		scale = "10000 10000 10000";
+		dataBlock = "Vermontry";
+	};
+	new InteriorInstance() {
+		position = "-28.2 0 20.4";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		interiorFile = "~/data/multiplayer/interiors/spooky/KingOfTheMarbleHalloween.dif";
+		showTerrainInside = "0";
+	};
+	new Trigger(SpookyKOTMEgg) {
+		position = "-25.2 16.2 19.75";
+		rotation = "1 0 0 0";
+		scale = "0.25 0.25 0.25";
+		dataBlock = "EventConnectionTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			achId = "8092";
+			rolloverText = "You found Boog E. Man\'s resting spot! It appears he found Santa\'s spot and took over it.";
+			text0 = "Life lesson: Stealing is totally worth it. Don\'t quote me on that though when you get caught.";
+	};
+	new Trigger(Bounds) {
+		position = "-62 52 16";
+		rotation = "1 0 0 0";
+		scale = "75 75 75";
+		dataBlock = "InBoundsTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+	};
+	new Trigger() {
+		position = "-13 35.25 23";
+		rotation = "0 0 1 180";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-25 35.25 23";
+		rotation = "0 0 1 180";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-37 35.25 23";
+		rotation = "0 0 1 180";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-45.25 27 23";
+		rotation = "0 0 1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-45.25 15 23";
+		rotation = "0 0 1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-45.25 3 23";
+		rotation = "0 0 1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-37.25 -5 23";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-25.25 -5 23";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-13.25 -5 23";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-5.25 27 23";
+		rotation = "0 0 -1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-5.25 15 23";
+		rotation = "0 0 -1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Trigger() {
+		position = "-5.25 3 23";
+		rotation = "0 0 -1 90";
+		scale = "1 1 1";
+		dataBlock = "SpawnTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+			add = "0 0 1";
+			gravity = "0";
+	};
+	new Item() {
+		position = "-27.2 17 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-23.2 13 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-23.2 17 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-27.2 13 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-13.2 15 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-25.2 27 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-37.2 15 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-25.2 3 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemRed";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-13.2 3 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemYellow";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-37.2 27 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemYellow";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-13.2 27 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemYellow";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-37.2 3 20.7";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "CandyItemYellow";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-37.2 9 20.85";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperJumpItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-19.2 3 20.85";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperJumpItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-13.2 21 20.85";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperJumpItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-37.2 21 20.837";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperSpeedItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-31.2 3 20.837";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperSpeedItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new Item() {
+		position = "-19.2 27 20.837";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "SuperSpeedItem";
+		collideable = "0";
+		static = "1";
+		rotate = "1";
+	};
+	new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "-2.797503 -10.15785 32.62068";
+         rotation = "0.5483658 0.2206391 -0.8066062 53.02259";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+      };
+      new StaticShape(CameraPath2) {
+         position = "-15.88506 -9.988345 28.95541";
+         rotation = "0.6928318 0.1571165 -0.7037745 35.72058";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3100";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+      };
+      new StaticShape(CameraPath3) {
+         position = "-30.17992 -4.98877 25.32254";
+         rotation = "0.8645831 -0.08984338 0.4943927 23.74016";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+      };
+      new StaticShape(CameraPath4) {
+         position = "-37.84398 4.702096 23.4491";
+         rotation = "0.3588168 -0.1646003 0.9187803 53.06429";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-39.76022 16.97063 22.76459";
+         rotation = "0.1311651 -0.1431115 0.9809765 96.08327";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-37.41713 30.80494 24.80445";
+         rotation = "0.06720702 -0.1881712 0.9798341 141.4244";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+      };
+      new StaticShape(CameraPath7) {
+         position = "-26.78474 39.9829 27.17005";
+         rotation = "0.01504565 -0.2105564 0.9774659 172.0092";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+      };
+      new StaticShape(CameraPath8) {
+         position = "-11.59806 42.1655 30.65697";
+         rotation = "-0.05152029 -0.2442359 0.9683463 203.0897";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "2900";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath9";
+      };
+      new StaticShape(CameraPath9) {
+         position = "1.046876 37.10641 32.62286";
+         rotation = "-0.120518 -0.2595362 0.9581839 227.9725";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath10";
+      };
+      new StaticShape(CameraPath10) {
+         position = "10.89627 24.3835 33.93862";
+         rotation = "0.1779257 0.2406585 -0.9541624 109.5987";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath11";
+      };
+      new StaticShape(CameraPath11) {
+         position = "13.49645 9.535417 34.77963";
+         rotation = "0.2711585 0.2377239 -0.9327167 86.45338";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath12";
+      };
+      new StaticShape(CameraPath12) {
+         position = "10.31709 -4.974849 35.36801";
+         rotation = "0.3964405 0.2378098 -0.8867251 68.15608";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+      };
+   };
+	new StaticShape() {
+		position = "-30.5 9 20.6";
+		rotation = "1 0 0 0";
+		scale = "1.25 1.25 1.25";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-20.25 21 20.6";
+		rotation = "1 0 0 0";
+		scale = "1.25 1.25 1.25";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-30 21 20.6";
+		rotation = "1 0 0 0";
+		scale = "1.25 1.25 1.25";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-20.25 9 20.6";
+		rotation = "1 0 0 0";
+		scale = "1.25 1.25 1.25";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-48 -8 30";
+		rotation = "0 0 1 224.999";
+		scale = "3 3 3";
+		dataBlock = "PumpkinScary";
+	};
+	new StaticShape() {
+		position = "-31.25 36 22.1";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-19 36 22.1";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-31.25 -6 22.1";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-19.25 -6 22.1";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-46.25 9 22.1";
+		rotation = "0 0 1 90.0002";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-46.25 21 22.1";
+		rotation = "0 0 1 90.0002";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-4.25 21 22.1";
+		rotation = "0 0 1 90.0002";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-4.25004 9 22.1";
+		rotation = "0 0 1 90.0002";
+		scale = "1 1 1";
+		dataBlock = "HalloweenLights3U";
+	};
+	new StaticShape() {
+		position = "-2.5 -8 30";
+		rotation = "0 0 1 135";
+		scale = "3 3 3";
+		dataBlock = "PumpkinScary";
+	};
+	new StaticShape() {
+		position = "-2.5 38 30";
+		rotation = "0 0 1 44.9998";
+		scale = "3 3 3";
+		dataBlock = "PumpkinScary";
+	};
+	new StaticShape() {
+		position = "-48 38 30";
+		rotation = "0 0 -1 45.0004";
+		scale = "3 3 3";
+		dataBlock = "PumpkinScary";
+	};
+	new StaticShape() {
+		position = "5 15 30";
+		rotation = "0 0 -1 90.0002";
+		scale = "20 20 20";
+		dataBlock = "Bat";
+	};
+	new StaticShape() {
+		position = "-55.5 15 30";
+		rotation = "0 0 1 90.0002";
+		scale = "20 20 20";
+		dataBlock = "Bat";
+	};
+	new StaticShape() {
+		position = "-25.25 -14.25 30";
+		rotation = "1 0 0 0";
+		scale = "20 20 20";
+		dataBlock = "Bat";
+	};
+	new StaticShape() {
+		position = "-25.25 45 30";
+		rotation = "0 0 1 180";
+		scale = "20 20 20";
+		dataBlock = "Bat";
+	};
+	new StaticShape() {
+		position = "3.75 15 24";
+		rotation = "0 1 0 90.0002";
+		scale = "2 2 2";
+		dataBlock = "Cobwebs";
+	};
+	new StaticShape() {
+		position = "-54.23 15 24";
+		rotation = "0 -1 0 90.0002";
+		scale = "2 2 2";
+		dataBlock = "Cobwebs";
+	};
+	new StaticShape() {
+		position = "-25.25 43.98 24.0002";
+		rotation = "-1 0 0 90.0002";
+		scale = "2 2 2";
+		dataBlock = "Cobwebs";
+	};
+};
+}
+//--- MISSION END ---
+//--- SERVER POSTMISSION SCRIPTS BEGIN ---
+//Put any scripts that will be loaded after the mission is loaded here
+
+//--- SERVER POSTMISSION SCRIPTS END ---

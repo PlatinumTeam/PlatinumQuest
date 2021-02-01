@@ -1,0 +1,413 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         name = "Tube Treasure";
+         goldTime = "45000";
+         level = "10";
+         type = "advanced";
+         desc = "Find all of the gems to finish the level!";
+         music = "Groove Police.ogg";
+         artist = "Alex Swanson";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.4034692 0.6133634 -0.6789684";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         locked = "true";
+         scale = "1 1 1";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "-6.27417e-09 1.21855e-07 499.995";
+         rotation = "0 0 1 179.909";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "0 0 485";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new Trigger(Bounds) {
+      position = "-64.0383 50.5761 468.814";
+      rotation = "1 0 0 0";
+      scale = "125.225 91.5567 91.7273";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 500";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/advanced/platform_circle_huge.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 485";
+      rotation = "1 0 0 0";
+      scale = "1.2 1.2 1";
+      interiorFile = "~/data/interiors_mbg/advanced/platform_circle.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "15.3572 -31.9589 511.008";
+      rotation = "0.5211439 0.2358609 -0.8202308 57.77761";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/halftubes/halftube_long.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-1.17475 -13.0404 499.723";
+      rotation = "0.210186 0.575806 0.7901071 49.5937";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/halftubes/halftube_long.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-48 0 502.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/halftubes/halftube_long.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "23.9894 -0.0140683 502.409";
+      rotation = "-0.9934652 0.01987201 0.112393 20.18272";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/halftubes/halftube_long.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "15 2.52571 485.381";
+      rotation = "1 0 0 32.65859";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_lintersect.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-38.7362 -1.62043 485.025";
+      rotation = "0.0504688 0.7753491 -0.629513 11.80678";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_long.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "33.4135 -0.224545 484.936";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new InteriorInstance() {
+      position = "40 0.127364 490.005";
+      rotation = "-1 0 0 94.5837";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_turn.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-40.4996 -0.493147 488.642";
+      rotation = "0.102835 0.700325 0.706378 174.8";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_turn.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-4.91603 7.10534 486.212";
+      rotation = "0.670286 0.416406 0.614266 231.553";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_long.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-5.35315 31.2327 493.761";
+      rotation = "0.189226 0.1717971 -0.9667882 95.65137";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/parts/tubes/tube_turn.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "28.5066 -16.9395 508.487";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "9.14913 -22.6987 505.106";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0.14271 17.892 500.1";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-51.8302 0.866806 489.249";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-47.1163 0.273054 484.994";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-18.246 0.000106558 487.271";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-5.6 4.6 485.05";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3.36051 43.0108 492.313";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "27.1621 -8.07697 489.308";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "39.9271 1.55435 501.714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0.276583 -3.84752 500.2";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "2.91372 0.393372 500.2";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "0.71698 -0.419859 491.222";
+      rotation = "0 0 1 47.5555";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "68.38468 22.88088 512.311";
+         rotation = "0.1449812 0.217342 -0.9652683 114.4453";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath2) {
+         position = "48.02631 30.31274 505.5083";
+         rotation = "-0.1075449 -0.2111296 0.9715238 232.6591";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "2500";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath3) {
+         position = "29.65436 31.98086 500.4055";
+         rotation = "-0.06394417 -0.1704237 0.9832939 220.502";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath4) {
+         position = "-54.43248 -0.4498056 489.0395";
+         rotation = "0.2117724 -0.2052549 0.9555223 90.81577";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "2500";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-45.6107 -0.2799725 485.9803";
+         rotation = "0.09540767 -0.09386523 0.9910029 89.58395";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+            useRotation = "1";
+            timeToNext = "2500";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-33.07736 0.1052402 485.7592";
+         rotation = "-0.02107488 0.0202235 0.9995734 87.66241";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath7) {
+         position = "-15.33842 0.923381 488.378";
+         rotation = "0.1406848 -0.125243 0.9821008 84.3823";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+            useRotation = "1";
+            timeToNext = "1300";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath8) {
+         position = "-10.74689 -2.635153 487.6018";
+         rotation = "0.2300024 -0.1303254 0.9644243 60.8708";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath9";
+            useRotation = "1";
+            timeToNext = "1300";
+            usePosition = "1";
+      };
+      new StaticShape(CameraPath9) {
+         position = "-7.742708 -7.083769 487.901";
+         rotation = "0.530634 -0.1489892 0.8344039 37.19604";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

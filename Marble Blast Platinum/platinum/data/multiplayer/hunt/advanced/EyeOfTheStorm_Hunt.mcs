@@ -1,0 +1,568 @@
+//--- INFO BEGIN ---
+//Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
+function MP_PQ_EyeOfTheStormHunt_GetMissionInfo() {
+	return
+new ScriptObject() {
+		name = "Eye of the Storm";
+		type = "Advanced";
+		level = "9";
+		desc = "Use the tornado to your advantage!";
+		startHelpText = "Move back and forth to escape the tornado\'s pull!";
+		artist = "Alex Swanson";
+		music = "Beach Party.ogg";
+		game = "Gold";
+		gameMode = "hunt";
+		Time = "240000";
+		maxGemsPerSpawn = "6";
+		radiusFromGem = "15";
+		CustomRadarRule = $Radar::Flags::Gems;
+		alarmStartTime = "20";
+		blast = "1";
+		easterEgg = "0";
+		gems = "26";
+		gems1 = "21";
+		gems10 = "0";
+		gems2 = "5";
+		gems5 = "0";
+		interior0 = $usermods @ "/data/lbinteriors_mbg/addon/eyeofthestorm.dif";
+		interiors = "1";
+		maxScore = "31";
+		platinumScore0 = "35";
+		platinumScore1 = "60";
+		score0 = "15";
+		score1 = "35";
+		ultimateScore0 = "85";
+		ultimateScore1 = "125";
+};
+}
+//--- INFO END ---
+//--- UNLOCK BEGIN ---
+//In the event that you want this mission to be locked by a function, here's
+// where you should put that. Just uncomment this function and fill it out:
+//function unlock_MissionNameHere(%mission) { //%mission is the MissionInfo
+//	return true; //True if the mission is unlocked
+//}
+//--- UNLOCK END ---
+//Don't continue loading if this just wants the mission info
+if ($loadingMissionInfo) return;
+//--- CLIENT SCRIPTS BEGIN ---
+//Put any scripts that will be loaded on all clients (in MP / SP) here.
+// Note: these will be loaded by dedicated servers too, so be sure to test for
+// $Server::Dedicated before creating any GUI.
+
+//--- CLIENT SCRIPTS END ---
+//Don't continue loading if this is a client (non-server)
+if (!$Server::Hosting || $Server::_Dedicated) return;
+//--- SERVER PREMISSION SCRIPTS BEGIN ---
+//These scripts will be loaded by the server only, before the mission is created.
+// This is a great place to put custom datablocks.
+
+//--- SERVER PREMISSION SCRIPTS END ---
+//--- MISSION BEGIN ---
+function MP_PQ_EyeOfTheStormHunt_LoadMission() {
+	return
+new SimGroup(MissionGroup) {
+
+	new SimGroup(SpawnPoints) {
+
+		new Trigger() {
+			position = "-2.5 4 2";
+			rotation = "0 0 1 90";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "1 0 2";
+			rotation = "0 0 1 180";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "3 3.1 2";
+			rotation = "0 0 -1 90";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "0 7 2";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "3.4 6.7 2";
+			rotation = "0 0 1 45";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "4 1 2";
+			rotation = "0 0 1 125";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "-2.5 6 2";
+			rotation = "0 0 -1 45";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+		new Trigger() {
+			position = "-3 0.5 2";
+			rotation = "0 0 1 225";
+			scale = "1 1 1";
+			dataBlock = "SpawnTrigger";
+			polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+				add = "0 0 1";
+				gravity = "0";
+		};
+	};
+	new MissionArea(MissionArea) {
+		area = "-360 -648 720 1296";
+		flightCeiling = "300";
+		flightCeilingRange = "20";
+			locked = "true";
+	};
+	new Sky(Sky) {
+		position = "336 136 0";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		cloudHeightPer[0] = "0";
+		cloudHeightPer[1] = "0";
+		cloudHeightPer[2] = "0";
+		cloudSpeed1 = "0.0001";
+		cloudSpeed2 = "0.0002";
+		cloudSpeed3 = "0.0003";
+		visibleDistance = "10000";
+		useSkyTextures = "1";
+		renderBottomTexture = "1";
+		SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+		fogDistance = "300";
+		fogColor = "0.600000 0.600000 0.600000 1.000000";
+		fogVolume1 = "-1 7.45949e-031 1.3684e-038";
+		fogVolume2 = "-1 1.07208e-014 8.756e-014";
+		fogVolume3 = "-1 5.1012e-010 2.05098e-008";
+		materialList = "~/data/skies/Cloudy/cloudy.dml";
+		windVelocity = "1 0 0";
+		windEffectPrecipitation = "0";
+		noRenderBans = "1";
+		fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+		fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+		fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+	};
+	new Sun() {
+		direction = "0.638261 0.459006 -0.61801";
+		color = "1.400000 1.200000 0.400000 1.000000";
+		ambient = "0.300000 0.300000 0.400000 1.000000";
+	};
+	new StaticShape() {
+		position = "0 0 0";
+		rotation = "1 0 0 0";
+		scale = "10000 10000 10000";
+		dataBlock = "Dusk";
+	};
+	new SimGroup(PathNodeGroup) {
+
+		new StaticShape(CameraPath1) {
+			position = "-0.962196 -1.38309 4.12861";
+			rotation = "0.978533 -0.0733129 0.192609 42.5102";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath2";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath2) {
+			position = "0.174221 -5.04586 8.36716";
+			rotation = "0.99161 0.0569139 -0.116059 52.6283";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath3";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath3) {
+			position = "3.55661 -7.94143 13.7649";
+			rotation = "0.850042 0.25519 -0.460768 66.1717";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath4";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath4) {
+			position = "7.9829 -8.9356 20.0778";
+			rotation = "0.763761 0.330871 -0.55425 76.0238";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath5";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath5) {
+			position = "13.3316 -7.31448 27.2491";
+			rotation = "0.67268 0.394994 -0.625684 86.3647";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath6";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath6) {
+			position = "17.3374 -3.39358 32.9626";
+			rotation = "0.500813 0.441814 -0.744303 99.6917";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath7";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath7) {
+			position = "20.3611 2.99074 38.9503";
+			rotation = "0.386851 0.472673 -0.791787 114.112";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath8";
+				timeToNext = "3000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath8) {
+			position = "20.8351 11.7317 46.2309";
+			rotation = "-0.264582 -0.494315 0.828039 227.807";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath9";
+				timeToNext = "5000";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+		new StaticShape(CameraPath9) {
+			position = "20.8351 11.7317 46.2309";
+			rotation = "-0.264582 -0.494315 0.828039 227.807";
+			scale = "1 1 1";
+			dataBlock = "PathNode";
+				nextNode = "CameraPath1";
+				timeToNext = "0";
+				usePosition = "1";
+				useRotation = "1";
+				useScale = "0";
+				reverseRotation = "0";
+				placed = "1";
+		};
+	};
+	new InteriorInstance() {
+		position = "0 0 0";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		interiorFile = "~/data/lbinteriors_mbg/addon/eyeofthestorm.dif";
+		showTerrainInside = "0";
+	};
+	new Trigger(Bounds) {
+		position = "-25 22 -5";
+		rotation = "1 0 0 0";
+		scale = "50 40 500";
+		dataBlock = "InBoundsTrigger";
+		polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+	};
+	new StaticShape() {
+		position = "0.06875 3.62188 0.4125";
+		rotation = "1 0 0 0";
+		scale = "1 1 1";
+		dataBlock = "Tornado";
+	};
+	new SimGroup(GemSpawns) {
+
+		new Item() {
+			position = "0.43 -6.1 5.7";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "7.2 -7.6 9.35";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "4.9 7.45 1.8";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemYellow";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-1.9 -6.9 1.8";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemYellow";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "10.29 11.25 8.47";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-4.3 6.25 0.7";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-0.9 10.6 4.25";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "7.24 -0.12 3.17";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "8.2 2.4 4.1";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "4.75 13.25 8.23988";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "9.64 8.1 5.47";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "1.4 13.8 6.85";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemYellow";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-5.9 11.3 5.95";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-7.2 7.5 2.76";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-11 3.55 3.10058";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemYellow";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-11 -1.66 5.49";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-7.6 -5 5.8";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-4.73 -2.2 1.7";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-5.4 1 1.12";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "-1.25 6.34 0.43";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "2.64 0.93 0.43";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "0.5 -2 2.65";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "9.75 -2.26 5.8";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "12.8 -2.18 8.8";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "13.5 -6.25 10.05";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemYellow";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+		new Item() {
+			position = "13.2 4.7 4.12109";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			dataBlock = "GemItemRed";
+			collideable = "0";
+			static = "1";
+			rotate = "1";
+		};
+	};
+};
+}
+//--- MISSION END ---
+//--- SERVER POSTMISSION SCRIPTS BEGIN ---
+//Put any scripts that will be loaded after the mission is loaded here
+
+//--- SERVER POSTMISSION SCRIPTS END ---

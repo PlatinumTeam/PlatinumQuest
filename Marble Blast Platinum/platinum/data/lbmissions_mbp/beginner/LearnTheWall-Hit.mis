@@ -1,0 +1,285 @@
+// UT Tip: Instead of slowing down after the first wall hit, you can just hit the wall normally instead of jumping.
+// This will get you to the first diamond much faster.
+// Rep. by Matan
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         level = "12";
+         startHelpText = "Wall-hits are used when you must reach a platform that is too high to jump to.";
+         ultimateTime = "14500";
+         name = "Learn the Wall-Hit";
+         artist = "Andrew";
+         music = "Rising Temper.ogg";
+         desc = "Learn how to do wall-hits to make yourself go higher.";
+         type = "beginner";
+         goldTime = "18000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.900000 0.900000 0.900000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/Beginner/Beginner_Sky.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.5445079 0.439467 -0.7144089";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         locked = "true";
+         position = "0 0 0";
+   };
+   new Trigger(IBT) {
+      position = "-55 11 536";
+      rotation = "1 0 0 0";
+      scale = "100 80 50";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger(congrats) {
+      position = "-33.2883 0.538779 542.452";
+      rotation = "1 0 0 0";
+      scale = "10 10 3";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Congratulations! You have made your first successful wall-hit!";
+   };
+   new StaticShape(StartPoint) {
+      position = "-38.3089 -56.3419 539.4";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new Trigger(wall2) {
+      position = "-43.3264 -15.3648 539.298";
+      rotation = "1 0 0 0";
+      scale = "10 2 2";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Do a wall-hit on the wall ahead to reach the platform above and to the right of you.";
+   };
+   new Trigger(wall3) {
+      position = "-33.2964 -29.4496 542.452";
+      rotation = "1 0 0 0";
+      scale = "10 2 3";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Rebound off the wall to your left to make it to the platform above.";
+   };
+   new Item() {
+      position = "-28.3839 -19.4084 542.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-24.0829 -4.5634 542.652";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignSide";
+   };
+   new InteriorInstance() {
+      position = "-43.3421 -59.3551 531.59";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_MBP/WallHit.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(EndPoint) {
+      position = "19.9448 -54.3791 551.65";
+      rotation = "0 0 -1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(wall1) {
+      position = "-43.303 -43.4689 539.298";
+      rotation = "1 0 0 0";
+      scale = "10 2 2";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "To do a wall-hit, get a running start, jump, and rebound off the wall!";
+   };
+   new Item() {
+      position = "-15.4009 -54.4367 545.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "20 -55.4 556.3";
+      rotation = "0 0 1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger(wall4) {
+      position = "-7.41268 -49.3329 545.474";
+      rotation = "1 0 0 0";
+      scale = "2 10 3";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Get a running start and rebound off the wall ahead to make it to the finish.";
+   };
+   new StaticShape() {
+      position = "-28.4 -58.7 545.65";
+      rotation = "0 0 -1 89.99999";
+      scale = "1 1 1";
+      dataBlock = "SignSide";
+   };
+   new Item() {
+      position = "20 -54 556.4";
+      rotation = "1 0 0 0";
+      scale = "1 1 1.3";
+      dataBlock = "easterEgg";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "-58.97834 -98.56768 570.2748";
+         rotation = "0.5062487 -0.1856411 0.8421696 47.05878";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "4000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+      };
+      new StaticShape(CameraPath2) {
+         position = "-59.95715 -79.60124 564.2839";
+         rotation = "0.4441497 -0.1950469 0.8744642 53.33065";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "4150";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+      };
+      new StaticShape(CameraPath3) {
+         position = "-58.33173 -58.96783 557.6649";
+         rotation = "0.3595833 -0.2099415 0.9091889 65.41406";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+      };
+      new StaticShape(CameraPath4) {
+         position = "-40.3059 -38.65831 549.68";
+         rotation = "0.1027339 -0.2169181 0.9707689 130.6176";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-34.6347 -39.32727 547.6096";
+         rotation = "0.07237483 -0.2029182 0.9765174 141.5941";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "2600";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-29.9052 -40.50404 546.2108";
+         rotation = "0.03734978 -0.1837596 0.9822614 157.4189";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+      };
+      new StaticShape(CameraPath7) {
+         position = "5.963847 -47.41144 553.6103";
+         rotation = "0.02694552 -0.04474168 0.9986352 117.9525";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "5000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+      };
+      new StaticShape(CameraPath8) {
+         position = "5.963847 -47.41144 548.1103";
+         rotation = "0.02694552 -0.04474168 0.9986352 117.9525";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

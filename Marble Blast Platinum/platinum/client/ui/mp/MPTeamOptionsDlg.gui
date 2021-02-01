@@ -1,0 +1,574 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPTeamOptionsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "79 129";
+		extent = "642 341";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 269";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamOptionsDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsLeave) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "521 269";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamOptionsDlg.leave();";
+			helpTag = "0";
+			text = "Leave";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPTeamOptionsTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "11 17";
+			extent = "620 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPTeamOptionsNameTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "16 78";
+			extent = "92 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQTextboxBorderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "99 76";
+			extent = "134 27";
+			minExtent = "21 21";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiTextEditCtrl(MPTeamOptionsNameField) {
+				profile = "PQTextboxSmallProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "3 1";
+				extent = "129 25";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPTeamOptionsDlg.updateActive();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+		};
+		new GuiMLTextCtrl(MPTeamOptionsPlayersTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "422 47";
+			extent = "198 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "left";
+			vertSizing = "height";
+			position = "422 65";
+			extent = "198 164";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "172 138";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(MPTeamOptionsPlayerList) {
+					profile = "PQTextListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "172 8";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiMLTextCtrl(MPTeamOptionsPrivateTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "16 142";
+			extent = "120 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiCheckBoxCtrl(MPTeamOptionsPrivateCheck) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "206 140";
+			extent = "31 31";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "40 240";
+			extent = "123 18";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			text = "More fields to come soon!";
+			maxLength = "255";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsDelete) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "427 269";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "0";
+			command = "MPTeamOptionsDlg.teamDelete();";
+			helpTag = "0";
+			text = "Delete";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsAdd) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "333 269";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "0";
+			command = "MPTeamOptionsDlg.addPlayers();";
+			helpTag = "0";
+			text = "Invite";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "234 65";
+			extent = "198 210";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "172 184";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiMLTextEditCtrl(MPTeamOptionsDescField) {
+					profile = "PQTextboxSmallProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "172 184";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPTeamOptionsDlg.updateActive(); MPTeamOptionsDlg.checkDesc();";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "1024";
+						cursorPosition = "4";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsPromote) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "427 224";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "0";
+			command = "MPTeamOptionsDlg.promote();";
+			helpTag = "0";
+			text = "Promote";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsKick) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "521 224";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "0";
+			command = "MPTeamOptionsDlg.kick();";
+			helpTag = "0";
+			text = "Kick";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPTeamOptionsDescTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "234 47";
+			extent = "198 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsColorNext) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "204 104";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamOptionsDlg.nextColor();";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright.png";
+				bitmapRotation = "180";
+		};
+		new GuiMLTextCtrl(MPTeamOptionsColorTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "16 110";
+			extent = "171 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBitmapCtrl(MPTeamOptionsColorIcon) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "177 107";
+			extent = "30 30";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./team/color_1";
+			wrap = "0";
+		};
+		new GuiBorderButtonCtrl(MPTeamOptionsColorPrev) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "145 104";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamOptionsDlg.prevColor();";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright.png";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+
+function MPTeamOptionsDlg::onWake(%this) {
+	MPTeamOptionsTitle.setText("<bold:28><just:center>Team Options");
+	MPTeamOptionsPlayersTitle.setText("<font:24><just:center>Team Player List");
+	MPTeamOptionsNameTitle.setText("<font:18>Team Name:");
+	MPTeamOptionsDescTitle.setText("<font:24><just:center>Team Info");
+	MPTeamOptionsColorTitle.setText("<font:18>Team Color:");
+	MPTeamOptionsPrivateTitle.setText("<font:18>Private?");
+
+	%this.noUpdate = false;
+	%this.updateActive();
+	%this.updateTeam();
+	%this.updateColor();
+	%this.checkDesc();
+}
+
+function MPTeamOptionsDlg::open(%this) {
+	RootGui.pushDialog(%this);
+	%this.updating = true;
+}
+
+function MPTeamOptionsDlg::close(%this) {
+	RootGui.popDialog(%this);
+	// Update the server
+
+	if ($MP::TeamMode && !%this.noUpdate && %this.updating) {
+		%this.updating = false;
+		commandToServer('TeamNameUpdate', MPTeamOptionsNameField.getValue());
+
+		%maxLength = 255;
+		%descSend = MPTeamOptionsDescField.getValue();
+		commandToServer('TeamDescUpdateStart');
+		for (%i = 0; %i < mCeil(strLen(%descSend) / %maxLength); %i ++)
+			commandToServer('TeamDescUpdatePart', getSubStr(%descSend, %i * %maxLength, %maxLength));
+		commandToServer('TeamDescUpdateEnd');
+		commandToServer('TeamColorUpdate', %this.colorChoice - 1);
+		commandToServer('TeamPrivateUpdate', MPTeamOptionsPrivateCheck.getValue());
+	}
+}
+
+function MPTeamOptionsDlg::checkDesc(%this) {
+	cancel(%this.checkSch);
+	if (!%this.isAwake())
+		return;
+	if (strLen(MPTeamOptionsDescField.getValue()) > $MP::TeamDescMaxLength) {
+		MPTeamOptionsDescField.setValue(getSubStr(MPTeamOptionsDescField.getValue(), 0, $MP::TeamDescMaxLength));
+	}
+	if (getWord(MPTeamOptionsDescField.getExtent(), 1) > getWord(MPTeamOptionsDescField.getGroup().getExtent(), 1)) {
+		MPTeamOptionsDescField.resize(0, getWord(MPTeamOptionsDescField.position, 1), getWord(MPTeamOptionsDescField.getGroup().getExtent(), 0) - 22, getWord(MPTeamOptionsDescField.getExtent(), 1));
+	} else {
+		MPTeamOptionsDescField.resize(0, getWord(MPTeamOptionsDescField.position, 1), getWord(MPTeamOptionsDescField.getGroup().getExtent(), 0), getWord(MPTeamOptionsDescField.getExtent(), 1));
+	}
+	MPTeamOptionsDescField.forceReflow();
+	%this.checkSch = %this.schedule(2, "checkDesc");
+}
+
+function MPTeamOptionsDlg::nextColor(%this) {
+	%color = %this.colorChoice;
+	%color ++;
+	if (%color > 8)
+		%color = 1;
+	%this.colorChoice = %color;
+	%this.updateColor();
+}
+
+function MPTeamOptionsDlg::prevColor(%this) {
+	%color = %this.colorChoice;
+	%color --;
+	if (%color < 1)
+		%color = 8;
+	%this.colorChoice = %color;
+	%this.updateColor();
+}
+
+function MPTeamOptionsDlg::updateColor(%this) {
+	%this.colorChoice = min(max(%this.colorChoice, 1), 8);
+	%color = %this.colorChoice;
+	MPTeamOptionsColorIcon.setVisible(true);
+	MPTeamOptionsColorIcon.setBitmap($userMods @ "/client/ui/mp/team/color_" @ %color);
+}
+
+function MPTeamOptionsDlg::updateTeam(%this) {
+	MPTeamOptionsNameField.setValue($MP::TeamName);
+	MPTeamOptionsDescField.setValue($MP::TeamDesc);
+	MPTeamOptionsPrivateCheck.setValue($MP::TeamPrivate);
+
+	%this.colorChoice = $MP::TeamColor + 1;
+	%this.updateColor();
+
+	MPTeamOptionsPlayerList.clear();
+	%count = TeamPlayerList.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%player = getField(TeamPlayerList.getEntry(%i), 0);
+		MPTeamOptionsPlayerList.addRow(%i, LBResolveName(%player, true) TAB %player);
+	}
+
+	MPTeamOptionsPlayerList.sort(0);
+}
+
+function MPTeamOptionsDlg::updateActive(%this) {
+	%name = getField(MPTeamOptionsPlayerList.getRowTextById(MPTeamOptionsPlayerList.getSelectedId()), 1);
+
+	MPTeamOptionsPromote.setVisible($MP::TeamLeaderStatus);
+	MPTeamOptionsDelete.setVisible($MP::TeamLeaderStatus);
+	MPTeamOptionsKick.setVisible($MP::TeamLeaderStatus);
+	MPTeamOptionsAdd.setVisible($MP::TeamLeaderStatus);
+
+	MPTeamOptionsKick.setActive(%name !$= "" && %name !$= $LB::Username);
+	MPTeamOptionsPromote.setActive(%name !$= "" && %name !$= $LB::Username);
+
+	MPTeamOptionsColorNext.setActive($MP::TeamLeaderStatus);
+	MPTeamOptionsColorPrev.setActive($MP::TeamLeaderStatus);
+
+	MPTeamOptionsNameField.setActive($MP::TeamLeaderStatus);
+	MPTeamOptionsDescField.setActive($MP::TeamLeaderStatus);
+	MPTeamOptionsPrivateCheck.setActive($MP::TeamLeaderStatus);
+}
+
+function MPTeamOptionsDlg::leave(%this) {
+	// Leave team
+	MessageBoxYesNo("Leave Team?", "Are you sure you want to leave this team? Private teams cannot be rejoined without an invitation from the leader. If you are the team leader, the next player on the team will become leader.", "MPTeamOptionsDlg.doLeave();", "");
+}
+
+function MPTeamOptionsDlg::doLeave(%this) {
+	// Moron!
+	%this.noUpdate = true;
+	commandToServer('TeamLeave');
+	%this.close();
+}
+
+function MPTeamOptionsDlg::kick(%this) {
+	// Kick player
+	%name = getField(MPTeamOptionsPlayerList.getRowTextById(MPTeamOptionsPlayerList.getSelectedId()), 1);
+	MessageBoxYesNo("Kick" SPC %name @ "?", "Are you sure you want to kick" SPC %name SPC "off the team?" @($MP::TeamPrivate ? " They will not be able to re-join the team without an invitation from you." : ""), "MPTeamOptionsDlg.doKick();", "");
+}
+
+function MPTeamOptionsDlg::doKick(%this) {
+	%name = getField(MPTeamOptionsPlayerList.getRowTextById(MPTeamOptionsPlayerList.getSelectedId()), 1);
+	commandToServer('TeamKick', %name);
+}
+
+function MPTeamOptionsDlg::promote(%this) {
+	// Promote player to leader
+	%name = getField(MPTeamOptionsPlayerList.getRowTextById(MPTeamOptionsPlayerList.getSelectedId()), 1);
+//   echo("Promoting" SPC %name);
+	commandToServer('TeamPromote', %name);
+}
+
+function MPTeamOptionsDlg::teamDelete(%this) {
+	// Delete team
+	MessageBoxYesNo("Delete Team?", "Are you sure you want to delete this team? You and any players currently on the team will be moved to the default team.", "MPTeamOptionsDlg.doTeamDelete();", "");
+}
+
+function MPTeamOptionsDlg::doTeamDelete(%this) {
+	// If you really want to, I ain't gonna stop you
+	%this.noUpdate = true;
+	commandToServer('TeamDelete');
+	%this.close();
+}
+
+function MPTeamOptionsDlg::addPlayers(%this) {
+	// Add players to team
+	MPTeamInviteDlg.open();
+}

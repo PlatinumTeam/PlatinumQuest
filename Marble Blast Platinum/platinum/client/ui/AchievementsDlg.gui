@@ -1,0 +1,731 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(GuiWhiteBorderProfile) {
+	bitmap = "./play/whiteborder.png";
+	hasBitmapArray = true;
+	opaque = false;
+};
+
+//Category IDs
+$Achievement::Category::General = 0;
+$Achievement::Category::Level = 1;
+
+//Number of categories
+$Achievement::Category::Count = 2;
+
+//Names
+$Achievement::Category::Name[$Achievement::Category::General] = "General Achievements";
+$Achievement::Category::Name[$Achievement::Category::Level] = "Level-Specific Achievements";
+$Achievement::Category::Directory[$Achievement::Category::General] = "general";
+$Achievement::Category::Directory[$Achievement::Category::Level] = "level";
+
+//Actual achievement texts
+
+//Warning: If you update any of these achievements' indices you need to tell
+// someone who can code because they're hard coded down below and you'll earn
+// the wrong achievements otherwise.
+
+$Achievement::Name [$Achievement::Category::General,  0] = "Quest Complete"; //Done
+$Achievement::Desc [$Achievement::Category::General,  0] = "Finish every official level under the Par Time.";
+$Achievement::LBID [$Achievement::Category::General,  0] = 125;
+$Achievement::Order[$Achievement::Category::General,  0] = 0;
+$Achievement::Name [$Achievement::Category::General,  1] = "Quest Conquered"; //Done
+$Achievement::Desc [$Achievement::Category::General,  1] = "Finish every level under the Par Time, including the Bonus levels.";
+$Achievement::LBID [$Achievement::Category::General,  1] = 126;
+$Achievement::Order[$Achievement::Category::General,  1] = 1;
+$Achievement::Name [$Achievement::Category::General,  2] = "Platinum Player"; //Done
+$Achievement::Desc [$Achievement::Category::General,  2] = "Beat the Platinum Time/Score of every official level.";
+$Achievement::LBID [$Achievement::Category::General,  2] = 127;
+$Achievement::Order[$Achievement::Category::General,  2] = 2;
+$Achievement::Name [$Achievement::Category::General,  3] = "Ultimate Player"; //Done
+$Achievement::Desc [$Achievement::Category::General,  3] = "Beat the Ultimate Time/Score of every official level.";
+$Achievement::LBID [$Achievement::Category::General,  3] = 128;
+$Achievement::Order[$Achievement::Category::General,  3] = 3;
+$Achievement::Name [$Achievement::Category::General,  4] = "Awesome Player"; //Done
+$Achievement::Desc [$Achievement::Category::General,  4] = "Beat 5 levels' secret Awesome Time/Score.";
+$Achievement::LBID [$Achievement::Category::General,  4] = 129;
+$Achievement::Order[$Achievement::Category::General,  4] = 4;
+$Achievement::Name [$Achievement::Category::General,  5] = "Brick Cinema Soundtrack"; //Done
+$Achievement::Desc [$Achievement::Category::General,  5] = "Beat the secret Awesome Time/Score of every official level.";
+$Achievement::LBID [$Achievement::Category::General,  5] = 130;
+$Achievement::Order[$Achievement::Category::General,  5] = 5;
+$Achievement::Name [$Achievement::Category::General,  6] = "Ahead of Schedule"; //Done
+$Achievement::Desc [$Achievement::Category::General,  6] = "Beat the Ultimate Time of all construction-themed levels.";
+$Achievement::LBID [$Achievement::Category::General,  6] = 131;
+$Achievement::Order[$Achievement::Category::General,  6] = 6;
+$Achievement::Name [$Achievement::Category::General,  7] = "Working Overtime"; //Done
+$Achievement::Desc [$Achievement::Category::General,  7] = "Achieve 100% on all non-Bonus Quota levels.";
+$Achievement::LBID [$Achievement::Category::General,  7] = 132;
+$Achievement::Order[$Achievement::Category::General,  7] = 7;
+$Achievement::Name [$Achievement::Category::General,  8] = "Absolute Madness"; //Done
+$Achievement::Desc [$Achievement::Category::General,  8] = "Collect every single Gem in a non-Bonus Gem Madness level.";
+$Achievement::LBID [$Achievement::Category::General,  8] = 133;
+$Achievement::Order[$Achievement::Category::General,  8] = 8;
+$Achievement::Name [$Achievement::Category::General,  9] = "Basically a Gem Collection Level"; //Done
+$Achievement::Desc [$Achievement::Category::General,  9] = "Get all of the gems on all non-Bonus Gem Madness levels.";
+$Achievement::LBID [$Achievement::Category::General,  9] = 134;
+$Achievement::Order[$Achievement::Category::General,  9] = 9;
+$Achievement::Name [$Achievement::Category::General, 10] = "Birdie!"; //Done
+$Achievement::Desc [$Achievement::Category::General, 10] = "Find a Nest Egg.";
+$Achievement::LBID [$Achievement::Category::General, 10] = 135;
+$Achievement::Order[$Achievement::Category::General, 10] = 10;
+$Achievement::Name [$Achievement::Category::General, 11] = "Bird Watcher"; //Done
+$Achievement::Desc [$Achievement::Category::General, 11] = "Discover all the Nest Eggs in the official levels.";
+$Achievement::LBID [$Achievement::Category::General, 11] = 136;
+$Achievement::Order[$Achievement::Category::General, 11] = 11;
+$Achievement::Name [$Achievement::Category::General, 12] = "Extra Chirpy"; //Done
+$Achievement::Desc [$Achievement::Category::General, 12] = "Discover all the Nest Eggs in the Bonus levels.";
+$Achievement::LBID [$Achievement::Category::General, 12] = 137;
+$Achievement::Order[$Achievement::Category::General, 12] = 12;
+$Achievement::Name [$Achievement::Category::General, 13] = "They've Gone to Plaid!"; //Done
+$Achievement::Desc [$Achievement::Category::General, 13] = "Achieve ludicrous speed and max out the speedometer.";
+$Achievement::LBID [$Achievement::Category::General, 13] = 138;
+$Achievement::Order[$Achievement::Category::General, 13] = 13;
+$Achievement::Name [$Achievement::Category::General, 14] = "Ready Player Four"; //Done
+$Achievement::Desc [$Achievement::Category::General, 14] = "Finish a level with four controllers connected."; //RIP completionists
+$Achievement::LBID [$Achievement::Category::General, 14] = 139;
+$Achievement::Order[$Achievement::Category::General, 14] = 14;
+$Achievement::Hide [$Achievement::Category::General, 14] = true;
+$Achievement::Category::Count[$Achievement::Category::General] = 15; //Last index + 1 in case you add more
+
+$Achievement::Level[$Achievement::Category::Level,  0] = "Into the Deep";
+$Achievement::Name [$Achievement::Category::Level,  0] = "Ultimate Breather!"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  0] = "Get the Ultimate Time without using any Powerups at all.";
+$Achievement::LBID [$Achievement::Category::Level,  0] = 140;
+$Achievement::Order[$Achievement::Category::Level,  0] = 0;
+$Achievement::Level[$Achievement::Category::Level,  1] = "Side-Stroller";
+$Achievement::Name [$Achievement::Category::Level,  1] = "Edge of the World"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  1] = "Climb the wall next to the start pad. See how far you get!";
+$Achievement::LBID [$Achievement::Category::Level,  1] = 141;
+$Achievement::Order[$Achievement::Category::Level,  1] = 1;
+$Achievement::Level[$Achievement::Category::Level, 16] = "Having a Blast";
+$Achievement::Name [$Achievement::Category::Level, 16] = "Having Exactly One Blast"; //not Done
+$Achievement::Desc [$Achievement::Category::Level, 16] = "Finish the level using only one cannon shot and without the gyrocopter.";
+$Achievement::LBID [$Achievement::Category::Level, 16] = 156;
+$Achievement::Order[$Achievement::Category::Level, 16] = 2;
+$Achievement::Level[$Achievement::Category::Level,  2] = "Trial by Fire";
+$Achievement::Name [$Achievement::Category::Level,  2] = "Rapid Fire"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  2] = "Destroy all the Ice Shards in this level under 4 minutes.";
+$Achievement::LBID [$Achievement::Category::Level,  2] = 142;
+$Achievement::Order[$Achievement::Category::Level,  2] = 3;
+$Achievement::Level[$Achievement::Category::Level,  3] = "Dragon's Wing";
+$Achievement::Name [$Achievement::Category::Level,  3] = "The Real Awesome Time"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  3] = "Complete the level under 57.50 seconds.";
+$Achievement::LBID [$Achievement::Category::Level,  3] = 143;
+$Achievement::Order[$Achievement::Category::Level,  3] = 4;
+$Achievement::Level[$Achievement::Category::Level, 20] = "Construction Wonders";
+$Achievement::Name [$Achievement::Category::Level, 20] = "A Relaxing Puzzle"; //NOT DONE
+$Achievement::Desc [$Achievement::Category::Level, 20] = "Solve the puzzle and get to the secret area.";
+$Achievement::LBID [$Achievement::Category::Level, 20] = 160;
+$Achievement::Order[$Achievement::Category::Level, 20] = 5;
+$Achievement::Level[$Achievement::Category::Level,  4] = "Castle Colossus";
+$Achievement::Name [$Achievement::Category::Level,  4] = "Colossus Collector"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  4] = "Achieve 100% and finish the level under Par Time.";
+$Achievement::LBID [$Achievement::Category::Level,  4] = 144;
+$Achievement::Order[$Achievement::Category::Level,  4] = 6;
+$Achievement::Level[$Achievement::Category::Level,  5] = "Diminishing Returns";
+$Achievement::Name [$Achievement::Category::Level,  5] = "Economically Viable"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  5] = "Fade out every single Fade Platform in the 2D section.";
+$Achievement::LBID [$Achievement::Category::Level,  5] = 145;
+$Achievement::Order[$Achievement::Category::Level,  5] = 7;
+$Achievement::Level[$Achievement::Category::Level,  6] = "Terminal Velocity";
+$Achievement::Name [$Achievement::Category::Level,  6] = "Unintended Workarounds"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  6] = "Finish the level without using the Anvil Powerup.";
+$Achievement::LBID [$Achievement::Category::Level,  6] = 146;
+$Achievement::Order[$Achievement::Category::Level,  6] = 8;
+$Achievement::Level[$Achievement::Category::Level, 19] = "Citadel";
+$Achievement::Name [$Achievement::Category::Level, 19] = "High Quality Modeling"; //NOT DONE
+$Achievement::Desc [$Achievement::Category::Level, 19] = "I can't believe we still haven't fixed that hole in the map!";
+$Achievement::LBID [$Achievement::Category::Level, 19] = 159;
+$Achievement::Order[$Achievement::Category::Level, 19] = 9;
+$Achievement::Hide [$Achievement::Category::Level, 19] = true;
+$Achievement::Level[$Achievement::Category::Level,  7] = "Newton's Dilemma";
+$Achievement::Name [$Achievement::Category::Level,  7] = "Askew"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  7] = "Grab the Gravity Modifier below you, then clear the level under 1:20 in real time. Get the Gems in the correct order!";
+$Achievement::LBID [$Achievement::Category::Level,  7] = 147;
+$Achievement::Order[$Achievement::Category::Level,  7] = 10;
+$Achievement::Level[$Achievement::Category::Level,  8] = "Waves in the Dark";
+$Achievement::Name [$Achievement::Category::Level,  8] = "Sequence Breaker"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  8] = "Nice try.";
+$Achievement::LBID [$Achievement::Category::Level,  8] = 148;
+$Achievement::Order[$Achievement::Category::Level,  8] = 11;
+$Achievement::Level[$Achievement::Category::Level,  9] = "Cannon Sniper";
+$Achievement::Name [$Achievement::Category::Level,  9] = "I'm Dancing! I'm Dancing!"; //Done
+$Achievement::Desc [$Achievement::Category::Level,  9] = "This level also has an Easter Egg.";
+$Achievement::LBID [$Achievement::Category::Level,  9] = 149;
+$Achievement::Order[$Achievement::Category::Level,  9] = 12;
+$Achievement::Level[$Achievement::Category::Level, 10] = "Frozen Flames";
+$Achievement::Name [$Achievement::Category::Level, 10] = "Pants on Fire"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 10] = "Finish the level the wrong way."; // This means you start by going LEFT after the cannon instead of RIGHT. Collect the 2nd and 3rd Gems before the 1st to qualify for the achievement.
+$Achievement::LBID [$Achievement::Category::Level, 10] = 150;
+$Achievement::Order[$Achievement::Category::Level, 10] = 13;
+$Achievement::Level[$Achievement::Category::Level, 11] = "Emergency Stopping Only";
+$Achievement::Name [$Achievement::Category::Level, 11] = "Return to Sender"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 11] = "Reach the start pad again after missing the finish pad.";
+$Achievement::LBID [$Achievement::Category::Level, 11] = 151;
+$Achievement::Order[$Achievement::Category::Level, 11] = 14;
+$Achievement::Level[$Achievement::Category::Level, 12] = "Manic Bounce";
+$Achievement::Name [$Achievement::Category::Level, 12] = "Marble Madness"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 12] = "Complete the level without going Out of Bounds a single time.";
+$Achievement::LBID [$Achievement::Category::Level, 12] = 152;
+$Achievement::Order[$Achievement::Category::Level, 12] = 15;
+$Achievement::Level[$Achievement::Category::Level, 15] = "Gunnery Practice";
+$Achievement::Name [$Achievement::Category::Level, 15] = "A Tight Fit"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 15] = "Finish the level with a score of exactly 20.";
+$Achievement::LBID [$Achievement::Category::Level, 15] = 155;
+$Achievement::Order[$Achievement::Category::Level, 15] = 16;
+$Achievement::Level[$Achievement::Category::Level, 17] = "Unstable Islands";
+$Achievement::Name [$Achievement::Category::Level, 17] = "Some Tricky Footwork"; //NOT DONE
+$Achievement::Desc [$Achievement::Category::Level, 17] = "Destory every tile on every island that isn't covered by foliage.";
+$Achievement::LBID [$Achievement::Category::Level, 17] = 157;
+$Achievement::Order[$Achievement::Category::Level, 17] = 17;
+$Achievement::Level[$Achievement::Category::Level, 18] = "Arctic Inferno";
+$Achievement::Name [$Achievement::Category::Level, 18] = "Feeling Blue"; //NOT DONE
+$Achievement::Desc [$Achievement::Category::Level, 18] = "Score at least 150 points destroying only blue ice shards.";
+$Achievement::LBID [$Achievement::Category::Level, 18] = 158;
+$Achievement::Order[$Achievement::Category::Level, 18] = 18;
+$Achievement::Level[$Achievement::Category::Level, 13] = "Minute Minute";
+$Achievement::Name [$Achievement::Category::Level, 13] = "Not very Bubbly of you"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 13] = "Think outside the box and finish the level with at least 55 seconds of Bubble Time remaining.";
+$Achievement::LBID [$Achievement::Category::Level, 13] = 153;
+$Achievement::Order[$Achievement::Category::Level, 13] = 19;
+$Achievement::Level[$Achievement::Category::Level, 14] = "Puzzle 11 - Nightmare";
+$Achievement::Name [$Achievement::Category::Level, 14] = "Nightmare Redux"; //Done
+$Achievement::Desc [$Achievement::Category::Level, 14] = "Complete the level under 1:35.00 without jumping.";
+$Achievement::LBID [$Achievement::Category::Level, 14] = 154;
+$Achievement::Order[$Achievement::Category::Level, 14] = 20;
+
+$Achievement::Category::Count[$Achievement::Category::Level] = 21; //Last index + 1 in case you add more
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(AchievementsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	_guiSize = "800 600";
+		defaultControl = "AchievScroll";
+		commandSelect = "RootGui.popDialog(AchievementsDlg); PlayMissionGui.showBody();";
+		commandCancel = "RootGui.popDialog(AchievementsDlg); PlayMissionGui.showBody();";
+		commandNameSelect = "Close";
+
+	new GuiControl(AchievBody) {
+		profile = "PQWindowProfile";
+		horizSizing = "right";
+		vertSizing = "top";
+		position = "105 21";
+		extent = "579 336";
+		minExtent = "27 27";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapBorderCtrl() {
+			profile = "GuiWhiteBorderProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "21 57";
+			extent = "516 258";
+			minExtent = "0 0";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiScrollCtrl(AchievScroll) {
+			profile = "PQScrollWhiteProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "21 57";
+			extent = "537 258";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(AchievList) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "516 0";
+				minExtent = "0 0";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+		new GuiMLTextCtrl(AchievTitleText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "129 16";
+			extent = "320 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+			defaultText = "<bold:28><just:center>PlatinumQuest Achievements";
+		};
+		new GuiBorderButtonCtrl(AchievClose) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "438 10";
+			extent = "131 48";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(AchievementsDlg); PlayMissionGui.showBody();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "Return";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function AchievementsDlg::onWake(%this) {
+	//Try to center this GUI, but don't overlap the dropdowns
+	%x = (getWord(Canvas.getExtent(), 0) / 2) - (getWord(AchievBody.getExtent(), 0) / 2);
+	if (%x < 395) {
+		%x = 395;
+	}
+	AchievBody.setPosition(%x SPC getWord(AchievBody.getPosition(), 1));
+
+	%this.update();
+	%this.loadList();
+}
+
+function AchievementsDlg::loadList(%this) {
+	AchievList.clear();
+	AchievList.setHeight(0);
+
+	for (%catId = 0; %catId < $Achievement::Category::Count; %catId ++) {
+		//Achievement category stuff
+		%catCount = $Achievement::Category::Count[%catId];
+		%catName  = $Achievement::Category::Name[%catId];
+
+		%this.addCategory(%catId, %catName);
+
+		%sorted = Array("AchievementSort");
+
+		for (%id = 0; %id < %catCount; %id ++) {
+			if ($Achievement::Show[%catId, %id]) {
+				%sorted.addEntry(%catId SPC %id);
+			}
+		}
+		%sorted.sort(sortAchievements);
+
+		for (%i = 0; %i < %sorted.getSize(); %i ++) {
+			//%catId = getWord(%sorted.getEntry(%i), 0);
+			%id = getWord(%sorted.getEntry(%i), 1);
+
+			%achName  = $Achievement::Name [%catId, %id];
+			%achDesc  = $Achievement::Desc [%catId, %id];
+			%achLevel = $Achievement::Level[%catId, %id];
+
+			if ($Achievement::Show[%catId, %id]) {
+				%earned = $Achievement::Earned[%catId, %id];
+				%this.addAchievement(%catId, %id, %earned, %achName, %achDesc, %achLevel);
+			}
+		}
+		%sorted.delete();
+	}
+
+	//Take off the last 3 pixels of border
+	AchievList.setHeight(getWord(AchievList.getExtent(), 1) - 3);
+}
+
+//Sort two achievement "cat id" pairs by thier ordering in $Achievement::Order
+function sortAchievements(%a, %b) {
+	%aCatId = getWord(%a, 0);
+	%aId = getWord(%a, 1);
+	%bCatId = getWord(%b, 0);
+	%bId = getWord(%b, 1);
+	if (%aCatId != %bCatId) {
+		return %aCatId < %bCatId;
+	}
+	return $Achievement::Order[%aCatId, %aId] < $Achievement::Order[%bCatId, %bId];
+}
+
+function AchievementsDlg::addCategory(%this, %catId, %catName) {
+	%w = getWord(AchievList.getExtent(), 0);
+	%h = 40;
+	%x = 0;
+	%y = getWord(AchievList.getExtent(), 1);
+
+	%boxName = "AchievCatBox_" @ %catId;
+	%textName = "AchievCatText_" @ %catId;
+
+	%box = new GuiControl(%boxName) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0" SPC %y;
+		extent = %w SPC %h;
+		minExtent = "8 8";
+		visible = "1";
+
+		new GuiMLTextCtrl(%textName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "7 7";
+			extent = (%w - 4) SPC(%h - 4);
+			minExtent = "8 8";
+			visible = "1";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBitmapBorderCtrl() {
+			profile = "GuiWhiteBorderProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "0 -3";
+			extent = %w SPC(%h + 3);
+			minExtent = "8 8";
+			visible = "1";
+		};
+	};
+
+	%text = "<bold:28>" @ %catName;
+	%textName.setText(%text);
+
+	AchievList.add(%box);
+
+	AchievList.setHeight(%y + %h);
+}
+
+function AchievementsDlg::addAchievement(%this, %catId, %id, %earned, %achName, %achDesc, %achLevel) {
+	%w = getWord(AchievList.getExtent(), 0);
+	%h = 80;
+	%x = 0;
+	%y = getWord(AchievList.getExtent(), 1);
+
+	%boxName = "AchievBox_" @ %catId @ "_" @ %id;
+	%imgName = "AchievImg_" @ %catId @ "_" @ %id;
+	%textName = "AchievText_" @ %catId @ "_" @ %id;
+
+	%box = new GuiControl(%boxName) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0" SPC %y;
+		extent = %w SPC %h;
+		minExtent = "8 8";
+		visible = "1";
+
+		new GuiBitmapCtrl(%imgName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "4 4";
+			extent = (%h - 8) SPC(%h - 8);
+			minExtent = "8 8";
+			visible = "1";
+		};
+		new GuiMLTextCtrl(%textName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "2 2";
+			extent = (%w - 8) SPC(%h - 4);
+			minExtent = "8 8";
+			visible = "1";
+			lineSpacing = "2";
+			allowColorChars = "1";
+			maxChars = "-1";
+		};
+		new GuiBitmapBorderCtrl() {
+			profile = "GuiWhiteBorderProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "0 -3";
+			extent = %w SPC(%h + 3);
+			minExtent = "8 8";
+			visible = "1";
+		};
+	};
+
+	%color = (%earned ? "<color:000000>" : "<color:888888>");
+
+	%text = %color @ "<font:26><lmargin:80>" @ %achName;
+	if (%achLevel !$= "")
+		%text = %text @ "<just:right><font:19>(" @ %achLevel @ ")";
+	%text = %text NL "<font:19><just:left>" @ %achDesc;
+	%textName.setText(%text);
+
+	%imgName.setBitmap(%earned ? "platinum/client/ui/achiev/pq/" @ $Achievement::Category::Directory[%catId] @ "/" @ %id @ ".png" : "platinum/client/ui/achiev/lock.png");
+
+	AchievList.add(%box);
+	AchievList.setHeight(%y + %h);
+}
+
+//-----------------------------------------------------------------------------
+// Achievement-specific section
+
+function AchievementsDlg::update(%this, %catId, %id) {
+	//Reset all to shown in case we unlock the ability to see any
+	for (%catId = 0; %catId < $Achievement::Category::Count; %catId ++) {
+		%catCount = $Achievement::Category::Count[%catId];
+		for (%id = 0; %id < %catCount; %id ++) {
+			$Achievement::Show[%catId, %id] = !$Achievement::Hide[%catId, %id];
+			$Achievement::Earned[%catId, %id] = false;
+		}
+	}
+
+	if (!$pref::ShowAwesomeHints) {
+		//Awesome time achievements, don't show them until we have an awesome time
+		//You'll have an awesome time getting these achievements
+
+		//"Beginner's Luck"
+		$Achievement::Show[$Achievement::Category::General, 4] = false;
+		//"Matan is calling, he'd like his marble back"
+		$Achievement::Show[$Achievement::Category::General, 5] = false;
+		//"The Real Awesome Time"
+		$Achievement::Show[$Achievement::Category::Level, 3] = false;
+	}
+
+	//Lame achievements that need to be pref'd like the plaid one
+	for (%catId = 0; %catId < $Achievement::Category::Count; %catId ++) {
+		%catCount = $Achievement::Category::Count[%catId];
+		for (%id = 0; %id < %catCount; %id ++) {
+			%earned = checkAchievementPref(%catId, %id);
+			$Achievement::Earned[%catId, %id] = %earned;
+			if (%earned) {
+				$Achievement::Show[%catId, %id] = true;
+			}
+		}
+	}
+}
+
+function checkAchievementPref(%catId, %id) {
+	if (lb()) {
+		%lbid = $Achievement::LBID[%catId, %id];
+		return LBAchievementsDlg.playerAchievements[$LB::Username].containsEntry(%lbid);
+	}
+	//TODO: Anti-hack? No point imo
+	return $pref::Achievement[%catId, %id];
+}
+
+function activateAchievement(%catId, %id) {
+	if (lb()) {
+		%lbid = $Achievement::LBID[%catId, %id];
+		//If we already have it online then don't award it again.... RIP server
+		if (LBAchievementsDlg.playerAchievements[$LB::Username].containsEntry(%lbid)) {
+			return;
+		}
+
+		//Rate limit this
+		if ($Achievement::Recording[%lbid]) {
+			return;
+		}
+		$Achievement::Recording[%lbid] = true;
+		schedule(5000, 0, setVariable, "$Achievement::Recording" @ %lbid, 0);
+
+		//LB activate anyway
+		statsRecordAchievement(%lbid);
+		return;
+	}
+
+	//Don't give it twice
+	if (checkAchievementPref(%catId, %id)) {
+		return;
+	}
+
+	//TODO: Anti-hack? No point imo
+	$pref::Achievement[%catId, %id] = true;
+
+	//Show it off
+	%text = $Achievement::Name[%catId, %id];
+	%bitmap = "platinum/client/ui/achiev/pq/" @ $Achievement::Category::Directory[%catId] @ "/" @ %id @ ".png";
+
+	echo("Got achievement: " @ %text);
+
+	addAchievementMessage(%text, %bitmap, "72 72");
+	alxPlay(GetAchievement);
+
+	savePrefs();
+}
+
+function checkEndgameAchievements() {
+	//Don't do this on servers, you'll try to download all their missions and it'll be bad
+	if (mp() && !($Server::Hosting && !$Server::_Dedicated)) {
+		return;
+	}
+
+	Unlock::updateCaches();
+	if ($CurrentGame $= "PlatinumQuest") {
+
+		echo("Checking achievements...");
+
+		//Totals for PQ not including bonus
+		%totalAll       = $Unlock::GameMissionTotal["PlatinumQuest"];
+		%total          = $Unlock::GameMissionTotal["PlatinumQuest"]                                - $Unlock::DifficultyMissionTotal["PlatinumQuest", "Bonus"];
+		%totalEasterEgg = $Unlock::GameTotalEggs["PlatinumQuest"]                                   - $Unlock::DifficultyTotalEggs["PlatinumQuest", "Bonus"];
+		%totalQuota     = $Unlock::GameGamemodeMissionTotal["PlatinumQuest", "quota"]               - $Unlock::DifficultyGamemodeMissionTotal["PlatinumQuest", "Bonus", "quota"];
+		%totalMadness   = $Unlock::GameGamemodeMissionTotal["PlatinumQuest", "gemmadness"]          - $Unlock::DifficultyGamemodeMissionTotal["PlatinumQuest", "Bonus", "gemmadness"];
+		%par            = $Unlock::GameCompletion["PlatinumQuest"]                                  - $Unlock::DifficultyCompletion["PlatinumQuest", "Bonus"];
+		%gold           = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::Gold]          - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Gold];
+		%platinum       = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::Platinum]      - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Platinum];
+		%ultimate       = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::Ultimate]      - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Ultimate];
+		%awesome        = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::Awesome]       - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Awesome];
+		%easterEgg      = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::EasterEgg]     - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::EasterEgg];
+		%quota100       = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::Quota100]      - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Quota100];
+		%madnessAll     = $Unlock::GameCompletionFlags["PlatinumQuest", $Completion::GemMadnessAll] - $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::GemMadnessAll];
+
+		//These can just be got directly
+		%totalBonus          = $Unlock::DifficultyMissionTotal["PlatinumQuest", "Bonus"];
+		%totalEasterEggBonus = $Unlock::DifficultyTotalEggs["PlatinumQuest", "Bonus"];
+		%parBonus            = $Unlock::DifficultyCompletion["PlatinumQuest", "Bonus"];
+		%goldBonus           = $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Gold];
+		%platinumBonus       = $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Platinum];
+		%ultimateBonus       = $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Ultimate];
+		%awesomeBonus        = $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::Awesome];
+		%easterEggBonus      = $Unlock::DifficultyCompletionFlags["PlatinumQuest", "Bonus", $Completion::EasterEgg];
+
+		//Check for achievements
+		echo("Statistics dump:");
+		echo("Total par times: " @ %par @ " / " @ %total @ " (bonus: " @ %parBonus @ " / " @ %totalBonus @ ")");
+		echo("Total gold times: " @ %gold @ " / " @ %total @ " (bonus: " @ %goldBonus @ " / " @ %totalBonus @ ")");
+		echo("Total platinum times: " @ %platinum @ " / " @ %total @ " (bonus: " @ %platinumBonus @ " / " @ %totalBonus @ ")");
+		echo("Total ultimate times: " @ %ultimate @ " / " @ %total @ " (bonus: " @ %ultimateBonus @ " / " @ %totalBonus @ ")");
+		if (%awesome > 0)
+			echo("Total awesome times: " @ %awesome @ " / " @ %total @ " (bonus: " @ %awesomeBonus @ " / " @ %totalBonus @ ")");
+		echo("Total quota 100%s: " @ %quota100 @ " / " @ %totalQuota);
+		echo("Total gemmadness alls: " @ %madnessAll @ " / " @ %totalQuota);
+
+		//Complete every level
+		if (%par >= %total) {
+			activateAchievement($Achievement::Category::General, 0);
+		}
+		//Complete every level and all bonus levels
+		if (%par >= %total && %parBonus >= %totalBonus) {
+			activateAchievement($Achievement::Category::General, 1);
+		}
+		//Beat all PTs
+		if (%platinum >= %total) {
+			activateAchievement($Achievement::Category::General, 2);
+		}
+		//Beat all UTs
+		if (%ultimate >= %total) {
+			activateAchievement($Achievement::Category::General, 3);
+		}
+		//Beat 5 ATs
+		if (%awesome >= 5) {
+			activateAchievement($Achievement::Category::General, 4);
+		}
+		//Beat all ATs
+		if (%awesome >= %total) {
+			activateAchievement($Achievement::Category::General, 5);
+		}
+		//Beat all construction UTs
+		if (
+			   (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Beginner") @ "/HighRiseQuickFall.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Beginner") @ "/RacingSpirits.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Beginner") @ "/BubbleCavern.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Beginner") @ "/HipPopStepJump.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Intermediate") @ "/ConstructionWonders.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Intermediate") @ "/RicketyRace.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Intermediate") @ "/AssemblyLine.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Advanced") @ "/WorkInProgress.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Advanced") @ "/DangerousDevelopment.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Advanced") @ "/CannonSniper.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Expert") @ "/ABridgeTooHard.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Expert") @ "/PlatinumConstructionCo.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Expert") @ "/Contractor.mcs").completion & $Completion::Ultimate)
+			&& (getMissionInfo(PlayMissionGui.ml.getMissionDirectory("PlatinumQuest", "Expert") @ "/Hydropower.mcs").completion & $Completion::Ultimate)
+		) {
+			activateAchievement($Achievement::Category::General, 6);
+		}
+		//100% all non-bonus quota levels
+		if (%quota100 >= %totalQuota) {
+			activateAchievement($Achievement::Category::General, 7);
+		}
+		//100% gems in at least 1 gemmadness level.
+		if (%madnessAll > 0) {
+			activateAchievement($Achievement::Category::General, 8);
+		}
+		//100% gens in all gem madness levels
+		if (%madnessAll >= %totalMadness) {
+			activateAchievement($Achievement::Category::General, 9);
+		}
+	}
+
+	//Win a level with 4 joysticks connected
+	if (getJoystickCount() >= 4) {
+		activateAchievement($Achievement::Category::General, 14);
+	}
+
+	clientCbCheckEndgameAchievements();
+}
+
+function checkNestEggAchievements() {
+	//Don't do this on servers, you'll try to download all their missions and it'll be bad
+	if (mp() && !($Server::Hosting && !$Server::_Dedicated)) {
+		return;
+	}
+
+	if ($CurrentGame $= "PlatinumQuest") {
+
+		echo("Checking achievements...");
+
+		%totalEasterEgg = Unlock::getGameEasterEggCount();
+		%totalEasterEggBonus = Unlock::getDifficultyEasterEggCount("Bonus");
+		%easterEgg = Unlock::getGameCompletionCountFlags($CurrentGame, $Completion::EasterEgg);
+		%easterEggBonus = Unlock::getDifficultyCompletionCountFlags("Bonus", $CurrentGame, $Completion::EasterEgg);
+
+		//Ignore bonus eggs
+		%easterEgg -= %easterEggBonus;
+		%totalEasterEgg -= %totalEasterEggBonus;
+
+		//Check for achievements
+
+		echo("Statistics dump:");
+		echo("Total easterEggs: " @ %easterEgg @ " / " @ %totalEasterEgg @ " (bonus: " @ %easterEggBonus @ " / " @ %totalEasterEggBonus @ ")");
+
+		//One nest egg
+		if (%easterEgg >= 1) {
+			activateAchievement($Achievement::Category::General, 10);
+		}
+		//All official nest eggs
+		if (%easterEgg >= %totalEasterEgg) {
+			activateAchievement($Achievement::Category::General, 11);
+		}
+		//All bonus nest eggs
+		if (%easterEggBonus >= %totalEasterEggBonus) {
+			activateAchievement($Achievement::Category::General, 12);
+		}
+	}
+}

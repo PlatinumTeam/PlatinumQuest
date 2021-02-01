@@ -1,0 +1,1195 @@
+//-----------------------------------------------------------------------------
+// Basically a complete reimplementation of the inspector in script
+// Because I am a madman
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(InspectDlg) {
+	profile = "GuiDialogProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "True";
+	setFirstResponder = "False";
+	modal = "False";
+	helpTag = "0";
+
+	new GuiWindowCtrl(InspectTitle) {
+		profile = "GuiWindowProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "20 20";
+		extent = "200 400";
+		minExtent = "8 8";
+		visible = "True";
+		setFirstResponder = "False";
+		modal = "True";
+		helpTag = "0";
+		resizeWidth = "True";
+		resizeHeight = "True";
+		canMove = "True";
+		canClose = "True";
+		canMinimize = "True";
+		canMaximize = "True";
+		minSize = "50 50";
+		closeCommand = "RootGui.popDialog(InspectDlg);";
+		font = "12 244 Arial";
+		selectfillColor = "253";
+		fillColor = "250";
+		opaque = "true";
+
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "8 24";
+			extent = "40 16";
+			minExtent = "8 8";
+			visible = "True";
+			setFirstResponder = "False";
+			modal = "True";
+			command = "InspectApply();";
+			helpTag = "0";
+			text = "APPLY";
+			selectBorderColor = "255";
+			borderColor = "249";
+			fillColor = "249";
+			fontHL = "12 253 Arial";
+			font = "12 252 Arial";
+		};
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "56 24";
+			extent = "29 18";
+			minExtent = "8 8";
+			visible = "True";
+			setFirstResponder = "False";
+			modal = "True";
+			helpTag = "0";
+			text = "Name:";
+			font = "12 244 Arial";
+		};
+		new GuiTextEditCtrl(InspectObjectName) {
+			profile = "GuiTextEditProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "98 23";
+			extent = "72 18";
+			minExtent = "8 8";
+			visible = "True";
+			setFirstResponder = "False";
+			modal = "True";
+			helpTag = "0";
+			historySize = "0";
+		};
+		new GuiScrollCtrl() {
+			profile = "GuiScrollProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "8 44";
+			extent = "184 348";
+			minExtent = "8 8";
+			visible = "True";
+			setFirstResponder = "False";
+			modal = "True";
+			helpTag = "0";
+			willFirstRespond = "True";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "False";
+
+			new GuiControl(InspectFields) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "164 8";
+				minExtent = "8 8";
+				visible = "True";
+				helpTag = "0";
+				editControlOffset = "5";
+				entryHeight = "18";
+				textExtent = "80";
+				entrySpacing = "2";
+				maxMenuExtent = "80";
+			};
+		};
+	};
+	new GuiWindowCtrl(InspectTreeTitle) {
+		profile = "GuiWindowProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "232 20";
+		extent = "200 400";
+		minExtent = "8 8";
+		visible = "True";
+		setFirstResponder = "False";
+		modal = "True";
+		helpTag = "0";
+		text = "TREE VIEW";
+		resizeWidth = "True";
+		resizeHeight = "True";
+		canMove = "True";
+		canClose = "True";
+		canMinimize = "True";
+		canMaximize = "True";
+		minSize = "50 50";
+		closeCommand = "RootGui.popDialog(InspectDlg);";
+
+		new GuiScrollCtrl() {
+			profile = "GuiScrollProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "8 24";
+			extent = "184 368";
+			minExtent = "8 8";
+			visible = "True";
+			setFirstResponder = "False";
+			modal = "True";
+			helpTag = "0";
+			willFirstRespond = "True";
+			hScrollBar = "dynamic";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "False";
+
+			new GuiTreeViewCtrl(InspectTreeView) {
+				profile = "GuiTreeViewProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "64 64";
+				minExtent = "8 8";
+				visible = "True";
+				setFirstResponder = "False";
+				modal = "True";
+				helpTag = "0";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+exec("./InspectAddFieldDlg.gui");
+
+function Inspect(%obj) {
+	RootGui.popDialog("InspectDlg");
+	RootGui.pushDialog("InspectDlg", 30);
+
+	InspectFields.inspector.inspect(%obj);
+	InspectObjectName.setValue(%obj.getName());
+	InspectTitle.setValue(%obj.getId() @ ": " @ %obj.getName());
+}
+
+function InspectApply(%editor) {
+	if (%editor) {
+		EWorldEditor.isDirty = true;
+		EditorInspector.inspector.apply(InspectorNameEdit.getValue());
+	} else {
+		InspectFields.inspector.apply(InspectObjectName.getValue());
+	}
+}
+
+function SimObject::onInspectApply(%this) {
+	//Stub
+}
+
+function InspectTreeView::onSelect(%this, %obj) {
+	Inspect(%obj);
+}
+
+function Tree(%obj) {
+	RootGui.popDialog("InspectDlg");
+	RootGui.pushDialog("InspectDlg", 20);
+	InspectTreeView.open(%obj);
+}
+
+function Inspector::addDynamicField(%this, %obj) {
+	InspectAddFieldDlg.object = %obj;
+	InspectAddFieldDlg.inspector = %this;
+	InspectAddFieldName.setValue("");
+	InspectAddFieldValue.setValue("");
+	RootGui.pushDialog(InspectAddFieldDlg, 99);
+}
+
+function InspectAddFieldDlg::doAction(%this) {
+	if (InspectAddFieldName.getValue() $= "" || InspectAddFieldValue.getValue() $= "")
+		return;
+	%this.object.setFieldValue(InspectAddFieldName.getValue(), InspectAddFieldValue.getValue());
+	%this.inspector.inspect(%this.object);
+}
+
+function MakeInspector(%gui) {
+	if (isObject(%gui.inspector))
+		return;
+
+	RootGroup.add(%insp = new ScriptObject(%gui.getId() @ "_Object") {
+		class = "Inspector";
+		gui = %gui;
+		editControlOffset = (%gui.editControlOffset $= "" ?  5 : %gui.editControlOffset);
+		entryHeight       = (%gui.entryHeight       $= "" ? 18 : %gui.entryHeight);
+		textExtent        = (%gui.textExtent        $= "" ? 80 : %gui.textExtent);
+		entrySpacing      = (%gui.entrySpacing      $= "" ?  2 : %gui.entrySpacing);
+		maxMenuExtent     = (%gui.maxMenuExtent     $= "" ? 80 : %gui.maxMenuExtent);
+	});
+	%gui.inspector = %insp;
+}
+
+function Inspector::inspect(%this, %obj, %displayNames) {
+	%this.object = %obj;
+	%this.build(%displayNames $= "" ? true : %displayNames);
+}
+
+function Inspector::build(%this, %displayNames) {
+	//We need to build up the inspector.
+
+	//First, get a list of all the object's fields.
+	%members  = %this.object.getMemberFieldList();
+	%dynamics = %this.object.getDynamicFieldList();
+
+	//Members are sorted already, dynamics need to be.
+	// Place them all into an array and sort that
+	%dynArray = Array(InspectDynamicFieldsArray);
+	%count = getFieldCount(%dynamics);
+	for (%i = 0; %i < %count; %i ++) {
+		%dynArray.addEntry(getField(%dynamics, %i));
+	}
+	%dynArray.sort(compareStringLesser);
+
+	//Clean up from the last time
+	%this.reset();
+
+	//Basic information
+	%this.addField("Class: " @ %this.object.getClassName(), -1);
+	%this.addField("Id: " @ %this.object.getId(), -1);
+
+	%classes = %this.object.getParentClasses();
+	%classCount = getFieldCount(%classes);
+
+	%count = getFieldCount(%members);
+	for (%i = 0; %i < %count; %i ++) {
+		%field = getField(%members, %i);
+		%value = %this.object.getFieldValue(%field);
+
+		%title = "";
+		%desc = "";
+		%disable = "";
+		%type = "";
+
+		//Try to get some data about them
+		for (%j = 0; %j < %classCount; %j ++) {
+			%objClass = getField(%classes, %j);
+			if (%title $= "" && $Inspect::ClassField[%objClass, %field, "name"] !$= "") {
+				%title = $Inspect::ClassField[%objClass, %field, "name"];
+			}
+			if (%desc $= "" && $Inspect::ClassField[%objClass, %field, "desc"] !$= "") {
+				%desc = $Inspect::ClassField[%objClass, %field, "desc"];
+			}
+			if (%disable $= "" && $Inspect::ClassField[%objClass, %field, "disable"] !$= "") {
+				%disable = $Inspect::ClassField[%objClass, %field, "disable"];
+			}
+			if (%type $= "" && $Inspect::ClassField[%objClass, %field, "type"] !$= "") {
+				%type = $Inspect::ClassField[%objClass, %field, "type"];
+
+				if ($Inspect::CustomFieldType[%type] !$= "") {
+					%type = $Inspect::CustomFieldType[%type];
+				} else {
+					%type = 1;
+				}
+			}
+		}
+		//Some stuff just doesn't work
+		if (%disable) {
+			continue;
+		}
+
+		if (%title $= "" || !%displayNames) {
+			%title = %field;
+		}
+		if (%type $= "") {
+			%type = %this.object.getFieldType(%field);
+		}
+
+		//Add it
+		%this.addField(%field, %type, %value, false, %title, (%desc $= "" ? "" : (%title @ ": " @ %desc)));
+	}
+
+	%class = %this.object.getClassName();
+	if ($Inspect::CustomField[%class, 0, "field"] !$= "") {
+		//Custom fields from the datablock
+		%this.addField("  Class-Specific Fields", -1);
+
+		for (%i = 0; $Inspect::CustomField[%class, %i, "field"] !$= ""; %i ++) {
+			if ($Inspect::CustomField[%class, %i, "disable"])
+				continue;
+
+			%field = $Inspect::CustomField[%class, %i, "field"];
+			%type = $Inspect::CustomField[%class, %i, "type"];
+			%value = %this.object.getFieldValue(%field);
+			%title = $Inspect::CustomField[%class, %i, "name"];
+			%desc = $Inspect::CustomField[%class, %i, "desc"];
+
+			if (%title $= "" || !%displayNames) {
+				%title = %field;
+			}
+
+			if ($Inspect::CustomFieldType[%type] !$= "") {
+				%type = $Inspect::CustomFieldType[%type];
+			} else {
+				%type = 1;
+			}
+
+			if ($Inspect::CustomField[%class, %i, "class"] !$= "")
+				%type = %type SPC $Inspect::CustomField[%class, %i, "class"];
+
+			if (%value $= "")
+				%value = $Inspect::CustomField[%class, %i, "default"];
+
+			%this.addField(%field, %type, %value, true, %title, %title @ ": " @ %desc);
+		}
+	}
+
+	if (%this.object.getFieldValue("datablock") !$= "") {
+		%db = %this.object.getFieldValue("datablock");
+
+		if (%db.customField[0, "field"] !$= "") {
+			//Custom fields from the datablock
+			%this.addField("  Datablock-Specific Fields", -1);
+
+			for (%i = 0; %db.customField[%i, "field"] !$= ""; %i ++) {
+				if (%db.customField[%i, "disable"])
+					continue;
+
+				%field = %db.customField[%i, "field"];
+				%type = %db.customField[%i, "type"];
+				%value = %this.object.getFieldValue(%field);
+				%title = %db.customField[%i, "name"];
+				%desc = %db.customField[%i, "desc"];
+
+				if (%title $= "" || !%displayNames) {
+					%title = %field;
+				}
+
+				if ($Inspect::CustomFieldType[%type] !$= "") {
+					%type = $Inspect::CustomFieldType[%type];
+				} else {
+					%type = 1;
+				}
+
+				if (%db.customField[%i, "class"] !$= "")
+					%type = %type SPC %db.customField[%i, "class"];
+
+				if (%value $= "")
+					%value = %db.customField[%i, "default"];
+
+				%this.addField(%field, %type, %value, true, %title, %title @ ": " @ %desc);
+			}
+		}
+	}
+
+	if (%this.object.getClassName() $= "ScriptObject" && %this.object.class $= "Array") {
+		//Array Entries header
+		%this.addField("  Array Entries", -1);
+
+		//Actual entries
+		%count = %this.object.getSize();
+		for (%i = 0; %i < %count; %i ++) {
+			%type  = 1; //String
+			%value = %this.object.getEntry(%i);
+
+			if (%this.object.__obj[%i] !$= "") {
+				%type = 14; //SimObject
+			}
+
+			//Add it
+			%this.addField("__array_entry_" @ %i, %type, %value, true, "Entry " @ %i);
+		}
+	}
+
+	//Dynamic Fields header and add button
+	%this.addField("  Dynamic Fields", -1);
+	%this.gui.add(new GuiButtonCtrl("InspectAddDynamicFieldButton") {
+		profile = "GuiButtonProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = 84 SPC((%this.fields - 1) * %this.entryHeight);
+		extent = 80 SPC %this.entryHeight;
+		visible = "1";
+		text = "Add";
+		command = %this @ ".addDynamicField(\"" @ %this.object @ "\");";
+		groupNum = "-1";
+		buttonType = "PushButton";
+	});
+
+	//Actual fields
+	%count = %dynArray.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%field = %dynArray.getEntry(%i);
+		%type  = 1; //String
+		%value = %this.object.getFieldValue(%field);
+
+		if (isObject(%this.fieldEntry[%field]))
+			continue;
+
+		if (strpos(%field, "__obj") != -1) {
+			//Internal
+			continue;
+		}
+		if (%this.object.__obj[%field] !$= "") {
+			%type = 14; //SimObject
+		}
+
+		//Add it
+		%this.addField(%field, %type, %value, true, %field);
+	}
+
+	%this.gui.setHeight(%this.fields * %this.entryHeight);
+
+	//Clean up
+	%dynArray.delete();
+}
+
+function Inspector::reset(%this) {
+	for (%i = 0; %i < %this.fields; %i ++) {
+		%name = %this.field[%i];
+		if (isObject(%this.fieldEntry[%name]))
+			%this.fieldEntry[%name].delete();
+		%this.fieldEntry[%name] = "";
+		%this.field[%i] = "";
+	}
+
+	%this.fields = 0;
+	//Delete everything inside
+	%this.gui.clear();
+}
+
+$Inspect::CustomFieldType["boolean"] = 3;
+$Inspect::CustomFieldType["time"] = 103;
+$Inspect::CustomFieldType["string"] = 1;
+$Inspect::CustomFieldType["enum"] = 10;
+$Inspect::CustomFieldType["GameBaseData"] = 100;
+$Inspect::CustomFieldType["ItemData"] = 101;
+$Inspect::CustomFieldType["TriggerData"] = 102;
+$Inspect::CustomFieldType["ColorI"] = 12;
+$Inspect::CustomFieldType["ColorF"] = 13;
+$Inspect::CustomFieldType["SimObject"] = 14;
+
+$Inspect::MathFieldCount[15] = 2; //TypePoint2I
+$Inspect::MathFieldCount[16] = 2; //TypePoint2F
+$Inspect::MathFieldCount[17] = 1; //TypePoint3F
+$Inspect::MathFieldCount[18] = 4; //TypePoint4F
+$Inspect::MathFieldCount[19] = 4; //TypeRectI
+$Inspect::MathFieldCount[20] = 4; //TypeRectF
+$Inspect::MathFieldCount[21] = 1; //TypeMatrixPosition
+$Inspect::MathFieldCount[22] = 1; //TypeMatrixRotation
+$Inspect::MathFieldCount[23] = 2; //TypeBox3F
+$Inspect::MathFieldCount[34] = 1; //TypeTriggerPolyhedron
+
+//Mapping of field type -> expected class for class-type fields
+$Inspect::TypeClass[25] = GameBaseData;
+$Inspect::TypeClass[26] = ExplosionData;
+$Inspect::TypeClass[28] = SplashData;
+$Inspect::TypeClass[31] = ParticleEmitterData;
+$Inspect::TypeClass[32] = AudioDescription;
+$Inspect::TypeClass[33] = AudioProfile;
+$Inspect::TypeClass[35] = ProjectileData;
+$Inspect::TypeClass[38] = DebrisData;
+$Inspect::TypeClass[40] = DecalData;
+$Inspect::TypeClass[42] = AudioEnvironment;
+$Inspect::TypeClass[43] = AudioSampleEnvironment;
+
+$Inspect::TypeClass[100] = GameBaseData;
+$Inspect::TypeClass[101] = ItemData;
+$Inspect::TypeClass[102] = TriggerData;
+
+function Inspector::addField(%this, %field, %type, %value, %dynamic, %title, %tooltip) {
+	if (%field $= "") {
+		%this.fields ++;
+		return;
+	}
+	if (%title $= "") {
+		%title = %field;
+	}
+
+	%innerWidth = getWord(%this.gui.getExtent(), 0) - 4;
+	%innerHeight = %this.entryHeight;
+
+	//Make sure the labels don't overlap the text entry
+	%textLen = textLen(%title);
+	%labelWidth = %textLen;
+
+	//For the delete button
+	if (%dynamic)
+		%labelWidth += 14;
+
+	//But make sure they aren't too short either. 80 works well.
+	if (%labelWidth < 80)
+		%labelWidth = 80;
+
+	//Have some padding on the fields
+	%fieldStart = %labelWidth + 4;
+	%fieldWidth = (%innerWidth - %fieldStart) - 4;
+
+	//Container
+	%this.gui.add(%group = new GuiControl("InspectField_" @ %field) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = 2 SPC(%this.fields * %this.entryHeight);
+		extent = %innerWidth SPC %innerHeight;
+		visible = "1";
+	});
+
+	//Label
+	%group.add(new GuiTextCtrl(%nameCtrl = "InspectName_" @ %field) {
+		profile = "GuiTextProfile";
+		horizSizing = "right";
+		vertSizing = "height";
+		position = "0 0";
+		extent = %labelWidth SPC %innerHeight;
+		visible = "1";
+		text = %title;
+	});
+
+	if (%tooltip !$= "") {
+		%nameCtrl.setTooltip(%tooltip);
+	}
+
+	//Value
+	switch (%type) {
+	//TypeSeparator = -1
+	case -1:
+	//Nothing
+
+	//TypeBool =  3,  <-- Checkbox
+	//TypeFlag = 11,  <-- Checkbox
+	case 3 or 11:
+		%group.add(%entry = new GuiCheckBoxCtrl() {
+			profile = "GuiCheckBoxProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			text = "I";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+		});
+
+	//TypeFilename = 9,  <-- File picker
+	//case 9:
+	//	%group.add(%entry = new GuiButtonCtrl("InspectFileEntry") {
+	//		profile = "GuiButtonProfile";
+	//		horizSizing = "width";
+	//		vertSizing = "height";
+	//		position = %fieldStart SPC 0;
+	//		extent = %fieldWidth SPC %innerHeight;
+	//		visible = "1";
+	//		text = "";
+	//		command = "Inspector.chooseFile(\"" @ %this.fields @ "\");";
+	//		groupNum = "-1";
+	//		buttonType = "PushButton";
+	//	});
+
+	//TypeEnum = 10,  <-- Popup menu
+	case 10:
+		%group.add(%entry = new GuiPopUpMenuCtrl(InspectEnumEntry) {
+			profile = "GuiPopUpMenuProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			text = "";
+			maxLength = "255";
+			maxPopupHeight = "400";
+		});
+		//What values can we use here?
+		%enumValues = %this.getEnumRecords(%this.object, %field);
+		//Just add them all as they come
+		%count = getRecordCount(%enumValues);
+		for (%i = 0; %i < %count; %i ++) {
+			%enumRecord = getRecord(%enumValues, %i);
+			%enumValue = getField(%enumRecord, 0);
+			%enumName = getField(%enumRecord, 1);
+			%entry._enumValue[%i] = %enumValue;
+			%entry._enumName[%i] = %enumName;
+			%entry.add(%enumName, %i);
+		}
+
+	//TypePoint2I           = 15,  <-- Multiple text boxes
+	//TypePoint2F           = 16,  <-- Multiple text boxes
+	//TypePoint3F           = 17,  <-- Multiple text boxes
+	//TypePoint4F           = 18,  <-- Multiple text boxes
+	//TypeRectI             = 19,  <-- Multiple text boxes
+	//TypeRectF             = 20,  <-- Multiple text boxes
+	//TypeMatrixPosition    = 21,  <-- Multiple text boxes
+	//TypeMatrixRotation    = 22,  <-- Multiple text boxes
+	//TypeBox3F             = 23,  <-- Multiple text boxes
+	//TypeTriggerPolyhedron = 34,  <-- Multiple text boxes
+	case 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 34:
+		//Specialty case: bitmaps and bitmap buttons will auto size if you set
+		// their extent to 0 0. Only these classes do that.
+		if (%field $= "extent" && (
+		                 %this.object.getClassName() $= "GuiBitmapCtrl" ||
+		                         %this.object.getClassName() $= "GuiBitmapButtonCtrl" ||
+		                                 %this.object.getClassName() $= "GuiBitmapButtonTextCtrl"
+		             )) {
+			%fieldWidth -= 50;
+			%group.add(new GuiButtonCtrl() {
+				profile = "GuiButtonProfile";
+				horizSizing = "left";
+				vertSizing = "height";
+				position = %fieldStart + %fieldWidth SPC 0;
+				extent = 50 SPC %innerHeight;
+				visible = "1";
+				text = "Auto";
+				command = %this.object @ ".setInspectField(\"extent\", \"0 0\");" @ %this @ ".inspect(\"" @ %this.object @ "\");";
+				groupNum = "-1";
+				buttonType = "PushButton";
+			});
+		}
+
+		%group.add(%entry = new GuiControl("InspectMathEntry") {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			maxLength = "255";
+		});
+		%entry.onNextFrame("updateSize");
+
+		%count = $Inspect::MathFieldCount[%type];
+		%subControlExtent = %fieldWidth / %count;
+
+		for (%i = 0; %i < %count; %i ++) {
+			%entry.add(%ctrl = new GuiTextEditCtrl() {
+				profile = "GuiInspectorTextEditProfile";
+				horizSizing = "relative";
+				vertSizing = "height";
+				position = (%i * %subControlExtent) SPC 0;
+				extent = %subControlExtent SPC %innerHeight;
+				visible = "1";
+				maxLength = "255";
+			});
+			%ctrl.makeFirstResponder(false);
+		}
+
+	//TypeGuiProfile = 24,  <-- Popup menu
+	case 24:
+		%group.add(%entry = new GuiPopUpMenuCtrl() {
+			profile = "GuiPopUpMenuProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			text = "";
+			maxLength = "255";
+			maxPopupHeight = "400";
+		});
+		//Read all the GuiControlProfiles that we can find
+		%count = GuiDataGroup.getCount();
+		for (%i = 0; %i < %count; %i ++) {
+			%db = GuiDataGroup.getObject(%i);
+			//Make sure nothing else is trying to be a control profile
+			if (%db.getClassName() $= "GuiControlProfile")
+				%entry.add(%db.getName(), %i);
+		}
+		%entry.sort();
+
+	//TypeGameBaseDataPtr           = 25,  <-- Popup menu
+	//TypeExplosionDataPtr          = 26,  <-- Popup menu
+	//TypeSplashDataPtr             = 28,  <-- Popup menu
+	//TypeParticleEmitterDataPtr    = 31,  <-- Popup menu
+	//TypeAudioDescriptionPtr       = 32,  <-- Popup menu
+	//TypeAudioProfilePtr           = 33,  <-- Popup menu
+	//TypeProjectileDataPtr         = 35,  <-- Popup menu
+	//TypeDebrisDataPtr             = 38,  <-- Popup menu
+	//TypeDecalDataPtr              = 40,  <-- Popup menu
+	//TypeAudioEnvironmentPtr       = 42,  <-- Popup menu
+	//TypeAudioSampleEnvironmentPtr = 43,  <-- Popup menu
+	case 25 or 26 or 28 or 31 or 32 or 33 or 35 or 38 or 40 or 42 or 43:
+		%class = $Inspect::TypeClass[%type];
+
+		%group.add(%entry = new GuiPopUpMenuCtrl() {
+			profile = "GuiPopUpMenuProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			text = "";
+			maxLength = "255";
+			maxPopupHeight = "400";
+		});
+		%dbType = $Inspect::TypeClass[%type];
+
+		//Read all the potential datablocks from the data block group
+		%count = DataBlockGroup.getCount();
+		for (%i = 0; %i < %count; %i ++) {
+			%db = DataBlockGroup.getObject(%i);
+			//Make sure we only get the objects of the class type we want
+			if (%db.isKindOfClass(%dbType))
+				%entry.add(%db.getName(), %i);
+		}
+		//Also root group, because DataBlockGroup doesn't fill unless you start a mission
+		%count = RootGroup.getCount();
+		for (%i = 0; %i < %count; %i ++) {
+			%db = RootGroup.getObject(%i);
+			//Make sure we only get the objects of the class type we want
+			if (%db.isKindOfClass(%dbType))
+				%entry.add(%db.getName(), %i);
+		}
+		%entry.sort();
+
+	//Custom types
+	case 100 or 101 or 102:
+		%group.add(%entry = new GuiPopUpMenuCtrl() {
+			profile = "GuiPopUpMenuProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			text = "";
+			maxLength = "255";
+			maxPopupHeight = "400";
+		});
+
+		%dbType = $Inspect::TypeClass[getWord(%type, 0)];
+		%dbClass = (getWordCount(%type) == 2 ? getWord(%type, 1) : "");
+
+		//Read all the potential datablocks from the data block group
+		%count = DataBlockGroup.getCount();
+		for (%i = 0; %i < %count; %i ++) {
+			%db = DataBlockGroup.getObject(%i);
+			//Make sure we only get the objects of the class type we want
+			if (%dbClass !$= "" && %db.className !$= %dbClass)
+				continue;
+			if (%db.isKindOfClass(%dbType))
+				%entry.add(%db.getName(), %i);
+		}
+		//Also root group, because DataBlockGroup doesn't fill unless you start a mission
+		%count = RootGroup.getCount();
+		for (%i = 0; %i < %count; %i ++) {
+			%db = RootGroup.getObject(%i);
+			//Make sure we only get the objects of the class type we want
+			if (%dbClass !$= "" && %db.className !$= %dbClass)
+				continue;
+			if (%db.isKindOfClass(%dbType))
+				%entry.add(%db.getName(), %i);
+		}
+		%entry.sort();
+
+	case 103:
+		%group.add(%entry = new GuiTextEditCtrl() {
+			profile = "GuiInspectorTextEditProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			maxLength = "255";
+			TimeEntryCtrl = "1";
+		});
+		%entry.makeFirstResponder(false);
+
+	//TypeSimObjectPtr = 14,  <-- Object
+	case 14:
+		%group.add(%entry = new GuiTextEditCtrl() {
+			profile = "GuiInspectorTextEditProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = (%fieldWidth - 30) SPC %innerHeight;
+			visible = "1";
+			maxLength = "255";
+		});
+		%group.add(new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "left";
+			vertSizing = "height";
+			position = (%fieldStart + %fieldWidth - 30) SPC 0;
+			extent = 30 SPC %innerHeight;
+			visible = "1";
+			maxLength = "255";
+			visible = "1";
+			text = "-->";
+			command = %this @ ".inspect(\"" @ %value @ "\");";
+			groupNum = "-1";
+			buttonType = "PushButton";
+		});
+		%entry.makeFirstResponder(false);
+
+	//TypeS32Vector    =  2,  <-- ???
+	//TypeBoolVector   =  4,  <-- ???
+	//TypeF32Vector    =  6,  <-- ???
+	//TypeWaypointTeam = 37,  <-- ???
+	//Just let these default to textbox for now
+	//case 2 or 4 or 6 or 37:
+
+	//TypeS8         =  0,  <-- Text box
+	//TypeS32        =  1,  <-- Text box
+	//TypeF32        =  5,  <-- Text box
+	//TypeString     =  7,  <-- Text box
+	//TypeCaseString =  8,  <-- Text box
+	//TypeColorI     = 12,  <-- Text box
+	//TypeColorF     = 13,  <-- Text box
+	default:
+		%group.add(%entry = new GuiTextEditCtrl() {
+			profile = "GuiInspectorTextEditProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = %fieldStart SPC 0;
+			extent = %fieldWidth SPC %innerHeight;
+			visible = "1";
+			maxLength = "255";
+		});
+		%entry.makeFirstResponder(false);
+	}
+
+	if (isObject(%entry)) {
+		%entry.setValue(%value);
+
+		if (%dynamic) {
+			%group.add(new GuiButtonCtrl("InspectDelete_" @ %field) {
+				profile = "GuiButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = (%textLen + 2) SPC 4;
+				extent = "10 10";
+				text = "x";
+				command = %this.object @ ".setFieldValue(\"" @ expandEscape(%field) @ "\", \"\");" @ %this @ ".inspect(\"" @ %this.object @ "\");";
+				groupNum = "-1";
+				buttonType = "PushButton";
+			});
+		}
+	}
+
+	//Store this so we can use it to apply
+	%this.field[%this.fields] = %field;
+	%this.fieldEntry[%field] = %entry;
+	%this.fields ++;
+}
+
+function Inspector::getEnumRecords(%this, %object, %field) {
+	%classValues = %object.getFieldEnumValues(%field);
+	%fieldCount = getFieldCount(%classValues);
+
+	%records = "";
+	for (%i = 0; %i < %fieldCount; %i ++) {
+		%fieldValue = getField(%classValues, %i);
+		%fieldName  = %fieldValue;
+		%records = addRecord(%records, %fieldValue TAB %fieldName);
+	}
+
+	if (%object.getFieldValue("datablock") !$= "") {
+		//Has a datablock
+		%db = %object.getFieldValue("datablock");
+		for (%i = 0; %db.customEnum[%field, %i, "value"] !$= ""; %i ++) {
+			%fieldValue = %db.customEnum[%field, %i, "value"];
+			%fieldName  = %db.customEnum[%field, %i, "name"];
+			if (%fieldName $= "") {
+				%fieldName = %fieldValue;
+			}
+			%records = addRecord(%records, %fieldValue TAB %fieldName);
+		}
+	}
+
+	return %records;
+}
+
+function Inspector::apply(%this, %name) {
+	//And because this is provided too
+	%this.object.setName(%name);
+	%this.object.inspectPreApply();
+
+	for (%i = 0; %i < %this.fields; %i ++) {
+		//Which field is this? Don't apply label fields
+		%field = %this.field[%i];
+		if (%field $= "")
+			continue;
+
+		//Make sure we had something to change, otherwise we'd apply for blank values
+		%entry = %this.fieldEntry[%field];
+		if (!isObject(%entry))
+			continue;
+
+		//Actually set the field on the object
+		%value = %entry.getValue();
+
+		if (strpos(%field, "__array_entry_") != -1) {
+			%index = getSubStr(%field, 14, strlen(%field)); //strlen("__array_entry_")
+			%this.object.replaceEntryByIndex(%index, %value);
+			continue;
+		}
+		%this.object.setFieldValue(%field, %value);
+	}
+
+	%this.object.inspectPostApply();
+	%this.object.onInspectApply();
+
+	if ((%this.object.getType() & $TypeMasks::GameBaseObjectType) != 0) {
+		%this.object.forceNetUpdate();
+	}
+	if (%this.object._sync) {
+		%this.object.resync();
+	}
+
+	%this.inspect(%this.object);
+}
+
+function Inspector::chooseFile(%this, %index) {
+	%this.currentField = %index;
+	getLoadFilename("*.png\t*.jpg\t*.bmp", "InspectChooseFile");
+}
+
+function InspectChooseFile(%name) {
+	Inspector.finishChooseFile(%name);
+}
+
+function Inspector::finishChooseFile(%this, %name) {
+	%index = %this.currentField;
+	%this.currentField = "";
+
+	%field = %this.field[%index];
+	%entry = %this.fieldEntry[%field];
+	%entry.setValue(%name);
+}
+
+function InspectMathEntry::setValue(%this, %value) {
+	//Figure out how many words each box should get
+	%words = getWordCount(%value);
+	%subs = %this.getCount();
+	%per = %words / %subs;
+
+	//Set all boxes to have the right text
+	for (%i = 0; %i < %subs; %i ++) {
+		//Start and end word indices
+		%start = %per * %i;
+		%end = (%per * (%i + 1)) - 1;
+
+		//And set it
+		%words = getWords(%value, %start, %end);
+		%this.getObject(%i).setValue(%words);
+	}
+}
+
+function InspectMathEntry::getValue(%this) {
+	//Concatenate all objects
+	%subs = %this.getCount();
+	%val = "";
+	for (%i = 0; %i < %subs; %i ++) {
+		//Don't have a space at the beginning
+		if (%i > 0)
+			%val = %val @ " ";
+		%val = %val @ %this.getObject(%i).getValue();
+	}
+	return %val;
+}
+
+function InspectFileEntry::setValue(%this, %value) {
+	%this.setText(%value);
+}
+
+function InspectFileEntry::getValue(%this) {
+	return %this.getText();
+}
+
+function InspectMathEntry::updateSize(%this) {
+	cancel(%this.sizeSch);
+
+	%width = getWord(%this.getExtent(), 0);
+	%subs = %this.getCount();
+	for (%i = 0; %i < %subs; %i ++) {
+		%sub = %this.getObject(%i);
+		%sub.setWidth(%width / %subs);
+		%sub.setPosition(setWord(%sub.getPosition(), 0, %i * (%width / %subs)));
+	}
+
+	%this.sizeSch = %this.schedule(100, "updateSize");
+}
+
+function InspectEnumEntry::getValue(%this) {
+	%value = Parent::getValue(%this);
+	for (%i = 0; %this._enumName[%i] !$= ""; %i ++) {
+		if (%this._enumName[%i] $= %value) {
+			return %this._enumValue[%i];
+		}
+	}
+	return %value;
+}
+
+function InspectEnumEntry::setValue(%this, %value) {
+	for (%i = 0; %this._enumValue[%i] !$= ""; %i ++) {
+		if (%this._enumValue[%i] $= %value) {
+			%value = %this._enumName[%i];
+		}
+	}
+	Parent::setValue(%this, %value);
+}
+
+function GuiBitmapCtrl::inspectPostApply(%this) {
+	Parent::inspectPostApply(%this);
+	%this.setBitmap(%this.bitmap);
+}
+function GuiBitmapButtonCtrl::inspectPostApply(%this) {
+	Parent::inspectPostApply(%this);
+	%this.setBitmap(%this.bitmap);
+}
+function GuiChunkedBitmapCtrl::inspectPostApply(%this) {
+	Parent::inspectPostApply(%this);
+	%this.setBitmap(%this.bitmap);
+}
+function SceneObject::inspectPostApply(%this) {
+	Parent::inspectPostApply(%this);
+	%this.setTransform(%this.getTransform());
+}
+
+function SimObject::setInspectField(%this, %field, %value) {
+	%this.inspectPreApply();
+	%this.setFieldValue(%field, %value);
+	%this.inspectPostApply();
+}
+
+MakeInspector(InspectFields);
+
+$Inspect::ClassField["GuiControl", "position", "name"] = "Position";
+$Inspect::ClassField["GuiControl", "position", "desc"] = "Where the control is on screen. From top left corner.";
+
+//Basic stuff
+$Inspect::ClassField["SceneObject", "position", "name"] = "Position";
+$Inspect::ClassField["SceneObject", "position", "desc"] = "Where the object is in space.";
+$Inspect::ClassField["SceneObject", "rotation", "name"] = "Rotation";
+$Inspect::ClassField["SceneObject", "rotation", "desc"] = "Angle-axis rotation of the object, angle in degrees. Alt+drag the axis handles to rotate with your mouse.";
+$Inspect::ClassField["SceneObject", "scale", "name"] = "Scale";
+$Inspect::ClassField["SceneObject", "scale", "desc"] = "Scale of the object in 3 dimensions. Ctrl+alt+drag the axis handles or a side of the object's bounding box to scale with your mouse.";
+$Inspect::ClassField["GameBase", "nameTag", "name"] = "nameTag";
+$Inspect::ClassField["GameBase", "nameTag", "desc"] = "Does nothing.";
+$Inspect::ClassField["GameBase", "nameTag", "disable"] = "1";
+//Datablocks
+$Inspect::ClassField["ShapeBase", "datablock", "name"] = "Data Block";
+$Inspect::ClassField["ShapeBase", "datablock", "desc"] = "Controls the shape file and properties of the object.";
+$Inspect::ClassField["Trigger", "datablock", "name"] = "Data Block";
+$Inspect::ClassField["Trigger", "datablock", "desc"] = "Controls the behavior of the trigger.";
+$Inspect::ClassField["PathedInterior", "datablock", "name"] = "Data Block";
+$Inspect::ClassField["PathedInterior", "datablock", "desc"] = "Controls the sound of the PathedInterior. Don't change this.";
+$Inspect::ClassField["PathedInterior", "datablock", "disable"] = "1";
+//Items
+$Inspect::ClassField["Item", "collideable", "name"] = "Collidable";
+$Inspect::ClassField["Item", "collideable", "desc"] = "This does nothing.";
+$Inspect::ClassField["Item", "collideable", "disable"] = "1";
+$Inspect::ClassField["Item", "static", "name"] = "Disable Physics";
+$Inspect::ClassField["Item", "static", "desc"] = "If you set this to false the game will crash.";
+$Inspect::ClassField["Item", "static", "disable"] = "1";
+$Inspect::ClassField["Item", "rotate", "name"] = "Rotate";
+$Inspect::ClassField["Item", "rotate", "desc"] = "Rotate the item around its z axis.";
+//Triggers
+$Inspect::ClassField["Trigger", "polyhedron", "name"] = "Polyhedron";
+$Inspect::ClassField["Trigger", "polyhedron", "desc"] = "Specifies the bounding region for the trigger in the format (origin) (+x vector) (+y vector) (+z vector). Vectors are usually orthogonal.";
+//Interiors
+$Inspect::ClassField["InteriorInstance", "interiorFile", "name"] = "Interior File";
+$Inspect::ClassField["InteriorInstance", "interiorFile", "desc"] = "Location of the dif file for this interior. Note: if you change this you need to reload your mission for it to update.";
+$Inspect::ClassField["InteriorInstance", "showTerrainInside", "name"] = "Show Terrain Inside";
+$Inspect::ClassField["InteriorInstance", "showTerrainInside", "desc"] = "No terrain in this game, this does nothing.";
+$Inspect::ClassField["InteriorInstance", "showTerrainInside", "disable"] = "1";
+$Inspect::ClassField["InteriorInstance", "AudioProfile", "name"] = "Audio Profile";
+$Inspect::ClassField["InteriorInstance", "AudioProfile", "desc"] = "Audio to play when the alarm state of the interior changes.";
+$Inspect::ClassField["InteriorInstance", "AudioProfile", "disable"] = "1";
+$Inspect::ClassField["InteriorInstance", "AudioEnvironment", "name"] = "Audio Environment";
+$Inspect::ClassField["InteriorInstance", "AudioEnvironment", "desc"] = "Ambient audio for this interior.";
+$Inspect::ClassField["InteriorInstance", "AudioEnvironment", "disable"] = "1";
+//PathedInteriors
+$Inspect::ClassField["PathedInterior", "interiorResource", "name"] = "Interior File";
+$Inspect::ClassField["PathedInterior", "interiorResource", "desc"] = "Location of the dif file for this interior. Note: if you change this you need to reload your mission for it to update.";
+$Inspect::ClassField["PathedInterior", "interiorIndex", "name"] = "Index in Interior";
+$Inspect::ClassField["PathedInterior", "interiorIndex", "desc"] = "Index number, starting at 0, of the PathedInterior in the interior file. Note: if you change this you need to reload your mission for it to update.";
+$Inspect::ClassField["PathedInterior", "basePosition", "name"] = "Base Position";
+$Inspect::ClassField["PathedInterior", "basePosition", "desc"] = "Starting position, should be the same as Position.";
+$Inspect::ClassField["PathedInterior", "baseRotation", "name"] = "Base Rotation";
+$Inspect::ClassField["PathedInterior", "baseRotation", "desc"] = "Starting rotation, should be the same as Rotation.";
+$Inspect::ClassField["PathedInterior", "baseScale", "name"] = "Base Scale";
+$Inspect::ClassField["PathedInterior", "baseScale", "desc"] = "Starting scale, should be the same as Scale.";
+//Markers
+$Inspect::ClassField["Marker", "seqNum", "name"] = "Sequence Number";
+$Inspect::ClassField["Marker", "seqNum", "desc"] = "Number of this marker in sequence (starting at 0).";
+$Inspect::ClassField["Marker", "msToNext", "name"] = "Time to Next";
+$Inspect::ClassField["Marker", "msToNext", "type"] = "time";
+$Inspect::ClassField["Marker", "msToNext", "desc"] = "How long it takes to get to the next marker. Note: if you change this you need to reload your mission for it to update.";
+$Inspect::ClassField["Marker", "smoothingType", "name"] = "Smoothing Type"; //Catmull-Rom: https://www.cs.cmu.edu/~462/projects/assn2/assn2/catmullRom.pdf
+$Inspect::ClassField["Marker", "smoothingType", "desc"] = "How to smooth out the motion. Linear is basic interpolation, Spline accounts for the surrounding markers (Catmull-Rom), and Accelerate will speed up and slow down (Cosine). Note: if you change this you need to reload your mission for it to update.";
+
+$Inspect::CustomField["GuiBorderButtonCtrl", 0, "field"  ] = "borderColor";
+$Inspect::CustomField["GuiBorderButtonCtrl", 0, "type"   ] = "ColorF";
+$Inspect::CustomField["GuiBorderButtonCtrl", 0, "name"   ] = "Multiply Color";
+$Inspect::CustomField["GuiBorderButtonCtrl", 0, "desc"   ] = "Entire button is multiplied by this color.";
+$Inspect::CustomField["GuiBorderButtonCtrl", 0, "default"] = "";
+$Inspect::CustomField["GuiBorderButtonCtrl", 1, "field"  ] = "bitmap";
+$Inspect::CustomField["GuiBorderButtonCtrl", 1, "type"   ] = "File";
+$Inspect::CustomField["GuiBorderButtonCtrl", 1, "name"   ] = "Bitmap";
+$Inspect::CustomField["GuiBorderButtonCtrl", 1, "desc"   ] = "Bitmap displayed over the border in the center.";
+$Inspect::CustomField["GuiBorderButtonCtrl", 1, "default"] = "";
+$Inspect::CustomField["GuiBorderButtonCtrl", 2, "field"  ] = "bitmapColor";
+$Inspect::CustomField["GuiBorderButtonCtrl", 2, "type"   ] = "ColorF";
+$Inspect::CustomField["GuiBorderButtonCtrl", 2, "name"   ] = "Bitmap Multiply Color";
+$Inspect::CustomField["GuiBorderButtonCtrl", 2, "desc"   ] = "Center bitmap is multiplied by this color.";
+$Inspect::CustomField["GuiBorderButtonCtrl", 2, "default"] = "";
+$Inspect::CustomField["GuiBorderButtonCtrl", 3, "field"  ] = "bitmapRotation";
+$Inspect::CustomField["GuiBorderButtonCtrl", 3, "type"   ] = "float";
+$Inspect::CustomField["GuiBorderButtonCtrl", 3, "name"   ] = "Bitmap Rotation";
+$Inspect::CustomField["GuiBorderButtonCtrl", 3, "desc"   ] = "Rotation of center bitmap in degrees clockwise.";
+$Inspect::CustomField["GuiBorderButtonCtrl", 3, "default"] = "";
+$Inspect::CustomField["GuiBorderButtonCtrl", 4, "field"  ] = "bitmapOffset";
+$Inspect::CustomField["GuiBorderButtonCtrl", 4, "type"   ] = "float";
+$Inspect::CustomField["GuiBorderButtonCtrl", 4, "name"   ] = "Bitmap Offset";
+$Inspect::CustomField["GuiBorderButtonCtrl", 4, "desc"   ] = "Offset in pixels of the bitmap from the center of the button.";
+$Inspect::CustomField["GuiBorderButtonCtrl", 4, "default"] = "";
+
+$Inspect::CustomField["GuiBitmapCtrl", 0, "field"  ] = "bitmapColor";
+$Inspect::CustomField["GuiBitmapCtrl", 0, "type"   ] = "ColorF";
+$Inspect::CustomField["GuiBitmapCtrl", 0, "name"   ] = "Multiply Color";
+$Inspect::CustomField["GuiBitmapCtrl", 0, "desc"   ] = "Entire bitmap is multiplied by this color.";
+$Inspect::CustomField["GuiBitmapCtrl", 0, "default"] = "";
+$Inspect::CustomField["GuiBitmapCtrl", 1, "field"  ] = "bitmapRotation";
+$Inspect::CustomField["GuiBitmapCtrl", 1, "type"   ] = "float";
+$Inspect::CustomField["GuiBitmapCtrl", 1, "name"   ] = "Rotation";
+$Inspect::CustomField["GuiBitmapCtrl", 1, "desc"   ] = "Rotation in degrees clockwise.";
+$Inspect::CustomField["GuiBitmapCtrl", 1, "default"] = "";
+
+$Inspect::CustomField["GuiCheckboxCtrl", 0, "field"  ] = "checkRight";
+$Inspect::CustomField["GuiCheckboxCtrl", 0, "type"   ] = "boolean";
+$Inspect::CustomField["GuiCheckboxCtrl", 0, "name"   ] = "Right-Align";
+$Inspect::CustomField["GuiCheckboxCtrl", 0, "desc"   ] = "Align checkbox image on the right.";
+$Inspect::CustomField["GuiCheckboxCtrl", 0, "default"] = "false";
+
+$Inspect::CustomField["Item", 0, "field"  ] = "noRespawn";
+$Inspect::CustomField["Item", 0, "type"   ] = "boolean";
+$Inspect::CustomField["Item", 0, "name"   ] = "No Respawn";
+$Inspect::CustomField["Item", 0, "desc"   ] = "Do not respawn this item at all.";
+$Inspect::CustomField["Item", 0, "default"] = "";

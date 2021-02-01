@@ -1,0 +1,318 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPExitGameDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+		defaultControl = "MPExitReturn";
+		commandCancel = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); resumeGame();";
+		commandAlt1 = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); resumeGame(); forceRespawn(true); schedule(100, 0, forceRespawn, false);";
+		commandLT = "OptionsGui.show(\"exit\");";
+		commandRT = "RootGui.pushDialog(JukeboxDlg);";
+		commandNameCancel = "Resume";
+		commandNameAlt1 = "Restart";
+		commandNameLT = "Options";
+		commandNameRT = "Jukebox";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "222 181";
+		extent = "356 238";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(MPExitRestart1) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "131 76";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); commandToServer(\'RestartLevel\');";
+			helpTag = "0";
+			text = "Restart";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				tooltip = "Restarts the game to the Ready, Set, Go sequence";
+				controlLeft = "MPExitQuickspawn";
+				controlRight = "MPExitRestart2";
+				controlDown = "MPExitDisconnect";
+		};
+		new GuiBorderButtonCtrl(MPExitDisconnect) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "68 121";
+			extent = "122 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPExitGameDlg.exit();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "Disconnect";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlRight = "MPExitReturn";
+				controlDown = "MPExitTeams";
+				controlUp = "MPExitRestart1";
+		};
+		new GuiBorderButtonCtrl(MPExitReturn) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "190 121";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); resumeGame();";
+			accelerator = "escape";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlLeft = "MPExitDisconnect";
+				controlDown = "MPExitServer";
+				controlUp = "MPExitRestart2";
+		};
+		new GuiBorderButtonCtrl(MPExitServer) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "198 166";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPServerDlg.open();";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/play/settings";
+				tooltip = "Server Settings";
+				controlLeft = "MPExitTeams";
+				controlRight = "MPExitPlayers";
+				controlUp = "MPExitReturn";
+		};
+		new GuiMLTextCtrl(MPExitTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "12 27";
+			extent = "331 14";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MPExitQuickspawn) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "27 76";
+			extent = "104 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); resumeGame(); forceRespawn(true); schedule(100, 0, forceRespawn, false);";
+			helpTag = "0";
+			text = "Respawn";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlRight = "MPExitRestart1";
+				controlDown = "MPExitDisconnect";
+		};
+		new GuiBorderButtonCtrl(MPExitRestart2) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "225 76";
+			extent = "104 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(MPExitGameDlg); hideControllerUI(); commandToServer(\'LobbyRestart\');";
+			helpTag = "0";
+			text = "Overview";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				simpleStyle = "0";
+				tooltip = "Restarts the game to the pre-game \"ready\" screen";
+				controlLeft = "MPExitRestart1";
+				controlDown = "MPExitReturn";
+		};
+		new GuiBorderButtonCtrl(MPExitTeams) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "113 166";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamSelectDlg.open();";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/play/team";
+				tooltip = "Team Information";
+				controlLeft = "MPExitMarbles";
+				controlRight = "MPExitServer";
+				controlUp = "MPExitDisconnect";
+		};
+		new GuiBorderButtonCtrl(MPExitMarbles) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "27 166";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.pushDialog(MarbleSelectDlg);";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/play/marble";
+				tooltip = "Marble Select";
+				controlRight = "MPExitTeams";
+				controlUp = "MPExitDisconnect";
+		};
+		new GuiBorderButtonCtrl(MPExitPlayers) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "284 166";
+			extent = "45 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPPlayersDlg.show();";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/play/players";
+				tooltip = "Player List";
+				controlLeft = "MPExitServer";
+				controlUp = "MPExitReturn";
+		};
+	};
+	new GuiBorderButtonCtrl() {
+		profile = "PQButtonPlainProfile";
+		horizSizing = "right";
+		vertSizing = "top";
+		position = "10 525";
+		extent = "140 65";
+		minExtent = "8 8";
+		visible = "1";
+		command = "OptionsGui.show(\"exit\");";
+		helpTag = "0";
+		text = "Options";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+	new GuiBorderButtonCtrl() {
+		profile = "PQButtonPlainProfile";
+		horizSizing = "left";
+		vertSizing = "top";
+		position = "650 525";
+		extent = "140 65";
+		minExtent = "8 8";
+		visible = "1";
+		command = "RootGui.pushDialog(JukeboxDlg);";
+		helpTag = "0";
+		text = "Jukebox";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+};
+//--- OBJECT WRITE END ---
+
+
+function MPExitGameDlg::onWake(%this) {
+	if (ControllerGui.isJoystick()) {
+		input_moveLeft(0);
+		input_moveRight(0);
+		input_moveForward(0);
+		input_moveBackward(0);
+	}
+	%this.updateActive();
+	%this.force = false;
+}
+
+function MPExitGameDlg::updateActive(%this) {
+	MPExitTeams.setActive($MP::TeamMode);
+	MPExitServer.setActive($Server::Hosting);
+	MPExitPlayers.setActive($Server::Hosting);
+	MPExitRestart1.setActive($Server::Hosting);
+	MPExitRestart2.setActive($Server::Hosting);
+	MPExitTitle.setText("<bold:28><just:center>Ingame Options");
+	MPExitServer.command = ($Server::_Dedicated ? "MPDedicatedServerDlg.open();" : "MPServerDlg.open();");
+
+	MPExitDisconnect.setText($Server::Hosting ? "Level Select" : "Disconnect");
+	cancel(%this.textSch);
+}
+
+
+function MPExitGameDlg::onSleep(%this) {
+}
+
+function MPExitGameDlg::exit(%this) {
+	if (%this.force || !$Server::Hosting) {
+		disconnect();
+	} else {
+		%this.force = true;
+		commandToServer('LobbyReturn');
+		%this.textSch = MPExitDisconnect.schedule(1000, setText, "Disconnect");
+	}
+}

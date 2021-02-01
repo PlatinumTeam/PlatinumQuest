@@ -1,0 +1,504 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(EndGameDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "1024 768";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "1024 768";
+		loadedBitmap = "1";
+		tile = "0";
+		defaultControl = "EG_Replay";
+		commandAlt1 = "RootGui.popDialog(EndGameDlg); EndGameDlg.restart();";
+		commandNameAlt1 = "Restart";
+		commandAlt2 = "RootGui.popDialog(EndGameDlg); EndGameDlg.next();";
+		commandNameAlt2 = "Next Level";
+		commandCancel = "RootGui.popDialog(EndGameDlg); EndGameDlg.end();";
+		commandNameCancel = "Menu";
+
+	new GuiControl(EndGameContent) {
+		profile = "PQWindowProfile";
+		horizSizing = "right";
+		vertSizing = "height";
+		position = "128 -14";
+		extent = "469 796";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl(EndGameBox) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "center";
+			position = "0 38";
+			extent = "469 720";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(EG_TitleText) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "20 10";
+				extent = "247 56";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiMLTextCtrl(EG_Result) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = "256 10";
+				extent = "194 56";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiScrollCtrl() {
+				profile = "GuiPhilScrollProfile";
+				horizSizing = "right";
+				vertSizing = "height";
+				position = "36 62";
+				extent = "409 579";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiMLTextCtrl(EG_Description) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "397 252";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+				new GuiMLTextCtrl(EG_TopTimesText) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "top";
+					position = "0 267";
+					extent = "397 186";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+				new GuiMLTextCtrl(EG_Rating) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "top";
+					position = "0 489";
+					extent = "397 14";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+			new GuiBorderButtonCtrl(EG_Replay) {
+				profile = "PQButton26Profile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "27 649";
+				extent = "112 55";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.popDialog(EndGameDlg); EndGameDlg.restart();";
+				accelerator = "shift return";
+				helpTag = "0";
+				text = "Restart";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlRight = "EG_Next";
+			};
+			new GuiBorderButtonCtrl(EG_Next) {
+				profile = "PQButton26Profile";
+				horizSizing = "center";
+				vertSizing = "top";
+				position = "178 649";
+				extent = "112 55";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.popDialog(EndGameDlg); EndGameDlg.next();";
+				accelerator = "enter";
+				helpTag = "0";
+				text = "Next";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlLeft = "EG_Replay";
+				controlRight = "EG_Continue";
+			};
+			new GuiBorderButtonCtrl(EG_Continue) {
+				profile = "PQButton26Profile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "325 649";
+				extent = "112 55";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.popDialog(EndGameDlg); EndGameDlg.end();";
+				accelerator = "escape";
+				helpTag = "0";
+				text = "Menu";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlLeft = "EG_Next";
+			};
+		};
+	};
+	new GuiBitmapCtrl(EnterNameDlg) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "1 1";
+		extent = "1024 768";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "./exit/black";
+		wrap = "0";
+
+		new GuiControl(EnterNameBox) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "620 361";
+			extent = "291 116";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "39 0";
+				extent = "251 116";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiControl() {
+					profile = "PQPanelProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "-12 0";
+					extent = "263 116";
+					minExtent = "41 41";
+					visible = "1";
+					helpTag = "0";
+
+					new GuiMLTextCtrl(EnterNameText) {
+						profile = "GuiDefaultProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "15 16";
+						extent = "233 36";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 -1";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transtop";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 105";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transbot";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl(EnterNameShadowBot) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 75";
+				extent = "13 30";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transside";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl(EnterNameShadowTop) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 11";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transside";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl(EnterNameShadowTab) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 23";
+				extent = "39 52";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/endtab";
+				wrap = "0";
+			};
+			new GuiControl() {
+				profile = "PQPanelProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "33 48";
+				extent = "251 62";
+				minExtent = "41 41";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiTextEditCtrl(EnterNameEdit) {
+					profile = "PQTextboxProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "12 15";
+					extent = "188 31";
+					minExtent = "8 8";
+					visible = "1";
+					variable = "$pref::HighScoreName";
+					command = "highScoreNameChanged();";
+					altCommand = "if ($pref::HighScoreName !$= \"\") { highScoreNameAccept(); }";
+					helpTag = "0";
+					maxLength = "255";
+					maxPixelWidth = "188";
+					historySize = "0";
+					password = "0";
+					tabComplete = "0";
+					sinkAllKeyEvents = "0";
+				};
+				new GuiBitmapButtonCtrl(EnterNameAcceptButton) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "200 11";
+					extent = "40 40";
+					minExtent = "8 8";
+					visible = "1";
+					command = "highScoreNameAccept();";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					bitmap = "./endgame/check";
+					controlOffset = "-10 -10";
+					controlExtent = "60 60";
+				};
+			};
+		};
+		new GuiControl(EnterNameAwesomeBox) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "550 301";
+			extent = "470 264";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "39 0";
+				extent = "431 264";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiControl() {
+					profile = "PQPanelProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "-12 0";
+					extent = "443 266";
+					minExtent = "41 41";
+					visible = "1";
+					helpTag = "0";
+				};
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 -1";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transtop";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "26 255";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transbot";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "height";
+				position = "26 75";
+				extent = "13 180";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transside";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "26 11";
+				extent = "13 12";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/transside";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 23";
+				extent = "39 52";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./endgame/endtab";
+				wrap = "0";
+			};
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "40 13";
+				extent = "416 239";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiBorderButtonCtrl(EnterNameAwesomeClose) {
+					profile = "PQButtonProfile";
+					horizSizing = "center";
+					vertSizing = "top";
+					position = "161 179";
+					extent = "94 45";
+					minExtent = "8 8";
+					visible = "1";
+					command = "EnterNameBox.setVisible(true); EnterNameAwesomeBox.setVisible(false); if (ControllerGui.isJoystick()) { ControllerGui.selectControl($highScoreIndex !$= \"\" ? EnterNameAcceptButton : EG_Replay); }";
+					helpTag = "0";
+					text = "Close";
+					groupNum = "-1";
+					buttonType = "PushButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+				};
+				new GuiMLTextCtrl(EnterNameAwesomeText) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "8 9";
+					extent = "392 14";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "Oh no";
+				};
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---

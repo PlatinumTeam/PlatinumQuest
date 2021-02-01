@@ -1,0 +1,511 @@
+//-----------------------------------------------------------------------------
+// Portions Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Torque Game Engine
+//
+// Portions Copyright (c) 2001 GarageGames.Com
+//-----------------------------------------------------------------------------
+
+//selectHandle = $usermods @ "/core/editor/SelectHandle.png";
+//defaultHandle = $usermods @ "/core/editor/DefaultHandle.png";
+//lockedHandle = $usermods @ "/core/editor/LockedHandle.png";
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(EditorGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "800 600";
+		currentEditor = "World Editor Creator";
+		saveAs = "0";
+
+	new EditManager() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "0 0";
+		extent = "64 64";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+	};
+	new WorldEditor(EWorldEditor) {
+		profile = "MissionEditorProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 22";
+		extent = "800 578";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		cameraZRot = "0";
+		forceFOV = "0";
+		renderMissionArea = "1";
+		missionAreaFillColor = "255 0 0 20";
+		missionAreaFrameColor = "255 0 0 128";
+		consoleFrameColor = "255 0 0 255";
+		consoleFillColor = "0 0 0 0";
+		consoleSphereLevel = "1";
+		consoleCircleSegments = "32";
+		consoleLineWidth = "1";
+		isDirty = "0";
+		planarMovement = "1";
+		undoLimit = "40";
+		dropType = "atCamera";
+		projectDistance = "2000";
+		boundingBoxCollision = "1";
+		renderPlane = "1";
+		renderPlaneHashes = "1";
+		gridColor = "255 255 255 20";
+		planeDim = "500";
+		gridSize = "10 10 10";
+		renderPopupBackground = "1";
+		popupBackgroundColor = "100 100 100 255";
+		popupTextColor = "255 255 0 255";
+		objectTextColor = "255 255 255 255";
+		objectsUseBoxCenter = "1";
+		axisGizmoMaxScreenLen = "200";
+		axisGizmoActive = "1";
+		mouseMoveScale = "0.25";
+		mouseRotateScale = "0.1963495";
+		mouseScaleScale = "0.01";
+		minScaleFactor = "0.1";
+		maxScaleFactor = "4000";
+		objSelectColor = "255 0 0 255";
+		objMouseOverSelectColor = "0 0 255 255";
+		objMouseOverColor = "0 255 0 255";
+		showMousePopupInfo = "1";
+		dragRectColor = "255 255 0 255";
+		renderObjText = "1";
+		renderObjHandle = "1";
+		objTextFormat = "$id$: $name$";
+		faceSelectColor = "0 0 100 100";
+		renderSelectionBox = "1";
+		selectionBoxColor = "255 255 0 255";
+		selectionLocked = "0";
+		snapToGrid = "0";
+		snapRotations = "0";
+		rotationSnap = "15";
+		toggleIgnoreList = "0";
+		renderNav = "0";
+		selectHandle = $usermods @ "/core/editor/SelectHandle.png";
+		defaultHandle = $usermods @ "/core/editor/DefaultHandle.png";
+		lockedHandle = $usermods @ "/core/editor/LockedHandle.png";
+			dropAvg = "1";
+			editMode0 = "move";
+			editMode1 = "rotate";
+			editMode2 = "scale";
+			numEditModes = "3";
+
+		new GuiFrameSetCtrl(EWFrame) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "left";
+			vertSizing = "height";
+			position = "530 0";
+			extent = "270 578";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			columns = "0";
+			rows = "0 295";
+			borderWidth = "4";
+			borderColor = "206 206 206 206";
+			borderEnable = "dynamic";
+			borderMovable = "dynamic";
+			autoBalance = "0";
+			fudgeFactor = "0";
+
+			new GuiControl(EWTreePane) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "270 291";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiScrollCtrl() {
+					profile = "EditorScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "270 291";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "alwaysOff";
+					vScrollBar = "alwaysOn";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiTreeViewCtrl(EditorTree) {
+						profile = "GuiTreeViewProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "2 2";
+						extent = "640 11";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						allowMultipleSelections = "1";
+						recurseSets = "1";
+					};
+				};
+			};
+			new GuiControl(EWCreatorInspectorPane) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 295";
+				extent = "270 283";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiScrollCtrl(EWCreatorPane) {
+					profile = "EditorScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "270 283";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "alwaysOn";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new CreatorTree(Creator) {
+						profile = "GuiTreeViewProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "2 2";
+						extent = "90 44";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+					};
+				};
+				new GuiControl(EWInspectorPane) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "270 283";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+
+					new GuiControl() {
+						profile = "EditorScrollProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "270 24";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiButtonCtrl(ECreateSubsBtn) {
+							profile = "GuiButtonProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "205 2";
+							extent = "64 20";
+							minExtent = "8 8";
+							visible = "0";
+							command = "EWorldEditor.createSubs();";
+							helpTag = "0";
+							text = "Create Subs";
+							groupNum = "-1";
+							buttonType = "PushButton";
+							repeatPeriod = "1000";
+							repeatDecay = "1";
+						};
+						new GuiButtonCtrl() {
+							profile = "GuiButtonProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "2 2";
+							extent = "40 20";
+							minExtent = "8 8";
+							visible = "1";
+							command = "InspectApply(true);";
+							helpTag = "0";
+							text = "Apply";
+							groupNum = "-1";
+							buttonType = "PushButton";
+							repeatPeriod = "1000";
+							repeatDecay = "1";
+						};
+						new GuiTextEditCtrl(InspectorNameEdit) {
+							profile = "GuiTextEditProfile";
+							horizSizing = "width";
+							vertSizing = "bottom";
+							position = "44 2";
+							extent = "160 18";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							maxLength = "255";
+							maxPixelWidth = "0";
+							historySize = "0";
+							password = "0";
+							tabComplete = "0";
+							sinkAllKeyEvents = "0";
+						};
+					};
+					new GuiScrollCtrl() {
+						profile = "EditorScrollProfile";
+						horizSizing = "width";
+						vertSizing = "height";
+						position = "0 24";
+						extent = "270 259";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						willFirstRespond = "1";
+						hScrollBar = "dynamic";
+						vScrollBar = "alwaysOn";
+						constantThumbHeight = "0";
+						childMargin = "0 0";
+
+						new GuiControl(EditorInspector) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "width";
+							vertSizing = "bottom";
+							position = "2 2";
+							extent = "248 74";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+						};
+					};
+				};
+				new GuiScrollCtrl(EWReplaysPane) {
+					profile = "EditorScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "270 283";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "alwaysOff";
+					vScrollBar = "alwaysOff";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "width";
+						vertSizing = "height";
+						position = "2 2";
+						extent = "266 279";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiTextCtrl() {
+							profile = "GuiTextProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "3 3";
+							extent = "39 18";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							text = "Replays";
+							maxLength = "255";
+						};
+						new GuiScrollCtrl() {
+							profile = "EditorScrollProfile";
+							horizSizing = "width";
+							vertSizing = "height";
+							position = "4 24";
+							extent = "258 216";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							willFirstRespond = "1";
+							hScrollBar = "alwaysOff";
+							vScrollBar = "alwaysOn";
+							constantThumbHeight = "0";
+							childMargin = "0 0";
+
+							new GuiControl(EWActiveReplayList) {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "2 2";
+								extent = "234 40";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+							};
+						};
+						new GuiButtonCtrl() {
+							profile = "GuiButtonProfile";
+							horizSizing = "right";
+							vertSizing = "top";
+							position = "4 245";
+							extent = "127 30";
+							minExtent = "8 8";
+							visible = "1";
+							command = "EWActiveReplayList.createNew();";
+							helpTag = "0";
+							text = "Create New";
+							groupNum = "-1";
+							buttonType = "PushButton";
+							repeatPeriod = "1000";
+							repeatDecay = "1";
+						};
+						new GuiButtonCtrl() {
+							profile = "GuiButtonProfile";
+							horizSizing = "right";
+							vertSizing = "top";
+							position = "135 245";
+							extent = "127 30";
+							minExtent = "8 8";
+							visible = "1";
+							command = "EWActiveReplayList.addExisting();";
+							helpTag = "0";
+							text = "Add Existing";
+							groupNum = "-1";
+							buttonType = "PushButton";
+							repeatPeriod = "1000";
+							repeatDecay = "1";
+						};
+					};
+				};
+			};
+		};
+	};
+	new GuiMenuBar(EditorMenuBar) {
+		profile = "GuiMenuBarProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0 0";
+		extent = "800 22";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+	};
+	new GuiSliderCtrl(ECameraSpeed) {
+		profile = "GuiSliderProfile";
+		horizSizing = "left";
+		vertSizing = "bottom";
+		position = "608 0";
+		extent = "142 22";
+		minExtent = "8 8";
+		visible = "1";
+		variable = "$Camera::movementSpeed";
+		helpTag = "0";
+		range = "0.000000 300.000000";
+		ticks = "1000";
+		value = "102.5";
+	};
+	new GuiTextCtrl() {
+		profile = "GuiTextProfile";
+		horizSizing = "left";
+		vertSizing = "bottom";
+		position = "532 2";
+		extent = "74 18";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		text = "Camera Speed:";
+		maxLength = "255";
+	};
+	new GuiButtonCtrl(EditorExpandInspector) {
+		profile = "GuiButtonProfile";
+		horizSizing = "left";
+		vertSizing = "bottom";
+		position = "750 1";
+		extent = "50 20";
+		minExtent = "8 8";
+		visible = "1";
+		command = "editorExpand();";
+		helpTag = "0";
+		text = "Expand";
+		groupNum = "-1";
+		buttonType = "ToggleButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+	new GuiScrollCtrl(EWSpecialBox) {
+		profile = "EditorScrollProfile";
+		horizSizing = "width";
+		vertSizing = "top";
+		position = "0 550";
+		extent = "530 50";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		willFirstRespond = "1";
+		hScrollBar = "dynamic";
+		vScrollBar = "alwaysOff";
+		constantThumbHeight = "0";
+		childMargin = "0 0";
+
+		new GuiControl(EWSpecialScroll) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "2 2";
+			extent = "1006 30";
+			minExtent = "530 8";
+			visible = "1";
+			helpTag = "0";
+		};
+	};
+	new GuiCheckBoxCtrl(EMovingObjectsCheck) {
+		profile = "GuiCheckBoxProfile";
+		horizSizing = "left";
+		vertSizing = "bottom";
+		position = "400 0";
+		extent = "130 22";
+		minExtent = "8 8";
+		visible = "1";
+		command = "EWorldEditor.toggleMovingObjects();";
+		helpTag = "0";
+		text = "Enable Moving Objects";
+		groupNum = "-1";
+		buttonType = "ToggleButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+};
+//--- OBJECT WRITE END ---
+
+MakeInspector(EditorInspector);

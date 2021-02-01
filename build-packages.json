@@ -1,0 +1,150 @@
+{
+  "contents": {
+    "spooky-interiors": [
+      "platinum/data/multiplayer/interiors/spooky"
+    ],
+    "spooky-missions": [
+      "platinum/data/multiplayer/spooky"
+    ],
+    "spooky-too-many-ghost-sounds": [
+      "platinum/data/sound/ghost",
+      "platinum/data/sound/lightning_impact.wav"
+    ],
+    "spooky-shapes": [
+      "platinum/data/shapes/Halloween"
+    ],
+    "spooky-images": [
+      "platinum/data/texture_packs/spooky",
+      "platinum/data/previews_mp/spooky",
+      "platinum/client/ui/menu/pq_frightfest.png"
+    ],
+    "spooky-scripts": [
+      "platinum/client/scripts/modes/spooky.cs.dso",
+      "platinum/server/scripts/modes/spooky.cs.dso",
+      "platinum/client/scripts/modes/ghosts.cs.dso",
+      "platinum/server/scripts/modes/ghosts.cs.dso"
+    ],
+    "april": [
+      "platinum/client/scripts/modes/april.cs.dso",
+      "platinum/server/scripts/modes/april.cs.dso"
+    ],
+    "xmas-interiors": [
+      "platinum/data/multiplayer/interiors/Xmas"
+    ],
+    "xmas-missions": [
+      "platinum/data/multiplayer/snowball"
+    ],
+    "xmas-shapes": [
+      "platinum/data/shapes/Links.txt",
+      "platinum/data/shapes/Xmas"
+    ],
+    "xmas-images": [
+      "platinum/data/texture_packs/snowball",
+      "platinum/data/previews_mp/snowball",
+      "platinum/client/ui/lb/chat/flair/globe17.png",
+      "platinum/client/ui/menu/pq_winterfest.png"
+    ],
+    "xmas-scripts": [
+      "platinum/client/scripts/modes/snowball.cs.dso",
+      "platinum/server/scripts/modes/snowball.cs.dso",
+      "platinum/client/scripts/modes/snowballsOnly.cs.dso",
+      "platinum/server/scripts/modes/snowballsOnly.cs.dso"
+    ],
+    "extras": [
+      "platinum/data/interiors_pq/bonus/SuperSecretPuzzle12.dif",
+      "platinum/data/missions_pq/bonus/SuperSecretPuzzle12.jpg",
+      "platinum/data/previews_pq/bonus/SuperSecretPuzzle12.prev.dds",
+      "platinum/data/missions_pq/bonus/SuperSecretPuzzle12.mcs.dso"
+    ],
+    "lbmissions_mbg": [
+      "platinum/data/lbmissions_mbg"
+    ],
+    "lbmissions_mbp": [
+      "platinum/data/lbmissions_mbp"
+    ],
+    "lbmissions_mbu": [
+      "platinum/data/lbmissions_mbu"
+    ],
+    "lbmissions_pq": [
+      "platinum/data/lbmissions_pq"
+    ],
+    "lbmissions_custom": [
+      "platinum/data/lbmissions_custom"
+    ],
+    "lbinteriors_mbg": [
+      "platinum/data/lbinteriors_mbg"
+    ],
+    "lbinteriors_mbp": [
+      "platinum/data/lbinteriors_mbp"
+    ],
+    "lbinteriors_mbu": [
+      "platinum/data/lbinteriors_mbu"
+    ],
+    "lbinteriors_pq_tutorial": [
+      "platinum/data/lbinteriors_pq/tutorial"
+    ],
+    "lbinteriors_pq_beginner": [
+      "platinum/data/lbinteriors_pq/beginner"
+    ],
+    "lbinteriors_pq_intermediate": [
+      "platinum/data/lbinteriors_pq/intermediate"
+    ],
+    "lbinteriors_pq_advanced": [
+      "platinum/data/lbinteriors_pq/advanced"
+    ],
+    "lbinteriors_pq_expert": [
+      "platinum/data/lbinteriors_pq/expert"
+    ],
+    "lbinteriors_pq_bonus": [
+      "platinum/data/lbinteriors_pq/bonus"
+    ],
+    "lbinteriors_pq": [
+      "platinum/data/lbinteriors_pq"
+    ],
+    "lbinteriors_custom_mbg": [
+      "platinum/data/lbinteriors_custom/mbg"
+    ],
+    "lbinteriors_custom_mbp": [
+      "platinum/data/lbinteriors_custom/mbp"
+    ],
+    "lbinteriors_custom_pq": [
+      "platinum/data/lbinteriors_custom/pq"
+    ],
+    "lbinteriors_custom": [
+      "platinum/data/lbinteriors_custom"
+    ]
+  },
+  "installed": [
+    "lbmissions_mbg",
+    "lbmissions_mbp",
+    "lbmissions_mbu",
+    "lbmissions_pq",
+    "lbmissions_custom",
+    "lbinteriors_mbg",
+    "lbinteriors_mbp",
+    "lbinteriors_mbu",
+    "lbinteriors_custom_mbg",
+    "lbinteriors_custom_mbp",
+    "lbinteriors_custom_pq",
+    "lbinteriors_custom",
+    "lbinteriors_pq_tutorial",
+    "lbinteriors_pq_beginner",
+    "lbinteriors_pq_intermediate",
+    "lbinteriors_pq_advanced",
+    "lbinteriors_pq_expert",
+    "lbinteriors_pq_bonus",
+    "lbinteriors_pq",
+    "extras",
+    "spooky-interiors",
+    "spooky-missions",
+    "spooky-too-many-ghost-sounds",
+    "spooky-shapes",
+    "spooky-images",
+    "spooky-scripts",
+    "xmas-interiors",
+    "xmas-missions",
+    "xmas-shapes",
+    "xmas-images",
+    "xmas-scripts"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "identifier": "spooky",
+  "name": "Frightfest",
+  "author": "Platinum Team",
+  "description": "Works best with darkness pack.",
+  "timer_color": {
+    "normal": "255 128 0 255",
+    "stopped": "180 180 30 255",
+    "danger": "220 30 30 255"
+  },
+  "hidden": true
+}

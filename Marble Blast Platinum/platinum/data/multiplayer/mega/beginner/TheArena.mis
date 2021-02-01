@@ -1,0 +1,358 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         alarmStartTime = "25";
+         artist = "Aayrl";
+         desc = "An all out Mega Marble brawl!";
+         game = "Custom";
+         gameMode = "mega";
+         level = "4";
+         music = "The Race.ogg";
+         name = "The Arena";
+         noDownload = "1";
+         overviewHeight = "15";
+         time = "180000";
+         type = "Beginner";
+   };
+   new Item() {
+      position = "0 -12 7.000503";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "18 24 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger(BasicSpawnTrigger) {
+      position = "35 -31 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SpawnTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "38 38 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup(SpawnTriggers) {
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 7.45949e-31 1.3684e-38";
+      fogVolume2 = "-1 1.07208e-14 8.756e-14";
+      fogVolume3 = "-1 5.1012e-10 2.05098e-08";
+      materialList = "~/data/skies/Cloudy/cloudy.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+   };
+   new Sun(Sun) {
+      direction = "0.638261 0.459006 -0.61801";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new StaticShape(SkySphere) {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1000 1000 1000";
+      dataBlock = "Dusk";
+   };
+   new Trigger(Bounds) {
+      position = "-51 51 -3";
+      rotation = "1 0 0 0";
+      scale = "102 102 1000";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new SimGroup(interiors) {
+
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/multiplayer/interiors/beginner/thearena.dif";
+         showTerrainInside = "0";
+      };
+   };
+   new Trigger(BasicSpawnTrigger) {
+      position = "-36 32 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SpawnTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "0 12 7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 0 7.000503";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Comforting Mystery.ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+   new Item() {
+      position = "36 0 7.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-36 0 7.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-31 0 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "31 0 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 0 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-38 -38 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-2 28 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new StaticShape() {
+      position = "0 -28 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new Item() {
+      position = "20 0 7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 -28 -0.4994971";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-2 28 -0.4994971";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "34 38 -0.5157785";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34 -38 -0.5157785";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-18 0 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "18 0 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 6 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 -6 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-20 0 7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "BlastItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-18 24 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "18 -24 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new InteriorInstance() {
+      position = "18 20.5 15.25";
+      rotation = "0 0 1 89.99998";
+      scale = "1 1 1";
+      interiorFile = "~/data/multiplayer/interiors/parts/arch_8_corner.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-18 20.5 15.25";
+      rotation = "0 0 1 89.99998";
+      scale = "1 1 1";
+      interiorFile = "~/data/multiplayer/interiors/parts/arch_8_corner.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "18 -20.5 15.25";
+      rotation = "0 0 -1 90.00014";
+      scale = "1 1 1";
+      interiorFile = "~/data/multiplayer/interiors/parts/arch_8_corner.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-18 -20.5 15.25";
+      rotation = "0 0 -1 90.00014";
+      scale = "1 1 1";
+      interiorFile = "~/data/multiplayer/interiors/parts/arch_8_corner.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "-18 -24 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+};
+//--- OBJECT WRITE END ---
+

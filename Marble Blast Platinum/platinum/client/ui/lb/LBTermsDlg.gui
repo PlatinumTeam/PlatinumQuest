@@ -1,0 +1,149 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LBTermsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "104 13";
+		extent = "432 453";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiMLTextCtrl(LBT_Title) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "23 18";
+			extent = "385 45";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 56";
+			extent = "388 330";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "13 13";
+				extent = "362 304";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiMLTextCtrl(LBTerms_Text) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "342 696";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "311 381";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBTermsDlg.accept();";
+			helpTag = "0";
+			text = "Accept";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "27 381";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBTermsDlg.decline();";
+			helpTag = "0";
+			text = "Decline";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function LBTermsDlg::onWake(%this) {
+	LBT_Title.setText("<font:40><just:center>Terms and Conditions");
+	LBTerms_Text.setText(fread(expandFilename("./login/tos.txt")));
+}
+
+function LBTermsDlg::decline(%this) {
+	// Off my server
+	LBMessage("Cancelling...");
+	LBDisconnect();
+}
+
+function LBTermsDlg::accept(%this) {
+	LBNetwork.send("ACCEPTTOS\n");
+
+	if ($LB::LoggedIn)
+		RootGui.setContent(LBChatGui);
+}

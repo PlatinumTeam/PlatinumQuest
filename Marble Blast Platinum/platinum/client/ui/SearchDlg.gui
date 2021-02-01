@@ -1,0 +1,408 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(SearchProfile : GuiTextListProfile) {
+	fontType = $DefaultFont;
+	fontSize = "16";
+	fontColors[0] = "0 0 0 255";
+	fontColorHL = "51 51 51 255";
+	fillColorHL = "0 0 0 51";
+	fontColorNA = "153 153 153";
+};
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(SearchDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "800 600";
+		loading = "0";
+
+	new GuiControl(SG_Window) {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "146 58";
+		extent = "507 483";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 22";
+			extent = "463 55";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(SearchTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "16 14";
+				extent = "400 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiTextEditCtrl(SearchEdit) {
+				profile = "GuiMediumTextEditProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "81 12";
+				extent = "369 31";
+				minExtent = "8 8";
+				visible = "1";
+				command = "SearchDlg.search();";
+				altCommand = "SearchDlg.entryStart();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				escapeCommand = "SearchDlg.clearSearch();";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "1";
+			};
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 55";
+			extent = "463 361";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(SearchHeader) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "17 12";
+				extent = "446 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 33";
+				extent = "437 315";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(SearchMissionList) {
+					profile = "SearchProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "421 8";
+					minExtent = "8 8";
+					visible = "1";
+					command = "SearchDlg.onSelect();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0 250";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl(SearchRandom) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "121 411";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "SearchDlg.random();";
+			helpTag = "0";
+			text = "Random";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(SearchPlay) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "386 411";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "SearchDlg.StartMission();";
+			helpTag = "0";
+			text = "Play";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(SG_Cancel) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 411";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(SearchDlg); PlayMissionGui.showBody();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+// define the search group object.  This object holds all data
+// for the searches.
+if (!isObject(SearchSet)) {
+	new SimSet(SearchSet);
+	RootGroup.add(SearchSet);
+}
+
+function SearchDlg::onWake(%this) {
+	SearchHeader.setText("<bold:18><tab:250,320>Name\tAuthor");
+
+	%this.buildSearch();
+}
+
+function SearchDlg::buildSearch(%this) {
+	%this.setStatus("Loading...", false);
+
+	echo("Current game is:" SPC $CurrentGame);
+
+	%t = getRealTime();
+	SearchMissionList.clear();
+
+	// delete objects in search group
+	SearchSet.clear();
+
+	// iterate through each difficulty
+	%ml = PlayMissionGui.ml;
+	%difficulties = %ml.getDifficultyList($CurrentGame);
+	for (%i = 0; %i < getRecordCount(%difficulties); %i ++) {
+		%difficultyInfo = getRecord(%difficulties, %i);
+		%difficulty = getField(%difficultyInfo, 0);
+
+		%list = %ml.getMissionList($CurrentGame, %difficulty);
+		if (!isObject(%list)) {
+			%ml.buildMissionList($CurrentGame, %difficulty);
+		}
+		for (%j = 0; %j < %list.getSize(); %j ++) {
+			//Get the file's info
+			%info = %list.getEntry(%j);
+
+			//Don't count missions we can't see
+			if (!Unlock::canDisplayMission(%info)) {
+				%info.canDisplay = false;
+				continue;
+			}
+			getSearchMissionInfo(%info, $CurrentGame, %difficulty);
+
+			SearchSet.add(%info);
+		}
+	}
+
+	%this.setStatus("Loaded.", true);
+
+	// now we will fill up the mission list
+	%this.search();
+}
+
+function testSearch(%mission, %flags, %query) {
+	return (strStr(%mission.searchName, %query) != -1)
+	       || (strStr(%mission.searchArtist, %query) != -1)
+	       || (strStr(%mission.searchFile, %query) != -1)
+	       || (strStr(%mission.searchModification, %query) != -1)
+	       || (strStr(%mission.searchGameModes, %query) != -1)
+	       || (strStr(%mission.searchGameType, %query) != -1);
+}
+
+function getSearchRow(%obj) {
+	return trim(%obj.trimName)
+	       TAB trim(%obj.artist)
+	       TAB trim(%obj.searchName)
+	       TAB %obj;
+}
+
+// this builds the search list specified by the type:
+// this is also used for keyword search
+//
+// Note: I use different for loops because that way it only
+// has to check the searchType only once.
+function SearchDlg::search(%this) {
+	SearchMissionList.clear();
+	%key = strlwr(trim(SearchEdit.getValue()));
+
+	//Get the flags for this search
+	%flags = "";
+	for (%i = 0; %i < getWordCount(%key); %i ++) {
+		%word = getWord(%key, %i);
+		if (getSubStr(%word, 0, 1) $= "!") {
+			%flags = addWord(%flags, %word);
+			%key = removeWord(%key, %i);
+			%i --;
+		}
+	}
+
+	//Load all the missions
+	%count = SearchSet.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%obj = SearchSet.getObject(%i);
+
+		if (!testSearch(%obj, %flags, %key))
+			continue;
+
+		%row = getSearchRow(%obj);
+		%id = SearchMissionList.rowCount();
+		SearchMissionList.addRow(%id, %row);
+		SearchMissionList.setRowActive(%id, (%obj.canPlay $= "" ? true : %obj.canPlay));
+	}
+
+	%this.finalize();
+
+	%this.setStatus("Search:", true);
+}
+
+// this is called after a search query is processed.
+// this will activate/deactivate the play button, and it will
+// auto-select a row in the mission list, ect.
+//
+// This code is about the only thing left from the old SearchDlg
+function SearchDlg::finalize(%this) {
+	if (SearchMissionList.rowCount()) {
+		SearchMissionList.sort(0);
+		SearchMissionList.setSelectedRow(0);
+		SearchMissionList.scrollVisible(0);
+		SearchRandom.setActive(true);
+		SearchPlay.setActive(true);
+	} else {
+		SearchPlay.setActive(false);
+		SearchRandom.setActive(false);
+	}
+}
+
+// this function will play the selected mission.
+function SearchDlg::StartMission(%this) {
+	%id = SearchMissionList.getSelectedId();
+	if (!SearchMissionList.isRowActive(%id)) {
+		return;
+	}
+
+	%mission = getField(SearchMissionList.getRowTextById(%id), 3);
+	PlayMissionGui.setSelectedMission(%mission, %mission.searchGame, %mission.searchType);
+
+	if (mp()) {
+		RootGui.popDialog(SearchDlg);
+		PlayMissionGui.showBody();
+	} else {
+		menuLoadStartMission(%mission.file);
+	}
+}
+
+// quick start when the enter key is pressed
+function SearchDlg::entryStart(%this) {
+	if (SearchMissionList.getSelectedId() != -1)
+		%this.StartMission();
+}
+
+function SearchDlg::clearSearch(%this) {
+	SearchEdit.setValue("");
+	SearchDlg.search();
+}
+
+// Get additional search data for this mission
+function getSearchMissionInfo(%info, %game, %type) {
+	// this is used for search comparisons
+	%info.trimName = clipPx($DefaultFont, 15, %info.name, 210, true);
+	if (%info.searchName $= "")         %info.searchName         = strlwr(%info.name);
+	if (%info.searchArtist $= "")       %info.searchArtist       = strlwr(%info.artist);
+	if (%info.searchFile $= "")         %info.searchFile         = strlwr(%missionFile);
+	if (%info.searchGameModes $= "")    %info.searchGameModes    = strlwr(resolveMissionGameModes(%info.gameMode));
+	if (%info.searchGameType $= "")     %info.searchGameType     = (strpos(%missionFile, "multiplayer/") != -1) ? "multiplayer" : "singleplayer";
+	if (%info.searchModification $= "") %info.searchModification = strlwr(resolveMissionModification(%info));
+	if (%info.searchDifficulty $= "")   %info.searchDifficulty   = "unknown";
+	if (%info.searchGame $= "")         %info.searchGame         = %game;
+	if (%info.searchType $= "")         %info.searchType         = %type;
+	%info.hash = getFileSHA256(%missionFile);
+}
+
+// in case the user wants to do a random search
+function SearchDlg::random(%this) {
+	%count = SearchMissionList.rowCount();
+	if (!%count)
+		return;
+	%randomNumber = getRandom(0, %count - 1);
+	SearchMissionList.setSelectedRow(%randomNumber);
+}
+
+function SearchDlg::setStatus(%this, %status, %active) {
+	SearchTitle.setText("<font:24><color:696969>" @ %status);
+	SearchEdit.setVisible(%active);
+	SearchEdit.makeFirstResponder(%active);
+	SearchPlay.setActive(%active);
+	SearchRandom.setActive(%active);
+	Canvas.repaint();
+}
+
+function SearchDlg::onSelect(%this) {
+
+}
+
+function smis() {
+	%id = SearchMissionList.getSelectedId();
+	%mission = getField(SearchMissionList.getRowTextById(%id), 3);
+
+	return %mission;
+}

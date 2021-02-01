@@ -1,0 +1,393 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPTeamCreateDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		checkSch = "274208";
+		colorChoice = "1";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "57 73";
+		extent = "500 295";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapCtrl(MPTeamCreateColorIcon) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "214 92";
+			extent = "30 30";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./team/color_1";
+			wrap = "0";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 223";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamCreateDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamCreateButton) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "379 223";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamCreateDlg.create();";
+			helpTag = "0";
+			text = "Create";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPTeamCreateTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "11 17";
+			extent = "478 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPTeamCreateNameTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "32 63";
+			extent = "186 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQTextboxBorderProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "135 59";
+			extent = "134 27";
+			minExtent = "21 21";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiTextEditCtrl(MPTeamCreateNameField) {
+				profile = "PQTextboxSmallProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "3 1";
+				extent = "129 25";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPTeamCreateDlg.updateActive();";
+				helpTag = "0";
+				maxLength = "255";
+				maxPixelWidth = "0";
+				historySize = "0";
+				password = "0";
+				tabComplete = "0";
+				sinkAllKeyEvents = "0";
+			};
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "270 48";
+			extent = "208 180";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 39";
+				extent = "182 128";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiMLTextEditCtrl(MPTeamCreateDescField) {
+					profile = "PQTextboxSmallProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "182 128";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "1024";
+						cursorPosition = "1";
+				};
+			};
+			new GuiMLTextCtrl(MPTeamCreateDescTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "1 13";
+				extent = "205 27";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiMLTextCtrl(MPTeamCreatePrivateTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "32 128";
+			extent = "186 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiCheckBoxCtrl(MPTeamCreatePrivateCheck) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "242 125";
+			extent = "31 31";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamCreateColorNext) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "240 89";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamCreateDlg.nextColor();";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright.png";
+				bitmapRotation = "180";
+		};
+		new GuiMLTextCtrl(MPTeamCreateColorTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "32 96";
+			extent = "186 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MPTeamCreateColorPrev) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "182 89";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamCreateDlg.prevColor();";
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/play/leftright.png";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPTeamCreateDlg::onWake(%this) {
+	MPTeamCreateTitle.setText("<bold:28><just:center>Create Team");
+	MPTeamCreateNameTitle.setText("<font:18>Team Name:");
+	MPTeamCreateDescTitle.setText("<font:24><just:center>Team Info");
+	MPTeamCreateColorTitle.setText("<font:18>Team Color:");
+	MPTeamCreatePrivateTitle.setText("<font:18>Private?");
+
+	%this.updateColor();
+	%this.updateActive();
+	%this.checkDesc();
+}
+
+function MPTeamCreateDlg::open(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPTeamCreateDlg::close(%this) {
+	RootGui.popDialog(%this);
+}
+
+function MPTeamCreateDlg::nextColor(%this) {
+	%color = %this.colorChoice;
+	%color ++;
+	if (%color > 8)
+		%color = 1;
+	%original = %color;
+	%looped = true;
+	while (getField($MP::TeamColorsUsed, %color - 1)) {
+		%color ++;
+		if (%color > 8) {
+			%color = 1;
+			if (%looped) {
+				%color = %original;
+				break;
+			}
+			%looped = true;
+		}
+	}
+	%this.colorChoice = %color;
+	%this.updateColor();
+}
+
+function MPTeamCreateDlg::prevColor(%this) {
+	%color = %this.colorChoice;
+	%color --;
+	if (%color < 1)
+		%color = 8;
+	%original = %color;
+	%looped = true;
+	while (getField($MP::TeamColorsUsed, %color - 1)) {
+		%color --;
+		if (%color < 1) {
+			%color = 8;
+			if (%looped) {
+				%color = %original;
+				break;
+			}
+			%looped = true;
+		}
+	}
+	%this.colorChoice = %color;
+	%this.updateColor();
+}
+
+function MPTeamCreateDlg::updateColor(%this) {
+	%this.colorChoice = min(max(%this.colorChoice, 1), 8);
+	%color = %this.colorChoice;
+	MPTeamCreateColorIcon.setVisible(true);
+	MPTeamCreateColorIcon.setBitmap($userMods @ "/client/ui/mp/team/color_" @ %color);
+}
+
+function MPTeamCreateDlg::updateActive(%this) {
+	%name = MPTeamCreateNameField.getValue();
+	MPTeamCreateButton.setActive(%name !$= "");
+
+	MPTeamCreateNameField.setActive(true);
+	MPTeamCreateDescField.setActive(true);
+	MPTeamCreatePrivateCheck.setActive(true);
+}
+
+function MPTeamCreateDlg::checkDesc(%this) {
+	cancel(%this.checkSch);
+	if (!%this.isAwake())
+		return;
+	if (strLen(MPTeamCreateDescField.getValue()) > $MP::TeamDescMaxLength) {
+		MPTeamCreateDescField.setValue(getSubStr(MPTeamCreateDescField.getValue(), 0, $MP::TeamDescMaxLength));
+	}
+	if (getWord(MPTeamCreateDescField.getExtent(), 1) > getWord(MPTeamCreateDescField.getGroup().getExtent(), 1)) {
+		MPTeamCreateDescField.resize(0, getWord(MPTeamCreateDescField.position, 1), getWord(MPTeamCreateDescField.getGroup().getExtent(), 0) - 22, getWord(MPTeamCreateDescField.getExtent(), 1));
+	} else {
+		MPTeamCreateDescField.resize(0, getWord(MPTeamCreateDescField.position, 1), getWord(MPTeamCreateDescField.getGroup().getExtent(), 0), getWord(MPTeamCreateDescField.getExtent(), 1));
+	}
+	MPTeamCreateDescField.forceReflow();
+	%this.checkSch = %this.schedule(2, "checkDesc");
+}
+
+function MPTeamCreateDlg::create(%this) {
+	%name = MPTeamCreateNameField.getValue();
+	%desc = MPTeamCreateDescField.getValue();
+	%private = MPTeamCreatePrivateCheck.getValue();
+	%color = %this.colorChoice - 1;
+
+	commandToServer('TeamCreate', %name, %private, %color);
+	// Send desc separately, as it won't fit
+	%maxLength = 255;
+	%descSend = MPTeamCreateDescField.getValue();
+	commandToServer('TeamDescUpdateStart');
+	for (%i = 0; %i < mCeil(strLen(%descSend) / %maxLength); %i ++)
+		commandToServer('TeamDescUpdatePart', getSubStr(%descSend, %i * %maxLength, %maxLength));
+	commandToServer('TeamDescUpdateEnd');
+
+	MPTeamCreateNameField.setActive(false);
+	MPTeamCreateDescField.setActive(false);
+	MPTeamCreatePrivateCheck.setActive(false);
+	MPTeamCreateButton.setActive(false);
+}

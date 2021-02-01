@@ -1,0 +1,328 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(CompleteDemoDlg) {
+	profile = "GuiDialogProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "640 480";
+		callback = "EndGameDlg.end();";
+
+	new GuiControl() {
+		profile = "PQPanelProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "91 91";
+		extent = "487 316";
+		minExtent = "41 41";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "101 41";
+			extent = "363 56";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "101 76";
+			extent = "363 56";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 141";
+			extent = "442 108";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "365 244";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "CompleteDemoDlg.dosave();";
+			helpTag = "0";
+			text = "Save";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "29 15";
+			extent = "429 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<just:center><bold:28>Recording Options";
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "34 57";
+			extent = "76 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:24>Name:";
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "34 92";
+			extent = "76 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:24>Author:";
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "192 123";
+			extent = "103 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:24>Description:";
+		};
+		new GuiTextEditCtrl(EnterDemoFileEdit) {
+			profile = "GuiMediumTextEditProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "114 54";
+			extent = "335 31";
+			minExtent = "8 8";
+			visible = "1";
+			altCommand = "CompleteDemoDlg.save();";
+			helpTag = "0";
+			maxLength = "255";
+			maxPixelWidth = "0";
+			historySize = "0";
+			password = "0";
+			tabComplete = "0";
+			sinkAllKeyEvents = "0";
+		};
+		new GuiTextEditCtrl(EnterDemoAuthor) {
+			profile = "GuiMediumTextEditProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "114 89";
+			extent = "335 31";
+			minExtent = "8 8";
+			visible = "1";
+			altCommand = "CompleteDemoDlg.save();";
+			helpTag = "0";
+			maxLength = "255";
+			maxPixelWidth = "0";
+			historySize = "0";
+			password = "0";
+			tabComplete = "0";
+			sinkAllKeyEvents = "0";
+		};
+		new GuiScrollCtrl() {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "35 154";
+			extent = "416 82";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiMLTextEditCtrl(EnterDemoDescription) {
+				profile = "PQTextboxSmallProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "402 82";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 244";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "CompleteDemoDlg.dodelete();";
+			helpTag = "0";
+			text = "Delete";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "255 153 153 255";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+// AWESOME GUI
+
+function CompleteDemoDlg::open(%this, %callback) {
+	error("Opening CompleteDemoDlg");
+	%this.callback = %callback;
+
+	Canvas.pushDialog(%this);
+	%score = $Game::FinalScore;
+
+	if (%score $= "") {
+		%title = MissionInfo.name SPC "Unfinished Run";
+	} else {
+		%format = (getField(%score, 0) == $ScoreType::Time ? formatTime(getField(%score, 1)) : formatScore(getField(%score, 1)));
+		%title = MissionInfo.name SPC %format;
+	}
+
+	// Autofill these
+	EnterDemoAuthor.setValue($pref::highscoreName);
+	EnterDemoFileEdit.setValue(%title);
+}
+
+function CompleteDemoDlg::dosave(%this) {
+	%author = EnterDemoAuthor.getValue();
+	%name = EnterDemoFileEdit.getValue();
+	%desc = EnterDemoDescription.getText();
+
+	%file = $Record::File;
+	%final = "platinum/data/recordings/" @ alphaNum(%name) @ ".rrec";
+
+	// If it's a file, we need to append a number to it.
+	%num = 0;
+	while (isFile(%final)) {
+		%num++;
+		%baseName = alphaNum(%name) @ "(" @ %num @ ")";
+		%final = "platinum/data/recordings/" @ %baseName @ ".rrec";
+	}
+	if (%num > 0) {
+		// If we have had to append a new name, let's put a number in the name as well.
+		%name = %name SPC "(" @ %num @ ")";
+	}
+
+	recordFinish();
+
+	%tmp = %file @ ".tmp";
+	moveFile(%file, %tmp);
+
+	%fr = new FileObject();
+	if (!%fr.openForRead(%tmp)) {
+		error("Couldn't open file for reading");
+		return;
+	}
+	%fw = new FileObject();
+	if (!%fw.openForWrite(%final)) {
+		error("Couldn't open file for writing");
+		return;
+	}
+
+	//Copy header
+	%fw.writeRawS16(%fr.readRawS16());
+	%fw.writeRawS16(%fr.readRawS16());
+	%fw.writeRawString8(%fr.readRawString8());
+	%fw.writeRawString8(%fr.readRawString8());
+
+	//Change to mark as having metadata
+	%flags = %fr.readRawU8();
+	%flags |= 1;
+	%fw.writeRawU8(%flags);
+
+	//Write metadata
+	recordWriteMetadata(%fw, %author, %name, %desc);
+
+	//Write the rest of the everything
+	%fw.writeBase64(%fr.readBase64());
+
+	%fr.close();
+	%fw.close();
+	%fr.delete();
+	%fw.delete();
+
+	deleteFile(%tmp);
+
+	$Record::NeedSave = false;
+	RootGui.popDialog(%this);
+	eval(%this.callback);
+}
+
+function CompleteDemoDlg::dodelete(%this) {
+	//Make sure not to save
+	$Record::NeedSave = false;
+
+	//And clean up the temp file
+	%file = $Record::File;
+	recordFinish();
+	deleteFile(%file);
+
+	RootGui.popDialog(%this);
+	eval(%this.callback);
+}

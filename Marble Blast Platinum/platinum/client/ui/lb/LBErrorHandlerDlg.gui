@@ -1,0 +1,165 @@
+//-----------------------------------------------------------------------------
+// LBErrorHandlerDlg.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LBErrorHandlerDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "3 3";
+		extent = "634 473";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "center";
+			vertSizing = "center";
+			position = "119 50";
+			extent = "396 373";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(LBErrorHandlerTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "15 19";
+				extent = "366 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiMLTextCtrl(LBErrorHandlerText) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "17 76";
+				extent = "362 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBorderButtonCtrl(LBErrorOkHandlerButton) {
+				profile = "PQButtonProfile";
+				horizSizing = "center";
+				vertSizing = "top";
+				position = "149 311";
+				extent = "98 45";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Ok";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiBorderButtonCtrl(LBErrorYesHandlerButton) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "top";
+				position = "17 311";
+				extent = "98 45";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "Yes";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+			new GuiBorderButtonCtrl(LBErrorNoHandlerButton) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "281 311";
+				extent = "98 45";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				text = "No";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+// method that asserts the error handler
+function LBAssert(%title,%message,%callback) {
+	// default erases commands and hides the error handler
+	%defaultCallback = "LBErrorNoHandlerButton.command = \"\"; LBErrorYesHandlerButton.command = \"\";";
+	%defaultCallback = %defaultCallback @ "LBErrorOkHandlerButton.command=\"\"; RootGui.popDialog(LBErrorHandlerDlg);";
+	LBErrorHandlerTitle.setText("<bold:32><just:center>" @ %title);
+	LBErrorHandlerText.setText("<font:18><just:center>" @ %message);
+	LBErrorOkHandlerButton.command = %callback @ %defaultCallback;
+	LBErrorYesHandlerButton.setVisible(false);
+	LBErrorNoHandlerButton.setVisible(false);
+	LBErrorOkHandlerButton.setVisible(true);
+	RootGui.pushDialog(LBErrorHandlerDlg);
+
+	// play sound effect
+	alxPlay(LBError);
+}
+
+// assert yes/no dialog box
+function LBAssertYesNo(%title,%message,%yes,%no) {
+	// default erases commands and hides the error handler
+	%defaultCallback = "LBErrorNoHandlerButton.command = \"\"; LBErrorYesHandlerButton.command = \"\";";
+	%defaultCallback = %defaultCallback @ "LBErrorOkHandlerButton.command=\"\"; RootGui.popDialog(LBErrorHandlerDlg);";
+	LBErrorHandlerTitle.setText("<bold:32><just:center>" @ %title);
+	LBErrorHandlerText.setText("<font:18><just:center>" @ %message);
+	LBErrorYesHandlerButton.command = %yes @ %defaultCallback;
+	LBErrorNoHandlerButton.command = %no @ %defaultCallback;
+	LBErrorYesHandlerButton.setVisible(true);
+	LBErrorNoHandlerButton.setVisible(true);
+	LBErrorOkHandlerButton.setVisible(false);
+	RootGui.pushDialog(LBErrorHandlerDlg);
+
+	// play sound effect
+	alxPlay(LBError);
+}

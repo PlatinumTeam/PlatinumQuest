@@ -1,0 +1,280 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(MPTeamJoinListProfile : PQTextListProfile) {
+	fontType = $DefaultFont;
+	fontSize = 18;
+
+	fontColors[0] = "0 0 0 255";
+	fontColors[1] = "153 0 0 255";   // (255   0   0) / 2
+	fontColors[2] = "153 153 0 255"; // (255 255   0) / 2
+	fontColors[3] = "0 153 0 255";   // (  0 255   0) / 2
+	fontColors[4] = "0 153 153 255"; // (  0 255 255) / 2
+	fontColors[5] = "0 0 153 255";   // (  0   0 255) / 2
+	fontColors[6] = "153 0 153 255"; // (255   0 255) / 2
+	fontColors[7] = "153 77 0 255";  // (255 128   0) / 2
+	fontColors[8] = "77 0 153 255";  // (128   0 255) / 2
+};
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPTeamJoinDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "148 97";
+		extent = "541 376";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 304";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamJoinDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPTeamJoinButton) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "420 304";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamJoinDlg.joinTeam();";
+			helpTag = "0";
+			text = "Join";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPTeamJoinTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "66 22";
+			extent = "409 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "23 53";
+			extent = "253 256";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "227 230";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiTextListCtrl(MPTeamJoinList) {
+					profile = "MPTeamJoinListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "223 16";
+					minExtent = "8 8";
+					visible = "1";
+					command = "MPTeamJoinDlg.infoTeam();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "left";
+			vertSizing = "height";
+			position = "266 53";
+			extent = "253 256";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "227 230";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiMLTextCtrl(MPTeamJoinDesc) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "207 195";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "326 304";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPTeamJoinDlg.create();";
+			helpTag = "0";
+			text = "Create";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPTeamJoinDlg::open(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPTeamJoinDlg::close(%this) {
+	RootGui.popDialog(%this);
+}
+
+function MPTeamJoinDlg::onWake(%this) {
+	// Title
+	MPTeamJoinTitle.setText("<bold:28><just:center>Join Team");
+	%this.updateTeamList();
+}
+
+function MPTeamJoinDlg::create(%this) {
+	// Pass it on, the more dialogs, the merrier!
+	MPTeamCreateDlg.open();
+}
+
+function MPTeamJoinDlg::updateTeamList(%this) {
+	MPTeamJoinList.clear();
+
+	%count = TeamList.getSize();
+	for (%i = 0; %i < %count; %i ++) {
+		%team = getRecord(TeamList.getEntry(%i), 0);
+		%color = getRecord(TeamList.getEntry(%i), 1);
+		MPTeamJoinList.addRow(%i, collapseEscape("\\c" @(%color + 1)) @ %team);
+	}
+	MPTeamJoinList.sort(0, true);
+
+	MPTeamJoinList.setSelectedRow(0);
+	MPTeamJoinButton.setActive(%count > 0);
+
+	%this.infoTeam();
+}
+
+function MPTeamJoinDlg::infoTeam(%this) {
+	%selectedTeam = stripCols(MPTeamJoinList.getRowTextById(MPTeamJoinList.getSelectedId()));
+	$MP::TeamInfoLoading = true;
+	commandToServer('TeamInfo', %selectedTeam);
+
+	%this.updateTeam();
+}
+
+function MPTeamJoinDlg::updateTeam(%this) {
+	// Update team information
+	if ($MP::TeamInfoLoading || $MP::TeamInfoName $= "" || $MP::TeamInfoName $= 0) {
+		%text = "<font:24><just:center>Loading Team Info...";
+		MPTeamJoinDesc.setText(%text);
+	} else {
+		%text = "<spush><font:24><just:center>" @ $MP::TeamInfoName @ "<spop><font:18>";
+		%text = %text NL "<spush><just:left><bold:18>Info:<spop>" SPC $MP::TeamInfoDesc;
+		%text = %text NL "<spush><bold:18>Players:<spop>";
+		%count = TeamInfoPlayerList.getSize();
+		for (%i = 0; %i < %count; %i ++) {
+			if (%i)
+				%text = %text @ ",";
+			%text = %text @ " ";
+			if (getField(TeamInfoPlayerList.getEntry(%i), 1))
+				%text = %text @ "[L] ";
+			%text = %text @ LBResolveName(getField(TeamInfoPlayerList.getEntry(%i), 0), true);
+		}
+		MPTeamJoinDesc.setText(%text);
+	}
+}
+
+function MPTeamJoinDlg::joinTeam(%this) {
+	%selectedTeam = stripCols(MPTeamJoinList.getRowTextById(MPTeamJoinList.getSelectedId()));
+	commandToServer('TeamJoin', %selectedTeam);
+	%this.close();
+}

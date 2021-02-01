@@ -1,0 +1,330 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(JukeboxDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "./exit/black";
+	wrap = "0";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "57 61";
+		extent = "524 357";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(JukeBoxDlg_stop) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "216 285";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "0";
+			command = "JukeboxDlg.stop();";
+			helpTag = "0";
+			text = "Stop";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(JukeBoxDlg_play) {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "215 285";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "$JukeBoxDlg::isPlaying = true; JukeboxDlg.play();";
+			helpTag = "0";
+			text = "Play";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 22";
+			extent = "480 197";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "454 171";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiTextListCtrl(JukeBox_SongList) {
+					profile = "PQTextListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "2 0";
+					extent = "434 651";
+					minExtent = "8 8";
+					visible = "1";
+					command = "JukeBoxDlg.selectSong();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+						noDuplicates = "false";
+				};
+			};
+		};
+		new GuiMLTextCtrl(JukeBox_SongTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "54 224";
+			extent = "416 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(JukeBox_SongAuthor) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "51 253";
+			extent = "421 27";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(JukeBoxDlg_prev) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "121 285";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "JukeboxDlg.prevSong();";
+			helpTag = "0";
+			text = "Prev";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(JukeBoxDlg_next) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "309 285";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "JukeboxDlg.nextSong();";
+			helpTag = "0";
+			text = "Next";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 285";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(JukeboxDlg);";
+			accelerator = "escape";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+GlobalActionMap.bind(keyboard, "ctrl F5", toggleJukebox);
+GlobalActionMap.bindCmd(keyboard, "ctrl F6", "", "if($JukeboxDlg::isPlaying || $JukeboxDlg::active) JukeboxDlg.prevSong();");
+GlobalActionMap.bindCmd(keyboard, "ctrl F7", "", "JukeboxDlg.toggleSong();");
+GlobalActionMap.bindCmd(keyboard, "ctrl F8", "", "if($JukeboxDlg::isPlaying || $JukeboxDlg::active) JukeboxDlg.nextSong();");
+
+function toggleJukebox(%make) {
+	if (%make) {
+		if ($JukeboxDlg::active)
+			RootGui.popDialog(JukeboxDlg);
+		else
+			RootGui.pushDialog(JukeboxDlg);
+	}
+}
+function JukeboxDlg::onWake(%this) {
+	$JukeboxDlg::active = true;
+	JukeBox_SongTitle.setText("<bold:28><just:center>Title:");
+	%this.getSongList();
+	%this.selectPlayingSong();
+}
+function JukeboxDlg::onSleep(%this) {
+	$JukeboxDlg::active = false;
+}
+function JukeboxDlg::selectPlayingSong(%this) {
+	if (alxIsPlaying($currentMusicHandle)) {
+		$JukeBoxDlg::isPlaying = true;
+		JukeBox_SongAuthor.setText("<font:24><just:center>Playing");
+	} else {
+		$JukeBoxDlg::isPlaying = false;
+		JukeBox_SongAuthor.setText("<font:24><just:center>Stopped");
+	}
+	JukeBoxDlg_stop.setVisible($JukeBoxDlg::isPlaying);
+	JukeBoxDlg_play.setVisible(!$JukeBoxDlg::isPlaying);
+
+	for (%i = 0; %i < $JukeboxDlg::SongNum; %i++) {
+		if ($JukeboxDlg::Song[%i] $= fileBase(MusicProfile.fileName)) {
+			JukeBox_SongList.setSelectedById(%i);
+			%row = JukeBox_SongList.getRowNumById(%i);
+			$JukeboxDlg::playingId = %row;
+			JukeBox_SongTitle.setText("<bold:28><just:center>Title: " @ $JukeboxDlg::Song[%i]);
+			%this.update();
+			return;
+		}
+	}
+}
+
+function JukeboxDlg::update(%this) {
+	if ($JukeboxDlg::playingId == 0)
+		JukeBoxDlg_prev.setActive(false);
+	else
+		JukeBoxDlg_prev.setActive(true);
+
+	if ($JukeboxDlg::playingId == ($JukeboxDlg::SongNum - 1))
+		JukeBoxDlg_next.setActive(false);
+	else
+		JukeBoxDlg_next.setActive(true);
+}
+
+function JukeboxDlg::prevSong(%this) {
+	if ($JukeboxDlg::playingId == 0)
+		return;
+
+	%row = $JukeboxDlg::playingId - 1;
+
+	JukeBox_SongList.setSelectedRow(%row);
+	%this.play();
+}
+
+function JukeboxDlg::toggleSong(%this) {
+	if ($JukeboxDlg::isPlaying) {
+		%this.stop();
+	} else {
+		$JukeboxDlg::isPlaying = true;
+		%this.play();
+	}
+}
+
+function JukeboxDlg::selectSong(%this) {
+	%this.play();
+}
+
+function JukeboxDlg::nextSong(%this) {
+	if ($JukeboxDlg::playingId == ($JukeboxDlg::SongNum - 1))
+		return;
+
+	%row = $JukeboxDlg::playingId + 1;
+
+	JukeBox_SongList.setSelectedRow(%row);
+	%this.play();
+}
+
+function JukeboxDlg::play(%this) {
+	JukeBoxDlg_stop.setVisible(true);
+	JukeBoxDlg_play.setVisible(false);
+	%id = JukeBox_SongList.getSelectedId();
+	%row = JukeBox_SongList.getRowNumById(%id);
+
+	if ($JukeboxDlg::isPlaying) {
+		playMusic($JukeboxDlg::Song[%id] @ ".ogg");
+		JukeBox_SongAuthor.setText("<font:24><just:center>Playing");
+	}
+
+	$JukeboxDlg::playingId = %row;
+	JukeBox_SongTitle.setText("<bold:28><just:center>Title: " @ $JukeboxDlg::Song[%id]);
+	%this.update();
+}
+
+function JukeboxDlg::stop(%this) {
+	JukeBoxDlg_stop.setVisible(false);
+	JukeBoxDlg_play.setVisible(true);
+	pauseMusic();
+	$JukeBoxDlg::isPlaying = false;
+	JukeBox_SongAuthor.setText("<font:24><just:center>Stopped");
+}
+
+function JukeboxDlg::getSongList(%this) {
+	if (!$JukeboxDlg::musicFound) {
+		JukeBox_SongList.clear();
+		$JukeboxDlg::SongNum = 0;
+		for (%file = findFirstFile($usermods @ "/data/sound/music/*.ogg"); %file !$= ""; %file = findNextFile($usermods @ "/data/sound/music/*.ogg")) {
+			// Remove upbeat finale and good to jump to (Loop Edit)
+			%base = fileBase(%file);
+			if (%base $= "Upbeat Finale" || %base $= "Good to Jump to (Loop Edit)")
+				continue;
+			JukeBox_SongList.addRow($JukeboxDlg::SongNum,fileBase(%file));
+			$JukeboxDlg::Song[$JukeboxDlg::SongNum] = fileBase(%file);
+			$JukeboxDlg::SongNum++;
+		}
+		JukeBox_SongList.sort(0);
+		$JukeboxDlg::musicFound = true;
+	}
+}

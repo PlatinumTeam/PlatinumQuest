@@ -1,0 +1,208 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(HintsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		defaultControl = "Hints_Scroll";
+		commandSelect = "HintsDlg.close();";
+		commandCancel = "HintsDlg.close();";
+		commandNameSelect = "Close";
+
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "0 0";
+		extent = "640 480";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl(Hints_Base) {
+			profile = "PQWindowProfile";
+			horizSizing = "center";
+			vertSizing = "center";
+			position = "56 15";
+			extent = "527 450";
+			minExtent = "61 61";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "503 -6";
+			extent = "118 118";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./loading/loading_helpbubble";
+			wrap = "0";
+		};
+		new GuiScrollCtrl(Hints_Scroll) {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "79 72";
+			extent = "481 319";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiMLTextCtrl(Hints_Text) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "466 328";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiMLTextCtrl(Hints_Title) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "79 39";
+			extent = "428 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "273 393";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "HintsDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiButtonBaseCtrl(Hints_Close2) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "1000 370";
+			extent = "1 1";
+			minExtent = "1 1";
+			visible = "1";
+			command = "HintsDlg.close();";
+			accelerator = "escape";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function HintsDlg::close(%this) {
+	RootGui.popDialog(HintsDlg);
+	if ($gamePaused && $Game::Running)
+		resumeGame();
+
+	PlayMissionGui.showBody();
+}
+
+function HintsDlg::onWake(%this) {
+	%mission = PlayMissionGui.getMissionInfo();
+
+	%title = "<bold:28>" @ %mission.name @ ":";
+	%text = "<font:17>";
+
+	%this.completion = Unlock::getMissionCompletion(%mission);
+
+	if (%mission.generalHint $= "" && %mission.trivia $= "" && %mission.ultimateHint $= "" && %mission.awesomeHint $= "" && %mission.eggHint $= "") { // No hints?
+		%text = "No information or hints exist for " @ %mission.name @ ".";
+	} else {
+		if (%mission.generalHint !$= "") {
+			%text = %text @ "<condensed:24>Hints\n<font:17>" @ %mission.generalHint @ "\n\n";
+		}
+
+		//Simple check
+		if (%mission.ultimateHint !$= "" && %this.shouldShowUltimate(%mission)) {
+			%text = %text @ "<condensed:24>Ultimate Hint\n<font:17>" @ %mission.ultimateHint @ "\n\n";
+		}
+		if (%mission.awesomeHint !$= "" && %this.shouldShowAwesome(%mission)) {
+			%text = %text @ "<condensed:24>Awesome Hint\n<font:17>" @ %mission.awesomeHint @ "\n\n";
+		}
+		if (%mission.eggHint !$= "" && %this.shouldShowEgg(%mission)) {
+			%text = %text @ "<condensed:24>Nest Egg Hint\n<font:17>" @ %mission.eggHint @ "\n\n";
+		}
+
+		//Trivia at the end
+
+		if (%mission.trivia !$= "") {
+			%text = %text @ "<condensed:24>Trivia\n<font:17>" @ %mission.trivia @ "\n\n";
+		}
+	}
+
+	Hints_Title.setText(%title);
+	Hints_Text.setText(%text);
+}
+
+function HintsDlg::shouldShowUltimate(%this, %mission) {
+	return %this.completion & $Completion::Platinum;
+}
+
+function HintsDlg::shouldShowAwesome(%this, %mission) {
+	//Don't let them know about these until they get one
+	if (!$pref::ShowAwesomeHints)
+		return false;
+	return %this.completion & $Completion::Ultimate;
+}
+
+function HintsDlg::shouldShowEgg(%this, %mission) {
+	//If you beat the par then you can see the egg hint
+	return %this.completion & $Completion::Par;
+}

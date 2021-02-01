@@ -1,0 +1,146 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc = "Spin the marble in the air to avoid falling off the level.";
+         name = "Air Movement";
+         goldTime = "5000";
+         artist = "Alex Swanson";
+         type = "Beginner";
+         music = "Beach Party.ogg";
+         level = "8";
+         startHelpText = "Spin the marble in the air to avoid falling off the level!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -1.73483e+09 -1.73483e+09";
+      fogVolume2 = "-1 -1.73483e+09 -1.73483e+09";
+      fogVolume3 = "-1 -1.73483e+09 -1.73483e+09";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -1734829824.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -1734829824.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -1734829824.000000";
+   };
+   new Sun() {
+      direction = "0.7019758 -0.5213699 -0.4851839";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/beginner/training_airmove.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 -4 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "-3.60576e-08 -4 -47.5";
+      rotation = "0 0 1 179.518";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-11.5 29.6508 -51";
+      rotation = "1 0 0 0";
+      scale = "23 41.1508 72";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "-3.48621 9.06227 1.38891";
+      rotation = "1 0 0 31.51271";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new StaticShape() {
+      position = "0.341891 -3.52288 -38.4778";
+      rotation = "0 0 -1 8.594384";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger(Help) {
+      position = "-8.32154 8.40169 0.453332";
+      rotation = "1 0 0 0";
+      scale = "16.5255 3.62262 1";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Use the direction keys while airborne to move the marble.";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "3.533681 10.97101 3.672666";
+         rotation = "-0.07080697 -0.22177 0.9725248 214.5";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "6000";
+      };
+      new StaticShape(CameraPath2) {
+         position = "3.526681 10.96117 -29.99723";
+         rotation = "-0.1759596 -0.5511122 0.8156676 209.1943";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "5000";
+      };
+      new StaticShape(CameraPath3) {
+         position = "3.527714 10.96262 -30.00143";
+         rotation = "-0.1746953 -0.547152 0.8186002 209.2947";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,170 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc = "Learn to fly!";
+         name = "Gyrocopter";
+         goldTime = "3750";
+         artist = "Alex Swanson";
+         music = "Classic Vibe.ogg";
+         type = "Beginner";
+         level = "9";
+         startHelpText = "Use the Gyrocopter PowerUp to fly to the finish!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -2.19536e+38 -2.19536e+38";
+      fogVolume2 = "-1 -2.2087e+38 -2.19536e+38";
+      fogVolume3 = "-1 -2.18196e+38 -2.16867e+38";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222204871403647643306393613037507444736.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -219535990253541534601988090029785743360.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -214193076221289989668889361412515692544.000000";
+   };
+   new Sun() {
+      direction = "0.4817261 0.4817261 -0.7320382";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_mbg/beginner/training_copter.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "28 5.79158e-08 81";
+      rotation = "0 0 -1 90.5273";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "-28 6.5436e-07 65";
+      rotation = "0 0 -1 89.95439";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Item() {
+      position = "18 0 81";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         showHelpOnPickup = "1";
+   };
+   new Trigger(Bounds) {
+      position = "-52.5444 38.0152 57.871";
+      rotation = "1 0 0 0";
+      scale = "107.509 73.1917 86.7494";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "-28.0149 0.164103 73.1906";
+      rotation = "0 0 -1 107.143";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "33.06541 10.23588 88.69156";
+         rotation = "0.1582192 0.2507859 -0.9550252 117.8605";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath2) {
+         position = "28.29422 3.974019 85.20653";
+         rotation = "0.1621337 0.2099673 -0.9641714 106.6632";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "4000";
+      };
+      new StaticShape(CameraPath3) {
+         position = "19.7687 -2.350284 82.2191";
+         rotation = "0.2552522 0.1536417 -0.9545892 64.46737";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "1600";
+      };
+      new StaticShape(CameraPath4) {
+         position = "16.01017 -3.333555 81.36656";
+         rotation = "0.37762 0.2264105 -0.8978539 67.46877";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "5000";
+      };
+      new StaticShape(CameraPath5) {
+         position = "16.01017 -3.333555 81.36656";
+         rotation = "0.37762 0.2264105 -0.8978539 67.46877";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

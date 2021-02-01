@@ -1,0 +1,464 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         type = "advanced";
+         ultimateTime = "6000";
+         artist = "Alex Swanson";
+         music = "Tim Trance.ogg";
+         difficulty = "8";
+         goldTime = "10000";
+         name = "Divergence";
+         time = "75000";
+         game = "Ultra";
+useUltraMarble = "1";
+         level = "1";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "10000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "1000";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 1.84699e+25 3670.77";
+      fogVolume2 = "-1 7.22507e+28 5.10655e+28";
+      fogVolume3 = "-1 1.01124e+12 1.69273e+22";
+      materialList = "~/data/skies/Cloudy/cloudy.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 274952335980479313908596736.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 11918.598633";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 1109264997360148182116335616.000000";
+         sphereFront = "platinum/data/shapes/skies/wintry/front.png";
+         sphereBack = "platinum/data/shapes/skies/wintry/back.png";
+   };
+   new StaticShape() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "5000 5000 5000";
+      dataBlock = "Wintry";
+   };
+   new Sun() {
+      direction = "0.5732009 0.2753569 -0.7717638";
+      color = "1.080000 1.030000 0.900000 1.000000";
+      ambient = "0.400000 0.400000 0.500000 1.000000";
+         shadowColor = "0.000000 0.000000 0.150000 0.350000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbu/advanced/divergence.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape() {
+      position = "53.2688 12.9905 -2.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "50.9511 12.9075 -1.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "48.6809 12.8917 -0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "46.3817 12.8621 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "34 27 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "34 29 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "34 31 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "34 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "10 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "8 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-18 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-20 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-22 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-24 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-26 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-28 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-30 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-32 27 4.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "8 35 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "36 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "38 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "40 33 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TrapDoor";
+         timeout = "200";
+         resettime = "Default";
+         open = "0";
+   };
+   new StaticShape() {
+      position = "-1 20 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+   };
+   new Item() {
+      position = "2 -7 0.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup(SpawnPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "93 0 -7.5";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+   };
+   new StaticShape(EndPoint) {
+      position = "-53 4 8.5";
+      rotation = "0 0 1 178.372";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-66.382 62.2743 -10.0889";
+      rotation = "1 0 0 0";
+      scale = "172.571 74.07 5000";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "-3.03044 19.8212 8.44573";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         timeBonus = "5000";
+   };
+   new Item() {
+      position = "34.1942 32.9558 1";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         timeBonus = "5000";
+   };
+   new Item() {
+      position = "32.1113 5.05026 1";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         timeBonus = "5000";
+   };
+   new Item() {
+      position = "50.0827 13.1081 -0.863436";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         timeBonus = "5000";
+   };
+   new Item() {
+      position = "-4.04711 53.068 2.99814";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         timeBonus = "5000";
+   };
+   new Item() {
+      position = "97.3858 -4.46812 -7.29999";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup() {
+
+      new Trigger() {
+         position = "18.4165 41.6264 -0.815256";
+         rotation = "1 0 0 0";
+         scale = "5 5 5";
+         dataBlock = "CheckpointTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            respawnPoint = "check3";
+      };
+      new TSStatic(check3) {
+         position = "21.9665 38.9965 0.512075";
+         rotation = "0 0 -1 88.23549";
+         scale = "0.5 0.5 0.5";
+         shapeName = "~/data/shapes/buttons/checkPoint.dts";
+      };
+   };
+   new SimGroup() {
+
+      new TSStatic(check4) {
+         position = "32.0382 11.0259 0.504562";
+         rotation = "0 0 -1 90.5273";
+         scale = "0.5 0.5 0.5";
+         shapeName = "~/data/shapes/buttons/checkPoint.dts";
+      };
+      new Trigger() {
+         position = "29.0322 13.5538 -1.06098";
+         rotation = "1 0 0 0";
+         scale = "5 5 5";
+         dataBlock = "CheckpointTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            respawnPoint = "check4";
+      };
+   };
+   new SimGroup() {
+
+      new TSStatic(check5) {
+         position = "44.0667 -7.02027 0.50874";
+         rotation = "0 0 -1 89.3814";
+         scale = "0.5 0.5 0.5";
+         shapeName = "~/data/shapes/buttons/checkPoint.dts";
+      };
+      new Trigger() {
+         position = "42.5403 -4.33637 -1.03334";
+         rotation = "1 0 0 0";
+         scale = "5 5 5";
+         dataBlock = "CheckpointTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            respawnPoint = "check5";
+      };
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "96.00781 4.246259 9.383395";
+         rotation = "0.3395381 0.2180326 -0.9149731 70.12373";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "12000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+      };
+      new StaticShape(CameraPath2) {
+         position = "6.211864 0.3969789 25.93239";
+         rotation = "0.58336 0.2953236 -0.7566209 67.572";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "5000";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+      };
+      new StaticShape(CameraPath3) {
+         position = "6.211864 0.3969789 25.93239";
+         rotation = "0.58336 0.2953236 -0.7566209 67.572";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

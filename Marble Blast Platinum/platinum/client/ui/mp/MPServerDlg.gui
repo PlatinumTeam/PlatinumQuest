@@ -1,0 +1,557 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPServerDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "73 9";
+		extent = "494 461";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(MPServerCancel) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "154 389";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPServerDlg.cancel();";
+			helpTag = "0";
+			text = "Cancel";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(MPServerSave) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "248 389";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPServerDlg.saveFields();";
+			helpTag = "0";
+			text = "Save";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPServerTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "11 21";
+			extent = "472 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPServerShowPasswordsTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "275 99";
+			extent = "129 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiCheckBoxCtrl(MPServerShowPasswords) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "433 96";
+			extent = "31 31";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPServerDlg.updateActive();";
+			helpTag = "0";
+			text = "Show Passwords";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPServerIPTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "top";
+			position = "26 368";
+			extent = "435 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(MPServerPortTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "26 338";
+			extent = "197 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(MPServerMapRefresh) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "233 329";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPServerDlg.refreshPortMapping();";
+			helpTag = "0";
+			text = "button";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = "platinum/client/ui/mp/join/refresh-small.png";
+				bitmapRotation = "0";
+				tooltip = "Refresh";
+		};
+		new GuiControl(MPServerSettingsContainer) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "height";
+			position = "26 65";
+			extent = "240 268";
+			minExtent = "27 27";
+			visible = "1";
+			helpTag = "0";
+		};
+		new GuiMLTextCtrl(MPServerDescTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "272 125";
+			extent = "190 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "left";
+			vertSizing = "height";
+			position = "263 143";
+			extent = "209 226";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "12 12";
+				extent = "185 202";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "dynamic";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 0";
+
+				new GuiMLTextEditCtrl(MPServerDescField) {
+					profile = "PQTextboxSmallProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "2 0";
+					extent = "165 202";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "512";
+						cursorPosition = "1";
+				};
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPServerDlg::onWake(%this) {
+	MPServerTitle.setText("<bold:28><just:center>Server Settings");
+	MPServerDescTitle.setText("<font:18><just:center>Server Info");
+	MPServerDescField.setValue($Pref::Server::Info);
+
+	MPServerShowPasswordsTitle.setText("<font:18><just:left>Show Password:");
+	MPServerShowPasswords.setValue(false);
+
+	%this.populate();
+	%this.updateIP();
+}
+
+function MPServerDlg::populate(%this) {
+	%rowHeight = 29;
+	MPServerSettingsContainer.clear();
+
+	//Add each setting from the list
+	for (%i = 0; %i < $MP::Server::Settings; %i ++) {
+		%id       = $MP::Server::Setting[%i, "id"];
+		%name     = $MP::Server::Setting[%i, "name"];
+		%type     = $MP::Server::Setting[%i, "type"];
+		%variable = $MP::Server::Setting[%i, "variable"];
+
+		//The title field should be called "MPServer<name>Title"
+		%titleName = "MPServer" @ %id @ "Title";
+
+		//Temporary variable to store results in
+		%tempvar = "$MP::Server::Temp::" @ %id;
+		//Reset tempvar to the initial state
+		setVariable(%tempvar, getVariable(%variable));
+
+		%y = (%rowHeight * %i);
+
+		//Add the title for the setting
+		MPServerSettingsContainer.add(
+		new GuiMLTextCtrl(%titleName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = 0 SPC (10 + %y);
+			extent = "206 14";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		}
+		);
+
+		//Set the title's text to show what the setting is
+		%titleName.setText("<font:18><just:left>" @ %name @ ":");
+
+		switch$ (%type) {
+		case "check":
+			//The checkbox name should be called "MPServer<name>Check"
+			%checkName = "MPServer" @ %id @ "Check";
+
+			//Add a checkbox
+			MPServerSettingsContainer.add(
+			new GuiCheckboxCtrl(%checkName) {
+				profile = "PQCheckboxProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = 209 SPC (%y + 6);
+				extent = "31 31";
+				minExtent = "8 8";
+				visible = "1";
+				variable = %tempvar;
+				helpTag = "0";
+				text = "button";
+				groupNum = "-1";
+				buttonType = "ToggleButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+			}
+			);
+
+			//Check it if the var is set
+			%checkName.setText(getVariable(%variable));
+		case "number":
+			//The plus button's name should be called "MPServer<name>Plus"
+			%plusName = "MPServer" @ %id @ "Plus";
+			//The minus button's name should be called "MPServer<name>Minus"
+			%minusName = "MPServer" @ %id @ "Minus";
+
+			//Add a + button
+			MPServerSettingsContainer.add(
+			new GuiBorderButtonCtrl(%plusName) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = 207 SPC (%y + 2);
+				extent = "35 35";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPServerDlg.incrementSetting(\"" @ %i @ "\");";
+				helpTag = "0";
+				text = "+";
+				groupNum = "-1";
+				buttonType = "RepeaterButton";
+				repeatPeriod = "1000";
+				repeatDecay = "0.9";
+			}
+			);
+			//And a - button
+			MPServerSettingsContainer.add(
+			new GuiBorderButtonCtrl(%minusName) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = 178 SPC (%y + 2);
+				extent = "35 35";
+				minExtent = "8 8";
+				visible = "1";
+				command = "MPServerDlg.decrementSetting(\"" @ %i @ "\");";
+				helpTag = "0";
+				text = "-";
+				groupNum = "-1";
+				buttonType = "RepeaterButton";
+				repeatPeriod = "1000";
+				repeatDecay = "0.9";
+			}
+			);
+
+			//Numerical variables have values
+			%titleName.setText("<font:18><just:left>" @ %name @ ":" SPC getVariable(%variable));
+		case "text" or "password":
+			//The field name should be called "MPServer<name>Field"
+			%fieldName = "MPServer" @ %id @ "Field";
+
+			//Add a textbox surrounded in a transparency
+			MPServerSettingsContainer.add(
+			new GuiControl() {
+				profile = "PQTextboxBorderProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = 93 SPC (%y + 6);
+				extent = "147 27";
+				minExtent = "27 27";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiTextEditCtrl(%fieldName) {
+					profile = "PQTextboxSmallProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "3 3";
+					extent = "141 24";
+					minExtent = "8 8";
+					visible = "1";
+					variable = %tempvar;
+					command = "MPServerDlg.updateActive();";
+					helpTag = "0";
+					maxLength = "255";
+					maxPixelWidth = "0";
+					historySize = "0";
+					password = (%type $= "password"); //Password field support
+					tabComplete = "0";
+					sinkAllKeyEvents = "0";
+				};
+			}
+			);
+
+			//And set its value
+			%fieldName.setValue(getVariable(%variable));
+		}
+	}
+}
+
+function MPServerDlg::incrementSetting(%this, %idx) {
+	%id   = $MP::Server::Setting[%idx, "id"];
+	%max  = $MP::Server::Setting[%idx, "max"];
+	%name = $MP::Server::Setting[%idx, "name"];
+
+	//Temporary variable to store results in
+	%tempvar = "$MP::Server::Temp::" @ %id;
+
+	//Get its value and increment it
+	%val = getVariable(%tempVar);
+	%val ++;
+
+	//Make sure we haven't gone over
+	if (%val > %max)
+		%val = %max;
+
+	//And set it
+	setVariable(%tempVar, %val);
+
+	//The title field should be called "MPServer<name>Title"
+	%titleName = "MPServer" @ %id @ "Title";
+
+	//Numerical variables have values
+	%titleName.setText("<font:18><just:left>" @ %name @ ":" SPC %val);
+}
+
+function MPServerDlg::decrementSetting(%this, %idx) {
+	%id   = $MP::Server::Setting[%idx, "id"];
+	%min  = $MP::Server::Setting[%idx, "min"];
+	%name = $MP::Server::Setting[%idx, "name"];
+
+	//Temporary variable to store results in
+	%tempvar = "$MP::Server::Temp::" @ %id;
+
+	//Get its value and decrement it
+	%val = getVariable(%tempVar);
+	%val --;
+
+	//Make sure we haven't gone under
+	if (%val < %min)
+		%val = %min;
+
+	//And set it
+	setVariable(%tempVar, %val);
+
+	//The title field should be called "MPServer<name>Title"
+	%titleName = "MPServer" @ %id @ "Title";
+
+	//Numerical variables have values
+	%titleName.setText("<font:18><just:left>" @ %name @ ":" SPC %val);
+}
+
+function MPUpdatePortLabel() {
+	MPServerDlg.updateIP();
+}
+
+function MPServerDlg::updateActive(%this) {
+	for (%i = 0; %i < $MP::Server::Settings; %i ++) {
+		%id       = $MP::Server::Setting[%i, "id"];
+		%name     = $MP::Server::Setting[%i, "name"];
+		%type     = $MP::Server::Setting[%i, "type"];
+		%variable = $MP::Server::Setting[%i, "variable"];
+
+		//Temporary variable to store results in
+		%tempvar = "$MP::Server::Temp::" @ %id;
+
+		switch$ (%type) {
+		case "text" or "password":
+			//The field name should be called "MPServer<name>Field"
+			%fieldName = "MPServer" @ %id @ "Field";
+			%fieldName.password = (%type $= "password" && !MPServerShowPasswords.getValue());
+
+			setVariable(%tempvar, %fieldName.getValue());
+		}
+	}
+
+	MPServerSave.setActive($MP::Server::Temp::Name !$= "");
+}
+
+function MPServerDlg::updateIP(%this) {
+	// Various server port forward statuses
+	%status = "<spush><color:ffff66>Loading<spop>";
+	switch$ ($PortStatus) {
+	case "lan":
+		%status = "<spush><color:ff6666>Failure<spop>";
+	case "error":
+		%status = "<spush><color:ff6666>Server Error!<spop>";
+	case "checking":
+		%status = "<spush><color:ffff66>Checking<spop>";
+	case "global":
+		%status = "<spush><color:66ff66>Successful<spop>";
+	}
+	// Set the displays
+	MPServerPortTitle.setText("<font:18>Port Mapping:<just:right>" @ %status);
+	MPServerIPTitle.setText("<font:18>Server Address:<just:right>" @ $ip @($pref::Server::Port != 28000 ? ":" @ $pref::Server::Port : ""));
+}
+
+function MPServerDlg::open(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPServerDlg::saveFields(%this) {
+	RootGui.popDialog(%this);
+	PlayMissionGui.showBody();
+	$Pref::Server::Info = MPServerDescField.getValue();
+
+	for (%i = 0; %i < $MP::Server::Settings; %i ++) {
+		%id       = $MP::Server::Setting[%i, "id"];
+		%variable = $MP::Server::Setting[%i, "variable"];
+
+		//Temporary variable to store results in
+		%tempvar = "$MP::Server::Temp::" @ %id;
+
+		commandToServer('ServerSetting', %id, getVariable(%tempvar));
+	}
+
+	savePrefs();
+	startHeartbeat();
+
+	PlayMissionGui.updateMPButtons();
+}
+
+function MPServerDlg::cancel(%this) {
+	RootGui.popDialog(%this);
+	PlayMissionGui.showBody();
+	MPServerDescField.setValue($Pref::Server::Info);
+}
+
+function MPServerDlg::updateSpinner(%this) {
+	if (!%this.isAwake())
+		return;
+	if (%this.loading || (MPServerMapRefresh.bitmapRotation % 180) > 0) {
+		MPServerMapRefresh.bitmapRotation -= 10;
+		MPServerMapRefresh.bitmapRotation += 180;
+		MPServerMapRefresh.bitmapRotation %= 180;
+	}
+}
+
+function MPServerDlg::refreshPortMapping(%this) {
+	$PortStatus = "";
+	checkPort();
+
+	MPServerMapRefresh.setActive(false);
+	MPUpdatePortLabel();
+	%this.loading = true;
+
+	if (%this.spinInterval $= "")
+		%this.spinInterval = %this.interval(40, "updateSpinner");
+}
+
+function MPServerDlg::portMappingFinished(%this) {
+	MPServerMapRefresh.setActive(true);
+	MPUpdatePortLabel();
+	%this.loading = false;
+}

@@ -1,0 +1,188 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc = "Learn to jump up the upper ramp. Roll on to the exit pad to complete the level.";
+         name = "Jump Training";
+         goldTime = "6750";
+         artist = "Alex Swanson";
+         type = "Beginner";
+         music = "Classic Vibe.ogg";
+         level = "3";
+         startHelpText = "Jump up the ramp to the finish!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.4817261 0.4817261 -0.7320382";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         scale = "1 1 1";
+         locked = "true";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "-0.28569 0.0961937 499.021";
+         rotation = "0 0 1 0.05595291";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "25.1421 50.5672 504.912";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new InteriorInstance() {
+      position = "10.2794 25.7924 502.697";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/beginner/training2.dif";
+      showTerrainInside = "0";
+         locked = "true";
+   };
+   new Trigger() {
+      position = "-11.298 103.375 478.493";
+      rotation = "1 0 0 0";
+      scale = "49.2618 126.785 50";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "-4.73127 29.8391 499.04";
+      rotation = "1 0 0 0";
+      scale = "8.88257 8.037 1";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Press <func:bind jump> to Jump!";
+   };
+   new StaticShape() {
+      position = "25.7706 50.5267 511.647";
+      rotation = "0 0 1 26.35601";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "-12.92111 -17.49693 517.6018";
+         rotation = "0.7208572 -0.2263151 0.6550927 51.21207";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath2) {
+         position = "-13.17871 2.956663 510.5768";
+         rotation = "0.3320133 -0.1786538 0.926202 60.31028";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath3) {
+         position = "-2.42635 19.58776 505.1978";
+         rotation = "0.159664 -0.1042438 0.981652 67.25562";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath4) {
+         position = "18.12675 20.39605 507.5959";
+         rotation = "0.01277247 -0.003594015 0.999912 31.43452";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath5) {
+         position = "35.71632 18.19655 511.8248";
+         rotation = "0.5320665 0.1997805 -0.8227958 49.0589";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+            useRotation = "1";
+            timeToNext = "5000";
+      };
+      new StaticShape(CameraPath6) {
+         position = "35.71632 18.19655 511.8248";
+         rotation = "0.5320665 0.1997805 -0.8227958 49.0589";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

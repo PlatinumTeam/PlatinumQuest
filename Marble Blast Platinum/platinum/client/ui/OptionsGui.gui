@@ -1,0 +1,1154 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(OptionsGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	_guiSize = "800 600";
+	tab = "Graphics";
+		commandXAxis = "OptionsGui.setXAxis(%value);";
+		commandYAxis = "OptionsGui.setYAxis(%value);";
+		commandRXAxis = "OptionsGui.setRXAxis(%value);";
+		commandRYAxis = "OptionsGui.setRYAxis(%value);";
+		commandAlt1 = "OptionsGui.apply();";
+		commandCancel = "OptionsGui.apply(); OptionsGui.back();";
+		commandNameAlt1 = "Apply";
+		commandNameCancel = "Back";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "8 13";
+		extent = "784 573";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(OptionsGraphicsButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "40 19";
+			extent = "134 65";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.setTab(\"Graphics\");";
+			helpTag = "0";
+			text = "Graphics";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsGameplayButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "182 19";
+			extent = "134 65";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.setTab(\"Gameplay\");";
+			helpTag = "0";
+			text = "Gameplay";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsInputButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "324 19";
+			extent = "134 65";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.setTab(\"Input\");";
+			helpTag = "0";
+			text = "Input";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsAudioButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "466 19";
+			extent = "134 65";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.setTab(\"Audio\");";
+			helpTag = "0";
+			text = "Audio";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsOnlineButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "608 19";
+			extent = "134 65";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.setTab(\"Online\");";
+			helpTag = "0";
+			text = "Online";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsHomeButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "304 500";
+			extent = "94 46";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.apply(); OptionsGui.back();";
+			helpTag = "0";
+			text = "Back";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(OptionsApplyButton) {
+			profile = "GuiBorderButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "398 500";
+			extent = "94 46";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.apply();";
+			helpTag = "0";
+			text = "Apply";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiScrollCtrl(OptionsGameplayPanel) {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "30 88";
+			extent = "726 394";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(OptionsGameplayContent) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "717 0";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+		new GuiScrollCtrl(OptionsGraphicsPanel) {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "30 88";
+			extent = "726 394";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(OptionsGraphicsContent) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "717 0";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+		new GuiScrollCtrl(OptionsAudioPanel) {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "30 88";
+			extent = "726 394";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(OptionsAudioContent) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "717 0";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+		new GuiControl(OptionsInputPanel) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "30 88";
+			extent = "726 416";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+
+			new GuiControl(OptionsControlsJoystickPanel) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "414 0";
+				extent = "312 365";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiControl(OptionsControlsRightJoystick) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "162 0";
+					extent = "150 150";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "56 0";
+						extent = "39 54";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 54";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/up_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsRightJoystickArrowUp) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 54";
+							extent = "39 0";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl(OptionsControlsRightJoystickArrowUpInner) {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 -54";
+								extent = "39 54";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/up_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "56 96";
+						extent = "39 54";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 54";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/down_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsRightJoystickArrowDown) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 0";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl() {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 0";
+								extent = "39 54";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/down_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "96 56";
+						extent = "54 39";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "54 39";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/right_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsRightJoystickArrowRight) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "0 39";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl() {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 0";
+								extent = "54 39";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/right_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "0 56";
+						extent = "54 39";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "54 39";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/left_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsRightJoystickArrowLeft) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "54 0";
+							extent = "0 39";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl(OptionsControlsRightJoystickArrowLeftInner) {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "-54 0";
+								extent = "54 39";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/left_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiBitmapCtrl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "58 58";
+						extent = "35 35";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						bitmap = "./options/controls/marble";
+						wrap = "0";
+					};
+				};
+				new GuiControl(OptionsControlsLeftJoystick) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "150 150";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "56 0";
+						extent = "39 54";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 54";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/up_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsLeftJoystickArrowUp) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 54";
+							extent = "39 0";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl(OptionsControlsLeftJoystickArrowUpInner) {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 -54";
+								extent = "39 54";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/up_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "56 96";
+						extent = "39 54";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 54";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/down_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsLeftJoystickArrowDown) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "39 0";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl() {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 0";
+								extent = "39 54";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/down_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "96 56";
+						extent = "54 39";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "54 39";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/right_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsLeftJoystickArrowRight) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "0 39";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl() {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "0 0";
+								extent = "54 39";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/right_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiControl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "0 56";
+						extent = "54 39";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+
+						new GuiBitmapCtrl() {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "0 0";
+							extent = "54 39";
+							minExtent = "8 8";
+							visible = "1";
+							helpTag = "0";
+							bitmap = "./options/controls/left_off";
+							wrap = "0";
+						};
+						new GuiControl(OptionsControlsLeftJoystickArrowLeft) {
+							profile = "GuiDefaultProfile";
+							horizSizing = "right";
+							vertSizing = "bottom";
+							position = "54 0";
+							extent = "0 39";
+							minExtent = "0 0";
+							visible = "1";
+							helpTag = "0";
+
+							new GuiBitmapCtrl(OptionsControlsLeftJoystickArrowLeftInner) {
+								profile = "GuiDefaultProfile";
+								horizSizing = "right";
+								vertSizing = "bottom";
+								position = "-54 0";
+								extent = "54 39";
+								minExtent = "8 8";
+								visible = "1";
+								helpTag = "0";
+								bitmap = "./options/controls/left_on";
+								wrap = "0";
+							};
+						};
+					};
+					new GuiBitmapCtrl() {
+						profile = "GuiDefaultProfile";
+						horizSizing = "right";
+						vertSizing = "bottom";
+						position = "58 58";
+						extent = "35 35";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						bitmap = "./options/controls/marble";
+						wrap = "0";
+					};
+				};
+				new GuiCheckBoxCtrl(OptionsControlsInvertLX) {
+					profile = "PQCheckboxProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "20 153";
+					extent = "100 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					variable = "$pref::Input::InvertJoystickLX";
+					text = "Invert X";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlDown = "OptionsControlsInvertLY";
+					controlRight = "OptionsControlsInvertRX";
+				};
+				new GuiCheckBoxCtrl(OptionsControlsInvertLY) {
+					profile = "PQCheckboxProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "20 181";
+					extent = "100 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					variable = "$pref::Input::InvertJoystickLY";
+					text = "Invert Y";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsInvertLX";
+					controlRight = "OptionsControlsInvertRY";
+					controlDown = "OptionsControlsLSMovement";
+				};
+				new GuiCheckBoxCtrl(OptionsControlsInvertRX) {
+					profile = "PQCheckboxProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "182 153";
+					extent = "100 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					variable = "$pref::Input::InvertJoystickRX";
+					text = "Invert X";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlDown = "OptionsControlsInvertRY";
+					controlLeft = "OptionsControlsInvertLX";
+				};
+				new GuiCheckBoxCtrl(OptionsControlsInvertRY) {
+					profile = "PQCheckboxProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "182 181";
+					extent = "100 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					variable = "$pref::Input::InvertJoystickRY";
+					text = "Invert Y";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsInvertRX";
+					controlLeft = "OptionsControlsInvertLY";
+					controlDown = "OptionsControlsRSMovement";
+				};
+				new GuiRadioCtrl(OptionsControlsLSMovement) {
+					profile = "PQRadioProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "18 211";
+					extent = "120 35";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					command = "OptionsGui.setJoystickMovement(\"LS\", \"Movement\");";
+					text = "Movement";
+					groupNum = "2";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsInvertLY";
+					controlRight = "OptionsControlsRSMovement";
+					controlDown = "OptionsControlsLSCamera";
+				};
+				new GuiRadioCtrl(OptionsControlsLSCamera) {
+					profile = "PQRadioProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "18 239";
+					extent = "120 35";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					command = "OptionsGui.setJoystickMovement(\"LS\", \"Camera\");";
+					text = "Camera";
+					groupNum = "2";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsLSMovement";
+					controlDown = "OptionsControlsJoystickSpeedXSlider";
+					controlRight = "OptionsControlsRSCamera";
+				};
+				new GuiRadioCtrl(OptionsControlsRSMovement) {
+					profile = "PQRadioProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "180 211";
+					extent = "120 35";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					command = "OptionsGui.setJoystickMovement(\"RS\", \"Movement\");";
+					text = "Movement";
+					groupNum = "3";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsInvertRY";
+					controlLeft = "OptionsControlsLSMovement";
+					controlDown = "OptionsControlsRSCamera";
+				};
+				new GuiRadioCtrl(OptionsControlsRSCamera) {
+					profile = "PQRadioProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "180 239";
+					extent = "120 35";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					command = "OptionsGui.setJoystickMovement(\"RS\", \"Camera\");";
+					text = "Camera";
+					groupNum = "3";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					controlUp = "OptionsControlsRSMovement";
+					controlDown = "OptionsControlsJoystickSpeedXSlider";
+					controlLeft = "OptionsControlsLSCamera";
+				};
+				new GuiMLTextCtrl() {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "25 274";
+					extent = "271 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24><just:center>Camera Sensitivity";
+				};
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "116 313";
+					extent = "178 10";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "~/client/ui/options/slider_bar";
+					wrap = "0";
+				};
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "116 343";
+					extent = "178 10";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "~/client/ui/options/slider_bar";
+					wrap = "0";
+				};
+				new GuiMLTextCtrl(OptionsControlsJoystickSpeedXTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "25 304";
+					extent = "68 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24>X:";
+				};
+				new GuiMLTextCtrl(OptionsControlsJoystickSpeedYTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "25 334";
+					extent = "68 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24>Y:";
+				};
+				new GuiSliderCtrl(OptionsControlsJoystickSpeedXSlider) {
+					profile = "GuiSliderProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "100 302";
+					extent = "210 31";
+					minExtent = "8 8";
+					visible = "1";
+					variable = "$pref::Input::Joystick::CameraSpeedX";
+					helpTag = "0";
+					altCommand = "OptionsGui.updateJoystickSpeedX();";
+					range = "0.005 0.07";
+					value = "0.03";
+					ticks = "80";
+					joyTicks = "16";
+					bitmap = "./options/slider";
+					controlUp = "OptionsControlsRSCamera";
+					controlDown = "OptionsControlsJoystickSpeedYSlider";
+				};
+				new GuiSliderCtrl(OptionsControlsJoystickSpeedYSlider) {
+					profile = "GuiSliderProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "100 332";
+					extent = "210 31";
+					minExtent = "8 8";
+					visible = "1";
+					variable = "$pref::Input::Joystick::CameraSpeedY";
+					helpTag = "0";
+					altCommand = "OptionsGui.updateJoystickSpeedY();";
+					range = "0.005 0.07";
+					value = "0.03";
+					ticks = "80";
+					joyTicks = "16";
+					bitmap = "./options/slider";
+					controlUp = "OptionsControlsJoystickSpeedXSlider";
+					controlDown = "OptionsControlsJoystickButton";
+				};
+			};
+			new GuiControl(OptionsControlsKeyboardPanel) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "414 0";
+				extent = "312 365";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiMLTextCtrl() {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "30 0";
+					extent = "271 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24><just:center>Camera Sensitivity";
+				};
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "106 39";
+					extent = "158 10";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "~/client/ui/options/slider_bar";
+					wrap = "0";
+				};
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "106 69";
+					extent = "158 10";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "~/client/ui/options/slider_bar";
+					wrap = "0";
+				};
+				new GuiMLTextCtrl(OptionskeyboardSpeedTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "5 30";
+					extent = "88 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24>Keyboard:";
+				};
+				new GuiMLTextCtrl(OptionsmouseSpeedTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "5 60";
+					extent = "88 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						defaultText = "<bold:24>Mouse:";
+				};
+				new GuiSliderCtrl(OptionskeyboardSpeedValue) {
+					profile = "GuiSliderProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "90 28";
+					extent = "190 31";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					altCommand = "OptionsGui.updateMouseSpeed();";
+					range = "0.01 0.09";
+					ticks = "90";
+					bitmap = "./options/slider";
+				};
+				new GuiSliderCtrl(OptionsmouseSpeedValue) {
+					profile = "GuiSliderProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "90 58";
+					extent = "190 31";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					altCommand = "OptionsGui.updateKeyboardSpeed();";
+					range = "0.05 0.95";
+					ticks = "90";
+					joyTicks = "16";
+					bitmap = "./options/slider";
+				};
+				new GuiMLTextCtrl(OptionskeyboardSpeedDisplay) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "260 30";
+					extent = "52 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+				new GuiMLTextCtrl(OptionsmouseSpeedDisplay) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "260 60";
+					extent = "52 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+			new GuiScrollCtrl(OptionsInputScroll) {
+				profile = "PQScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "414 365";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "alwaysOn";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiControl(OptionsInputHotkeys) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "400 0";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+				};
+			};
+			new GuiBorderButtonCtrl(OptionsControlsKeyboardButton) {
+				profile = "PQButtonPillLeftProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "208 362";
+				extent = "184 50";
+				minExtent = "8 8";
+				visible = "1";
+				command = "OptionsGui.setControlDevice(\"Keyboard\");";
+				helpTag = "0";
+				text = "  Keyboard/Mouse";
+				groupNum = "1";
+				buttonType = "RadioButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlRight = "OptionsControlsJoystickButton";
+			};
+			new GuiBorderButtonCtrl(OptionsControlsJoystickButton) {
+				profile = "PQButtonPillRightProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "392 362";
+				extent = "120 50";
+				minExtent = "8 8";
+				visible = "1";
+				command = "OptionsGui.setControlDevice(\"Joystick\");";
+				helpTag = "0";
+				text = "Controller  ";
+				groupNum = "1";
+				buttonType = "RadioButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+				controlUp = "OptionsControlsJoystickSpeedYSlider";
+				controlLeft = "OptionsControlsKeyboardButton";
+			};
+		};
+		new GuiControl(OptionsOnlinePanel) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "30 88";
+			extent = "726 394";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+
+			new GuiControl(OptionsOnlineContent) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "717 0";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function OptionsGui::onGuiEditorPreSave(%this) {
+	OptionsHotkeysScroll.clear();
+}

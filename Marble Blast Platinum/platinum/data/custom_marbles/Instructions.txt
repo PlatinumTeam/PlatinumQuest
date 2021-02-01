@@ -1,0 +1,6 @@
+Here you can copy your own marble's DTS and its respective skin file (JPG, PNG, etc.)
+It should appear in Select Marble, category "Uncategorized."
+
+To create a category of marbles, simply create a new directory in here, titled what you want your new category to be called. Place any marble skins or DTS shapes into this directory for them to show up categorized in-game.
+
+If you have marble skins which you would like to apply to the default marble, copy the ball-superball.dts shape into the category where you would like to place the skins. All marble skins must be named <name>.marble.png (i.e. "base.marble.png"), otherwise they will not work with the marble.

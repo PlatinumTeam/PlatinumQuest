@@ -1,0 +1,352 @@
+//-----------------------------------------------------------------------------
+// LBStatsDlg.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+//--- OBJECT WRITE BEGIN ---
+new GuiChunkedBitmapCtrl(LBStatsDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	useVariable = "0";
+	tile = "0";
+		_guiSize = "800 600";
+		defaultControl = "LBStatsClose";
+		commandSelect = "RootGui.popDialog(LBStatsDlg);";
+		commandCancel = "RootGui.popDialog(LBStatsDlg);";
+		commandLT = "LBStatsDlg.prevCategory();";
+		commandRT = "LBStatsDlg.nextCategory();";
+		commandNameSelect = "Close";
+		commandNameLT = "Prev Category";
+		commandNameRT = "Next Category";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "178 61";
+		extent = "443 477";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+			wrap = "0";
+
+		new GuiMLTextCtrl(LBStatsTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "38 19";
+			extent = "366 36";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiScrollCtrl() {
+			profile = "PQScrollProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "33 54";
+			extent = "396 308";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiMLTextCtrl(LBStatsInfo) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "right";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "376 342";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiBorderButtonCtrl(LB_StatsGeneralCategory) {
+			profile = "PQButtonPillSmallLeftProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 356";
+			extent = "83 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"General\");";
+			helpTag = "0";
+			text = "  General";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LB_StatsGoldCategory) {
+			profile = "PQButtonPillSmallCenterProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "110 356";
+			extent = "48 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"Gold\");";
+			helpTag = "0";
+			text = "Gold";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LB_StatsPlatinumCategory) {
+			profile = "PQButtonPillSmallCenterProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "158 356";
+			extent = "81 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"Platinum\");";
+			helpTag = "0";
+			text = "Platinum";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LB_StatsUltraCategory) {
+			profile = "PQButtonPillSmallCenterProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "239 356";
+			extent = "51 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"Ultra\");";
+			helpTag = "0";
+			text = "Ultra";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LB_StatsPlatinumQuestCategory) {
+			profile = "PQButtonPillSmallCenterProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "290 356";
+			extent = "44 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"PlatinumQuest\");";
+			helpTag = "0";
+			text = "PQ";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LB_StatsCustomCategory) {
+			profile = "PQButtonPillSmallRightProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "334 356";
+			extent = "82 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBStatsDlg.selectCategory(\"Custom\");";
+			helpTag = "0";
+			text = "Custom  ";
+			groupNum = "1";
+			buttonType = "RadioButton";
+			repeatPeriod = "450";
+			repeatDecay = "0.958";
+		};
+		new GuiBorderButtonCtrl(LBStatsClose) {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "174 403";
+			extent = "94 47";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(LBStatsDlg);";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function LBStatsDlg::show(%this, %user) {
+	%this.user = %user;
+	%this.category = "General";
+	LB_StatsGeneralCategory.setValue(1);
+	LB_StatsGoldCategory.setValue(0);
+	LB_StatsPlatinumCategory.setValue(0);
+	LB_StatsUltraCategory.setValue(0);
+	LB_StatsPlatinumQuestCategory.setValue(0);
+	LB_StatsCustomCategory.setValue(0);
+
+	statsGetPlayerStats(%user);
+	RootGui.pushDialog(%this);
+}
+
+function LBStatsDlg::onWake(%this) {
+	%this.update();
+}
+
+function LBStatsDlg::onSleep(%this) {
+	PlayMissionGui.showBody();
+}
+
+function LBStatsDlg::prevCategory(%this) {
+	switch$ (%this.category) {
+		case "General": %this.selectCategory("Custom");
+		case "Gold": %this.selectCategory("General");
+		case "Platinum": %this.selectCategory("Gold");
+		case "Ultra": %this.selectCategory("Platinum");
+		case "PlatinumQuest": %this.selectCategory("Ultra");
+		case "Custom": %this.selectCategory("PlatinumQuest");
+	}
+}
+
+function LBStatsDlg::nextCategory(%this) {
+	switch$ (%this.category) {
+		case "General": %this.selectCategory("Gold");
+		case "Gold": %this.selectCategory("Platinum");
+		case "Platinum": %this.selectCategory("Ultra");
+		case "Ultra": %this.selectCategory("PlatinumQuest");
+		case "PlatinumQuest": %this.selectCategory("Custom");
+		case "Custom": %this.selectCategory("General");
+	}
+}
+
+function LBStatsDlg::selectCategory(%this, %category) {
+	%this.category = %category;
+
+	LB_StatsGeneralCategory.setValue(%category $= "General");
+	LB_StatsGoldCategory.setValue(%category $= "Gold");
+	LB_StatsPlatinumCategory.setValue(%category $= "Platinum");
+	LB_StatsUltraCategory.setValue(%category $= "Ultra");
+	LB_StatsPlatinumQuestCategory.setValue(%category $= "PlatinumQuest");
+	LB_StatsCustomCategory.setValue(%category $= "Custom");
+
+	%this.update();
+}
+
+function LBStatsDlg::update(%this) {
+	%stats = %this.stats[%this.user];
+	if (!isObject(%stats)) {
+		LBStatsTitle.setText("<bold:32><just:center>Loading...");
+		LBStatsInfo.setText("");
+		return;
+	}
+	LBStatsTitle.setText("<bold:32><just:center>" @ (%this.user $= $LB::Username ? "My Statistics" : "Statistics for " @ %stats.display));
+
+	if (%this.category $= "General") {
+		//General stats
+		%text = "<bold:24><just:center>General Statistics";
+		%text = %text @ "<font:18>\n";
+		%text = %text NL "<just:left>Total Rating: <just:right>" @ formatScore(%stats.general.rating);
+		%text = %text NL "<just:left>Overall Ranking: <just:right>" @ formatScore(%stats.general.rank);
+		%text = %text NL "<just:left>Total Time Travel: <just:right>" @ formatTimeHoursMs(%stats.general.total_bonus);
+		%text = %text NL "<just:left>Total Time: <just:right>" @ formatTimeHoursMs(%stats.general.total_time);
+		%text = %text NL "<just:left>Grand Total: <just:right>" @ formatTimeHoursMs(%stats.general.grand_total);
+	} else {
+		//Game-specific stats
+		%gameId = %stats.gameIds.getFieldValue(%this.category);
+		%game = %stats.games.getFieldValue(%gameId);
+
+		%text = "<bold:24><just:center>" @ %game.display @ " Statistics<font:18>";
+
+		//Difficulty breakdown
+		for (%i = 0; %i < %game.difficulties.getSize(); %i ++) {
+			%difficulty = %game.difficulties.getEntry(%i);
+			%percent = mFloor(100 * (%difficulty.completion / %difficulty.total_missions)) @ "%";
+			%text = %text NL "<just:left>" @ %difficulty.display @ " Completion: <just:right>"
+				@ %difficulty.completion @ " / " @ %difficulty.total_missions @ " (" @ %percent;
+			if (%difficulty.completion == %difficulty.total_missions) {
+				%text = %text @ " in " @ formatTimeHoursMs(%difficulty.total_time) @ ")";
+			} else {
+				%text = %text @ ")";
+			}
+		}
+		//Total game completion
+		%percent = mFloor(100 * (%game.completion.completion / %game.totals.total_missions)) @ "%";
+		%text = %text NL "<just:left>Game Completion: <just:right>"
+			@ %game.completion.completion @ " / " @ %game.totals.total_missions @ " (" @ %percent;
+		if (%game.completion.completion == %game.totals.total_missions) {
+			%text = %text @ " in " @ formatTimeHoursMs(%game.completion.total_time) @ ")";
+		} else {
+			%text = %text @ ")";
+		}
+		%text = %text NL "<just:left>";
+
+		//Challenge times
+		if (%game.has_platinum_times) {
+			%percent = mFloor(100 * (%game.completion.platinum_count / %game.totals.total_platinums)) @ "%";
+			%text = %text NL "<just:left>Total " @ %game.platinum_time_name @ "s: <just:right>"
+				@ mFloor(%game.completion.platinum_count) @ " / " @ mFloor(%game.totals.total_platinums) @ " (" @ %percent @ ")";
+		}
+		if (%game.has_ultimate_times) {
+			%percent = mFloor(100 * (%game.completion.ultimate_count / %game.totals.total_ultimates)) @ "%";
+			%text = %text NL "<just:left>Total " @ %game.ultimate_time_name @ "s: <just:right>"
+				@ mFloor(%game.completion.ultimate_count) @ " / " @ mFloor(%game.totals.total_ultimates) @ " (" @ %percent @ ")";
+		}
+		if (%game.has_awesome_times && (%game.completion.awesome_count > 0) && $pref::ShowAwesomeHints) {
+			%percent = mFloor(100 * (%game.completion.awesome_count / %game.totals.total_awesomes)) @ "%";
+			%text = %text NL "<just:left>Total " @ %game.awesome_time_name @ "s: <just:right>"
+				@ mFloor(%game.completion.awesome_count) @ " / " @ mFloor(%game.totals.total_awesomes) @ " (" @ %percent @ ")";
+		}
+		//Easter Eggs
+		if (%game.has_easter_eggs) {
+			%percent = mFloor(100 * (%game.completion.egg_count / %game.totals.total_eggs)) @ "%";
+			%text = %text NL "<just:left>Total " @ %game.easter_egg_name @ "s: <just:right>"
+				@ mFloor(%game.completion.egg_count) @ " / " @ mFloor(%game.totals.total_eggs) @ " (" @ %percent @ ")";
+		}
+		%text = %text NL "<just:left>Total Rating: <just:right>" @ formatScore(%game.rating) @ " (Ranked #" @ formatScore(%game.rank) @ ")";
+	}
+
+	LBStatsInfo.setText(%text);
+}
+
+function LBStatsDlg::onPlayerStatsUpdate(%this, %parsed) {
+	%this.stats[%parsed.username] = %parsed;
+	%this.update();
+}

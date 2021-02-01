@@ -1,0 +1,211 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         goldTime = "3500";
+         artist = "Alex Swanson";
+         music = "Beach Party.ogg";
+         level = "17";
+         name = "Breezeway";
+         startHelpText = "Race by the Duct Fans to finish!";
+         type = "beginner";
+         desc = "Watch out for the duct fans!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.5603952 0.3415451 -0.7545224";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         scale = "1 1 1";
+         position = "0 0 0";
+         locked = "true";
+         rotation = "1 0 0 0";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "2.60117 -3.09086 500.118";
+         rotation = "0 0 1 89.95439";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "47.0869 -3.09183 500.113";
+         rotation = "0 0 1 90.5273";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new Trigger(Bounds) {
+      position = "-1.50047 3.92374 494.141";
+      rotation = "1 0 0 0";
+      scale = "52.1696 14.0671 14.4808";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new InteriorInstance() {
+      position = "0.526207 -2.77715 499.622";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_mbg/beginner/training_fans.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape() {
+      position = "16.4286 -7.79968 500.858";
+      rotation = "-0.0005629627 0.7071066 0.7071066 179.935";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+   };
+   new StaticShape() {
+      position = "32.5512 2.2 500.555";
+      rotation = "-1 0 0 89.99999";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+   };
+   new StaticShape() {
+      position = "27.1647 -0.297122 501.271";
+      rotation = "0.04491669 0.05498008 0.9974766 78.63714";
+      scale = "1 1 1";
+      dataBlock = "SignCautionCaution";
+   };
+   new StaticShape() {
+      position = "10.9721 -5.77621 501.377";
+      rotation = "0.05579418 -0.07481296 0.9956355 106.8101";
+      scale = "1 1 1";
+      dataBlock = "SignCautionCaution";
+   };
+   new StaticShape() {
+      position = "46.8268 -5.58626 505.642";
+      rotation = "0 0 1 95.111";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger() {
+      position = "10.9996 -0.466551 499.922";
+      rotation = "1 0 0 0";
+      scale = "11.0481 5.45451 1";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Beware of the wind from the fans.";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "-0.451545 1.062212 502.9843";
+         rotation = "0.06570404 -0.09190083 0.9935982 109.2224";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath2) {
+         position = "13.78588 -0.1508271 501.3697";
+         rotation = "0.02391458 -0.07965956 0.9965352 146.6888";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "2500";
+      };
+      new StaticShape(CameraPath3) {
+         position = "23.97395 -1.494959 500.8123";
+         rotation = "-0.006240885 0.007477996 0.9999526 100.3083";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "2500";
+      };
+      new StaticShape(CameraPath4) {
+         position = "34.86197 -3.854362 500.6828";
+         rotation = "0.3542498 0.03262827 -0.9345815 11.2569";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "2500";
+      };
+      new StaticShape(CameraPath5) {
+         position = "45.05943 -4.024111 502.0993";
+         rotation = "0.2352407 0.1567917 -0.9592071 69.58791";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath6";
+            useRotation = "1";
+            timeToNext = "5000";
+      };
+      new StaticShape(CameraPath6) {
+         position = "45.05943 -4.024111 502.0993";
+         rotation = "0.2352407 0.1567917 -0.9592071 69.58791";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            placed = "1";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

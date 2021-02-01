@@ -1,0 +1,4151 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+new GuiControlProfile(PMDifficultyButtonProfile : PQButtonProfile) {
+	fontType = $DefaultFont["Bold"];
+	fontSize = "26";
+	fontColor = "0 0 0 255";
+	justify = "center";
+	bitmap = "./play/selector.png";
+	hasBitmapArray = true;
+};
+new GuiControlProfile(PMBarButtonProfile : PQButtonProfile) {
+	fillColor = "85 85 85 255";
+	fillColorNA = "153 153 153 255";
+	justify = "center";
+	bitmap = "./play/barbutton.png";
+	hasBitmapArray = true;
+};
+new GuiControlProfile(PMBarButtonLeftProfile : PQButtonProfile) {
+	fillColor = "85 85 85 255";
+	fillColorNA = "153 153 153 255";
+	justify = "center";
+	bitmap = "./play/barbuttonleft.png";
+	hasBitmapArray = true;
+};
+new GuiControlProfile(PMBarButtonRightProfile : PQButtonProfile) {
+	fillColor = "85 85 85 255";
+	fillColorNA = "153 153 153 255";
+	justify = "center";
+	bitmap = "./play/barbuttonright.png";
+	hasBitmapArray = true;
+};
+new GuiControlProfile(PMBarButtonTabProfile : PQButtonProfile) {
+	fillColor = "85 85 85 255";
+	fillColorNA = "153 153 153 255";
+	justify = "center";
+	bitmap = "./play/barbuttontab.png";
+	hasBitmapArray = true;
+};
+new GuiControlProfile(PMLevelNameBorderProfile) {
+	fillColor = "255 255 255 128";
+	bitmap = "./play/levelnameborder.png";
+	hasBitmapArray = true;
+	opaque = false;
+	modal = false;
+};
+new GuiControlProfile(PMInfoBoxBorderProfile) {
+	fillColor = "255 255 255 128";
+	bitmap = "./play/infoboxborder.png";
+	hasBitmapArray = true;
+	opaque = false;
+};
+new GuiControlProfile(PMLevelNameProfile : GuiMLTextProfile) {
+	modal = false;
+};
+new GuiControlProfile(PMGMLTextProfile : GuiMLTextProfile) {
+	fontColorLink = "53 53 204";
+	fontColorLinkHL = "0 0 150";
+};
+new GuiControlProfile(PMCustomListProfile : PQTextListProfile) {
+	fontSize = "18";
+};
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(PlayMissionGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "1024 768";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		commandLT = "PlayMissionGui.showGames();";
+		commandRT = "PlayMissionGui.showDifficulties();";
+		commandCancel = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.exit();";
+		commandNameLT = "Games";
+		commandNameRT = "Difficulties";
+		commandNameCancel = "Back";
+		_guiSize = "1024 768";
+		scoresPerPage = "5";
+
+	new GuiControl(PM_NotQualifiedScreen) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 0";
+		extent = "1024 768";
+		minExtent = "27 27";
+		visible = "0";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = "1024 768";
+			minExtent = "27 27";
+			visible = "1";
+			helpTag = "0";
+				blur = "1";
+		};
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = "1024 768";
+			minExtent = "27 27";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./game/hudfill.png";
+			wrap = "0";
+		};
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = "1024 768";
+			minExtent = "27 27";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./game/hudfill.png";
+			wrap = "0";
+		};
+		new GuiMLTextCtrl(PM_NotQualifiedText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "312 100";
+			extent = "400 27";
+			minExtent = "27 27";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+	};
+	new GuiControl(PM_MissionBox) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "height";
+		position = "10 0";
+		extent = "360 768";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+			blur = "1";
+
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = "360 768";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./play/missionlist";
+			wrap = "0";
+		};
+		new GuiBorderButtonCtrl(PM_GameSelector) {
+			profile = "PMDifficultyButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "-3 -21";
+			extent = "191 101";
+			minExtent = "8 8";
+			visible = "1";
+			command = "PlayMissionGui.showGames();";
+			helpTag = "0";
+			text = "Gold   ";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(PM_DifficultySelector) {
+			profile = "PMDifficultyButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "171 -21";
+			extent = "191 101";
+			minExtent = "8 8";
+			visible = "1";
+			command = "PlayMissionGui.showDifficulties();";
+			helpTag = "0";
+			text = "Beginner   ";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiScrollCtrl(PM_MissionScroll) {
+			profile = "GuiPhilScrollProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "6 75";
+			extent = "358 694";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiControl(PM_MissionListScrolling) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "348 90";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+	};
+	new GuiButtonBaseCtrl(PM_Popups) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 0";
+		extent = "1024 768";
+		minExtent = "8 8";
+		visible = "0";
+		command = "PlayMissionGui.hideSelectors();";
+		helpTag = "0";
+		text = "Button";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+
+		new GuiBitmapCtrl(PM_DifficultyList) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "197 50";
+			extent = "158 105";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			bitmap = "./lb/play/pc_trans/0";
+			wrap = "0";
+
+			new GuiScrollCtrl(PM_DifficultyContainer) {
+				profile = "GuiPhilScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "158 105";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiControl(PM_DifficultyScroll) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "158 105";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+				};
+			};
+		};
+		new GuiBitmapCtrl(PM_CustomDifficultyList) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "197 50";
+			extent = "300 400";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			bitmap = "./lb/play/pc_trans/0";
+			wrap = "0";
+
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "300 400";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./play/difficulty_n";
+				wrap = "0";
+			};
+			new GuiScrollCtrl(PM_CustomDifficultyContainer) {
+				profile = "GuiPhilScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "300 400";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(PM_CustomDifficultyScroll) {
+					profile = "PMCustomListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "285 400";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.selectCustomDifficulty();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+		};
+		new GuiBitmapCtrl(PM_GameList) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "23 50";
+			extent = "158 175";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+			bitmap = "./lb/play/pc_trans/0";
+			wrap = "0";
+
+			new GuiScrollCtrl(PM_GameContainer) {
+				profile = "GuiPhilScrollProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "158 175";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiControl(PM_GameScroll) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "158 175";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+				};
+			};
+		};
+	};
+	new GuiControl(PM_InfoBox) {
+		profile = "PQWindowProfile";
+		horizSizing = "relative";
+		vertSizing = "top";
+		position = "466 398";
+		extent = "569 213";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl(PM_MissionInfoPanel) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "19 57";
+			extent = "529 141";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiMLTextCtrl(PM_MissionScoresInfo) {
+				profile = "PMGMLTextProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = "343 0";
+				extent = "186 138";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiMLTextCtrl(PM_MissionInfo) {
+				profile = "PMGMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "332 99";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiMLTextCtrl(PM_MissionModesInfo) {
+				profile = "PMGMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "0 104";
+				extent = "332 99";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "left";
+				vertSizing = "height";
+				position = "337 3";
+				extent = "2 135";
+				minExtent = "1 1";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./play/extras/extraslinev.png";
+				wrap = "0";
+			};
+			new GuiControl(PM_ScoreModeButtons) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "0 139";
+				extent = "531 28";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiBitmapButtonCtrl(PM_ScoreModeEgg) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "28 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					text = "Button";
+					command = "PlayMissionGui.setScoreMode(\"egg\");";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					bitmap = "./play/scoreModes/egg";
+				};
+				new GuiBitmapButtonCtrl(PM_ScoreModeLap) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "26 0";
+					extent = "33 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					text = "Button";
+					command = "PlayMissionGui.setScoreMode(\"lap\");";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					bitmap = "./play/scoreModes/lap";
+				};
+				new GuiBitmapButtonCtrl(PM_ScoreModeQuota100) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "62 0";
+					extent = "46 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					text = "Button";
+					command = "PlayMissionGui.setScoreMode(\"quota100\");";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					bitmap = "./play/scoreModes/quota100";
+				};
+				new GuiBitmapButtonCtrl(PM_ScoreModeDD) {
+					profile = "GuiDefaultProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "110 0";
+					extent = "28 28";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					text = "Button";
+					command = "PlayMissionGui.setScoreMode(\"dd\");";
+					groupNum = "-1";
+					buttonType = "ToggleButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+					bitmap = "./play/scoreModes/dd";
+				};
+			};
+		};
+		new GuiMLTextCtrl(PM_MissionTitle) {
+			profile = "PMGMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "16 5";
+			extent = "332 56";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiMLTextCtrl(PM_MissionScoresTitle) {
+			profile = "PMGMLTextProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "357 15";
+			extent = "186 41";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+	};
+	new GuiControl(PM_UserlistBox) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "824 -11";
+		extent = "211 420";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQWindowProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "-11 0";
+			extent = "222 431";
+			minExtent = "61 61";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiControl(PM_LBUserlistBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "222 431";
+				minExtent = "61 61";
+				visible = "0";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_LBUserlistScroll) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "196 405";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(PM_LBUserList) {
+						profile = "GuiDefaultProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "196 14";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "1";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl(PM_MPUserlistBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "222 431";
+				minExtent = "61 61";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_MPUserlistScroll) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "196 405";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiControl(PM_MPUserList) {
+						profile = "GuiDefaultProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "196 14";
+						minExtent = "1 1";
+						visible = "1";
+						helpTag = "0";
+					};
+				};
+			};
+			new GuiControl(PM_TeamUserlistBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "222 431";
+				minExtent = "61 61";
+				visible = "0";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_TeamUserlistScroll) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "196 405";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(PM_TeamUserList) {
+						profile = "GuiDefaultProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "196 14";
+						minExtent = "1 1";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+		};
+	};
+	new GuiControl(PM_ChatBox) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = "466 -11";
+		extent = "358 420";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "PQWindowProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = "369 431";
+			minExtent = "61 61";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiControl(PM_LBChatBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "369 431";
+				minExtent = "61 61";
+				visible = "0";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_LBChatContainer) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "343 375";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(PM_LBChatText) {
+						profile = "GuiMLTextProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "324 14";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl(PM_MPChatBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "369 431";
+				minExtent = "61 61";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_MPChatContainer) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "343 375";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(PM_MPChatText) {
+						profile = "GuiMLTextProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "324 14";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl(PM_TeamChatBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "369 431";
+				minExtent = "61 61";
+				visible = "0";
+				helpTag = "0";
+
+				new GuiScrollCtrl(PM_TeamChatContainer) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "343 375";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(PM_TeamChatText) {
+						profile = "GuiMLTextProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "324 14";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "13 388";
+				extent = "245 30";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "width";
+					vertSizing = "top";
+					position = "0 0";
+					extent = "245 1";
+					minExtent = "8 1";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "./lb/core/transparency/75/transparencyfill";
+					wrap = "0";
+				};
+				new GuiTextEditCtrl(PM_ChatEntry) {
+					profile = "GuiMediumTextEditProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 1";
+					extent = "245 31";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.chatUpdate();";
+					altCommand = "PlayMissionGui.sendChat();";
+					helpTag = "0";
+					maxLength = "255";
+					maxPixelWidth = "0";
+					historySize = "0";
+					password = "0";
+					tabComplete = "0";
+					sinkAllKeyEvents = "0";
+						allowColorChars = "1";
+						lineSpacing = "2";
+						maxChars = "255";
+				};
+				new GuiMLTextCtrl(PM_ChatEntryDisabledText) {
+					profile = "GuiMediumTextEditProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 1";
+					extent = "245 27";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "1";
+					maxChars = "255";
+				};
+			};
+			new GuiControl(PM_ChatToggles) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "251 382";
+				extent = "112 43";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiBorderButtonCtrl(PM_ChatToggleGlobal) {
+					profile = "PQButtonPillLeftProfile";
+					horizSizing = "left";
+					vertSizing = "top";
+					position = "0 0";
+					extent = "56 43";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.toggleChat(\"global\");";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "1";
+					buttonType = "RadioButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+						bitmap = "platinum/client/ui/mp/play/global.png";
+						borderColor = "255 255 255";
+						bitmapOffset = "3 0";
+						tooltip = "Global";
+				};
+				new GuiBorderButtonCtrl(PM_ChatToggleServer) {
+					profile = "PQButtonPillRightProfile";
+					horizSizing = "left";
+					vertSizing = "top";
+					position = "56 0";
+					extent = "56 43";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.toggleChat(\"server\");";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "1";
+					buttonType = "RadioButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+						bitmap = "platinum/client/ui/mp/play/server.png";
+						borderColor = "255 255 255";
+						bitmapOffset = "-3 0";
+						tooltip = "Server";
+				};
+			};
+			new GuiControl(PM_TeamChatToggles) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "251 382";
+				extent = "112 43";
+				minExtent = "8 8";
+				visible = "0";
+				helpTag = "0";
+
+				new GuiBorderButtonCtrl(PM_ChatToggleTeamGlobal) {
+					profile = "PQButtonPillLeftProfile";
+					horizSizing = "left";
+					vertSizing = "top";
+					position = "0 0";
+					extent = "39 43";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.toggleChat(\"global\");";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "2";
+					buttonType = "RadioButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+						bitmap = "platinum/client/ui/mp/play/global.png";
+						borderColor = "255 255 255";
+						bitmapOffset = "3 0";
+						tooltip = "Global";
+				};
+				new GuiBorderButtonCtrl(PM_ChatToggleTeamServer) {
+					profile = "PQButtonPillCenterProfile";
+					horizSizing = "left";
+					vertSizing = "top";
+					position = "39 0";
+					extent = "34 43";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.toggleChat(\"server\");";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "2";
+					buttonType = "RadioButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+						bitmap = "platinum/client/ui/mp/play/server.png";
+						borderColor = "255 255 255";
+						tooltip = "Server";
+				};
+				new GuiBorderButtonCtrl(PM_ChatToggleTeamTeam) {
+					profile = "PQButtonPillRightProfile";
+					horizSizing = "left";
+					vertSizing = "top";
+					position = "73 0";
+					extent = "39 43";
+					minExtent = "8 8";
+					visible = "1";
+					command = "PlayMissionGui.toggleChat(\"team\");";
+					helpTag = "0";
+					text = "Button";
+					groupNum = "2";
+					buttonType = "RadioButton";
+					repeatPeriod = "1000";
+					repeatDecay = "1";
+						bitmap = "platinum/client/ui/mp/play/team.png";
+						borderColor = "255 255 255";
+						bitmapOffset = "-3 0";
+						tooltip = "Team";
+				};
+			};
+		};
+	};
+	new GuiControl(PM_ButtonBox) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "top";
+		position = "459 678";
+		extent = "434 90";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+			wrap = "0";
+	};
+	new GuiControl(PM_ExtrasBox) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "top";
+		position = "364 593";
+		extent = "719 128";
+		minExtent = "8 8";
+		visible = "0";
+		helpTag = "0";
+			wrap = "0";
+	};
+	new GuiButtonBaseCtrl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "left";
+		vertSizing = "top";
+		position = "1014 758";
+		extent = "10 10";
+		minExtent = "8 8";
+		visible = "1";
+		variable = "";
+		command = "$Unlock::PlayAll=true;PlayMissionGui.schedule(0,showMissionList);PlayMissionGui.schedule(0,updateMissionInfo);";
+		helpTag = "0";
+		groupNum = "-1";
+		buttonType = "PushButton";
+		repeatPeriod = "1000";
+		repeatDecay = "1";
+	};
+};
+//--- OBJECT WRITE END ---
+
+//-----------------------------------------------------------------------------
+// UI lifecycle
+
+function PlayMissionGui::open(%this) {
+	RootGui.setContent(%this);
+}
+
+function PlayMissionGui::init(%this) {
+	if (mp()) {
+		if ($Server::Hosting && !$Server::_Dedicated) {
+			%this.ml = getMissionList("mp");
+		} else {
+			%this.ml = getMissionList("server");
+		}
+
+		//Default mission list
+		%defaultGame = "Hunt";
+		%defaultType = "Beginner";
+
+		//Preferences
+		%game = ($MPPref::CurrentGame $= "" ? %defaultGame : $MPPref::CurrentGame);
+		%type = ($MPPref::MissionType $= "" ? %defaultType : $MPPref::MissionType);
+		%level = ($MPPref::SelectedMissionIndex $= "" ? 0 : $MPPref::SelectedMissionIndex);
+	} else if (lb()) {
+		%this.ml = getMissionList("lb");
+
+		//Default mission list
+		%defaultGame = "PlatinumQuest";
+		%defaultType = "Tutorial";
+
+		//Preferences
+		%game = ($LBPref::CurrentGame $= "" ? %defaultGame : $LBPref::CurrentGame);
+		%type = ($LBPref::MissionType $= "" ? %defaultType : $LBPref::MissionType);
+		%level = ($LBPref::SelectedMissionIndex $= "" ? 0 : $LBPref::SelectedMissionIndex);
+	} else {
+		%this.ml = getMissionList("offline");
+
+		//Default mission list
+		%defaultGame = "PlatinumQuest";
+		%defaultType = "Tutorial";
+
+		//Preferences
+		%game = ($pref::CurrentGame $= "" ? %defaultGame : $pref::CurrentGame);
+		%type = ($pref::MissionType $= "" ? %defaultType : $pref::MissionType);
+		%level = ($pref::SelectedMissionIndex $= "" ? 0 : $pref::SelectedMissionIndex);
+	}
+
+	//Can't find the game? Use a default
+	if (findField(%this.getGameList(), %game) == -1) {
+		%game = %defaultGame;
+
+		//Weird worst-case scenario where the default game doesn't exist either
+		if (findField(%this.getGameList(), %game) == -1) {
+			%game = getField(getRecord(%this.getGameList(), 0), 0);
+		}
+	}
+	%this.setGame(%game);
+
+	//Check if we have the selected difficulty in the list for our game
+	if (findField(%this.getDifficultyList(%game), %type) == -1) {
+		%type = %defaultType;
+
+		//Seriously?
+		if (findField(%this.getDifficultyList(%game), %type) == -1) {
+			//Use the first difficulty we can find
+			%type = getField(getRecord(%this.getDifficultyList(%game), 0), 0);
+		}
+	}
+	//Show the mission list
+	%this.setMissionType(%type);
+
+	//Break off here to play the intro before we load a mission
+	if (!$pref::Introduced) {
+		//You need to go play training wheels!
+		menuStartIntroduction();
+		return;
+	}
+
+	%this.buildMissionList(%game, %type);
+	%list = %this.getMissionList(%game, %type);
+
+	//Is their level past the end (removed stuff)
+	if (%level >= %list.getSize()) {
+		//Just use the last one then
+		%level = %list.getSize() - 1;
+		echo("Invalid selected mission index");
+
+		//And if all else fails
+		%info = %list.getEntry(%level);
+		if (!isObject(%info) || !isScriptFile(%info.file) || %info.ignoreMenu) {
+			error("Couldn't find last mission or something");
+			%level = 0;
+		}
+	} else if (%level < 0) {
+		//You moron
+		%level = 0;
+
+		echo("Selected a negative mission because what");
+	}
+
+	//If we shouldn't show the current mission, go pick a different one
+	%info = %list.getEntry(%level);
+	if (!isObject(%info) || !isScriptFile(%info.file)) {
+		error("Couldn't load menu mission");
+		%level = 0;
+		%info = %list.getEntry(%level);
+	}
+	if (isObject(%info)) {
+		%count = 0;
+		while ((!Unlock::canDisplayMission(%info) || %info.ignoreMenu) && %count < 100) {
+			%count ++; // Just in case
+			echo("Going to show invisible mission " @ %info.file @ "... trying again");
+			//Pick a new mission
+			if (%list.getSize() == (%level + 1)) {
+				echo("Ran out of levels going forwards, let's see if we can go backwards.");
+				break;
+			}
+			%level ++;
+			%info = %list.getEntry(%level);
+			echo("Trying " @ %info.file @ " instead");
+		}
+		%count = 0;
+		while ((!Unlock::canDisplayMission(%info) || %info.ignoreMenu) && %count < 100) {
+			%count ++; // Just in case
+			echo("Going to show invisible mission " @ %info.file @ "... trying again");
+			if (%level == 0) {
+				//Dunno
+				echo("No other levels in this list to select... guess we're going to give it away then.");
+				break;
+			}
+			%level --;
+			%info = %list.getEntry(%level);
+			echo("Trying " @ %info.file @ " instead");
+		}
+	} else {
+		error("Can't even find one mission in this difficulty? Who the hell knows? Just select another one.");
+		%level = 0;
+	}
+
+	//Show the stuff
+	%this.buildGameList();
+	if (!mp() || $Server::Lobby) {
+		%this.setMissionByIndex(%level);
+	}
+
+	echo("PlayMissionGui Init:");
+	echo("   Mission List: " @ %this.ml);
+	echo("   Game: " @ %game);
+	echo("   Difficulty: " @ %type);
+	echo("   Mission Index: " @ %level);
+	echo("   Mission: " @ %info.name);
+}
+
+function PlayMissionGui::onWake(%this) {
+	Unlock::updateCaches();
+	RootGui.resetDisplay();
+
+	%this.scoresPerPage = $LBPref::GlobalPageSize;
+	%this.globalScoreMode = "";
+
+	activateMenuHandler(PMMenu);
+
+	%this.setTickable(true);
+
+	//If we shouldn't show the current mission, go pick a different one
+	if (!Unlock::canDisplayMission(%this.getMissionInfo())) {
+		//Update the display
+		%this.showMissionList();
+
+		//Pick a new mission
+		if (%this.getMissionList($CurrentGame, $MissionType).getSize() < %this.selectedIndex + 1) {
+			//Try to pick the next mission if we can
+			%this.setMissionByIndex(%this.selectedIndex + 1);
+			if ($pref::AnimatePreviews && !mp()) {
+				%this.loadMission();
+			}
+		} else if (%this.selectedIndex > 0) {
+			//Or the previous one if we're at the end
+			%this.setMissionByIndex(%this.selectedIndex - 1);
+			if ($pref::AnimatePreviews && !mp()) {
+				%this.loadMission();
+			}
+		}
+	}
+
+	%this.initInterface();
+
+	//Reload scores if we're opening this after a level (or for the first time)
+	if (lb()) {
+		LBUpdateChat();
+		%this.loadOnlineScores();
+		devecho("Scores1");
+
+		if (mp()) {
+			if ($Server::Hosting) {
+				LBSetMode(6); //Hosting
+			} else {
+				LBSetMode(7); //Game Lobby
+			}
+		} else {
+			LBSetMode(1); //Level Select
+		}
+	}
+
+	if (mp()) {
+		%this.clearServerPlayerList();
+		%this.updateServerPlayerList();
+	}
+}
+
+function PlayMissionGui::initInterface(%this) {
+	//If we have already seen the credits, show the option to see them again
+	if ($pref::Congratulated) {
+		$PMG::BarButton["Extra", "Count"] = 7;
+		$PMG::BarButton["ExtraLB", "Count"] = 6;
+	}
+
+	if (mp()) {
+		%this.buildButtonBar("BottomMP");
+		%this.buildButtonBar("ExtraMP");
+		%this.updateMPButtons();
+		%this.clearServerPlayerList();
+		%this.updateServerPlayerList();
+	} else if (lb()) {
+		%this.buildButtonBar("BottomLB");
+		%this.buildButtonBar("ExtraLB");
+	} else {
+		%this.buildButtonBar("Bottom");
+		%this.buildButtonBar("Extra");
+	}
+
+	PM_MissionPlay.commandLeft = "ControllerGui.selectControl(PlayMissionGui.buttonFrameList.getEntry(min(PlayMissionGui.buttonFrameList.getSize(), $ThisControl.controlLeftPosition)));";
+
+	//So we can actually select stuff
+	%this.showGlobalScores = false;
+	%this.showMissionList();
+	%this.updateMissionInfo();
+	%this.showBody();
+
+	if (mp()) {
+		%this.updateChatPanel(true);
+		PM_DifficultySelector.setActive($Server::Hosting);
+		PM_GameSelector.setActive($Server::Hosting);
+		if ($Server::Hosting) {
+			%this.reactivateMissionList();
+		} else {
+			%this.deactivateMissionList();
+		}
+	} else {
+		PM_DifficultySelector.setActive(true);
+		PM_GameSelector.setActive(true);
+		%this.reactivateMissionList();
+	}
+
+	if (mp() && $Server::Hosting) {
+		%info = %this.getMissionInfo();
+		commandToServer('SetMission', %info.file, $CurrentGame, $MissionType, %this.ml.getGameMode($CurrentGame));
+	}
+	%this.updateMissionList();
+
+	if (mp()) {
+		setDiscordStatus("In a Server Lobby");
+	} else {
+		setDiscordStatus("In Level Select");
+	}
+}
+
+function PlayMissionGui::onSleep(%this) {
+	deactivateMenuHandler(PMMenu);
+
+	if (mp()) {
+		%this.clearServerPlayerList();
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Dropdowns
+
+function PlayMissionGui::buildGameList(%this) {
+	%games = %this.getGameList();
+	%height = 35;
+	PM_GameScroll.clear();
+
+	%extent = (%height * getRecordCount(%games));
+	PM_GameScroll.setExtent(158 SPC %extent);
+
+	%extent = min(%extent, getWord(Canvas.getExtent(), 1) - 50);
+	PM_GameList.setExtent(158 SPC %extent);
+	PM_GameContainer.setExtent(158 SPC %extent);
+
+	for (%i = 0; %i < getRecordCount(%games); %i ++) {
+		%entry = getRecord(%games, %i);
+		%name = getField(%entry, 0);
+		%display = getField(%entry, 1);
+
+		%buttonName = "PM_GameButton_" @ %i;
+		%buttonNameU = "PM_GameButton_" @ (%i - 1);
+		%buttonNameD = "PM_GameButton_" @ (%i + 1);
+
+		PM_GameScroll.add(new GuiBitmapButtonTextCtrl(%buttonName) {
+			profile = "PMDifficultyButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "1 " @ (%i * %height);
+			extent = "156 " @ %height;
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = %display;
+			command = "PlayMissionGui.setGame(\"" @ %name @ "\"); PlayMissionGui.showMissionList();";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./play/difficulty";
+				controlUp = %buttonNameU;
+				controlDown = %buttonNameD;
+				commandCancel = "PlayMissionGui.hideSelectors();";
+				commandNameCancel = "Close";
+		});
+	}
+
+	%this.buildDifficultyList();
+}
+
+function PlayMissionGui::buildDifficultyList(%this) {
+	if (%this.useCustomDifficultyList()) {
+		%this.buildCustomDifficultyList();
+		return;
+	}
+
+	%diffs = %this.getDifficultyList($CurrentGame);
+
+	%height = 35;
+	PM_DifficultyScroll.clear();
+
+	for (%i = 0; %i < getRecordCount(%diffs); %i ++) {
+		%entry = getRecord(%diffs, %i);
+		%name = getField(%entry, 0);
+		%display = getField(%entry, 1);
+
+		if (!%this.ml.hasMissionList($CurrentGame, %name)) {
+			//No files in this difficulty, scrap it and go to the next one
+			continue;
+		}
+
+		%y = PM_DifficultyScroll.getCount() * %height;
+
+		%buttonName = "PM_DifficultyButton_" @ %i;
+		%buttonNameU = "PM_DifficultyButton_" @ (%i - 1);
+		%buttonNameD = "PM_DifficultyButton_" @ (%i + 1);
+
+		PM_DifficultyScroll.add(new GuiBitmapButtonTextCtrl(%buttonName) {
+			profile = "PMDifficultyButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "1 " @ %y;
+			extent = "156 " @ %height;
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = %display;
+			command = "PlayMissionGui.setMissionType(\"" @ %name @ "\"); PlayMissionGui.showMissionList();";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./play/difficulty";
+				controlUp = %buttonNameU;
+				controlDown = %buttonNameD;
+				commandCancel = "PlayMissionGui.hideSelectors();";
+				commandNameCancel = "Close";
+		});
+		%count ++;
+	}
+
+	%extent = (%height * %count);
+	PM_DifficultyScroll.setExtent(158 SPC %extent);
+
+	%extent = min(%extent, getWord(Canvas.getExtent(), 1) - 50);
+	PM_DifficultyList.setExtent(158 SPC %extent);
+	PM_DifficultyContainer.setExtent(158 SPC %extent);
+}
+
+function PlayMissionGui::buildCustomDifficultyList(%this) {
+	%diffs = %this.getDifficultyList($CurrentGame);
+
+	PM_CustomDifficultyScroll.clear();
+
+	for (%i = 0; %i < getRecordCount(%diffs); %i ++) {
+		%entry = getRecord(%diffs, %i);
+		%name = getField(%entry, 0);
+
+		if (!%this.ml.hasMissionList($CurrentGame, %name)) {
+			//No files in this difficulty, scrap it and go to the next one
+			continue;
+		}
+
+		%node = %this.ml.getCustomDifficultyTreeNode(%name);
+		%depth = TreeCollapseDepth(%this.ml.customDifficultyTree, %node);
+		%path = TreeCollapsePath(%this.ml.customDifficultyTree, %node);
+		%path = getSubStr(%path, 0, strlen(%path) - 1); // Remove trailing /
+
+		%indent = "";
+		if (%depth > 1) {
+			%indent = %indent @ strRepeat("    ", %depth - 2);
+			%indent = %indent @ "- ";
+		}
+
+		PM_CustomDifficultyScroll.addRow(%i, %indent @ %path TAB %name);
+	}
+}
+
+function PlayMissionGui::selectCustomDifficulty(%this) {
+	%id = PM_CustomDifficultyScroll.getSelectedId();
+	%diff = getField(PM_CustomDifficultyScroll.getRowTextById(%id), 1);
+	%this.setMissionType(%diff);
+	PlayMissionGui.showMissionList();
+}
+
+function PlayMissionGui::useCustomDifficultyList(%this) {
+	return !lb() && ($CurrentGame $= "Custom");
+}
+
+function PlayMissionGui::showGames(%this) {
+	PM_GameList.setVisible(!PM_GameList.isVisible());
+	PM_GameSelector.setValue(PM_GameList.isVisible());
+
+	PM_DifficultyList.setVisible(false);
+	PM_DifficultySelector.setValue(false);
+	PM_CustomDifficultyList.setVisible(false);
+	PM_Popups.setVisible(PM_GameList.isVisible());
+
+	if (ControllerGui.isJoystick()) {
+		if (PM_GameList.isVisible()) {
+			ControllerGui.selectControl(PM_GameScroll.getObject(0));
+		} else {
+			%this.controllerHighlightMission();
+		}
+	}
+}
+
+function PlayMissionGui::showDifficulties(%this) {
+	if (%this.useCustomDifficultyList()) {
+		PM_CustomDifficultyList.setVisible(!PM_CustomDifficultyList.isVisible());
+	} else {
+		PM_DifficultyList.setVisible(!PM_DifficultyList.isVisible());
+	}
+	PM_DifficultySelector.setValue(PM_DifficultyList.isVisible());
+
+	PM_GameList.setVisible(false);
+	PM_GameSelector.setValue(false);
+	PM_Popups.setVisible(PM_DifficultyList.isVisible() || PM_CustomDifficultyList.isVisible());
+
+	if (ControllerGui.isJoystick()) {
+		if (PM_DifficultyList.isVisible() || PM_CustomDifficultyList.isVisible()) {
+			ControllerGui.selectControl(PM_DifficultyScroll.getObject(0));
+		} else {
+			%this.controllerHighlightMission();
+		}
+	}
+}
+
+function PlayMissionGui::hideSelectors(%this) {
+	PM_DifficultyList.setVisible(false);
+	PM_DifficultySelector.setValue(false);
+	PM_CustomDifficultyList.setVisible(false);
+	PM_GameList.setVisible(false);
+	PM_GameSelector.setValue(false);
+	PM_Popups.setVisible(false);
+
+	%this.controllerHighlightMission();
+}
+
+//-----------------------------------------------------------------------------
+// Selections
+
+function PlayMissionGui::setGame(%this, %game) {
+	%this.hideSelectors();
+
+	%found = false;
+	%games = %this.getGameList();
+	for (%i = 0; %i < getRecordCount(%games); %i ++) {
+		%record = getRecord(%games, %i);
+		if (getField(%record, 0) $= %game) {
+			PM_GameSelector.setText(getField(%record, 1) @ "   ");
+			%found = true;
+			break;
+		}
+	}
+	if (!%found) {
+		//Unknown game?? Just display the identifier I guess
+		PM_GameSelector.setText(%game @ "   ");
+	}
+
+	$CurrentGame = %game;
+
+	%this.buildDifficultyList();
+
+	//Check if we have the selected difficulty in the list for our game
+	%found = false;
+	%difficulties = %this.getDifficultyList(%game);
+	for (%i = 0; %i < getRecordCount(%difficulties); %i ++) {
+		%record = getRecord(%difficulties, %i);
+		if (getField(%record, 0) $= $MissionType) {
+			PM_DifficultySelector.setText(getField(%record, 1) @ "   ");
+			%found = true;
+			break;
+		}
+	}
+	if (!%found) {
+		//No? Use the first difficulty we can find
+		%this.setMissionType(getField(getRecord(%this.getDifficultyList(%game), 0), 0));
+	}
+
+	if (mp()) {
+		%mode = %this.ml.getGameMode(%game);
+		%modeInfo = getModeInfo(%mode);
+
+		$MP::CurrentMode = %mode;
+		$MP::CurrentModeInfo = %modeInfo;
+
+		if (isObject(%modeInfo) && !%modeInfo.teams && $Server::Hosting) {
+			echo("Disable teams mode because the game " @ %game @ " forces mode " @ %mode @ " that does not support it.");
+			%this.setTeamsMode(false);
+		}
+	}
+	if (!lb()) {
+		%this.setBarButtonActive(PM_MissionAchievements, $CurrentGame $= "PlatinumQuest");
+		%this.setBarButtonActive(PM_MissionStatistics, $CurrentGame !$= "Custom");
+	}
+}
+
+function PlayMissionGui::setMissionType(%this, %type) {
+	%this.hideSelectors();
+
+	%found = false;
+	%difficulties = %this.getDifficultyList($CurrentGame);
+	for (%i = 0; %i < getRecordCount(%difficulties); %i ++) {
+		%record = getRecord(%difficulties, %i);
+		if (getField(%record, 0) $= %type) {
+			PM_DifficultySelector.setText(getField(%record, 1) @ "   ");
+			%found = true;
+			break;
+		}
+	}
+	if (!%found) {
+		//Unknown difficulty?? Just display the identifier I guess
+		PM_DifficultySelector.setText(%type @ "   ");
+	}
+
+	$MissionType = %type;
+
+	%this.missionList = %this.getMissionList($CurrentGame, %type);
+}
+
+function PlayMissionGui::setSelectedMission(%this, %mission, %game, %type) {
+	if (%game $= "") {
+		%game = resolveMissionGame(%mission);
+	}
+	if (%type $= "") {
+		%type = resolveMissionType(%mission);
+	}
+
+	%this.setGame(%game);
+	%this.setMissionType(%type);
+	%this.showMissionList();
+
+	//Find the mission in our list
+	%list = %this.getMissionList(%game, %type);
+
+	for (%i = 0; %i < %list.getSize(); %i ++) {
+		%test = %list.getEntry(%i);
+		if (%test.file $= %mission.file) {
+			%this.setMissionByIndex(%i);
+			return;
+		}
+	}
+
+	error("Could not find mission " @ %mission.file);
+}
+
+function PlayMissionGui::setMissionByIndex(%this, %idx) {
+	//Mission list name
+	%list = %this.getMissionList($CurrentGame, $MissionType);
+	%info = %list.getEntry(%idx);
+
+	//Update selected mission
+	%this.selectedIndex = %idx;
+	%this.selectedMission = %info;
+
+	//Update all the prefs
+	if (mp()) {
+		$MPPref::SelectedMissionIndex = %idx;
+		$MPPref::MissionType = $MissionType;
+		$MPPref::CurrentGame = $CurrentGame;
+	} else if (lb()) {
+		$LBPref::SelectedMissionIndex = %idx;
+		$LBPref::MissionType = $MissionType;
+		$LBPref::CurrentGame = $CurrentGame;
+	} else {
+		$pref::SelectedMissionIndex = %idx;
+		$pref::MissionType = $MissionType;
+		$pref::CurrentGame = $CurrentGame;
+	}
+
+	//Update ids if we're online
+	if (lb()) {
+		//Do this after a delay so we don't load scores if people click too quickly)
+		cancel(%this.scoreSch);
+		%this.scoreSch = %this.schedule(500, loadOnlineScores);
+	}
+
+	if (mp()) {
+		$MP::MissionObj = %info;
+		$MP::MissionFile = %info.file;
+		commandToServer('SetMission', %info.file, $CurrentGame, $MissionType, %this.ml.getGameMode($CurrentGame));
+	}
+
+	//Set up game modes
+	%file = %info.file;
+	%modes = resolveMissionGameModes(%info.gameMode);
+	setClientGameModes(%modes);
+
+	if ($MissionType !$= "Custom" && $CurrentGame !$= "Custom") {
+		$pref::LastMission = %file;
+	}
+
+	//Reset score modes when you switch because the new mission might not have that mode
+	%this.globalScoreMode = "";
+
+	//Update the mission info
+	%this.updateMissionInfo();
+
+	menuSetMission(%file);
+}
+
+//-----------------------------------------------------------------------------
+// Mission List interface
+
+function PlayMissionGui::showMissionList(%this) {
+	PM_MissionListScrolling.clear();
+
+	//Mission list name
+	%list = %this.getMissionList($CurrentGame, $MissionType);
+
+	//Make sure we have a mission list
+	if (!isObject(%list)) {
+		%this.buildMissionList($CurrentGame, $MissionType);
+	}
+	if (!isObject(%list)) {
+		//We have nothing
+		return;
+	}
+
+	//Store how many we've shown so we don't have gaps for missions that are invisible
+	%shown = 0;
+
+	if (isObject(PM_MissionListButtons)) {
+		PM_MissionListButtons.delete();
+		%this.buttonFrameList.delete();
+	}
+	RootGroup.add(%group = new SimGroup(PM_MissionListButtons));
+	%this.buttonFrameList = Array(PM_ButtonFrameListArray);
+
+	//Create all the missions
+	for (%i = 0; %i < %list.getSize(); %i ++) {
+		%level = %list.getEntry(%i);
+
+		//Check if the mission doesn't want to be shown
+		if (!Unlock::canDisplayMission(%level))
+			continue;
+
+		//Create the interface objects
+		%group.add(%frame = %this.createMissionListFrame(%level, %i, %shown));
+		%this.buttonFrameList.addEntry(%frame);
+		%this.buttonFrameList.frame[%i] = %frame;
+		%shown ++;
+	}
+	PM_MissionListScrolling.setHeight(%this.missionListHeight);
+
+	%bump = getWord(PM_MissionListScrolling.getExtent(), 1) > getWord(PM_MissionScroll.getExtent(), 1);
+	PM_MissionScroll.setPosition(VectorAdd("1 75", (%bump ? "0 0" : "5 0")));
+
+	%this.updateMissionIcons();
+
+	%frame = %this.buttonFrameList.frame[%this.selectedIndex];
+	if (%frame.mission == %this.getMissionInfo()) {
+		%frame.button.setValue(1);
+	}
+
+	if (mp() && !$Server::Hosting) {
+		%this.deactivateMissionList();
+	}
+
+	for (%i = 0; %i < PM_MissionListScrolling.getCount(); %i ++) {
+		%ctrl = PM_MissionListScrolling.getObject(%i);
+		if (Unlock::canDisplayMission(%ctrl.mission)) {
+			%this.controllerHighlightMission(%ctrl);
+			break;
+		}
+	}
+
+	//Don't let us change missions while loading
+	if ($Client::Loading) {
+		%this.deactivateMissionList();
+	}
+}
+
+function PlayMissionGui::createMissionListFrame(%this, %level, %idx, %position) {
+	//(340px - 22px) / 3 == 106px
+	%width = 340;
+	%height = 40;
+
+	%padInsideX = 5;
+	%padInsideY = 5;
+
+	%padBetweenX = 0;
+	%padBetweenY = 0;
+
+	%padOuterX = 0;
+	%padOuterY = 0;
+
+	%eggWidth = 18;
+	%eggHeight = 24;
+
+	%textHeight = 28;
+
+	%extent = %width SPC %height;
+	%pad = %padInsideX SPC %padInsideY;
+
+	%icon = mFloor(%height * (116 / 90)) SPC %height;
+	%inset = VectorSub(%icon, VectorScale(%pad, 2));
+
+	%loadExt = %loadWidth SPC %loadHeight;
+	%loadPos = VectorRound(VectorScale(VectorSub(%icon, %loadExt), 0.5));
+
+	%textPos = (getWord(%icon, 0) + 5) SPC mFloor((%height - %textHeight) / 2);
+	%textExt = (%width - getWord(%textPos, 0) - %eggWidth - 5) SPC 24;
+
+	%eggX = %width - 2 - %eggWidth;
+	%eggY = getWord(%textPos, 1) + (%textHeight - %eggHeight) / 2;
+
+	//How many items can we fit per row?
+	%rowSize = mFloor((getWord(PM_MissionListScrolling.getExtent(), 0) - %padOuterX + %padBetweenX) / (%width + %padBetweenX));
+
+	//Where will this one go?
+	%x = (%position % %rowSize);
+	%y = mFloor(%position / %rowSize);
+
+	%guiPosition = (%padOuterX + (%x * (%width + %padBetweenX))) SPC (%padOuterY + (%y * (%height + %padBetweenY)));
+
+	%this.missionListHeight = getWord(%guiPosition, 1) + %height + %padOuterY;
+
+	//Name for the button
+	%buttonName = "PM_MissionButton_" @ %level;
+	%iconFrameName = "PM_MissionIconFrame_" @ %level;
+	%hoverName = "PM_MissionHover_" @ %level;
+	%iconName = "PM_MissionIcon_" @ %level;
+	%eggName = "PM_MissionEgg_" @ %level;
+
+	%frameName = "PM_MissionFrame_" @ %position;
+	%frameNameU = "PM_MissionFrame_" @ (%position - 1);
+	%frameNameD = "PM_MissionFrame_" @ (%position + 1);
+
+	//Create the control on the list
+	new GuiControl(%frameName) {
+		profile = "GuiDefaultProfile";
+		horizSizing = "right";
+		vertSizing = "bottom";
+		position = %guiPosition;
+		extent = %extent;
+		minExtent = %extent;
+		visible = "1";
+		hasMission = true;
+		mission = %level;
+		button = %buttonName;
+		iconFrame = %iconFrameName;
+		hover = %hoverName;
+		icon = %iconName;
+		egg = %eggName;
+		index = %idx;
+			commandSelect = "PlayMissionGui.trySetMissionByIndex(" @ %idx @ ");";
+			commandUp     = "PlayMissionGui.controllerHighlightMission(" @ %frameNameU @ ");";
+			commandDown   = "PlayMissionGui.controllerHighlightMission(" @ %frameNameD @ ");";
+			commandRight  = "PM_MissionPlay.controlLeftPosition = \"" @ %position @ "\"; ControllerGui.selectControl(PM_MissionPlay);";
+			commandRepeatUp   = true;
+			commandRepeatDown = true;
+			commandRepeatRight = true;
+			commandNameSelect = "Select";
+			commandAlt1 = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.play();";
+			commandNameAlt1 = "Play";
+
+		new GuiBitmapCtrl(%hoverName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "0 0";
+			extent = %extent;
+			minExtent = %extent;
+			visible = "1";
+			bitmap = expandFilename("./play/menuhover_n");
+			hasMission = true;
+			mission = %level;
+			button = %buttonName;
+			iconFrame = %iconFrameName;
+			hover = %hoverName;
+			icon = %iconName;
+			egg = %eggName;
+			index = %idx;
+			showingIcon = false;
+		};
+		new GuiMLTextCtrl(%textName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = %textPos;
+			extent = %textExt;
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:24>" @ clipPx($DefaultFont["Bold"], 24, %level.name, getWord(%textExt, 0), true);
+		};
+		new GuiBitmapCtrl(%iconName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = %pad;
+			extent = %inset;
+			minExtent = %inset;
+			visible = "1";
+			bitmap = expandFilename("./play/loadingicon");
+			hasMission = true;
+			mission = %level;
+			button = %buttonName;
+			iconFrame = %iconFrameName;
+			hover = %hoverName;
+			icon = %iconName;
+			egg = %eggName;
+			index = %idx;
+			showingIcon = false;
+		};
+		new GuiBitmapButtonCtrl(%iconFrameName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = %icon;
+			visible = "1";
+			command = "PlayMissionGui.trySetMissionByIndex(" @ %idx @ ");";
+			buttonType = "RadioButton"; //So it doesn't unselect
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./play/frame_locked";
+			hasMission = true;
+			mission = %level;
+			button = %buttonName;
+			iconFrame = %iconFrameName;
+			hover = %hoverName;
+			icon = %iconName;
+			egg = %eggName;
+			index = %idx;
+			enabled = true;
+		};
+		new GuiBitmapCtrl(%eggName) {
+			profile = "GuiModelessDialogProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = %eggX SPC %eggY;
+			extent = %eggWidth SPC %eggHeight;
+			minExtent = %eggWidth SPC %eggHeight;
+			visible = "0";
+			bitmap = expandFilename("./play/egg_mbp_big.png");
+			hasMission = true;
+			mission = %level;
+			button = %buttonName;
+			iconFrame = %iconFrameName;
+			hover = %hoverName;
+			icon = %iconName;
+			egg = %eggName;
+			index = %idx;
+			showingIcon = false;
+		};
+		new GuiButtonBaseCtrl(%buttonName) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 0";
+			extent = %extent;
+			visible = "1";
+			command = "PlayMissionGui.trySetMissionByIndex(" @ %idx @ ");";
+			buttonType = "RadioButton"; //So it doesn't unselect
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./play/frame_locked";
+			hasMission = true;
+			mission = %level;
+			button = %buttonName;
+			iconFrame = %iconFrameName;
+			hover = %hoverName;
+			icon = %iconName;
+			egg = %eggName;
+			index = %idx;
+			enabled = true;
+		};
+	};
+
+	return %frameName;
+}
+
+function PlayMissionGui::updateMissionFrame(%this, %frame) {
+	%level = %frame.mission;
+
+	//If they can't play, show a different image
+	%unlocked = Unlock::canPlayMission(%level);
+	if (%unlocked) {
+		%qual = Unlock::getMissionCompletion(%level);
+		if (%qual & $Completion::Awesome)  %frameImage = "./play/frame_awesome";
+		else if (%qual & $Completion::Ultimate) %frameImage = "./play/frame_ultimate";
+		else if (%qual & $Completion::Platinum) %frameImage = "./play/frame_platinum";
+		else if (%qual & $Completion::Gold)     %frameImage = "./play/frame_gold";
+		else if (%qual & $Completion::Par)      %frameImage = "./play/frame_completed";
+		else                                    %frameImage = "./play/frame_unlocked";
+
+		//Check if we have WR for the WR frame
+		if (lb()) {
+			if (isObject(%this.personalScoreListCache) && isObject(%this.personalScoreListCache.record)
+				&& %this.personalScoreListCache.record.containsEntry(%level.id)) {
+				//Oh cool, we do
+				%frameImage = "./play/frame_record";
+			}
+		}
+
+		//If you have an AT but don't have AT hints then you did something odd, maybe you
+		// got the AT on another computer? Whatever. You know what these are.
+		if ((%qual & $Completion::Awesome) && !$pref::ShowAwesomeHints) {
+			$pref::ShowAwesomeHints = true;
+		}
+
+		%frame.egg.visible = %level.easterEgg;
+		%bitmap = %this.getEggIcon(%level, %qual & $Completion::EasterEgg);
+		%frame.egg.bitmap = %bitmap;
+	} else {
+		%frameImage = "./play/frame_locked";
+	}
+
+	%this.updateMissionHover(%frame.hover);
+	%frame.iconFrame.setBitmap(expandFilename(%frameImage));
+}
+
+function PlayMissionGui::updateMissionHover(%this, %hover) {
+	if (%this.getMissionInfo() == %hover.mission) {
+		%hover.setBitmap(expandFilename("./play/menuhover_d"));
+	} else if (isObject(Canvas._cursorContent.hover) && Canvas._cursorContent.hover.getId() == %hover.getId()) {
+		%hover.setBitmap(expandFilename("./play/menuhover_h"));
+	} else {
+		%hover.setBitmap(expandFilename("./play/menuhover_n"));
+	}
+}
+
+function PlayMissionGui::trySetMissionByIndex(%this, %idx) {
+	%this.hideSelectors();
+	%frame = %this.buttonFrameList.frame[%idx];
+	%mis = %frame.mission;
+	if (%frame.button.enabled && %this.getMissionInfo() != %mis) {
+		if (mp() && $Client::Loaded) {
+			MessageBoxYesNo("Cancel Load", "You already have a mission loaded. Do you want to cancel the load?", "commandToServer(\'LobbyReturn\'); PlayMissionGui.setMissionByIndex(" @ %idx @ ");", "");
+			return;
+		}
+
+		%this.setMissionByIndex(%idx);
+
+		if ($pref::AnimatePreviews && !mp()) {
+			%this.loadMission();
+		}
+	}
+}
+
+function PlayMissionGui::controllerHighlightMission(%this, %ctrl) {
+	if (%ctrl $= "") {
+		%ctrl = %this.controllerSelect;
+	} else if (!isObject(%ctrl)) {
+		return;
+	}
+
+	%this.controllerSelect = %ctrl;
+
+	%this.defaultControl = %ctrl;
+	if (%this.isAwake() && ControllerGui.isJoystick()) {
+		ControllerGui.selectControl(%ctrl);
+	}
+
+	%this.commandStart = PM_MissionPlay.command;
+}
+
+function PlayMissionGui::showMissionIcon(%this, %frame) {
+	%level = %frame.mission;
+
+	%this.updateMissionFrame(%frame);
+
+	%unlocked = Unlock::canPlayMission(%level);
+	if (%frame.icon.levelBitmap $= "") {
+		%bitmap = expandFilename(%this.getBitmapDirectory($CurrentGame, $MissionType) @ "/" @ fileBase(%level.file));
+		if (!isBitmap(%bitmap)) {
+			%bitmap = resolveMissionBitmap(%level);
+		}
+		%frame.icon.levelBitmap = %bitmap;
+	} else {
+		%bitmap = %frame.icon.levelBitmap;
+	}
+	if (!%unlocked) {
+		//If they can't play, show a different image
+		%bitmap = %bitmap @ ".locked";
+	}
+	%frame.icon.setBitmap(%bitmap);
+	%frame.icon.showingIcon = true;
+	PM_MissionListScrolling.add(%frame);
+}
+
+function PlayMissionGui::hideMissionIcon(%this, %frame) {
+	//Offscreen, remove it
+	PM_MissionListButtons.add(%frame);
+	%frame.icon.showingIcon = false;
+}
+
+function PlayMissionGui::updateMissionIcons(%this) {
+	%yStart = -getWord(PM_MissionListScrolling.position, 1);
+	%yEnd = %yStart + getWord(PM_MissionScroll.extent, 1);
+
+	for (%i = 0; %i < PM_MissionListScrolling.getCount(); %i ++) {
+		%frame = PM_MissionListScrolling.getObject(%i);
+		%start = getWord(%frame.position, 1);
+		%end = getWord(%frame.position, 1) + getWord(%frame.extent, 1);
+
+		//See if we're showing one off-screen
+		if (%end > %yStart && %start < %yEnd) {
+			//No it should be visible
+			continue;
+		}
+
+		%this.hideMissionIcon(%frame);
+	}
+
+	//Just iterate and update them all
+	for (%i = 0; %i < %this.buttonFrameList.getSize(); %i ++) {
+		//Check if the button is visible
+		%frame = %this.buttonFrameList.getEntry(%i);
+		%start = getWord(%frame.position, 1);
+		%end = getWord(%frame.position, 1) + getWord(%frame.extent, 1);
+
+		if (%end < %yStart)
+			continue;
+		if (%start > %yEnd) {
+			//Nothing after here is before since they're in order
+			break;
+		}
+		if (%frame.icon.showingIcon)
+			continue;
+
+		%this.showMissionIcon(%frame);
+	}
+}
+
+function PlayMissionGui::updateMissionList(%this) {
+	%yStart = -getWord(PM_MissionListScrolling.extent, 1);
+	%yEnd = %yStart + getWord(PM_MissionListScrolling.extent, 1);
+
+	//Just iterate and update them all
+	for (%i = 0; %i < PM_MissionListScrolling.getCount(); %i ++) {
+		//Check if the button is visible
+		%frame = PM_MissionListScrolling.getObject(%i);
+		%this.showMissionIcon(%frame);
+	}
+
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::updateCurrentMission(%this) {
+	//Just iterate and update them all
+	for (%i = 0; %i < PM_MissionListScrolling.getCount(); %i ++) {
+		%frame = PM_MissionListScrolling.getObject(%i);
+
+		if (%frame.mission == %this.getMissionInfo())
+			%this.showMissionIcon(%frame);
+	}
+
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::deactivateMissionList(%this) {
+	for (%i = 0; %i < %this.buttonFrameList.getSize(); %i ++) {
+		//Name for the button
+		%frame = %this.buttonFrameList.getEntry(%i);
+		%frame.button.enabled = false;
+
+		//Don't disable the one we've selected because it'll screw up the frame image
+		if (%frame.mission != PlayMissionGui.getMissionInfo()) {
+			%frame.button.setActive(0);
+		} else {
+			%frame.button.setActive(1);
+		}
+
+		%frame.commandSelect = "";
+		%frame.commandAlt1 = "";
+	}
+}
+
+function PlayMissionGui::reactivateMissionList(%this) {
+	for (%i = 0; %i < %this.buttonFrameList.getSize(); %i ++) {
+		%frame = %this.buttonFrameList.getEntry(%i);
+		%frame.button.enabled = true;
+		%frame.button.setActive(1);
+
+		%frame.commandSelect = %frame.button.command;
+		%frame.commandAlt1 = PM_MissionPlay.command;
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Mission Info interface
+
+function PlayMissionGui::getEggIcon(%this, %info, %found) {
+	%egg = "";
+	if (%info.easterEgg) {
+		%egg = "platinum/client/ui/play/egg";
+		%modification = resolveMissionModification(%info);
+		%game = resolveMissionGame(%info);
+		%type = resolveMissionType(%info);
+		%egg = %egg @ ((%modification $= "PlatinumQuest" || (%game $= "Custom" && %type $= "PlatinumQuest") || %info.game $= "PlatinumQuest") ? "_pq_" : "_mbp_");
+		%egg = %egg @ (%found ? "get_ol" : "notfound_ol");
+	}
+	return ClientMode::callbackForMission(%info, "getEggIcon", %egg, %found);
+}
+
+function PlayMissionGui::updateMissionInfo(%this) {
+	//No point in updating offscreen, and we'll just cause errors when we reflow
+	if (!%this.isAwake())
+		return;
+	//Mission list name
+	%list = %this.getMissionList($CurrentGame, $MissionType);
+
+	//Deselct all missions
+	for (%i = 0; %i < %this.buttonFrameList.getSize(); %i ++) {
+		%frame = %this.buttonFrameList.getEntry(%i);
+		%frame.button.setValue(false);
+		%this.updateMissionHover(%frame.hover);
+	}
+	//Might not exist if we're on a different difficulty
+	if (isObject("PM_MissionButton_" @ %this.getMissionInfo())) {
+		("PM_MissionButton_" @ %this.getMissionInfo()).setValue(true);
+	}
+
+	//Fix sizing
+	PM_MissionInfo.setExtent((getWord(PM_MissionScoresInfo.position, 0) - 11) SPC 14);
+	PM_MissionTitle.setExtent(PM_MissionInfo.extent);
+
+	//Mission info
+	%info = %this.getMissionInfo();
+	%info = getMissionInfo(%info.file); //Non-partial
+
+	//Can we play this mission?
+	%canPlay = Unlock::canPlayMission(%info);
+	%requirements = (%info.requirements !$= "" ? %info.requirements : "No Requirements");
+
+	//Update which buttons are active
+	if (mp()) {
+		%this.updateMPButtons();
+	} else {
+		//TODO: Hash checking
+		%this.setBarButtonActive(PM_MissionPlay, %canPlay && !$Menu::Loading && !$Client::Loading && (!mp() || $Server::Hosting));
+		%this.setBarButtonActive(PM_MissionExtras, !$Menu::Loading && !$Client::Loading);
+
+		//Are there hints?
+		%hints = (%info.generalHint !$= "") || (%info.ultimateHint !$= "") || (%info.awesomeHint !$= "") || (%info.eggHint !$= "");
+		%this.setBarButtonActive(PM_MissionHints, %hints && %canPlay && !$Menu::Loading && !$Client::Loading);
+	}
+	if (!lb()) {
+		%this.setBarButtonActive(PM_MissionAchievements, $CurrentGame $= "PlatinumQuest");
+		%this.setBarButtonActive(PM_MissionStatistics, $CurrentGame !$= "Custom");
+	}
+
+	if (!%canPlay) {
+		if (%requirements !$= "") {
+			%qualText = "<font:36><just:center><spush><color:FF5555><shadow:1:1><shadowcolor:0000007f>Unlock Requirements:<spop>";
+			%qualText = %qualText NL "<font:28><color:FFFFFF><shadow:1:1><shadowcolor:0000007f>" @ %requirements;
+		}
+
+		PM_NotQualifiedText.setText(%qualText);
+	}
+
+	%showAwesome = ((Unlock::getMissionCompletion(%info) & $Completion::Awesome) == $Completion::Awesome) || $Unlock::DisplayAll;
+	//If you have an AT but don't have AT hints then you did something odd, maybe you
+	// got the AT on another computer? Whatever. You know what these are.
+	if (%showAwesome && !$pref::ShowAwesomeHints) {
+		$pref::ShowAwesomeHints = true;
+	}
+
+	if (%this.showGlobalScores) {
+		//Use the cache from the stats script
+		if (%this.globalScoreMode $= "") {
+			%scoreList = %this.globalScoreCache[%this.getMissionInfo().id];
+			%loading = %this.globalScoreCacheLoading[%this.getMissionInfo().id];
+			%failed = %this.globalScoreCacheFailed[%this.getMissionInfo().id] || (%this.getMissionInfo().id $= "");
+		} else {
+			%scoreList = %this.globalScoreModeCache[%this.getMissionInfo().id];
+			if (isObject(%scoreList)) {
+				%scoreList = %scoreList.getFieldValue(%this.globalScoreMode);
+			}
+			%loading = %this.globalScoreModeCacheLoading[%this.getMissionInfo().id];
+			%failed = %this.globalScoreModeCacheFailed[%this.getMissionInfo().id] || (%this.getMissionInfo().id $= "");
+		}
+
+		%buttonSize = 32;
+		if (getWord(PM_MissionInfo.extent, 0) < 342) { //extent of Global Scores and Prev Next
+			//Basically 1024x768 and stuff
+			%buttonSize = 24;
+		}
+
+		switch$ (%this.globalScoreMode) {
+			case "egg": %scoresTitle = "Best Egg Times";
+			case "lap": %scoresTitle = "Best Lap Times";
+			case "quota100": %scoresTitle = "100% Quota Scores";
+			case "dd": %scoresTitle = "Double Diamond Scores";
+			default: %scoresTitle = "Global Scores";
+		}
+
+		//The header has both "Global Scores" and next/prev text buttons
+		%title = "<bold:48>" @ (%loading ? "Loading Scores..." : %scoresTitle) @ "<just:right><font:" @ %buttonSize @ ">";
+		if (%this.globalPage == 0) {
+			%title = %title @ "<spush><color:999999>Prev<spop>";
+		} else {
+			%title = %title @ "<a:gamelink prevGlobalPage>Prev</a>";
+		}
+
+		%scoresTitle = "<bold:36><just:center>Your Scores:";
+		%text = "<font:21><just:left>";
+
+		if (isObject(%scoreList)) {
+			%columns = %scoreList.columns;
+			%rows = %scoreList.scores;
+
+			//Too far? Gray it out
+			if (%rows.getSize() <= (%this.globalPage * %this.scoresPerPage) + %this.scoresPerPage) {
+				%title = %title SPC "<spush><color:999999>Next<spop>";
+			} else {
+				%title = %title SPC "<a:gamelink nextGlobalPage>Next</a>";
+			}
+
+			if (%rows.getSize() == 0) {
+				//No scores!
+				%text = %text NL "<just:center>No scores! Be the first to beat this level!";
+			} else {
+				%colCount = %columns.getSize();
+
+				//Column names and indents
+				%cols = "";
+				%tabs = "<tab:";
+				%hasPlacement = false;
+				for (%i = 0; %i < %colCount; %i ++) {
+					%col = %columns.getEntry(%i);
+					%tab = %col.tab;
+					//Negative- that many pixels from right
+					if (%tab < 0) {
+						%tab += getWord(PM_MissionInfo.extent, 0);
+					}
+
+					//Zero- right align
+					if (%tab == 0) {
+						%tabRight[%i] = true;
+						%cols = %cols @ "<just:right>" @ %col.display;
+					} else {
+						%tabRight[%i] = false;
+						%tabs = %tabs @ (%i == 0 ? "" : ",") @ %tab;
+						%cols = %cols TAB %col.display;
+					}
+
+					//Tab width
+					%width = %col.width;
+					//Negative- that many pixels from right
+					if (%width < 0) {
+						%width += getWord(PM_MissionInfo.extent, 0);
+					}
+					%tabWidth[%i] = %width;
+
+					if (%col.type $= "place") {
+						%hasPlacement = true;
+					}
+				}
+				%tabs = %tabs @ ">";
+
+				%text = %text @ "<just:left>" @ %tabs @ %cols;
+
+				//The range of times that we want to show
+				%start = %this.globalPage * %this.scoresPerPage;
+				%count = min(%this.scoresPerPage, %rows.getSize() - %start);
+
+				//Score rows
+				for (%i = %start; %i < (%start + %count); %i ++) {
+					%row = %rows.getEntry(%i);
+					%mine = %row.username $= $LB::Username;
+
+					%text = %text NL "<spush><just:left>";
+					if (%mine) {
+						%text = %text @ "<color:00cc00>";
+					}
+					if (!%hasPlacement) {
+						%text = %text @ (%i + 1) @ ".";
+					}
+
+					//Guts of the score display
+					for (%j = 0; %j < %colCount; %j ++) {
+						%col = %columns.getEntry(%j);
+						%type = %col.type;
+						%field = %col.name;
+						if (%type $= "")
+							%type = %row.score_type;
+
+						%value = %row.getFieldValue(%field);
+
+						//Torque is not very good at handling null
+						if (%value $= "null" || %value $= "") {
+							%format = "";
+							%value = "";
+						} else {
+							//TODO: More types of these things?
+							switch$ (%type) {
+							case "time":
+								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Time TAB %value, %info, %showAwesome) : "");
+								%value = formatTime(%value);
+							case "score":
+								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Score TAB %value, %info, %showAwesome) : "");
+								%value = formatScore(%value);
+							case "place":
+								%format = "";
+								%value = %value @ ".";
+							default:
+								%format = "";
+							}
+						}
+
+						%value = clipPx($DefaultFont, 21, %value, %tabWidth[%j], false);
+						%value = "<spush>" @ %format @ %value @ "<spop>";
+
+						if (%tabRight[%j]) {
+							%text = %text @ "<just:right>" @ %value;
+						} else {
+							%text = %text TAB %value;
+						}
+					}
+					%text = %text @ "<spop>";
+				}
+				for (%i = (%start + %count); %i < %start + %this.scoresPerPage; %i ++) {
+					%text = %text NL "<spush> <spop>";
+				}
+			}
+		} else if (%failed) {
+			//Not loading, there just isn't any mission here.
+			%text = %text NL "<just:center>No scores! Be the first to beat this level!";
+			%title = %title SPC "<spush><color:999999>Next<spop>";
+		} else {
+			//Not updated yet, let's ask for the scores
+			%text = %text NL "<just:center>Loading...";
+			%title = %title SPC "<spush><color:999999>Next<spop>";
+		}
+
+		%text2 = "<just:center><font:21><a:gamelink hideGlobalScores>Hide Global Scores</a>";
+	} else {
+		//Mission name
+		%title = shrinkToFit(%info.name, $DefaultFont["Bold"], 48, 24, getWord(PM_MissionTitle.getExtent(), 0));
+		%scoresTitle = "<bold:36><just:center>Top Scores:";
+
+		%artist = (%info.artist !$= "" ? %info.artist : "No Author");
+
+		//Challenge times
+		%parTimeLabel      = (%info.time         ? formatTime(%info.time)         : "N/A");
+		%goldTimeLabel     = (%info.goldTime     ? formatTime(%info.goldTime)     : "N/A");
+		%platinumTimeLabel = (%info.platinumTime ? formatTime(%info.platinumTime) : "N/A");
+		%ultimateTimeLabel = (%info.ultimateTime ? formatTime(%info.ultimateTime) : "N/A");
+		%awesomeTimeLabel  = (%info.awesomeTime  ? formatTime(%info.awesomeTime)  : "N/A");
+		//Challenge scores
+		%parScoreLabel      = (%info.score         !$= "" ? formatScore(%info.score)         : "N/A");
+		%goldScoreLabel     = (%info.goldScore     !$= "" ? formatScore(%info.goldScore)     : "N/A");
+		%platinumScoreLabel = (%info.platinumScore !$= "" ? formatScore(%info.platinumScore) : "N/A");
+		%ultimateScoreLabel = (%info.ultimateScore !$= "" ? formatScore(%info.ultimateScore) : "N/A");
+		%awesomeScoreLabel  = (%info.awesomeScore  !$= "" ? formatScore(%info.awesomeScore)  : "N/A");
+
+		if (mp()) {
+			//See if we have more than one other player
+			%vs = !$Server::Hosting //Not host, so there must be someone else who is
+				|| (!$Server::_Dedicated && ClientGroup.getCount() > 1) //Hosting local, another player
+				|| ($Server::_Dedicated && isObject(ScoreList.player[1])); //Hosting dedicated, hack but should work
+
+			%index = (%vs ? 0 : 1);
+
+			//The MP indexed scores override any previously set scores. But don't override
+			// unless we actually have one.
+			%parScoreLabel      = (%info.score[%index]         !$= "" ? formatScore(%info.score[%index])         : %parScoreLabel);
+			%platinumScoreLabel = (%info.platinumScore[%index] !$= "" ? formatScore(%info.platinumScore[%index]) : %platinumScoreLabel);
+			%ultimateScoreLabel = (%info.ultimateScore[%index] !$= "" ? formatScore(%info.ultimateScore[%index]) : %ultimateScoreLabel);
+			%awesomeScoreLabel  = (%info.awesomeScore[%index]  !$= "" ? formatScore(%info.awesomeScore[%index])  : %awesomeScoreLabel);
+		}
+		//Use score if a time isn't available
+		%parLabel      = (%parScoreLabel     $= "N/A" ? %parTimeLabel       : %parScoreLabel);
+		%goldLabel     = (%goldTimeLabel     $= "N/A" ? %goldScoreLabel     : %goldTimeLabel);
+		%platinumLabel = (%platinumTimeLabel $= "N/A" ? %platinumScoreLabel : %platinumTimeLabel);
+		%ultimateLabel = (%ultimateTimeLabel $= "N/A" ? %ultimateScoreLabel : %ultimateTimeLabel);
+		%awesomeLabel  = (%awesomeTimeLabel  $= "N/A" ? %awesomeScoreLabel  : %awesomeTimeLabel);
+		%parType      = (%parScoreLabel     $= "N/A" ? "Time" : "Score");
+		%goldType     = (%goldTimeLabel     $= "N/A" ? "Score" : "Time");
+		%platinumType = (%platinumTimeLabel $= "N/A" ? "Score" : "Time");
+		%ultimateType = (%ultimateTimeLabel $= "N/A" ? "Score" : "Time");
+		%awesomeType  = (%awesomeTimeLabel  $= "N/A" ? "Score" : "Time");
+
+		//Information text
+		%text = "<font:21><just:left>" @ %info.desc;
+		%text = %text NL "<just:left>Author:<just:right>" @ %artist;
+
+		//Figure out what times/scores it needs
+		%defined = "Gold Platinum Ultra PlatinumQuest LBCustom";
+		%game = ((findWord(%defined, $CurrentGame) == -1) ? resolveMissionModification(%info) : $CurrentGame);
+		switch$ (%game) {
+		case "Gold":
+			//Need qualify and gold times
+			%parTitle = "Qualify";
+			%goldTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFFF00>Gold";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum"; // For hunt maps, just in case
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate"; // For hunt maps, just in case
+			%awesomeTitle = "";
+		case "Platinum":
+			//Need par / platinum / ultimate
+			%parTitle = "Par";
+			%goldTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum"; // For hunt maps, just in case
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate";
+			%awesomeTitle = "";
+		case "Ultra":
+			//Need par / gold / ultimate
+			%parTitle = "Par";
+			%goldTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFFF00>Gold";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum"; // For hunt maps, just in case
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate";
+			%awesomeTitle = "";
+		case "PlatinumQuest":
+			//Need par / platinum / ultimate / (awesome?)
+			%parTitle = "Par";
+			%goldTitle = "";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum";
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate";
+			%awesomeTitle = "<shadow:1:1><shadowcolor:0000007f><color:FF4444>Awesome";
+		case "LBCustom":
+			//Not really sure with these, just assume platinum
+			%parTitle = "Par";
+			%goldTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum"; // For hunt maps, just in case
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate";
+			%awesomeTitle = "<shadow:1:1><shadowcolor:0000007f><color:FF4444>Awesome";
+		default:
+			//It's custom, we're not really sure here
+			%parTitle = "Par";
+			%goldTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFFF00>Gold";
+			%platinumTitle = "<shadow:1:1><shadowcolor:0000007f><color:CCCCCC>Platinum";
+			%ultimateTitle = "<shadow:1:1><shadowcolor:0000007f><color:FFCC33>Ultimate";
+			%awesomeTitle = "<shadow:1:1><shadowcolor:0000007f><color:FF4444>Awesome";
+		}
+
+		%parText      = %parTitle      SPC %parType;
+		%goldText     = %goldTitle     SPC %goldType;
+		%platinumText = %platinumTitle SPC %platinumType;
+		%ultimateText = %ultimateTitle SPC %ultimateType;
+		%awesomeText  = %awesomeTitle  SPC %awesomeType;
+
+		//Not a par time, a duration
+		if (ClientMode::callbackForMission(%info, "timeMultiplier", 1) < 0) {
+			%parText = "Duration";
+		}
+
+		//Par can have both time and score
+		if (%parTimeLabel !$= "N/A") {
+			%text = %text NL "<just:left><spush>" @ %parText @ ":<spop><just:right>" @ %parTimeLabel;
+		}
+		if (%parScoreLabel !$= "N/A") {
+			%text = %text NL "<just:left><spush>" @ %parTitle SPC "Score:<spop><just:right>" @ %parScoreLabel;
+		}
+
+		//Show what we need to
+		if (%goldTitle     !$= "" && %goldLabel     !$= "N/A") %text = %text NL "<just:left><spush>" @ %goldText @ ":<spop><just:right>" @ %goldLabel;
+		if (%platinumTitle !$= "" && %platinumLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %platinumText @ ":<spop><just:right>" @ %platinumLabel;
+		if (%ultimateTitle !$= "" && %ultimateLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %ultimateText @ ":<spop><just:right>" @ %ultimateLabel;
+
+		if (%showAwesome) {
+			if (%awesomeTitle !$= "" && %awesomeLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %awesomeText @ ":<spop><just:right>" @ %awesomeLabel;
+		}
+
+		%text3 = "";
+
+		//Game modes display
+		%modes = resolveMissionGameModes(%info.gameMode);
+		%modes = formatGameModes(%modes);
+		for (%i = 0; %i < getWordCount(%modes); %i ++) {
+			%mode = getWord(%modes, %i);
+			%minfo = getModeInfo(%mode);
+			//Hack: addRecord will push a newline first if the text is blank
+			if (%minfo.name $= "")
+				continue;
+			%text3 = addRecord(%text3, "<bold:21><just:left>" @ %minfo.name @ ": <font:21>" @ %minfo.desc);
+		}
+
+		if (lb()) {
+			%text2 = "<just:center><font:21><a:gamelink showGlobalScores>Show Global Scores</a>";
+		} else {
+			%text2 = "<just:center><font:21>";
+		}
+	}
+
+	%text2 = %text2 @ "<condensed:21>";
+
+	if (getBestTimes(%info)) {
+		for (%i = 0; %i < $Game::HighscoreCount; %i ++) {
+			%type = getField($hs[%i], 0);
+			%score = getField($hs[%i], 1);
+			%name = getField($hs[%i], 2);
+
+			%color = getScoreFormatting($hs[%i], %info);
+			%formatted = %color @ (%type == $ScoreType::Time ? formatTime(%score) : formatScore(%score));
+			%text2 = %text2 NL "<spush><just:left>" @ %name @ "<just:right>" @ %formatted @ "<spop>";
+		}
+
+		if (%info.easterEgg) {
+			%egg = %this.getEggIcon(%info, $hs["eggFound"]);
+			%text2 = %text2 NL "<spush><just:left><bitmap:" @ %egg @ "><just:right>" @ formatTime(getField($hs["egg"], 0)) @ "<spop>";
+		}
+	} else if ($LB::Guest) {
+		%text2 = %text2 NL "<just:center>\nCreate an account to save your scores!";
+	} else {
+		%text2 = %text2 NL "<just:center>Loading...";
+	}
+
+	PM_NotQualifiedScreen.setVisible(!%canPlay);
+
+	PM_MissionTitle.setText(%title);
+	PM_MissionScoresTitle.setText(%scoresTitle);
+
+	PM_MissionInfo.setText(%text);
+	PM_MissionScoresInfo.setText(%text2);
+	PM_MissionModesInfo.setText(%text3);
+
+	//Have modes update first so we can size afterwards
+	ClientMode::callbackForMission(%info, "updatePlayMission", "", "sp");
+
+	%missionListWidth = 360; //Wide enough for 3 missions and a scrollbar
+
+	%infoMinPanelHeight = 138; //minimum height of the panel
+	%infoMaxTextWidth = 750;
+	%infoPaddingHeight = 75; //padding for the title and below the text
+	%infoBottomMargin = 157; //size of the bottom bar (including extras box)
+	%infoShadowWidth = 11; //width of the shadows on the side of the panel
+	%modeButtonsHeight = 28;
+
+	if (%this.showGlobalScores) {
+		%infoPaddingHeight += 9; //Extra height for the mode buttons
+	}
+
+	%bottom = getWord(%this.getExtent(), 1);
+	if (ControllerGui.isJoystick()) {
+		%bottom -= 25;
+	}
+
+	//Button box needs to center, but don't go over into the level list
+	%bx = max(459, (getWord(%this.getExtent(), 0) - getWord(PM_ButtonBox.getExtent(), 0)) / 2);
+	%by = %bottom - getWord(PM_ButtonBox.getExtent(), 1);
+	PM_ButtonBox.setPosition(%bx SPC %by);
+	PM_ExtrasBox.setPosition((%bx - 95) SPC (%by - 85));
+
+	PM_MissionBox.setExtent(%missionListWidth SPC %bottom);
+
+	//Line up the box with the buttons
+	%width = getWord(%this.getExtent(), 0) - (%bx + 7); //Magic number: makes it line up nicely
+	if (%width > 800) %width = %infoMaxTextWidth; //So it doesn't stretch across the entire screen
+	%x = getWord(%this.getExtent(), 0) - %width;
+
+	%width += %infoShadowWidth; //Magic number: shadow width
+
+	//Set width first so we can tell how tall it has to be
+	PM_InfoBox.setExtent(%width SPC 231); //Height here is arbitrary, gets reset later
+	PM_MissionInfo.forceReflow();
+	PM_MissionScoresInfo.forceReflow();
+	PM_MissionModesInfo.forceReflow();
+
+	//Modes info snaps to bottom
+	PM_MissionModesInfo.setPosition(0 SPC (getWord(PM_MissionInfoPanel.getExtent(), 1) - getWord(PM_MissionModesInfo.getExtent(), 1)));
+
+	//Heights of the two sides of the info. We need to scale so both are totally visible
+	%infoHeight = getWord(PM_MissionInfo.getExtent(), 1) + getWord(PM_MissionModesInfo.getExtent(), 1) + 4; //Magic number: padding
+	%scoreHeight = getWord(PM_MissionScoresInfo.getExtent(), 1);
+
+	%height = max(%infoHeight, %scoreHeight, %infoMinPanelHeight) + %infoPaddingHeight;
+	%y = (%bottom - %height - %infoBottomMargin);
+	PM_InfoBox.setPosition(%x SPC %y);
+	PM_InfoBox.setExtent(%width SPC %height);
+
+	PM_ScoreModeButtons.setVisible(lb() && %this.showGlobalScores);
+	if (lb()) {
+		//Align mode button panel to bottom
+		PM_ScoreModeButtons.resize(0, getWord(PM_MissionInfoPanel.getExtent(), 1) - %modeButtonsHeight, getWord(PM_MissionInfoPanel.getExtent(), 0), %modeButtonsHeight);
+
+		%hasModeEgg = %info.easterEgg;
+		%hasModeLap = stripos(%info.gameMode, "laps") != -1;
+		%hasModeQuota100 = stripos(%info.gameMode, "quota") != -1;
+		%hasModeDD = %info.dd;
+
+		//If any are invisible don't leave a gap where they should be
+		%pos = 0;
+		if (%hasModeEgg)      { PM_ScoreModeEgg.setPosition(%pos      SPC 0); %pos += getWord(PM_ScoreModeEgg.getExtent(),      0); }
+		if (%hasModeLap)      { PM_ScoreModeLap.setPosition(%pos      SPC 0); %pos += getWord(PM_ScoreModeLap.getExtent(),      0); }
+		if (%hasModeQuota100) { PM_ScoreModeQuota100.setPosition(%pos SPC 0); %pos += getWord(PM_ScoreModeQuota100.getExtent(), 0); }
+		if (%hasModeDD)       { PM_ScoreModeDD.setPosition(%pos       SPC 0); %pos += getWord(PM_ScoreModeDD.getExtent(),       0); }
+
+		PM_ScoreModeEgg.setVisible(%hasModeEgg);
+		PM_ScoreModeLap.setVisible(%hasModeLap);
+		PM_ScoreModeQuota100.setVisible(%hasModeQuota100);
+		PM_ScoreModeDD.setVisible(%hasModeDD);
+
+		PM_ScoreModeEgg.setValue(%this.globalScoreMode $= "egg");
+		PM_ScoreModeLap.setValue(%this.globalScoreMode $= "lap");
+		PM_ScoreModeQuota100.setValue(%this.globalScoreMode $= "quota100");
+		PM_ScoreModeDD.setValue(%this.globalScoreMode $= "dd");
+	}
+
+	if (mp()) {
+		PM_ChatBox.setVisible(true);
+		PM_UserlistBox.setVisible(true);
+
+		//Magic number city: lots of shadow padding to get stuff to line up
+		%pw = 200; //Playerlist width
+		%px = getWord(%this.getExtent(), 0) - %pw;
+
+		//Padding all over the place
+		PM_ChatBox.setPosition(%x SPC -11);
+		PM_ChatBox.setExtent((%width - %pw - 11) SPC (%y + 22));
+		PM_UserlistBox.setPosition(%px SPC -11);
+		PM_UserlistBox.setExtent((%pw + 11) SPC (%y + 22));
+	} else {
+		PM_ChatBox.setVisible(false);
+		PM_UserlistBox.setVisible(false);
+	}
+
+	if (lb()) {
+		%this.updateChatPanel(false);
+	}
+}
+
+function PM_MissionInfo::onURL(%this, %url) {
+	%url = getWord(%url, 1);
+	PlayMissionGui.call(%url);
+}
+
+function PM_MissionScoresInfo::onURL(%this, %url) {
+	PM_MissionInfo::onURL(%this, %url);
+}
+
+function PM_MissionTitle::onURL(%this, %url) {
+	PM_MissionInfo::onURL(%this, %url);
+}
+
+function PM_MissionScoresTitle::onURL(%this, %url) {
+	PM_MissionInfo::onURL(%this, %url);
+}
+
+function PlayMissionGui::prevGlobalPage(%this) {
+	%this.globalPage --;
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::nextGlobalPage(%this) {
+	%this.globalPage ++;
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::onTick(%this, %delta) {
+	if (!%this.isAwake())
+		return;
+
+	%this.updateMissionIcons();
+
+	%content = Canvas._cursorContent;
+	if (%content.hasMission) {
+		%mission = %content.mission;
+		%button = %content.button;
+
+		%name = %mission.name;
+		%length = textLen(%name, $DefaultFont, 28);
+
+		%pos = %button.getAbsolutePosition();
+
+		if (%this.lastHover !$= %button.hover) {
+			if (isObject(%this.lastHover)) {
+				%this.updateMissionHover(%this.lastHover);
+			}
+			%this.lastHover = %button.hover;
+			%this.updateMissionHover(%button.hover);
+		}
+	} else {
+		if (isObject(%this.lastHover)) {
+			%this.updateMissionHover(%this.lastHover);
+		}
+		%this.lastHover = "";
+	}
+
+	if (mp()) {
+		%this.updateLoadProgress(%delta);
+	}
+}
+
+function PlayMissionGui::showBody(%this) {
+	PM_InfoBox.setVisible(1);
+	PM_ChatBox.setVisible(mp());
+	PM_UserlistBox.setVisible(mp());
+}
+
+function PlayMissionGui::hideBody(%this) {
+	PM_InfoBox.setVisible(0);
+	PM_ChatBox.setVisible(0);
+	PM_UserlistBox.setVisible(0);
+}
+
+//-----------------------------------------------------------------------------
+// Mission loading and playing
+
+function PlayMissionGui::loadMission(%this) {
+	%list = %this.getMissionList($CurrentGame, $MissionType);
+	%file = %this.getMissionInfo().file;
+
+	//So we can't load two at a time
+	%this.deactivateMissionList();
+
+	%this.setBarButtonActive(PM_MissionPlay, false);
+	menuLoadMission(%file);
+}
+
+function PMMenu_MissionLoaded() {
+	if (PlayMissionGui.isAwake())
+		PlayMissionGui.onMissionLoaded();
+}
+
+function PMMenu_MissionLoadFailed() {
+	if (PlayMissionGui.isAwake())
+		PlayMissionGui.onMissionLoadFailed();
+}
+
+function PMMenu_StartLoading() {
+	if (PlayMissionGui.isAwake())
+		PlayMissionGui.onStartLoading();
+}
+
+function PMMenu_LoadProgress(%progress) {
+	if (PlayMissionGui.isAwake())
+		PlayMissionGui.onLoadProgress(%progress);
+}
+
+function PlayMissionGui::onMissionLoaded(%this) {
+	PM_MissionPlay.bitmap = PM_MissionPlay.originalBitmap;
+	PM_MissionPlay.bitmapOffset = PM_MissionPlay.originalBitmapOffset;
+	PM_MissionPlay.bitmapColor = PM_MissionPlay.originalBitmapColor;
+
+	%this.reactivateMissionList();
+	%this.updateMissionInfo();
+
+	if (!$pref::AnimatePreviews) {
+		%this.play();
+	}
+}
+
+function PlayMissionGui::onMissionLoadFailed(%this) {
+	PM_MissionPlay.bitmap = PM_MissionPlay.originalBitmap;
+	PM_MissionPlay.bitmapOffset = PM_MissionPlay.originalBitmapOffset;
+	PM_MissionPlay.bitmapColor = PM_MissionPlay.originalBitmapColor;
+
+	%this.reactivateMissionList();
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::onStartLoading(%this) {
+	PM_MissionPlay.bitmap = expandFilename("./play/loader/loader_0");
+	PM_MissionPlay.bitmapOffset = "12 -14";
+	PM_MissionPlay.bitmapColor = "204 204 204";
+	Canvas.repaint();
+}
+
+function PlayMissionGui::onLoadProgress(%this, %progress) {
+	PM_MissionPlay.bitmap = expandFilename("./play/loader/loader_" @ mRound(%progress * 16));
+}
+
+function PlayMissionGui::play(%this) {
+	if ($Menu::Loading || $Client::Loading)
+		return;
+
+	if (mp()) {
+		%this.updateMPButtons();
+		if ($Client::Loaded) {
+			// Pretty basic, no?
+			commandToServer('EnterGame');
+		} else {
+			//So we can't load two at a time
+			%this.deactivateMissionList();
+
+			commandToServer('LoadMission', %this.getMissionInfo().file);
+		}
+	} else {
+		//Thanks, controller support
+		if (!Unlock::canPlayMission(%this.getMissionInfo())) {
+			return;
+		}
+		if ($Menu::Loaded) {
+			menuPlay();
+		} else {
+			%this.loadMission();
+		}
+	}
+}
+
+function PlayMissionGui::exit(%this) {
+	if (mp()) {
+		%this.stopServer();
+	}
+	RootGui.setContent(lb() ? LBChatGui : MainMenuGui);
+}
+
+//-----------------------------------------------------------------------------
+
+function PlayMissionGui::onGuiEditorPreSave(%this) {
+	PM_MissionListScrolling.clear();
+	PM_GameScroll.clear();
+	PM_DifficultyScroll.clear();
+	PM_ButtonBox.clear();
+	PM_ExtrasBox.clear();
+
+	%this.missionList = "";
+	%this.selectedIndex = "";
+	%this.builtBar["BottomMP"] = "";
+	%this.builtBar["ExtraMP"] = "";
+	%this.builtBar["BottomLB"] = "";
+	%this.builtBar["ExtraLB"] = "";
+	%this.builtBar["Bottom"] = "";
+	%this.builtBar["Extra"] = "";
+	%this.buttonFrameList = "";
+	%this.chatPanel = "";
+	%this.missionListHeight = "";
+	%this.ml = "";
+	%this.showGlobalScores = "";
+}
+
+function PlayMissionGui::onGuiEditorPostSave(%this) {
+	%this.init();
+}
+
+//-----------------------------------------------------------------------------
+// Button bars
+
+$PMG::BarButton["Extra", "Name",       0] = "PM_MissionMarble";
+$PMG::BarButton["Extra", "Command",    0] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(MarbleSelectDlg);";
+$PMG::BarButton["Extra", "Bitmap",     0] = "platinum/client/ui/play/buttons/marble.png";
+$PMG::BarButton["Extra", "Name",       1] = "PM_MissionSearch";
+$PMG::BarButton["Extra", "Command",    1] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(SearchDlg);";
+$PMG::BarButton["Extra", "Bitmap",     1] = "platinum/client/ui/play/buttons/search.png";
+$PMG::BarButton["Extra", "Name",       2] = "PM_MissionAchievements";
+$PMG::BarButton["Extra", "Command",    2] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.showAchievements();";
+$PMG::BarButton["Extra", "Bitmap",     2] = "platinum/client/ui/play/buttons/achievements.png";
+$PMG::BarButton["Extra", "Name",       3] = "PM_MissionStatistics";
+$PMG::BarButton["Extra", "Command",    3] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.showStatistics();";
+$PMG::BarButton["Extra", "Bitmap",     3] = "platinum/client/ui/play/buttons/statistics.png";
+$PMG::BarButton["Extra", "Name",       4] = "PM_MissionEditor";
+$PMG::BarButton["Extra", "Command",    4] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(EditorOrNewDlg);";
+$PMG::BarButton["Extra", "Bitmap",     4] = "platinum/client/ui/play/buttons/editor.png";
+$PMG::BarButton["Extra", "Name",       5] = "PM_MissionReplay";
+$PMG::BarButton["Extra", "Command",    5] = "if ($ControllerEvent) {$Game::Record = !$Game::Record; $ThisControl.setValue($Game::Record); }"; //Hack for controllers
+$PMG::BarButton["Extra", "Variable",   5] = "$Game::Record";
+$PMG::BarButton["Extra", "ButtonType", 5] = "ToggleButton";
+$PMG::BarButton["Extra", "Bitmap",     5] = "platinum/client/ui/play/buttons/record.png";
+$PMG::BarButton["Extra", "Name",       6] = "PM_MissionCredits";
+$PMG::BarButton["Extra", "Command",    6] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.startCredits();";
+$PMG::BarButton["Extra", "Bitmap",     6] = "platinum/client/ui/play/buttons/credits.png";
+$PMG::BarButton["Extra", "Count"] = 6; //Increases to 7 after showing the credits
+$PMG::BarButton["Extra", "HaveTab"] = true;
+$PMG::BarButton["Extra", "Control"] = "PM_ExtrasBox";
+$PMG::BarButton["Extra", "CommandCancel"] = "PlayMissionGui.hideExtras(); ControllerGui.selectControl(PM_MissionExtras);";
+$PMG::BarButton["Extra", "CommandNameCancel"] = "Close";
+
+$PMG::BarButton["Bottom", "Name",    0] = "PM_MissionPlay";
+$PMG::BarButton["Bottom", "Command", 0] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.play();";
+$PMG::BarButton["Bottom", "Bitmap",  0] = "platinum/client/ui/play/buttons/play.png";
+$PMG::BarButton["Bottom", "Name",    1] = "PM_MissionHints";
+$PMG::BarButton["Bottom", "Command", 1] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); RootGui.pushDialog(HintsDlg); PlayMissionGui.hideBody();";
+$PMG::BarButton["Bottom", "Bitmap",  1] = "platinum/client/ui/play/buttons/hints.png";
+$PMG::BarButton["Bottom", "Name",    2] = "PM_MissionExtras";
+$PMG::BarButton["Bottom", "Command", 2] = "PlayMissionGui.hideSelectors(); PlayMissionGui.toggleExtras();";
+$PMG::BarButton["Bottom", "Bitmap",  2] = "platinum/client/ui/play/buttons/menu.png";
+$PMG::BarButton["Bottom", "Name",    3] = "PM_MissionExit";
+$PMG::BarButton["Bottom", "Command", 3] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.exit();";
+$PMG::BarButton["Bottom", "Bitmap",  3] = "platinum/client/ui/play/buttons/back.png";
+$PMG::BarButton["Bottom", "Count"] = 4;
+$PMG::BarButton["Bottom", "Control"] = "PM_ButtonBox";
+
+//-----------------------------------------------------------------------------
+
+$PMG::BarButton["ExtraLB", "Name",       0] = "PM_MissionMarble";
+$PMG::BarButton["ExtraLB", "Command",    0] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(MarbleSelectDlg);";
+$PMG::BarButton["ExtraLB", "Bitmap",     0] = "platinum/client/ui/play/buttons/marble.png";
+$PMG::BarButton["ExtraLB", "Name",       1] = "PM_MissionSearch";
+$PMG::BarButton["ExtraLB", "Command",    1] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(SearchDlg);";
+$PMG::BarButton["ExtraLB", "Bitmap",     1] = "platinum/client/ui/play/buttons/search.png";
+$PMG::BarButton["ExtraLB", "Name",       2] = "PM_MissionAchievements";
+$PMG::BarButton["ExtraLB", "Command",    2] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.showAchievements();";
+$PMG::BarButton["ExtraLB", "Bitmap",     2] = "platinum/client/ui/play/buttons/achievements.png";
+$PMG::BarButton["ExtraLB", "Name",       3] = "PM_MissionStatistics";
+$PMG::BarButton["ExtraLB", "Command",    3] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.showStatistics();";
+$PMG::BarButton["ExtraLB", "Bitmap",     3] = "platinum/client/ui/play/buttons/statistics.png";
+$PMG::BarButton["ExtraLB", "Name",       4] = "PM_MissionReplay";
+$PMG::BarButton["ExtraLB", "Command",    4] = "if ($ControllerEvent) {$Game::Record = !$Game::Record; $ThisControl.setValue($Game::Record); }"; //Hack for controllers
+$PMG::BarButton["ExtraLB", "Variable",   4] = "$Game::Record";
+$PMG::BarButton["ExtraLB", "ButtonType", 4] = "ToggleButton";
+$PMG::BarButton["ExtraLB", "Bitmap",     4] = "platinum/client/ui/play/buttons/record.png";
+$PMG::BarButton["ExtraLB", "Name",       5] = "PM_MissionCredits";
+$PMG::BarButton["ExtraLB", "Command",    5] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.startCredits();";
+$PMG::BarButton["ExtraLB", "Bitmap",     5] = "platinum/client/ui/play/buttons/credits.png";
+$PMG::BarButton["ExtraLB", "Count"] = 5; //Increases to 7 after showing the credits
+$PMG::BarButton["ExtraLB", "HaveTab"] = true;
+$PMG::BarButton["ExtraLB", "Control"] = "PM_ExtrasBox";
+$PMG::BarButton["ExtraLB", "CommandCancel"] = "PlayMissionGui.hideExtras(); ControllerGui.selectControl(PM_MissionExtras);";
+$PMG::BarButton["ExtraLB", "CommandNameCancel"] = "Close";
+
+$PMG::BarButton["BottomLB", "Name",    0] = "PM_MissionPlay";
+$PMG::BarButton["BottomLB", "Command", 0] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.play();";
+$PMG::BarButton["BottomLB", "Bitmap",  0] = "platinum/client/ui/play/buttons/play.png";
+$PMG::BarButton["BottomLB", "Name",    1] = "PM_MissionHints";
+$PMG::BarButton["BottomLB", "Command", 1] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); RootGui.pushDialog(HintsDlg); PlayMissionGui.hideBody();";
+$PMG::BarButton["BottomLB", "Bitmap",  1] = "platinum/client/ui/play/buttons/hints.png";
+$PMG::BarButton["BottomLB", "Name",    2] = "PM_MissionExtras";
+$PMG::BarButton["BottomLB", "Command", 2] = "PlayMissionGui.hideSelectors(); PlayMissionGui.toggleExtras();";
+$PMG::BarButton["BottomLB", "Bitmap",  2] = "platinum/client/ui/play/buttons/menu.png";
+$PMG::BarButton["BottomLB", "Name",    3] = "PM_MissionExit";
+$PMG::BarButton["BottomLB", "Command", 3] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.exit();";
+$PMG::BarButton["BottomLB", "Bitmap",  3] = "platinum/client/ui/play/buttons/back.png";
+$PMG::BarButton["BottomLB", "Count"] = 4;
+$PMG::BarButton["BottomLB", "Control"] = "PM_ButtonBox";
+
+//-----------------------------------------------------------------------------
+
+$PMG::BarButton["ExtraMP", "Name",       0] = "PM_MissionDownload";
+$PMG::BarButton["ExtraMP", "Command",    0] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); MPDownloadDlg.show();";
+$PMG::BarButton["ExtraMP", "Bitmap",     0] = "platinum/client/ui/play/buttons/download.png";
+$PMG::BarButton["ExtraMP", "Name",       1] = "PM_MissionAchievements";
+$PMG::BarButton["ExtraMP", "Command",    1] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); PlayMissionGui.showAchievements();";
+$PMG::BarButton["ExtraMP", "Bitmap",     1] = "platinum/client/ui/play/buttons/achievements.png";
+$PMG::BarButton["ExtraMP", "Name",       2] = "PM_MissionTeam";
+$PMG::BarButton["ExtraMP", "Command",    2] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); MPTeamSelectDlg.open();";
+$PMG::BarButton["ExtraMP", "Bitmap",     2] = "platinum/client/ui/play/buttons/teams.png";
+$PMG::BarButton["ExtraMP", "Name",       3] = "PM_MissionSearch";
+$PMG::BarButton["ExtraMP", "Command",    3] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(SearchDlg);";
+$PMG::BarButton["ExtraMP", "Bitmap",     3] = "platinum/client/ui/play/buttons/search.png";
+$PMG::BarButton["ExtraMP", "Name",       4] = "PM_MissionServer";
+$PMG::BarButton["ExtraMP", "Command",    4] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); RootGui.pushDialog(MPServerDlg);";
+$PMG::BarButton["ExtraMP", "Bitmap",     4] = "platinum/client/ui/play/buttons/server.png";
+$PMG::BarButton["ExtraMP", "Name",       5] = "PM_MissionPlayers";
+$PMG::BarButton["ExtraMP", "Command",    5] = "PlayMissionGui.hideExtras(); PlayMissionGui.hideBody(); MPPlayersDlg.show();";
+$PMG::BarButton["ExtraMP", "Bitmap",     5] = "platinum/client/ui/play/buttons/players.png";
+$PMG::BarButton["ExtraMP", "Name",       6] = "PM_MissionEnableTeams";
+$PMG::BarButton["ExtraMP", "Command",    6] = "PlayMissionGui.toggleTeamsMode();";
+$PMG::BarButton["ExtraMP", "Bitmap",     6] = "platinum/client/ui/play/buttons/teams-enable.png";
+$PMG::BarButton["ExtraMP", "Count"] = 7;
+$PMG::BarButton["ExtraMP", "HaveTab"] = true;
+$PMG::BarButton["ExtraMP", "Control"] = "PM_ExtrasBox";
+$PMG::BarButton["ExtraMP", "CommandCancel"] = "PlayMissionGui.hideExtras(); ControllerGui.selectControl(PM_MissionExtras);";
+$PMG::BarButton["ExtraMP", "CommandNameCancel"] = "Close";
+
+$PMG::BarButton["BottomMP", "Name",    0] = "PM_MissionPlay";
+$PMG::BarButton["BottomMP", "Command", 0] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.play();";
+$PMG::BarButton["BottomMP", "Bitmap",  0] = "platinum/client/ui/play/buttons/play.png";
+$PMG::BarButton["BottomMP", "Name",    1] = "PM_MissionMarble";
+$PMG::BarButton["BottomMP", "Command", 1] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); RootGui.pushDialog(MarbleSelectDlg); PlayMissionGui.hideBody();";
+$PMG::BarButton["BottomMP", "Bitmap",  1] = "platinum/client/ui/play/buttons/marble.png";
+$PMG::BarButton["BottomMP", "Name",    2] = "PM_MissionExtras";
+$PMG::BarButton["BottomMP", "Command", 2] = "PlayMissionGui.hideSelectors(); PlayMissionGui.toggleExtras();";
+$PMG::BarButton["BottomMP", "Bitmap",  2] = "platinum/client/ui/play/buttons/menu.png";
+$PMG::BarButton["BottomMP", "Name",    3] = "PM_MissionExit";
+$PMG::BarButton["BottomMP", "Command", 3] = "PlayMissionGui.hideSelectors(); PlayMissionGui.hideExtras(); PlayMissionGui.exit();";
+$PMG::BarButton["BottomMP", "Bitmap",  3] = "platinum/client/ui/play/buttons/back.png";
+$PMG::BarButton["BottomMP", "Count"] = 4;
+$PMG::BarButton["BottomMP", "Control"] = "PM_ButtonBox";
+
+//-----------------------------------------------------------------------------
+
+function PlayMissionGui::buildButtonBar(%this, %which) {
+	%bar = $PMG::BarButton[%which, "Control"];
+	%bar.clear();
+
+	%count = $PMG::BarButton[%which, "Count"];
+
+	%bar.add(new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "26 12";
+		extent = ((%count * 95) + 2) SPC "79";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		blur = "1";
+	});
+	for (%i = 0; %i < %count; %i ++) {
+		%profile = "PMBarButtonProfile";
+		if (%i == 0) {
+			%profile = "PMBarButtonLeftProfile";
+			%posX = 3;
+			%extentX = 119;
+			%offset = "12 0";
+			%controlOffset = "24 11";
+		} else {
+			%posX = 122 + 95 * (%i - 1);
+			%extentX = 95;
+			%offset = "0 0";
+			%controlOffset = "0 11";
+		}
+		if (%i == %count - 1) {
+			%profile = "PMBarButtonRightProfile";
+			%extentX = 119;
+			%offset = "-12 0";
+			%controlOffset = "0 11";
+		}
+		if (%i == 3 && $PMG::BarButton[%which, "HaveTab"]) {
+			%profile = "PMBarButtonTabProfile";
+		}
+
+		%bar.add(new GuiBorderButtonCtrl($PMG::BarButton[%which, "Name", %i]) {
+			profile = %profile;
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = %posX SPC 0;
+			extent = %extentX SPC 128;
+			minExtent = "8 8";
+			visible = "1";
+			command = $PMG::BarButton[%which, "Command", %i];
+			variable = $PMG::BarButton[%which, "Variable", %i];
+			helpTag = "0";
+			groupNum = "-1";
+			buttonType = ($PMG::BarButton[%which, "ButtonType", %i] $= "" ? "PushButton" : $PMG::BarButton[%which, "ButtonType", %i]);
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				bitmap = $PMG::BarButton[%which, "Bitmap", %i];
+				bitmapOffset = %offset;
+				bitmapColor = %profile.fillColor;
+				originalBitmap = $PMG::BarButton[%which, "Bitmap", %i];
+				originalBitmapOffset = %offset;
+				originalBitmapColor = %profile.fillColor;
+				controlLeft = $PMG::BarButton[%which, "Name", %i - 1];
+				controlRight = $PMG::BarButton[%which, "Name", %i + 1];
+				commandCancel = $PMG::BarButton[%which, "CommandCancel"];
+				commandNameCancel = $PMG::BarButton[%which, "CommandNameCancel"];
+				commandDown = "PlayMissionGui.hideExtras(); ControllerGui.selectControl(PM_MissionExtras);";
+				controlOffset = %controlOffset;
+				controlExtent = "95 80";
+		});
+	}
+
+	%this.builtBar[%which] = true;
+}
+
+function PlayMissionGui::toggleExtras(%this) {
+	if (PM_ExtrasBox.isVisible())
+		%this.hideExtras();
+	else
+		%this.showExtras();
+}
+
+function PlayMissionGui::showExtras(%this) {
+	PM_ExtrasBox.setVisible(1);
+	PM_MissionExtras.setValue(1);
+	if (ControllerGui.isJoystick()) {
+		//First object is a bitmap so second is the first button
+		%first = PM_ExtrasBox.getObject(1).getName();
+		ControllerGui.selectControl(%first);
+	}
+}
+
+function PlayMissionGui::hideExtras(%this) {
+	PM_ExtrasBox.setVisible(0);
+	PM_MissionExtras.setValue(0);
+}
+
+function PlayMissionGui::startCredits(%this) {
+	$Game::Menu = false;
+	menuStartCredits();
+}
+
+function PlayMissionGui::showAchievements(%this) {
+	if (lb()) {
+		LBAchievementsDlg.show($LB::Username);
+	} else {
+		RootGui.pushDialog(AchievementsDlg);
+	}
+}
+
+function PlayMissionGui::showStatistics(%this) {
+	if (lb()) {
+		LBStatsDlg.show($LB::Username);
+	} else {
+		RootGui.pushDialog(StatisticsDlg);
+	}
+}
+
+function PlayMissionGui::setBarButtonActive(%this, %button, %active) {
+	%button.setActive(%active);
+	%button.bitmapColor = (%active ? %button.profile.fillColor : %button.profile.fillColorNA);
+}
+
+//-----------------------------------------------------------------------------
+// Helper methods since I cbf to remember who owns what
+//-----------------------------------------------------------------------------
+
+function PlayMissionGui::getGameList(%this) {
+	return %this.ml.getGameList();
+}
+
+function PlayMissionGui::getDifficultyList(%this, %game) {
+	return %this.ml.getDifficultyList(%game);
+}
+
+function PlayMissionGui::getMissionList(%this, %game, %difficulty) {
+	return %this.ml.getMissionList(%game, %difficulty);
+}
+
+function PlayMissionGui::getBitmapDirectory(%this, %game, %difficulty) {
+	return %this.ml.getBitmapDirectory(%game, %difficulty);
+}
+
+function PlayMissionGui::buildMissionList(%this, %game, %difficulty) {
+	return %this.ml.buildMissionList(%game, %difficulty);
+}
+
+function PlayMissionGui::buildAllMissionLists(%this) {
+	//Don't do this on servers, you'll try to download all their missions and it'll be bad
+	if (mp() && !($Server::Hosting && !$Server::_Dedicated)) {
+		return;
+	}
+
+	//Save these for later
+	%oldCurrentGame = $CurrentGame;
+	%oldMissionType = $MissionType;
+
+	//For every game
+	%games = %this.getGameList();
+	for (%i = 0; %i < getRecordCount(%games); %i ++) {
+		%game = getRecord(%games, %i);
+		%gameName = getField(%game, 0);
+
+		//So it knows we're iterating this game
+		$CurrentGame = %gameName;
+
+		//For every difficulty
+		%difficulties = %this.getDifficultyList(%gameName);
+		for (%j = 0; %j < getRecordCount(%difficulties); %j ++) {
+			%difficulty = getRecord(%difficulties, %j);
+			%difficultyName = getField(%difficulty, 0);
+
+			//So it knows to build this difficulty
+			$MissionType = %difficultyName;
+
+			//Don't build one we already have
+			if (!isObject(%this.getMissionList(%gameName, %difficultyName)))
+				%this.buildMissionList(%gameName, %difficultyName);
+		}
+	}
+
+	//Revert these
+	$CurrentGame = %oldCurrentGame;
+	$MissionType = %oldMissionType;
+}
+
+//Get the current mission info object
+function PlayMissionGui::getMissionInfo(%this) {
+	return %this.selectedMission;
+}
+
+//-----------------------------------------------------------------------------
+// Leaderboards connection and online scores
+
+function PlayMissionGui::loadOnlineScores(%this) {
+	//Reset current scores
+	if (%this.getMissionInfo().id !$= "") {
+		%this.globalScoreCacheLoading[%this.getMissionInfo().id] = true;
+		%this.personalScoreCacheLoading[%this.getMissionInfo().id] = true;
+		%this.globalScoreCacheFailed[%this.getMissionInfo().id] = false;
+		%this.personalScoreCacheFailed[%this.getMissionInfo().id] = false;
+	}
+
+	//Get new scores
+	statsGetGlobalTopScores(%this.getMissionInfo());
+
+	if (!$LB::Guest) {
+		statsGetPersonalTopScores(%this.getMissionInfo());
+	}
+
+	if (%this.globalScoreMode !$= "") {
+		%this.loadOnlineScoreModes();
+	}
+}
+
+function PlayMissionGui::loadOnlineScoreModes(%this) {
+	//Reset current scores
+	if (%this.getMissionInfo().id !$= "") {
+		%this.globalScoreModeCacheLoading[%this.getMissionInfo().id] = true;
+		%this.globalScoreModeCacheFailed[%this.getMissionInfo().id] = false;
+	}
+
+	//Get new scores
+	statsGetTopScoreModes(%this.getMissionInfo());
+}
+
+function PlayMissionGui::setScoreMode(%this, %mode) {
+	if ($ThisControl.getValue() && %this.globalScoreMode $= "") {
+		%this.loadOnlineScoreModes();
+	}
+
+	%this.globalScoreMode = ($ThisControl.getValue() ? %mode : "");
+	%this.globalPage = %this.getInitialScoresPage();
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::showGlobalScores(%this) {
+	%this.showGlobalScores = true;
+	%this.globalPage = %this.getInitialScoresPage();
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::hideGlobalScores(%this) {
+	%this.showGlobalScores = false;
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::getInitialScoresPage(%this) {
+	%id = %this.getMissionInfo().id;
+	if (%id $= "") {
+		return 0;
+	}
+
+	//Find which page is ours
+	if (%this.globalScoreMode $= "") {
+		%scores = %this.globalScoreCache[%id];
+	} else {
+		%scores = %this.globalScoreModeCache[%id].getFieldValue(%this.globalScoreMode);
+	}
+	if (isObject(%scores)) {
+		for (%i = 0; %i < %scores.scores.getSize(); %i ++) {
+			%score = %scores.scores.getEntry(%i);
+			if (%score.username $= $LB::Username) {
+				//It's us
+				return mFloor(%i / %this.scoresPerPage);
+			}
+		}
+	}
+	return 0;
+}
+
+function PlayMissionGui::onOnlineScoreUpdate(%this, %scores) {
+	%this.globalScoreCache[%scores.missionId] = %scores;
+	%this.globalScoreCacheLoading[%scores.missionId] = false;
+	%this.globalScoreCacheFailed[%scores.missionId] = false;
+
+	//Update WR flags for this mission
+	if (%scores.scores.getSize() > 0) {
+		%had = %this.personalScoreListCache.record.containsEntry(%scores.missionId);
+		//Get entry for ourselves to see if we're first
+		%has = false;
+		for (%i = 0; %i < %scores.scores.getSize(); %i ++) {
+			if (%scores.scores.getEntry(%i).username $= $LB::Username) {
+				echo("Our new placement on this level is " @ %scores.scores.getEntry(%i).placement);
+				%has = %scores.scores.getEntry(%i).placement == 1;
+			}
+		}
+		if (%had && !%has) {
+			%this.personalScoreListCache.record.removeMatching(%scores.missionId);
+		} else if (%has && !%had) {
+			%this.personalScoreListCache.record.addEntry(%scores.missionId);
+		}
+	}
+
+	%this.globalPage = %this.getInitialScoresPage();
+	%this.updateCurrentMission();
+
+	// Update endgame just in case WR updated
+	if (EndGameDlg.isAwake()) {
+		reformatGameEndText();
+	}
+}
+
+function PlayMissionGui::onOnlineScoreFailed(%this, %mission) {
+	if (%mission.id !$= "") {
+		%this.globalScoreCache[%mission.id] = "";
+		%this.globalScoreCacheLoading[%mission.id] = false;
+		%this.globalScoreCacheFailed[%mission.id] = true;
+	}
+	%this.updateCurrentMission();
+}
+
+function PlayMissionGui::onPersonalScoreUpdate(%this, %scores) {
+	%this.personalScoreCache[%scores.missionId] = %scores;
+	%this.personalScoreCacheLoading[%scores.missionId] = false;
+	%this.personalScoreCacheFailed[%scores.missionId] = false;
+	%this.updateCurrentMission();
+}
+
+function PlayMissionGui::onPersonalScoreFailed(%this, %mission) {
+	if (%mission.id !$= "") {
+		%this.personalScoreCache[%mission.id] = "";
+		%this.personalScoreCacheLoading[%mission.id] = false;
+		%this.personalScoreCacheFailed[%mission.id] = true;
+	}
+	%this.updateCurrentMission();
+}
+
+function PlayMissionGui::onOnlineScoreModeUpdate(%this, %scores) {
+	%this.globalScoreModeCache[%scores.missionId] = %scores;
+	%this.globalScoreModeCacheLoading[%scores.missionId] = false;
+	%this.globalScoreModeCacheFailed[%scores.missionId] = false;
+
+	%this.globalPage = %this.getInitialScoresPage();
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::onOnlineScoreModeFailed(%this, %mission) {
+	if (%mission.id !$= "") {
+		%this.globalScoreModeCache[%mission.id] = "";
+		%this.globalScoreModeCacheLoading[%mission.id] = false;
+		%this.globalScoreModeCacheFailed[%mission.id] = true;
+	}
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::onPersonalScoreListUpdate(%this, %scores) {
+	%this.personalScoreListCache = %scores;
+}
+
+function PlayMissionGui::copyOnlinePrefs(%this) {
+	//Update offline scores list
+	%games = %this.ml.getGameList();
+	%gcount = getRecordCount(%games);
+	for (%i = 0; %i < %gcount; %i ++) {
+		%game = getRecord(%games, %i);
+		%gameName = getField(%game, 0);
+
+		%difficulties = %this.ml.getDifficultyList(%gameName);
+		%dcount = getRecordCount(%difficulties);
+		for (%j = 0; %j < %dcount; %j ++) {
+			%difficulty = getRecord(%difficulties, %j);
+			%difficultyName = getField(%difficulty, 0);
+			%missions = %this.ml.getMissionList(%gameName, %difficultyName);
+
+			if (!isObject(%missions)) {
+				%this.ml.buildMissionList(%gameName, %difficultyName);
+			}
+			for (%k = 0; %k < %missions.getSize(); %k ++) {
+				%mission = %missions.getEntry(%k);
+
+				//See if we should add it
+				%offMisFile = strReplace(%mission.file, "/lbmissions", "/missions");
+				if (!isScriptFile(%offMisFile)) {
+					continue;
+				}
+
+				%score = %this.personalScoreListCache.getFieldValue(%mission.id);
+				if (isObject(%score) && %score.score !$= "") {
+					%scoreInfo = ((%score.score_type $= "time") ? $ScoreType::Time : $ScoreType::Score) TAB %score.score TAB $LB::DisplayName;
+					%best = $pref::highscores[%offMisFile, 0];
+
+					//Online pref is always this
+					$pref::highscores[%mission.file] = %scoreInfo;
+
+					//As long as it beats our current score
+					if (compareScores(%scoreInfo, %best)) {
+						addBestScore(%offMisFile, %scoreInfo);
+						echo("Importing best score " @ %scoreInfo @ " for mission " @ %offMisFile);
+					}
+				}
+
+				//Copy quota 100s
+				%quota100 = %this.personalScoreListCache.quota100.getFieldValue(%mission.id);
+				if (isObject(%quota100) && %quota100.score !$= "") {
+					%qScore = %quota100.score;
+					%qBest = $pref::Quota100[%offMisFile];
+
+					//Online pref is always this
+					$pref::Quota100[%mission.file] = %qScore;
+
+					//Offline pref is whatever is better
+					if (%qBest $= "" || %qBest > %qScore) {
+						$pref::Quota100[%offMisFile] = %qScore;
+						echo("Imported online quota 100% time of " @ %qScore @ " for mission " @ %offMisFile);
+					}
+				}
+
+				//Copy lap times
+				%lapTime = %this.personalScoreListCache.lapTime.getFieldValue(%mission.id);
+				if (isObject(%lapTime) && %lapTime.time !$= "") {
+					%lScore = %lapTime.time;
+					%lBest = $pref::LapsBestTime[%offMisFile];
+
+					//Online pref is always this
+					$pref::LapsBestTime[%mission.file] = %lScore;
+
+					//Offline pref is whatever is better
+					if (%lBest $= "" || %lBest > %lScore) {
+						$pref::LapsBestTime[%offMisFile] = %lScore;
+						echo("Imported online lap time of " @ %lScore @ " for mission " @ %offMisFile);
+					}
+				}
+
+				//Also easter eggs
+				%egg = %this.onlineEasterEggCache.getFieldValue(%mission.id);
+				%oldEgg = $pref::EasterEggTime[%offMisFile];
+				if (%egg !$= "" && %egg < %oldEgg) {
+					$pref::EasterEggTime[%offMisFile] = %egg;
+					echo("Imported online egg time of " @ %egg @ " for mission " @ %offMisFile);
+				}
+			}
+		}
+	}
+
+	savePrefs();
+}
+
+function PlayMissionGui::onEasterEggUpdate(%this, %eggs) {
+	%this.onlineEasterEggCache = %eggs;
+	%this.updateMissionInfo();
+}
+
+function PlayMissionGui::clearOnlineCache(%this) {
+	//Delete everything we got
+	%this.onlineEasterEggCache.recurseDelete();
+	%this.personalScoreListCache.recurseDelete();
+
+	//Clean up score caches
+	%games = %this.ml.onlineMissionList.games;
+	if (!isObject(%games))
+		continue;
+	for (%i = 0; %i < %games.getSize(); %i ++) {
+		%game = %games.getEntry(%i);
+		%difficulties = %game.difficulties;
+		if (!isObject(%difficulties))
+			continue;
+		for (%j = 0; %j < %difficulties.getSize(); %j ++) {
+			%difficulty = %difficulties.getEntry(%j);
+			%missions = %difficulty.missions;
+			if (!isObject(%missions))
+				continue;
+			for (%k = 0; %k < %missions.getSize(); %k ++) {
+				%mission = %missions.getEntry(%k);
+
+				if (isObject(%this.globalScoreCache[%mission.id])) {
+					%this.globalScoreCache[%mission.id].recurseDelete();
+					%this.globalScoreCache[%mission.id] = "";
+				}
+				if (isObject(%this.personalScoreCache[%mission.id])) {
+					%this.personalScoreCache[%mission.id].recurseDelete();
+					%this.personalScoreCache[%mission.id] = "";
+				}
+			}
+		}
+	}
+
+	%this.init();
+}
+
+//-----------------------------------------------------------------------------
+// MP Stuff
+//-----------------------------------------------------------------------------
+
+function PlayMissionGui::startServer(%this) {
+	if ($Game::Menu) {
+		menuDestroyServer();
+		menuSetMission($Menu::MissionFile);
+	}
+	LBMessage("Starting Server...", "disconnect();");
+	Canvas.repaint();
+
+	$Server::Lobby = true;
+
+	deleteVariables("$MP::ValidMission*");
+	deleteVariables("$MP::InvalidMission*");
+
+	$Server::Hosting = true;
+	$Server::Loading = false;
+
+	if ($Pref::Server::Name $= "") {
+		$Pref::Server::Name = $LB::DisplayName @ "\'s Server";
+		// Bug them to change their server info
+		%this.activateServerSettings(true);
+	}
+
+	// We need to start up a server for clients to connect to
+	allowConnections(true);
+	//Let them plebs join
+	portInit($pref::Server::Port);
+	createServer("MultiPlayer");
+
+	//Update this before we join so we get the right skin
+	MarbleSelectDlg.loadPrefs();
+
+	// Check if port 28000 is open
+	checkPort();
+
+	%conn = new GameConnection(ServerConnection);
+	RootGroup.add(ServerConnection);
+	%conn.setConnectArgs($LB::Username, $MP::ServerPassword, MarbleSelectDlg.getSelection(), "bologna");
+	%conn.setJoinPassword($Pref::Server::Password);
+	%conn.connectLocal();
+
+	// And why not, we should probably tell them we exist...
+	startHeartbeat();
+	Time::stop();
+	onServerInfoQuery();
+
+	%this.init();
+}
+
+function PlayMissionGui::stopServer(%this) {
+	if ($Server::Hosting) {
+		// Take them off the master server
+		stopHeartbeat();
+		$Server::Hosting = false;
+	}
+	// Actually kill the server
+	disconnect(true);
+
+	// And save prefs for good measure
+	MPsavePrefs();
+}
+
+//-----------------------------------------------------------------------------
+// Chat interface
+
+// send chat
+function PlayMissionGui::sendChat(%this) {
+	if (!lb()) {
+		return;
+	}
+
+	//Get and clear message box
+	%message = trim(PM_ChatEntry.getValue());
+	PM_ChatEntry.setValue("");
+	if (%message $= "") {
+		return;
+	}
+
+	switch$ (%this.chatPanel) {
+	case "global":
+		LBSetChatMessage("", PM_ChatEntry);
+		//Don't let them think they can send messages if they're muted (they can't anyway)
+		if ($LB::LoggedIn && $LB::GlobalChatEnabled) {
+			LBSendChat(%message, %dest);
+		}
+	case "server":
+		mpSendChat(%message);
+	case "team":
+		teamSendChat(%message);
+	}
+}
+
+function PlayMissionGui::chatUpdate(%this) {
+	if (%this.chatPanel $= "global") {
+		%message = PM_ChatEntry.getValue();
+
+		if (getSubStr(%message, 0, 3) $= "@@@") {
+			%message = "/whisper" SPC $LB::LastWhisper SPC ltrim(getSubStr(%message, 3, strLen(%message)));
+		}
+		if (getSubStr(%message, 0, 2) $= "@@" && strLen(%message) > 2) {
+			%message = "/whisper " @ ltrim(getSubStr(%message, 2, strLen(%message)));
+		}
+		//Strip control characters from chat
+		%message = stripChars(%message, "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f");
+
+		//Update all chat
+		LBSetChatMessage(%message, PM_ChatEntry);
+
+		if (PM_ChatEntry.getValue() !$= %message) {
+			PM_ChatEntry.setValue(%message);
+		}
+
+		PM_ChatEntry.setPosition("0" SPC(30 - getWord(PM_ChatEntry.getExtent(), 1)));
+	}
+}
+
+function PlayMissionGui::updateChatPanel(%this, %toggled) {
+	if (%this.chatPanel $= "") {
+		%this.chatPanel = "server";
+	}
+
+	%lb = %this.chatPanel $= "global";
+	%mp = %this.chatPanel $= "server";
+	%team = %this.chatPanel $= "team";
+
+	PM_LBChatBox.setVisible(%lb);
+	PM_LBUserlistBox.setVisible(%lb);
+	PM_MPChatBox.setVisible(%mp);
+	PM_MPUserlistBox.setVisible(%mp);
+	PM_TeamChatBox.setVisible(%team);
+	PM_TeamUserlistBox.setVisible(%team);
+
+	PM_ChatToggles.setVisible(!$MP::TeamMode);
+	PM_TeamChatToggles.setVisible($MP::TeamMode);
+
+	PM_ChatToggleGlobal.setValue(%lb);
+	PM_ChatToggleServer.setValue(%mp);
+	PM_ChatToggleTeamGlobal.setValue(%lb);
+	PM_ChatToggleTeamServer.setValue(%mp);
+	PM_ChatToggleTeamTeam.setValue(%team);
+
+	if (%lb) {
+		PM_ChatToggleGlobal.borderColor = "255 255 255";
+		PM_ChatToggleTeamGlobal.borderColor = "255 255 255";
+	} else if (%mp) {
+		PM_ChatToggleServer.borderColor = "255 255 255";
+		PM_ChatToggleTeamServer.borderColor = "255 255 255";
+	} else if (%team) {
+		PM_ChatToggleTeamTeam.borderColor = "255 255 255";
+	}
+
+	if (%lb) {
+		PM_ChatEntryDisabledText.setText("<color:999999>Disabled");
+		PM_ChatEntry.setVisible($LB::GlobalChatEnabled);
+		PM_ChatEntryDisabledText.setVisible(!$LB::GlobalChatEnabled);
+		if (%toggled) {
+			PM_ChatEntry.makeFirstResponder($LB::GlobalChatEnabled);
+		}
+	} else {
+		PM_ChatEntry.setVisible(true);
+		PM_ChatEntryDisabledText.setVisible(false);
+		if (%toggled) {
+			PM_ChatEntry.makeFirstResponder(true);
+		}
+	}
+	//Scrolling to the bottom is absolute horseshit
+	PM_LBChatContainer.scrollToBottom();
+	PM_LBChatContainer.onNextFrame(scrollToBottom);
+	PM_LBChatContainer.schedule(10, scrollToBottom);
+	PM_LBChatContainer.schedule(100, scrollToBottom);
+	PM_LBChatContainer.schedule(200, scrollToBottom);
+	PM_MPChatContainer.scrollToBottom();
+	PM_MPChatContainer.onNextFrame(scrollToBottom);
+	PM_MPChatContainer.schedule(10, scrollToBottom);
+	PM_MPChatContainer.schedule(100, scrollToBottom);
+	PM_MPChatContainer.schedule(200, scrollToBottom);
+	PM_TeamChatContainer.scrollToBottom();
+	PM_TeamChatContainer.onNextFrame(scrollToBottom);
+	PM_TeamChatContainer.schedule(10, scrollToBottom);
+	PM_TeamChatContainer.schedule(100, scrollToBottom);
+	PM_TeamChatContainer.schedule(200, scrollToBottom);
+}
+
+function PlayMissionGui::toggleChat(%this, %type) {
+	%this.chatPanel = %type;
+	%this.updateChatPanel(true);
+}
+
+function PlayMissionGui::notifyGlobalChat(%this) {
+	if (%this.chatPanel $= "global") {
+		return;
+	}
+	PM_ChatToggleGlobal.borderColor = "100 255 100";
+	PM_ChatToggleTeamGlobal.borderColor = "100 255 100";
+}
+
+function PlayMissionGui::notifyServerChat(%this) {
+	if (%this.chatPanel $= "server") {
+		return;
+	}
+	PM_ChatToggleServer.borderColor = "100 255 100";
+	PM_ChatToggleTeamServer.borderColor = "100 255 100";
+}
+
+function PlayMissionGui::notifyTeamChat(%this) {
+	if (%this.chatPanel $= "team") {
+		return;
+	}
+	PM_ChatToggleTeamTeam.borderColor = "100 255 100";
+}
+
+//-----------------------------------------------------------------------------
+// Teams interface
+
+function PlayMissionGui::updateTeams(%this) {
+	%this.updateMPButtons();
+	%this.updateTeamUserlist();
+}
+
+function PlayMissionGui::updateTeamUserlist(%this) {
+	%text = "<lmargin:4><spush><font:24>Team <spush><color:" @ getTeamColor($MP::TeamColor) @ ">" @ $MP::TeamName @ "<spop>:<spop><font:17><lmargin:7>";
+	%count = TeamPlayerList.getSize();
+
+	// Display the team leader first
+	for (%i = 0; %i < %count; %i ++) {
+		if (getField(TeamPlayerList.getEntry(%i), 1)) {
+			%text = %text NL LBResolveName(getField(TeamPlayerList.getEntry(%i), 0), true);
+		}
+	}
+	// Display others second
+	for (%i = 0; %i < %count; %i ++) {
+		if (getField(TeamPlayerList.getEntry(%i), 1))
+			continue;
+		%text = %text NL LBResolveName(getField(TeamPlayerList.getEntry(%i), 0), true);
+	}
+
+	PM_TeamUserList.setText(%text);
+}
+
+function PlayMissionGui::toggleTeamsMode(%this) {
+	%this.setTeamsMode(!$MP::TeamMode);
+}
+
+function PlayMissionGui::setTeamsMode(%this, %on) {
+	$MP::TeamMode = %on;
+	commandToServer('SetTeamMode', %on);
+	%this.updateMPButtons();
+	%this.updateChatPanel();
+}
+
+//-----------------------------------------------------------------------------
+
+function PlayMissionGui::updateMPButtons(%this) {
+	if (!mp()) {
+		error("updateMPButtons called not in MP");
+		return;
+	}
+	%this.setBarButtonActive(PM_MissionSearch, $Server::Hosting && !$Client::Loading);
+	%this.setBarButtonActive(PM_MissionPlay, $Server::Hosting && !$Client::Loading);
+	%this.setBarButtonActive(PM_MissionServer, $Server::Hosting);
+	%this.setBarButtonActive(PM_MissionPlayers, $Server::Hosting);
+	%this.setBarButtonActive(PM_MissionEnableTeams, $Server::Hosting);
+	%this.setBarButtonActive(PM_MissionDownload, !$Client::Loading && (($Server::Hosting && !$Server::_Dedicated) || ($MP::DownloadMissionAvailable[$MP::MissionFile] && !isFile($MP::MissionFile))));
+
+	PM_MissionServer.command = ($Server::_Dedicated ? "MPDedicatedServerDlg.open();" : "MPServerDlg.open();");
+
+	%this.setBarButtonActive(PM_MissionTeam, $MP::TeamMode);
+	PM_MissionEnableTeams.setValue($MP::TeamMode);
+	PM_MissionEnableTeams.bitmap = ($MP::TeamMode ? "platinum/client/ui/play/buttons/teams-disable.png" : "platinum/client/ui/play/buttons/teams-enable.png");
+	PM_MissionPlay.bitmap = ($Client::Loaded ? "platinum/client/ui/play/buttons/play.png" : "platinum/client/ui/play/buttons/preload.png");
+}
+
+function PlayMissionGui::onMPMissionLoaded(%this) {
+	$Client::Loading = false;
+	$Client::Loaded = true;
+
+	%this.updateMissionInfo();
+	%this.updateServerPlayerList();
+
+	if ($Server::Hosting) {
+		%this.reactivateMissionList();
+	}
+}
+
+function PlayMissionGui::onMPStartLoading(%this) {
+	$Client::Loading = true;
+	$Client::Loaded = false;
+
+	%this.updateMissionInfo();
+	%this.updateServerPlayerList();
+}
+
+function PlayMissionGui::onMPLoadFailed(%this) {
+	$Client::Loading = false;
+	$Client::Loaded = false;
+
+	%this.updateMissionInfo();
+	%this.updateServerPlayerList();
+
+	if ($Server::Hosting) {
+		%this.reactivateMissionList();
+		MessageBoxOk("Mission Load Failed!", "Check .mis file or try another mission!");
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Server player list
+
+function PlayMissionGui::clearServerPlayerList(%this) {
+	PM_MPUserList.clear();
+	%count = $MP::ClientIndexMax;
+	for (%i = 0; %i < %count; %i ++) {
+		%player = PlayerList.getEntry(%i);
+		if (%player $= "")
+			continue;
+		if (isObject(PlayerListBox @ %i)) {
+			(PlayerListBox @ %i).delete();
+		}
+	}
+	PM_MPUserList.resize(0, 0, 1, 1);
+}
+
+function PlayMissionGui::updateServerPlayerList(%this) {
+	%start = getWord(PM_MPUserList.position, 1);
+	%count = $MP::ClientIndexMax;
+	for (%i = 0; %i < %count; %i ++) {
+		%height = 30;
+		%extent = getWord(PM_MPUserlistScroll.extent, 0);
+
+		%player = PlayerList.getEntry(%i);
+		if (%player $= "") {
+			if (isObject(PlayerListBox @ %i)) {
+				(PlayerListBox @ %i).delete();
+				//Shift all them up
+				%index = 0;
+				for (%j = 0; %j < %count; %j ++) {
+					if (isObject(PlayerListBox @ %j)) {
+						(PlayerListBox @ %j).resize(0, %index * %height, %extent, %height);
+						%index ++;
+					}
+				}
+				if (getWord(PM_MPUserlist.extent, 1) > getWord(PM_MPUserlistScroll.extent, 1)) {
+					%extent = getWord(PM_MPUserlistScroll.extent, 0) - 20;
+				}
+				PM_MPUserList.resize(0, %start, %extent, PM_MPUserList.getCount() * %height);
+			}
+			continue;
+		}
+		%name       = %player.name;
+		%loadState  = %player.loadState;
+		%team       = %player.team;
+		%marble     = %player.marble;
+		%progress   = %player.progress;
+		%ping       = %player.ping;
+		%color      = %player.color;
+
+		if (!isObject(PlayerListBox @ %i)) {
+			PM_MPUserList.add(new GuiProgressCtrl(PlayerListBox @ %i) {
+				profile = "GuiMLProgressProfile";
+				position = "0" SPC PM_MPUserList.getCount() * %height;
+				extent = %extent SPC %height;
+				minExtent = "8 8";
+
+				new GuiMLTextCtrl(PlayerListTitle @ %i) {
+					profile = "GuiDefaultProfile";
+					position = "7 6";
+					extent = %extent SPC %height;
+					minExtent = "8 8";
+				};
+				new GuiBitmapCtrl(PlayerListLoader @ %i) {
+					profile = "GuiDefaultProfile";
+					position = (%extent - 32) SPC((%height - 32) / 2);
+					extent = "32 32";
+					minExtent = "8 8";
+				};
+			});
+
+			PM_MPUserList.resize(0, %start, %extent, PM_MPUserList.getCount() * %height);
+		}
+
+		%loader = ("PlayerListLoader" @ %i);
+
+		switch (%loadState) {
+		case -1: //Lobby
+			%loader.setVisible(0);
+			%loader.setTooltip("Lobby");
+		case  0: //Loading
+			%loader.setVisible(1);
+			%loader.setBitmap("platinum/client/ui/play/load-arrows");
+			%loader.setTooltip("Loading " @ mRound(%progress * 100) @ "%");
+		case  1: //Sending
+			%loader.setVisible(1);
+			%loader.setBitmap("platinum/client/ui/play/load-arrows");
+			%loader.setTooltip("Sending " @ mRound(%progress * 100) @ "%");
+		case  2: //Confirming
+			%loader.setVisible(1);
+			%loader.setBitmap("platinum/client/ui/play/load-arrows");
+			%loader.setTooltip("Confirming");
+		case  3: //Ready
+			%loader.setVisible(1);
+			%loader.setBitmap("platinum/client/ui/play/load-checkmark");
+			%loader.setTooltip("Ready");
+		case  4: //Playing
+			%loader.setVisible(1);
+			%loader.setBitmap("platinum/client/ui/play/load-checkmark");
+			%loader.setTooltip("Playing");
+		default: //Lobby
+			%loader.setVisible(0);
+			%loader.setTooltip("Lobby");
+		}
+
+		//%pingb = nameToId("PlayerListPing" @ %i);
+		//%bitmap = "unknown";
+		//if (%ping < 100) %bitmap = "high";
+		//else if (%ping < 250) %bitmap = "medium";
+		//else if (%ping < 500) %bitmap = "low";
+		//else if (%ping < 1000) %bitmap = "matanny";
+		//%pingb.setBitmap($usermods @ "/client/ui/lb/play/connection-" @ %bitmap @ ".png");
+
+		%title = ("PlayerListTitle" @ %i);
+		%title.resize(7, 6, %extent, %height);
+		%name = clipPx($DefaultFont, 18, LBResolveName(%name, true), 196, true);
+
+		if ($MP::TeamMode) {
+			%color = "<color:" @ getTeamColor(%color) @ ">";
+		} else {
+			%color = "";
+		}
+
+		%title.setText("<font:18>" @ %color @ %name);
+	}
+
+	%this.updateLoadProgress(0);
+}
+
+function PlayMissionGui::updateLoadProgress(%this, %delta) {
+	if (!%this.isAwake() || $pref::FastMode)
+		return;
+
+	%count = $MP::ClientIndexMax;
+	for (%i = 0; %i < %count; %i ++) {
+		%player = PlayerList.getEntry(%i);
+		if (%player $= "")
+			continue;
+		%progress  = %player.progress;
+		%loadState = %player.loadState;
+
+		if (!isObject("PlayerListBox" @ %i))
+			return;
+
+		%loader = ("PlayerListLoader" @ %i);
+		switch (%loadState) {
+		case -1: //Lobby
+			%loader.bitmapRotation = 0;
+			%progress = 0;
+		case  0: //Loading
+			%loader.bitmapRotation -= 180 * (%delta / 1000);
+			%loader.setTooltip("Loading " @ mRound(%progress * 100) @ "%");
+		case  1: //Sending
+			%loader.bitmapRotation -= 180 * (%delta / 1000);
+			%loader.setTooltip("Sending " @ mRound(%progress * 100) @ "%");
+		case  2: //Confirming
+			%loader.bitmapRotation -= 180 * (%delta / 1000);
+		case  3: //Ready
+			%loader.bitmapRotation = 0;
+			%progress = 1;
+		case  4: //Playing
+			%loader.bitmapRotation = 0;
+			%progress = 1;
+		default: //Lobby
+			%loader.bitmapRotation = 0;
+			%progress = 1;
+		}
+
+		%box = ("PlayerListBox" @ %i);
+		if (%i == $MP::ClientIndex) {
+			%box.setValue(%progress);
+			continue;
+		}
+
+
+		if ($MP::LerpStart[%i] $= "")
+			$MP::LerpStart[%i] = 0;
+		if ($MP::LerpFinish[%i] $= "")
+			$MP::LerpFinish[%i] = %progress;
+		if ($MP::LerpTime[%i] $= "")
+			$MP::LerpTime[%i] = 0;
+
+		//vectorAdd(%a, vectorScale(vectorSub(%b, %a), %delta));
+		//start + ((final - start) * progress)
+
+		$MP::LerpProgress[%i] = $MP::LerpStart[%i] + (max($MP::LerpFinish[%i] - $MP::LerpStart[%i], 0) * min($MP::LerpTime[%i] / 400, 1));
+
+		$MP::LerpTime[%i] += 50;
+		if ($MP::LerpTime[%i] > 400 || $MP::LerpProgress[%i] >= $MP::LerpFinish[%i]) {
+			$MP::LerpTime[%i] = 0;
+			$MP::LerpFinish[%i] = %progress;
+			$MP::LerpStart[%i] = $MP::LerpProgress[%i];
+		}
+		%box.setValue(min($MP::LerpProgress[%i], 1));
+		if ($MP::LerpProgress[%i] > 1)
+			$MP::LerpProgress[%i] = 1;
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Temp screenshot stuff: to remove before release
+// im keeping this in here because it's just too good to remove and you can't stop me
+
+function supertemp_screenshot(%val) {
+	if (%val)
+		return;
+	activatePackage(screenshottemp);
+	resetCannons();
+	MissionStartup();
+	ServerGroup.onMissionReset();
+	clientCmdClearPaths();
+	resetMovingObjects();
+	ServerConnection.setcontrolObject(getCamera());
+	commandToClient(LocalClientConnection, '12dothepq');
+}
+function clientcmd12dothepq() {
+	commandToClient(LocalClientConnection, '34onthedancefloor');
+}
+function clientcmd34onthedancefloor() {
+	getCamera().setTransform(CameraPath1.getTransform());
+
+	RootGui.setContent(MiniShotGui);
+	Minishotter.resize(0, 0, 1280, 720);
+	Canvas.repaint();
+	%path = strreplace(filePath($Server::MissionFile) @ "/" @ fileBase($Server::MissionFile) @ ".prev.png", "/missions", "/previews");
+	mkdir(filePath(%path), 493); // 0755 (oct)
+	screenshot(%path, 1280, 720);
+	RootGui.setContent(PlayMissionGui);
+}
+
+package screenshottemp {
+	function StaticShape::playThread() {}
+	function Item::playThread() {}
+	function Node::getAdjustedProgress() {
+		return 0;
+	}
+	function Node::getPathTime(%obj, %node) {
+		%obj._pathPosition = 0;
+		return 100000;
+	}
+	function Item::onMissionReset(%this) {
+		%this.rotate = false;
+		%this.forceNetUpdate();
+		Parent::onMissionReset(%this);
+	}
+	function PathedInterior::setTargetPosition(%this) {
+		%pos = (%this.initialPosition $= "" ? 0 : %this.initialPosition);
+		Parent::setTargetPosition(%this, %pos);
+	}
+	function PathedInterior::setPathPosition(%this) {
+		%pos = (%this.initialPosition $= "" ? 0 : %this.initialPosition);
+		Parent::setPathPosition(%this, %pos);
+	}
+};
+
+// if some poor fucker presses this while checking out the dev build i will shit myself
+globalactionmap.bind("keyboard", "ctrl o", supertemp_screenshot);
+
+
+function templevelimg(%val) {
+	if (%val)
+		return;
+
+	%imgWidth = 1280;
+	%imgHeight = 720;
+	%imgFov = 90;
+
+	if (getWord(getResolution(), 0) < %imgWidth || getWord(getResolution(), 1) < %imgHeight) {
+		setResolution(%imgWidth, %imgHeight, 32);
+	}
+
+	RootGui.setContent(MiniShotGui);
+	Minishotter.resize(0, 0, %imgWidth, %imgHeight);
+	Minishotter.forceFOV = %imgFov;
+	Canvas.repaint();
+	screenShot(filePath($Server::MissionFile) @ "/" @ fileBase($Server::MissionFile) @ ".png", %imgWidth, %imgHeight);
+
+	//Load next
+	%pmg = PlayMissionGui;
+	%pmg.selectedIndex++;
+
+	%list = %pmg.getMissionList();
+	%idx = %pmg.selectedIndex;
+
+	if (%idx >= %list.getSize())
+		RootGui.setContent(PlayGui);
+
+	%mission = %list.getEntry(%idx);
+	%file = %mission.file;
+
+	loadMission(%file);
+}
+
+// if some poor fucker presses this while checking out the dev build i will shit myself
+globalactionmap.bind("keyboard", "ctrl space", templevelimg);

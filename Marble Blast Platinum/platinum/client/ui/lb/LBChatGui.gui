@@ -1,0 +1,1297 @@
+//-----------------------------------------------------------------------------
+// LBChatGui.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(LBChatGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+		_guiSize = "800 600";
+		defaultControl = "LBChatSinglePlayer";
+
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "relative";
+		vertSizing = "relative";
+		position = "0 0";
+		extent = "800 600";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapCtrl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "0 13";
+			extent = "800 555";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./chat/chat_transparency";
+			wrap = "0";
+
+			new GuiBorderButtonCtrl(LBChatLogout) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "684 511";
+				extent = "116 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = " LBChatGui.logout();";
+				helpTag = "0";
+				text = "Log Out";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlLeft = "LBChatReplays";
+					controlUp = "LBChatOptions";
+			};
+			new GuiBorderButtonCtrl(LBChatSinglePlayer) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "-1 0";
+				extent = "139 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "PlayMissionGui.open();";
+				helpTag = "0";
+				text = "Single Player";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlRight = "LBChatMultiplayer";
+			};
+			new GuiBorderButtonCtrl(LBChatProfile) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = "573 0";
+				extent = "117 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "LBUserDlg.show($LB::Username);";
+				helpTag = "0";
+				text = "Profile";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlDown = "LBChatReplays";
+					controlLeft = "LBChatLeaderboards";
+					controlRight = "LBChatOptions";
+			};
+			new GuiBorderButtonCtrl(LBChatOptions) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "bottom";
+				position = "684 0";
+				extent = "116 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "OptionsGui.show(\"lb\");";
+				helpTag = "0";
+				text = "Options";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlDown = "LBChatLogout";
+					controlLeft = "LBChatProfile";
+			};
+			new GuiBorderButtonCtrl(LBChatReplays) {
+				profile = "PQButtonProfile";
+				horizSizing = "left";
+				vertSizing = "top";
+				position = "572 511";
+				extent = "117 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "PlayDemoGui.open(1);";
+				helpTag = "0";
+				text = "Replays";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlRight = "LBChatLogout";
+					controlUp = "LBChatProfile";
+			};
+			new GuiBorderButtonCtrl(LBChatLeaderboards) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "257 0";
+				extent = "148 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.pushDialog(LBScoresDlg);";
+				helpTag = "0";
+				text = "Leaderboards";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlLeft = "LBChatMultiplayer";
+					controlRight = "LBChatProfile";
+			};
+			new GuiBorderButtonCtrl(LBChatMultiplayer) {
+				profile = "PQButtonProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "132 0";
+				extent = "131 45";
+				minExtent = "8 8";
+				visible = "1";
+				command = "RootGui.pushDialog(MPJoinServerDlg);";
+				helpTag = "0";
+				text = "Multiplayer";
+				groupNum = "-1";
+				buttonType = "PushButton";
+				repeatPeriod = "1000";
+				repeatDecay = "1";
+					controlLeft = "LBChatSinglePlayer";
+					controlRight = "LBChatLeaderboards";
+			};
+			new GuiControl() {
+				profile = "PQWindowProfile";
+				horizSizing = "left";
+				vertSizing = "height";
+				position = "568 34";
+				extent = "237 488";
+				minExtent = "61 61";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiScrollCtrl(LBChat_PlayerScroll) {
+					profile = "PQScrollProfile";
+					horizSizing = "left";
+					vertSizing = "height";
+					position = "11 13";
+					extent = "215 452";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(LBUserList) {
+						profile = "GuiDefaultProfile";
+						horizSizing = "relative";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "215 212";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "1";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl() {
+				profile = "PQWindowProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "-6 34";
+				extent = "590 527";
+				minExtent = "61 61";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiBitmapCtrl() {
+					profile = "GuiDefaultProfile";
+					horizSizing = "width";
+					vertSizing = "top";
+					position = "11 486";
+					extent = "568 1";
+					minExtent = "8 1";
+					visible = "1";
+					helpTag = "0";
+					bitmap = "./core/transparency/75/transparencyfill";
+					wrap = "0";
+				};
+				new GuiScrollCtrl(LBChatContainer) {
+					profile = "PQScrollProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "13 13";
+					extent = "564 473";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					willFirstRespond = "1";
+					hScrollBar = "dynamic";
+					vScrollBar = "dynamic";
+					constantThumbHeight = "0";
+					childMargin = "0 0";
+
+					new GuiMLTextCtrl(LBChatText) {
+						profile = "GuiMLTextProfile";
+						horizSizing = "width";
+						vertSizing = "bottom";
+						position = "0 0";
+						extent = "545 703";
+						minExtent = "8 8";
+						visible = "1";
+						helpTag = "0";
+						lineSpacing = "2";
+						allowColorChars = "0";
+						maxChars = "-1";
+					};
+				};
+			};
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "top";
+				position = "6 521";
+				extent = "566 29";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+
+				new GuiTextEditCtrl(LBSendChat) {
+					profile = "GuiMediumTextEditProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "566 31";
+					minExtent = "8 8";
+					visible = "1";
+					command = "LBChatGui.chatUpdate();";
+					altCommand = "LBChatGui.sendChat();";
+					helpTag = "0";
+					maxLength = "255";
+					maxPixelWidth = "0";
+					historySize = "0";
+					password = "0";
+					tabComplete = "0";
+					sinkAllKeyEvents = "0";
+						allowColorChars = "1";
+						lineSpacing = "2";
+						maxChars = "255";
+				};
+				new GuiMLTextCtrl(LBSendChatDisabledText) {
+					profile = "GuiMediumTextEditProfile";
+					horizSizing = "width";
+					vertSizing = "height";
+					position = "0 0";
+					extent = "566 27";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "1";
+					maxChars = "255";
+				};
+			};
+		};
+	};
+	new GuiMLTextCtrl(LBServerDescText) {
+		profile = "GuiMLTextProfile";
+		horizSizing = "width";
+		vertSizing = "top";
+		position = "6 570";
+		extent = "545 48";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		lineSpacing = "2";
+		allowColorChars = "0";
+		maxChars = "-1";
+	};
+};
+//--- OBJECT WRITE END ---
+
+// define important variables here
+$LB::FirstTimeForChatGui = true;
+
+// Chat cmds now get their own methods!
+deleteVariables("$LBCCmd*");
+
+// /*
+//  * LBChatCmdAddHandler(<command (without "/")>, <function to call>)
+//  * Function args are like such:
+//  * function func_name(<username>, <access>, <time>, <message>)
+//  */
+function LBCmdAddHandler(%cmd, %call, %requiresD) {
+	if ($LBCCmd[%cmd] !$= "")
+		return error("Chat command \"" @ %cmd @ "\" already has a handler!");
+	$LBCCmd[%cmd] = %call;
+	$LBCCmdD[%cmd] = %requiresD;
+}
+
+function LBCmdMeHandler(%username, %access, %time, %message) {
+	%row = LBChatColor("me") @ LBResolveName(%username, true) SPC destroyTorqueML(%message);
+	addLBChatLine(%row);
+}
+
+function LBCmdWhisperHandler(%username, %access, %time, %message) {
+	%to = getWord(%message, 0);
+	if (%to !$= $LB::Username) //Whoops!
+		return;
+	// Format the message
+	%message = getWords(%message, 1);
+	%message = destroyTorqueML(%message);
+	%message = linkify(%message);
+	// Only Mod+ can use formatted text
+	if (%access > 0) {
+		%message = styleify(%message);
+	}
+	$LB::LastWhisper = %username;
+	%row = LBChatColor("whisperfrom") @ "(From:" SPC LBResolveName(%username, true) @ ")" @ LBChatColor("whispermsg") SPC %message;
+	addLBChatLine(%row);
+}
+
+function LBCmdSlapHandler(%username, %access, %time, %message) {
+	%to = LBResolveName(getWord(%message, 0), true);
+	%row = LBSlapMessage(LBResolveName(%username, true), %to);
+	addLBChatLine(%row);
+}
+
+function LBCmdTheGameHandler(%username, %access, %time, %message) {
+	// \x10 is the font, \x11 is the size
+	if ($Game::Running)
+		%message = "<spush>" @ %username @ ": <font:\x10:\x11>THE GAME<spop>";
+	else
+		%message = "<spush>" @ %username @ ": <font:\x10 Bold:32>THE GAME<spop>";
+	addLBChatLine(%message);
+}
+
+LBCmdAddHandler("me",      LBCmdMeHandler);
+LBCmdAddHandler("whisper", LBCmdWhisperHandler);
+LBCmdAddHandler("msg",     LBCmdWhisperHandler);
+LBCmdAddHandler("slap",    LBCmdSlapHandler);
+LBCmdAddHandler("thegame", LBCmdTheGameHandler);
+
+//-----------------------------------------------------------------------------
+
+function LBChatGui::onWake(%this) {
+	if ($Game::Offline) {
+		closeLeaderboards();
+		return;
+	}
+	playLBMusic();
+
+	%this.welcomeMessage();
+	LBChatContainer.scrollToBottom();
+	LBChatContainer.schedule(100, scrollToBottom);
+	LBChatContainer.schedule(1000, scrollToBottom);
+
+	LBServerDescText.setText("<color:FFFFFF><bold:22><shadow:1:1><shadowcolor:0000007f>Leaderboards Server v8 @ " @ $LB::Server @ " - Running " @ $THIS_VERSION_NAME @ " / " @ $THIS_VERSION_SUB);
+
+	LBSendChat.setTickable(true);
+
+	// if we are a guest, we can not chat from here
+	LBSendChat.setActive($LB::GlobalChatEnabled);
+	LBSendChat.makeFirstResponder($LB::GlobalChatEnabled);
+
+	LBSendChat.setVisible($LB::GlobalChatEnabled);
+	LBSendChatDisabledText.setVisible(!$LB::GlobalChatEnabled);
+
+	LBSendChatDisabledText.setText("<color:999999>Disabled");
+	LBChatProfile.setActive(!$LB::Guest);
+
+	LBUpdateChat();
+
+	// Back at the chat screen, so have no status.
+	onNextFrame(LBSetMode, 0);
+
+	setDiscordStatus("In Global Lobby");
+}
+
+// show welcome message
+function LBChatGui::welcomeMessage(%this) {
+	// only show the welcome message once!
+	if ($LB::FirstTimeForChatGui) {
+		$LB::ChatText = trim($LB::WelcomeMessage);
+		LBUpdateChat();
+		// do not show this again
+		$LB::FirstTimeForChatGui = false;
+	}
+}
+
+//-----------------------------------------------------------------------------
+// receive chat code
+//-----------------------------------------------------------------------------
+
+// when a chat comes in
+function LBParseChat(%line) {
+	%line = URLDecode(%line);
+	// split up data into variables
+	%username = destroyTorqueML(decodeName(getWord(%line,0)));
+	%display = destroyTorqueML(decodeName(getWord(%line,1)));
+	%destination = decodeName(getWord(%line, 2));
+	%access = getWord(%line, 3); // admin, mod, user, ect.
+	%message = getWords(%line, 4);
+	%strlwr = strlwr(%message); // for %message comparisons
+
+	for (%i = 0; %i < $LB::BlockListCount; %i ++) {
+		%user = $LB::BlockListUser[%i];
+		if (%user $= %username) {
+			return;
+		}
+	}
+
+
+//   devecho("Received Chat Line" SPC %line);
+//      devecho("Going through with it");
+	// Redirect to cmd handler!
+	if (getSubStr(%strlwr, 0, 1) $= "/") {
+		%cmd = getWord(%strlwr, 0);
+		%cmd = getSubStr(%cmd, 1, strlen(%cmd));
+		if ($LBCCmd[%cmd] !$= "") {
+//			devecho("Got chat cmd:" SPC %cmd SPC "from user" SPC %username);
+			// If the cmd requires a destination, don't send it blank!
+			if ($LBCCmdD[%cmd] && %destination $= "")
+				return;
+			call($LBCCmd[%cmd], %username, %access, %chatTime, restWords(%message));
+			return;
+		}
+	}
+
+	// Format the message
+	%message = destroyTorqueML(%message);
+	%message = linkify(%message);
+	%message = styleify(%message, %access);
+
+	devecho("Received chat from" SPC %username);
+	devecho(%message);
+//	devecho("%time:" SPC %time);
+
+	if (strPos(strlwr(%message), strlwr($LB::Username)) != -1 || strPos(strlwr(%message), strlwr($LB::DisplayName)) != -1) {
+		// They mentioned your name, flash the thing!
+		if (RootGui.getContent().getId() == PlayMissionGui.getId()) {
+			PlayMissionGui.notifyGlobalChat();
+		}
+	}
+
+	%entry = LBUserListArray.getEntryByVariable("username", %username);
+
+	%display = LBResolveName(%username);
+	if (isObject(%entry) && %entry.location != 0)
+		%display = %display SPC LBResolveStatus(%entry.location);
+
+	// Add a colon to the name
+	%display = %display @ ":";
+
+	// Color their name appropriately
+	%display = LBColorFormat(%username, %display, %access);
+
+	%row = %display SPC %message;
+	addLBChatLine(%row);
+}
+
+// when a notification comes in
+// notification value || access (not used) || time || username
+function LBParseNotify(%line) {
+//	echo("PARSING NOTIFY:" SPC %line);
+
+	%notification = getWord(%line,0);
+	%username = destroyTorqueML(decodeName(getWord(%line,2)));
+	%display = destroyTorqueML(decodeName(getWord(%line,3)));
+	%data = getWords(%line,4);
+
+//   echo("TYPE:" SPC %notification);
+//   echo("USERNAME:" SPC %username);
+//   echo("DISPLAY:" SPC %display);
+//   echo("DATA:" SPC %data);
+
+	switch$ (%notification) {
+	case "login": // when someone logs in
+		%message = LBChatColor("notification") @ %display SPC "has just logged in." @ LBChatColor("normal");
+		addLBChatLine(%message);
+	case "logout": // when someone logs out
+		%message = LBChatColor("notification") @ %display SPC "has just logged out." @ LBChatColor("normal");
+		addLBChatLine(%message);
+	case "setlocation":
+		LBUserListArray.getEntryByVariable("username", %username).location = %data;
+		LBChatGui.updateUserlist();
+	case "kick": // When someone (probably you, hacker) has been kicked
+		if (%username !$= $LB::Username)
+			return;
+		LB_FinishLogout();
+		LBAssert("Kicked!", "You have been kicked from the leaderboards." @(%data $= "" ? "" : "\nAdditionally, you were kicked with the following message:\n\n" @ %data));
+	case "levelup": //MBF level up!
+		%message = LBChatColor("notification") @ %display SPC "has reached level" SPC %data @ "!";
+		addLBChatLine(%message);
+	case "mastery": //MBF Mastery Level up!
+		%message = LBChatColor("notification") @ %display SPC "has gained a Mastery Point!";
+		addLBChatLine(%message);
+	case "taskcomplete": //MBF Task Complete
+		%message = LBChatColor("tasks") @ %display SPC "has completed the task, \"" @ decodeName(%data) @ "\"!";
+		addLBChatLine(%message);
+	case "achievement": //Achievement Completed.
+		%message = LBChatColor("notification") @ %display SPC "has completed the achievement, \"" @ decodeName(%data) @ "\"!";
+		addLBChatLine(%message);
+	case "prestigeup": //MBF Prestige Rank
+		%message = LBChatColor("notification") @ %display SPC "has gained a prestige rank (" @ decodeName(%data) @ ")!";
+		addLBChatLine(%message);
+	case "record": //Wooooooooorld Recoooooooord
+		%level = getWord(%data, 0);
+		%time = getWord(%data, 1);
+		%name = decodeName(%level);
+		%message = LBChatColor("record") @ %display SPC "has just achieved a world record on \"" @ %name @ "\" of" SPC formatTime(%time);
+		addLBChatLine(%message);
+	case "recordscore": //WR for levels with scores instead of times
+		%level = getWord(%data, 0);
+		%score = getWord(%data, 1);
+		%name = decodeName(%level);
+		%message = LBChatColor("record") @ %display SPC "has just achieved a world record on \"" @ %name @ "\" of" SPC %score;
+		addLBChatLine(%message);
+	}
+}
+
+function popSpushSpop(%text, %start) {
+	//Look for a starting <spush>
+	%spush = strPos(%text, "<spush>", %start);
+
+	//No spush?
+	if (%spush == -1)
+		return %text;
+
+	//Look for a closing <spop>
+	%spop = strPos(%text, "<spop>", %spush + 7); //strlen("spush") == 7
+
+	//Unmatched spush, can't pop
+	if (%spop == -1)
+		return %text;
+
+	%nextSpush = strPos(%text, "<spush>", %spush + 7); //strlen("spush") == 7
+
+	//echo(%nextSpush SPC %spop);
+
+	//If we start a new spush before the spop, we have nesting. Need to pop all the nesting
+	while (%nextSpush < %spop) {
+		%spop = strPos(%text, "<spop>", %spop + 6); //strlen("spop") == 6
+
+		//Unmatched spush, can't pop
+		if (%spop == -1)
+			return %text;
+
+		%nextSpush = strPos(%text, "<spush>", %nextSpush + 7); //strlen("spush") == 7
+
+		//No next spush, we're good from here
+		if (%nextSpush == -1)
+			break;
+	}
+
+	//Remove all text between them
+	%text = getSubStr(%text, 0, %spush) @ getSubStr(%text, %spop + 6, strlen(%text)); //strlen("spop") == 6
+
+	return %text;
+}
+
+function popLBChatLine() {
+	//Don't cut off the welcome message
+	%start = strlen($LB::WelcomeMessage);
+
+	//Strip off one <spush><spop> (all chat lines have them)
+	$LB::ChatText = popSpushSpop($LB::ChatText, %start);
+
+	//Strip off the newline too
+	$LB::ChatText = getSubStr($LB::ChatText, 0, %start) @ getSubStr($LB::ChatText, %start + 1, strlen($LB::ChatText));
+}
+
+// add a line to the chat
+function addLBChatLine(%message) {
+	//Filter the chat if they request
+	%message = filterBadWords(%message);
+
+	$LB::ChatLines ++;
+	$LB::ChatText = $LB::ChatText NL "<spush>" @ %message @ "<spop>";
+
+	traceGuard();
+		// Too many chat lines causes some people to crash. This tries to avoid that.
+		if (strlen($LB::ChatText) > 20000) {
+			while (strlen($LB::ChatText) > 10000) {
+				popLBChatLine();
+			}
+			%message = ""; // Force LBUpdateChat to do a full update (slow!)
+		}
+	traceGuardEnd();
+
+	LBUpdateChat(%message);
+}
+
+function LBUpdateChat(%message) {
+	if (%message $= "") {
+		%text = "<font:\x10:\x11>" @ $LB::ChatText;
+
+		traceGuard();
+
+			// \x10 is the font, \x11 is the size
+			if (LBChatGui.isAwake()) {
+				LBChatText.setText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "chat"));
+				LBChatText.forceReflow();
+				LBChatContainer.scrollToBottom();
+			}
+
+			// add it to playGui too
+			if (PlayGUI.isAwake()) {
+				PG_LBChatText.setText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "ingame"));
+				PG_LBChatText.forceReflow();
+				PG_LBChatScroll.scrollToBottom();
+			}
+
+			if (PlayMissionGui.isAwake()) {
+				PM_LBChatText.setText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "chat"));
+				PM_LBChatText.forceReflow();
+				PM_LBChatContainer.scrollToBottom();
+			}
+
+		traceGuardEnd();
+	} else {
+		%text = "\n<spush>" @ %message @ "<spop>";
+
+		// Tried to make this work, turns out resize() doen't like to play
+		// nice with forceReflow(), and the chat always ends up sticking to the
+		// top. Left in incase I want to fix this later.
+
+		// Get bottom position
+//		%bottom = getWord(LBChatText.position, 1) + getWord(LBChatText.extent, 1);
+//		%top = getWord(LBChatText.position, 1);
+//
+//		%scrolled = %bottom <= getWord(LBChatContainer.extent, 1);
+//		devecho("LBChatText bottom is" SPC %bottom);
+//		devecho("LBChatText top is" SPC %top);
+//		devecho("LBChatText scrolled down is" SPC %scrolled);
+
+		// \x10 is the font, \x11 is the size
+		LBChatText.addText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "chat"), false);
+		if (LBChatGui.isAwake())
+			LBChatText.forceReflow();
+		LBChatContainer.scrollToBottom();
+
+		// Set position
+//		%newTop = (%scrolled ? getWord(LBChatContainer.extent, 1) - getWord(LBChatText.extent, 1) : %top);
+//		devecho("LBChatText new top is" SPC %newTop);
+
+		// This line does fuck all. Fucking torque.
+//		LBChatText.setPosition(0, %newTop);
+
+		// add it to playGui too
+		PG_LBChatText.addText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "ingame"), false);
+		if (PlayGUI.isAwake())
+			PG_LBChatText.forceReflow();
+		PG_LBChatScroll.scrollToBottom();
+
+		PM_LBChatText.addText(LBResolveChatColors(strReplace(strReplace(%text, "\x10", $DefaultFont), "\x11", 17), "chat"), false);
+		if (PlayMissionGui.isAwake())
+			PM_LBChatText.forceReflow();
+		PM_LBChatContainer.scrollToBottom();
+	}
+}
+
+function LBChatOpenURL(%url) {
+	%pre = %url;
+	if (strPos(%url, "://") == -1)
+		%url = "http://" @ %url;
+	MessageBoxYesNo("Go to Web Page?", "Do you want to go to the web page \"" @ %pre @ "\"? Remember: Only open links from people you trust!", "gotoWebPage(\"" @ %url @ "\");", "");
+}
+
+function LBChatText::onURL(%this, %url) {
+	LBChatOpenURL(%url);
+}
+
+function PG_LBChatText::onURL(%this, %url) {
+	LBChatOpenURL(%url);
+}
+
+function PM_LBChatText::onURL(%this, %url) {
+	LBChatOpenURL(%url);
+}
+
+// Make all http:// links in a message into actual <a> links
+function linkify(%message) {
+	%finish = "";
+	for (%i = 0; %i < getWordCount(%message); %i ++) {
+		%word = getWord(%message, %i);
+		if (strPos(%word, "http://") == 0)
+			%word = "<a:" @ getSubStr(%word, 7, strlen(%word)) @ ">" @ %word @ "</a>";
+		else if (strPos(%word, "https://") == 0) // I think we can use these
+			%word = "<a:" @ getSubStr(%word, 8, strlen(%word)) @ ">" @ %word @ "</a>";
+		else if (strPos(%word, "www") == 0) // These work too!
+			%word = "<a:" @ %word @ ">" @ %word @ "</a>";
+		else if (%word $= "marbleblast.com") // Why not
+			%word = "<a:marbleblast.com>marbleblast.com</a>";
+		else if (%word $= "[mbsite]")
+			%word = "<a:marbleblast.com>marbleblast.com</a>";
+		%finish = %finish @ %word @ " ";
+	}
+	return getSubStr(%finish, 0, strlen(%finish));
+}
+
+function colorify(%message, %access, %shadow) {
+	%start = 0;
+
+	if (getSubStr(%message, 0, 1) $= ">") {
+		// >using greentext outside of 4chan
+		%greentextStyle = LBChatColor("greentext");
+		%message = %greentextStyle @ %message;
+		%start = strLen(%greentextStyle) + 1;
+	}
+
+	//Message [col:rrggbb]with a color
+	while (strPos(%message, "[col:", %start) != -1) {
+		// [col:rrggbb]
+		%start = strPos(%message, "[col:", %start);
+		%stop  = strPos(%message, "]", %start);
+		if (%stop != -1) {
+			%color = getSubStr(%message, %start + 1, (%stop - %start - 1));
+			//col:rrggbb
+			%color = getSubStr(%color, 4, strLen(%color));
+
+			if ($LB::Color[%color] !$= "")
+				%color = $LB::Color[%color];
+
+			%replacement = (%access < 1 ? "" : ("<color:" @ %color @ ">" @(%shadow ? (%color !$= "000000" ? "<shadow:1:1><shadowcolor:0000007f>" : "<shadow:0:0>") : "")));
+			%message = getSubStr(%message, 0, %start) @ %replacement @ getSubStr(%message, %stop + 1, strLen(%message));
+			continue;
+		}
+		%start = %stop;
+	}
+
+	%start = 0;
+	//Message [cc] to clear color
+	while (strPos(%message, "[cc]", %start) != -1) {
+		%start = strPos(%message, "[cc]", %start);
+		%stop = %start + 4;
+		%message = getSubStr(%message, 0, %start) @ LBChatColor("normal") @ "<shadow:0:0>" @ getSubStr(%message, %stop, strLen(%message));
+	}
+
+	return %message;
+}
+
+function fontify(%message, %access, %font, %size) {
+	%start = 0;
+	//Message [b] for bold, [i] for italic, [bi] for bold italic, [c] for clear
+	while (strPos(%message, "[b]", %start) != -1) {
+		%start = strPos(%message, "[b]", %start);
+		%stop = %start + 3;
+		%replacement = (%access < 1 ? "" : "<font:" @ %font @ " Bold:" @ %size @ ">");
+		%message = getSubStr(%message, 0, %start) @ %replacement @ getSubStr(%message, %stop, strLen(%message));
+	}
+
+	%start = 0;
+	while (strPos(%message, "[i]", %start) != -1) {
+		%start = strPos(%message, "[i]", %start);
+		%stop = %start + 3;
+		%replacement = (%access < 1 ? "" : "<font:" @ %font @ " Italic:" @ %size @ ">");
+		%message = getSubStr(%message, 0, %start) @ %replacement @ getSubStr(%message, %stop, strLen(%message));
+	}
+
+	%start = 0;
+	while (strPos(%message, "[bi]", %start) != -1) {
+		%start = strPos(%message, "[bi]", %start);
+		%stop = %start + 4;
+		%replacement = (%access < 1 ? "" : "<font:" @ %font @ " Bold Italic:" @ %size @ ">");
+		%message = getSubStr(%message, 0, %start) @ %replacement @ getSubStr(%message, %stop, strLen(%message));
+	}
+
+	%start = 0;
+	while (strPos(%message, "[c]", %start) != -1) {
+		%start = strPos(%message, "[c]", %start);
+		%stop = %start + 3;
+		%replacement = (%access < 1 ? "" : "<font:" @ %font @ ":" @ %size @ ">");
+		%message = getSubStr(%message, 0, %start) @ %replacement @ getSubStr(%message, %stop, strLen(%message));
+	}
+	return %message;
+}
+
+function styleify(%message, %access) {
+	%message = colorify(%message, %access, true);
+	// \x10 is the font, \x11 is the size
+	%message = fontify(%message, %access, "\x10", "\x11");
+	%message = "<spush>" @ %message @ "<spop>";
+	return %message;
+}
+
+//-----------------------------------------------------------------------------
+// sending a message
+//-----------------------------------------------------------------------------
+
+// send chat
+function LBChatGui::sendChat(%this) {
+	%message = trim(LBSendChat.getValue());
+	if (%message !$= "" && $LB::LoggedIn && !$LB::Guest) {
+		LBSendChat(%message);
+	}
+	LBSetChatMessage("");
+}
+
+function LBChatGui::chatUpdate(%this) {
+	%message = LBSendChat.getValue();
+
+	if (getSubStr(%message, 0, 3) $= "@@@") {
+		%message = "/whisper" SPC $LB::LastWhisper SPC ltrim(getSubStr(%message, 3, strLen(%message)));
+		%update = true;
+	}
+	if (getSubStr(%message, 0, 2) $= "@@" && strLen(%message) > 2) {
+		%message = "/whisper " @ ltrim(getSubStr(%message, 2, strLen(%message)));
+		%update = true;
+	}
+	//Strip control characters from chat
+	%message = stripChars(%message, "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f");
+
+	//Update all chat
+	LBSetChatMessage(%message, LBSendChat);
+
+	if (LBSendChat.getValue() !$= %message && %update) {
+		LBSendChat.setValue(%message);
+	}
+
+	LBSendChat.setPosition("0" SPC(30 - getWord(LBSendChat.extent, 1)));
+}
+
+function LBSetChatMessage(%message, %ctrl) {
+	if (%ctrl !$= "LBSendChat")
+		LBSendChat.setValue(%message);
+	if (%ctrl !$= "PG_LBChatEntry")
+		PG_LBChatEntry.setValue(%message);
+	if (%ctrl !$= "PM_ChatEntry")
+		PM_ChatEntry.setValue(%message);
+}
+
+function LBChatGui::setEnableChatEntry(%this, %enabled) {
+	$LB::GlobalChatEnabled = %enabled;
+
+	LBSendChat.setVisible(%enabled);
+	LBSendChatDisabledText.setVisible(!%enabled);
+	LBSendChat.makeFirstResponder(%enabled);
+
+	//Hide the ingame chat if it's open
+	if (!%enabled && $chatHudType $= "global") {
+		diableChatHUD(true);
+	}
+	PG_LBChatEntry.setActive(%enabled);
+}
+
+//-----------------------------------------------------------------------------
+
+function LBSendChat(%message, %dest) {
+	if (%message $= "" || !$LB::LoggedIn)
+		return;
+
+	//How did you even get here
+	if (!$LB::GlobalChatEnabled)
+		return;
+
+	if (getSubStr(%message, 0, 3) $= "@@@") {
+		%message = getSubStr(%message, 3, strlen(%message));
+		%dest = $LB::LastWhisper;
+		%message = "/whisper" SPC %dest SPC restWords(%message);
+	}
+
+	if (getSubStr(%message, 0, 2) $= "@@") {
+		%message = getSubStr(%message, 2, strlen(%message));
+		%dest = firstWord(%message);
+		%message = "/whisper" SPC %dest SPC restWords(%message);
+	}
+
+	%line = strlwr(%message); // used for comparisons
+
+	%command = (getSubStr(ltrim(%line), 0, 1) $= "/" ? getWord(%line, 0) : "");
+	switch$ (%command) {
+	case "/whisper" or "/msg":
+		if (getWord(%message, 1) $= "" || getWordCount(%message) < 3) {
+			%row = LBChatColor("usage") @ "Usage: /whisper <username> <message>";
+			addLBChatLine(%row);
+			return;
+		}
+		%dest = getWord(%message, 1);
+		if (strlwr(%dest) $= strlwr($LB::Username)) {
+			%row = LBChatColor("usage") @ "You cannot whisper to yourself.";
+			addLBChatLine(%row);
+			return;
+		}
+
+		%found = false;
+		$LB::LastWhisper = %dest;
+
+	// For some strange reason, you need to put the whipser text in
+//         %message = "/whisper" SPC getWords(%message, 2);
+	case "/thegame":
+	case "/slap":
+		if (getWord(%message, 1) $= "" || getWordCount(%message) < 2) {
+			%row = LBChatColor("usage") @ "Usage: /slap <username>";
+			addLBChatLine(%row);
+			return;
+		}
+		%dest = getWord(%message, 1);
+		if (!LBUserListArray.containsEntryAtVariable("username", %uname)) {
+			%row = LBChatColor("usage") @ %dest SPC "is not online!";
+			addLBChatLine(%row);
+			return;
+		}
+	case "/me":
+		if (getWord(%message, 1) $= "" || getWordCount(%message) < 2) {
+			%row = LBChatColor("usage") @ "Usage: /me <message>";
+			addLBChatLine(%row);
+			return;
+		}
+	case "/help":
+		%set = getWord(%message, 1);
+		if (%set $= "")
+			%set = "info";
+		%helpMessage = LBChatColor("server") @ "SERVER: " @ $LB::ChatHelpMessage[strUpr(%set)];
+		addLBChatLine(%helpMessage);
+		return;
+	case "/invisible":
+		if ($LB::Access > 0) {
+			if ($LB::StatusNumeric == -1) {
+				LBSetMode(0, true);
+				$LB::Invisible = false;
+				addLBChatLine(LBChatColor("visible") @ "Going Visible...");
+			} else {
+				LBSetMode(-1, true);
+				$LB::Invisible = true;
+				addLBChatLine(LBChatColor("invisible") @ "Going Invisible...");
+			}
+			return;
+		}
+	case "/away":
+		if ($LB::StatusNumeric == 9) {
+			LBSetMode(0, true);
+			$LB::Away = false;
+		} else {
+			LBSetMode(9, true);
+			$LB::Away = true;
+		}
+		return;
+	case "/who":
+		if (getWord(%message, 1) $= "" || getWordCount(%message) == 1) {
+			//List all the users if they don't specify someone
+			%count = LBUserListArray.getSize();
+			addLBChatLine("There are " @ %count @ " users online:");
+			for (%i = 0; %i < %count; %i ++) {
+				%entry = LBUserListArray.getEntry(%i);
+				%row = %entry.group.singleName SPC LBColorFormat(%entry.username, %entry.display, %entry.access) SPC "(Username:" SPC %entry.username @ ")";
+				addLBChatLine(%row);
+			}
+			return;
+		}
+		//User information
+		%username = getWords(%message, 1);
+		%entry = LBUserListArray.getEntryByVariable("username", %username);
+
+		//Make sure they exist
+		if (!isObject(%entry)) {
+			//Try display?
+			%entry = LBUserListArray.getEntryByVariable("display", %username);
+			if (!isObject(%entry)) {
+				%row = LBChatColor("notification") @ "Invalid User: " @ %username;
+				addLBChatLine(%row);
+				return;
+			}
+		}
+
+		%location = LBResolveStatus(%entry.location);
+		%location = stripChars(%location, "()");
+
+		%titles = "";
+		if (%entry.prefix !$= "") {
+			%titles = %titles @ "Prefix: " @ %entry.prefix;
+		}
+		if (%entry.suffix !$= "") {
+			if (%titles !$= "")
+				%titles = %titles @ ", ";
+			%titles = %titles @ "Suffix: " @ %entry.suffix;
+		}
+		if (%entry.flair !$= "") {
+			if (%titles !$= "")
+				%titles = %titles @ ", ";
+			%titles = %titles @ "Flair: <bitmap:" @ $usermods @ "/client/ui/lb/chat/flair/" @ %entry.flair @ ".png>";
+		}
+
+		//Print their user information
+		addLBChatLine("User information for " @ %entry.display @ ":");
+		addLBChatLine("Username: " @ LBColorFormat(%entry.username, %entry.username, %entry.access));
+		addLBChatLine("Access: " @ %entry.group.singleName);
+		addLBChatLine("Location: " @ %location);
+		addLBChatLine("Titles: " @ %titles);
+		return;
+	}
+
+	if ($LB::StatusNumeric == 9) {
+		LBSetMode(0, true);
+		$LB::Away = false;
+	}
+
+	// show me chat
+	LBChatGui.showMeChat(%line,$LB::Username,%message);
+
+	LBNetwork.sendChat(%message, %dest);
+}
+
+// show me chat
+function LBChatGui::showMeChat(%this,%line,%username,%message) {
+	// figure out the status
+	%status = $LB::Status;
+	%display = LBResolveName(%username, true);
+	%displayExt = LBResolveName(%username) @((%status !$= "") ? " " : "") @ %status;
+
+	// if we did not use /me, put a colon
+	%command = (getSubStr(ltrim(%line), 0, 1) $= "/" ? getWord(%line, 0) : "");
+	switch$ (%command) {
+	case "/whisper" or "/msg":
+		%display = LBResolveName(getWord(%message, 1), true);
+
+		// Format the message
+		%message = getWords(%message, 2);
+		%message = destroyTorqueML(%message);
+		%message = linkify(%message);
+		// Only Mod+ can use formatted text
+		if (%access > 0) {
+			%message = styleify(%message);
+		}
+
+		%row = LBChatColor("whisperfrom") @ "(To:" SPC %display @ ")" @ LBChatColor("whispermsg") SPC %message;
+		addLBChatLine(%row);
+		return;
+	case "/help":
+		return;
+	case "/invisible": // If you're not a moderator, you get the shame of
+		if ($LB::Access > 0) return; //using a command that "doesn't exist"
+	default:
+	}
+}
+
+function LBSlapMessage(%from, %to) {
+	%self = %from $= $LB::Username;
+	%possessive = %to @ "\'s";
+	if (%from $= %to && %from $= $LB::Username) {
+		%to = "yourself";
+		%possessive = "your";
+	}
+	if (%from $= %to && %from !$= $LB::Username) {
+		%to = "themself";
+		%possessive = "their";
+	}
+	if (%from $= $LB::Username)
+		%from = "you";
+	if (%to $= $LB::Username) {
+		%to = "you";
+		%possessive = "your";
+	}
+	%slap = getRandom(0, 10);
+	//awkward wording
+	if (%self && %slap == 7) %slap ++;
+	switch (%slap) {
+	case  0:
+		return upperFirst(%from) SPC "slapped" SPC %to SPC "with a large fish!";
+	case  1:
+		return upperFirst(%from) SPC "slapped" SPC %to SPC "with a large trout!";
+	case  2:
+		return upperFirst(%from) SPC "slapped" SPC %to SPC "around with a large trout!";
+	case  3:
+		return upperFirst(%from) SPC "gave" SPC %to SPC "a slap with a large fish!";
+	case  4:
+		return upperFirst(%from) SPC "gave" SPC %to SPC "a good slapping with a large fish!";
+	case  5:
+		return upperFirst(%from) SPC "fish-slapped" SPC %to @ "!";
+	case  6:
+		return upperFirst(%from) SPC "slappily connected a large fish to" SPC %possessive SPC "face!";
+	case  7:
+		return upperFirst(%possessive) SPC "face was slapped by" SPC %from SPC "with a large fish!";
+	case  8:
+		return "An airborne fish on a forward trajectory from" SPC %from SPC "has intersected with" SPC %possessive SPC "face!";
+	case  9:
+		return upperFirst(%from) SPC "slapped" SPC %possessive SPC "face with a large fish!";
+	case 10:
+		return upperFirst(%from) SPC "slapped" SPC %to SPC "with a large, slimy, fish!";
+	}
+	return upperFirst(%from) SPC "slapped" SPC %to SPC "with a large fish!";
+}
+
+//-----------------------------------------------------------------------------
+// userlist code
+//-----------------------------------------------------------------------------
+
+// update the list!
+function LBChatGui::updateUserlist(%this) {
+	%text = "<lmargin:4><font:24>Users Online";
+
+	%lastGroup = -1;
+	while (isObject(LBChatUserProfile))
+		LBChatUserProfile.delete();
+	while (isObject(PM_LBChatUserProfile))
+		PM_LBChatUserProfile.delete();
+
+	LBUserList.setText(%text);
+	PM_LBUserList.setText(%text);
+
+	//Hard-coded height of the texts. For button positioning.
+	%start = 8;
+
+	for (%i = 0; %i < LBUserListArray.getSize(); %i ++) {
+		%entry = LBUserListArray.getEntry(%i);
+
+		%group = %entry.group;
+		if (%group.group !$= %lastGroup) {
+			devecho("Next group: " @ %group SPC %group.name);
+			%text = %text NL "<font:Arial:8> "; //Padding
+			%text = %text NL "<font:21>" @ %group.name;
+			%lastGroup = %group.group;
+			%start += 30;
+		}
+
+		// grab status
+		%status = LBResolveStatus(%entry.location);
+		%username = decodeName(%entry.username);
+		%display = decodeName(%entry.display);
+
+		%display = clipPx($DefaultFont, 17, %display SPC %status, 210, false);
+		%text = %text NL "<font:17>" @ LBResolveChatColors(LBColorFormat(%username, %display, %access), "chat");
+
+		%start += 19;
+		%end = %start + 19;
+
+		LBChat_PlayerScroll.add(new GuiButtonBaseCtrl(LBChatUserProfile) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "0" SPC %start;
+			extent = (getWord(LBChat_PlayerScroll.extent, 0) - 20) SPC (%end - %start); //Magic number: scrollbar size
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			command = "LBChatGui.onClickUserlist(" @ %i @ ");";
+			helpTag = "0";
+			text = "";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		});
+		PM_LBUserlistScroll.add(new GuiButtonBaseCtrl(PM_LBChatUserProfile) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "0" SPC %start;
+			extent = (getWord(PM_LBUserlistScroll.extent, 0) - 20) SPC (%end - %start); //Magic number: scrollbar size
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			command = "LBChatGui.onClickUserlist(" @ %i @ ");";
+			helpTag = "0";
+			text = "";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		});
+	}
+
+	LBUserList.setText(%text);
+	PM_LBUserList.setText(%text);
+
+	if (PlayMissionGui.isAwake()) {
+		PM_LBUserList.forceReflow();
+		if (getWord(PM_LBUserList.extent, 1) >= getWord(PM_LBUserlistScroll.extent, 1)) {
+			//Too long!
+			PM_LBUserList.setWidth(getWord(PM_LBUserlistScroll.extent, 0) - 16);
+		} else {
+			PM_LBUserList.setWidth(getWord(PM_LBUserlistScroll.extent, 0));
+		}
+	}
+}
+
+function LBChatGui::onClickUserlist(%this, %index) {
+	%user = LBUserListArray.getEntry(%index).username;
+	if (isGuest(%user))
+		return;
+	LBUserDlg.show(%user);
+}
+
+//-----------------------------------------------------------------------------
+// mode setting
+// This refers to the client's status, such as level select, chat, ect.
+//-----------------------------------------------------------------------------
+
+// @param %status : integer value representing status code
+function LBSetMode(%status, %ow) {
+	if ($LB::Invisible && !%ow) return;
+	if ($LB::Away && !%ow) return;
+	//echo("Setting mode to" SPC %Status);
+	LBSetModeForMe(%status);
+	LBNetwork.setMode(%status);
+}
+
+// this is used so the sender gets the update immediatly
+function LBSetModeForMe(%status) {
+	$LB::StatusNumeric = %status;
+	%status = LBResolveStatus(%status);
+	$LB::Status = %status;
+
+	LBUserListArray.getEntryByVariable("username", $LB::Username).location = %status;
+	LBChatGui.updateUserlist();
+}
+
+//-----------------------------------------------------------------------------
+// logout
+//-----------------------------------------------------------------------------
+
+// logout function so i stop having to say "kick me"
+function LBChatGui::logout(%this, %finishCmd) {
+	if ($Server::ServerType !$= "")
+		disconnect();
+	$LB::LoggingOut = true;
+	LBLoginButton.setActive(false);
+	// lock button to avoid spamming
+	LBdisconnect(%finishCmd);
+	LBMessage("Logging Out...", "LB_FinishLogout(\"" @ expandEscape(%finishCmd) @ "\");");
+}
+
+function LB_FinishLogout(%cmd) {
+	cancel($LB::LogoutSch);
+	$LB::LoggedIn = false;
+
+	PlayMissionGui.clearOnlineCache();
+	getMissionList("lb").clearOnlineCache();
+	getMissionList("mp").clearOnlineCache();
+	MarbleSelectGui.init();
+
+	//Back to Main Menu (since we need to clean up everything)
+	RootGui.setContent(MainMenuGui);
+	closeLeaderboards();
+	eval(%cmd);
+
+	//Play shell music.
+	playShellMusic();
+}

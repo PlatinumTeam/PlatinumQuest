@@ -1,0 +1,345 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiChunkedBitmapCtrl(PlayDemoGui) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "./exit/black";
+	useVariable = "0";
+	tile = "0";
+		commandCancel = "RootGui.popDialog(PlayDemoGui);";
+		commandNameCancel = "Close";
+		defaultControl = "PD_DemoList";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "33 24";
+		extent = "574 434";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(PD_play) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "453 362";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "startSelectedDemo();";
+			helpTag = "0";
+			text = "Play";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlLeft = "PD_Delete";
+		};
+		new GuiBorderButtonCtrl(PD_close) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "27 362";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(PlayDemoGui);";
+			accelerator = "escape";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				controlRight = "PD_Delete";
+				controlUp = "PD_DemoList";
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 62";
+			extent = "281 306";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "255 280";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(PD_DemoList) {
+					profile = "PQTextListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "239 700";
+					minExtent = "8 8";
+					visible = "1";
+					command = "getSelectedDemo();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+						controlDown = "PD_close";
+						noDuplicates = "false";
+				};
+			};
+		};
+		new GuiControl() {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "292 62";
+			extent = "260 306";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 13";
+				extent = "234 280";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiMLTextCtrl(PD_DescriptionText) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "230 14";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+		};
+		new GuiBorderButtonCtrl(PD_Delete) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "121 362";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "PlayDemoGui.deleteFile();";
+			helpTag = "0";
+			text = "Delete";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				borderColor = "255 153 153 255";
+				controlLeft = "PD_close";
+				controlRight = "PD_play";
+				controlUp = "PD_DemoList";
+		};
+		new GuiMLTextCtrl() {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "43 26";
+			extent = "487 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:28><just:center>Watch Replay";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function PlayDemoGui::open(%this, %lb) {
+	%this.isLB = %lb;
+	Canvas.pushDialog(%this);
+}
+
+function PlayDemoGui::onWake(%this) {
+	PlayDemoGui.buildDemoList();
+	PD_Delete.setActive(0);
+	PD_DescriptionText.setText("");
+	PD_play.setActive(0);
+}
+
+function PlayDemoGui::buildDemoList(%this) {
+	PD_DemoList.clear();
+
+	for (%file = findFirstFile($usermods @ "/data/recordings/*.rrec");
+	        %file !$= ""; %file = findNextFile($usermods @ "/data/recordings/*.rrec")) {
+		%base = fileBase(%file);
+		//Don't show our creepy send-your-rec system stuff
+		if (%base $= "lb-latest" || %base $= "lb-current")
+			continue;
+
+		%info = getReplayInfo(%file);
+		if (!isObject(%info)) {
+			//Couldn't load this one
+			continue;
+		}
+		// Ignore non-LB missions on LBs so we don't load custom code online
+		if (%this.isLB && !%info.lb) {
+			continue;
+		}
+
+		%tagText = (%info.mp ? "[MP] " : (%info.lb ? "[LB] " : ""));
+
+		%name = %info.name;
+		PD_DemoList.addRow(PD_DemoList.rowCount(), %tagText @ %name TAB %file TAB %name);
+	}
+	PD_DemoList.sort(2);
+}
+
+function getSelectedDemo() {
+	%id = PD_DemoList.getSelectedId();
+	%row = PD_DemoList.getRowTextById(%id);
+	%demo = getField(%row, 1);
+
+	%info = getReplayInfo(%demo);
+	%mission = getMissionInfo(%info.missionFile, true);
+	if (%info.hasMetadata) {
+		%text = "<bold:24>" @ %info.name;
+		%text = %text NL "<bold:20>Author:<font:20> " @ %info.author;
+		%text = %text NL "<bold:20>Mission:<font:20> " @ %mission.name;
+
+		if (%info.desc !$= "") {
+			%text = %text NL "<bold:20>Description:";
+			%text = %text NL "<font:18>" @ %info.desc;
+		}
+	} else {
+		%text = "<bold:24>" @ fileBase(%info.file) @ fileExt(%info.file);
+		%text = %text NL "<bold:20>Author:<font:20> Unknown";
+		%text = %text NL "<bold:20>Mission:<font:20> " @ %mission.name;
+	}
+
+	PD_DescriptionText.setText(%text);
+	PD_play.setActive(1);
+	PD_Delete.setActive(1);
+}
+
+function PlayDemoGui::deleteFile(%this) {
+	%id = PD_DemoList.getSelectedId();
+	%row = PD_DemoList.getRowTextById(%id);
+	%demo = getField(%row, 1);
+
+	%info = getReplayInfo(%demo);
+	%name = %info.name;
+
+	MessageBoxYesNo("Delete Recording?", "Do you want to delete the recording \"" @ %name @ "\"?", "PlayDemoGui.doDelete(" @ %id @ ");", "");
+}
+
+function PlayDemoGui::doDelete(%this, %id) {
+	%row = PD_DemoList.getRowTextById(%id);
+	%file = getField(%row, 1);
+
+	deleteFile(%file);
+	PD_DemoList.removeRowById(%id);
+
+	getSelectedDemo();
+}
+
+function startSelectedDemo() {
+	%id = PD_DemoList.getSelectedId();
+	%row = PD_DemoList.getRowTextById(%id);
+	%demo = getField(%row, 1);
+
+	playReplay(%demo);
+}
+
+function getReplayInfo(%file) {
+	%fo = new FileObject();
+	if (!%fo.openForRead(%file)) {
+		%fo.close();
+		%fo.delete();
+		return -1;
+	}
+
+	%obj = new ScriptObject(DemoPlaybackInfo) {
+		class = "DemoInfo";
+		superClass = "PlaybackInfo";
+		fo = %fo;
+		file = %file;
+	};
+	if (!isObject(DemoInfoGroup)) {
+		RootGroup.add(new SimGroup(DemoInfoGroup));
+	}
+	DemoInfoGroup.add(%obj);
+
+	if (!%obj.readHeader()) {
+		%obj.delete();
+		return -1;
+	}
+
+	%fo.close();
+	%fo.delete();
+
+	if (%obj.name $= "") {
+		if (%obj.hasMetadata) {
+			%obj.name = "Unnamed";
+		} else {
+			//Looks more broken if you have the extension, so do that
+			%obj.name = fileBase(%file) @ fileExt(%file);
+		}
+	}
+	if (%obj.author $= "") {
+		%obj.author = "Unknown";
+	}
+
+	return %obj;
+}

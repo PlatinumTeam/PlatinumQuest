@@ -1,0 +1,308 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(MPDedicatedServerDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "800 600";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	wrap = "0";
+		_guiSize = "800 600";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "243 140";
+		extent = "313 321";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl(MPDServerClose) {
+			profile = "PQButtonProfile";
+			horizSizing = "center";
+			vertSizing = "top";
+			position = "109 249";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedServerDlg.close();";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiMLTextCtrl(MPDServerTitle) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "11 21";
+			extent = "291 32";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+				defaultText = "<bold:28><just:center>Server Settings";
+		};
+		new GuiScrollCtrl() {
+			profile = "PQScrollProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			position = "12 54";
+			extent = "289 190";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "dynamic";
+			constantThumbHeight = "0";
+			childMargin = "2 2";
+
+			new GuiControl(MPDServerSettingsBox) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "2 2";
+				extent = "285 186";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+			};
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function MPDedicatedServerDlg::onWake(%this) {
+	%this.generateSettings();
+	%this.updateActive();
+}
+
+function MPDedicatedServerDlg::updateActive(%this) {
+	for (%i = 0; %i < %this.settings; %i ++) {
+		if (%this.setting[%i, "type"] $= "number") {
+			%plusName = "MPDServerSetting" @ %this.setting[%i] @ "Plus";
+			%minusName = "MPDServerSetting" @ %this.setting[%i] @ "Minus";
+			%labelName = "MPDServerSetting" @ %this.setting[%i] @ "Label";
+
+			%plusName.setActive(%this.setting[%i, "value"] < %this.setting[%i, "max"]);
+			%minusName.setActive(%this.setting[%i, "value"] > %this.setting[%i, "min"]);
+			%labelName.setText("<font:18>" @ %this.setting[%i, "name"] @ ":" SPC %this.setting[%i, "value"]);
+		}
+	}
+}
+
+function MPDedicatedServerDlg::update(%this, %id) {
+	%checkName = "MPDServerSetting" @ %id @ "Check";
+	%value = %checkName.getValue();
+
+	%this.updateActive();
+	commandToServer('ServerSetting', %id, %value);
+}
+
+function MPDedicatedServerDlg::increment(%this, %id) {
+	%idx = %this.setting[%id];
+	%this.setting[%idx, "value"] ++;
+	if (%this.setting[%idx, "value"] > %this.setting[%idx, "max"])
+		%this.setting[%idx, "value"] = %this.setting[%idx, "max"];
+
+	%this.updateActive();
+	commandToServer('ServerSetting', %id, %this.setting[%idx, "value"]);
+}
+
+function MPDedicatedServerDlg::decrement(%this, %id) {
+	%idx = %this.setting[%id];
+	%this.setting[%idx, "value"] --;
+	if (%this.setting[%idx, "value"] < %this.setting[%idx, "min"])
+		%this.setting[%idx, "value"] = %this.setting[%idx, "min"];
+
+	%this.updateActive();
+	commandToServer('ServerSetting', %id, %this.setting[%idx, "value"]);
+}
+
+function MPDedicatedServerDlg::open(%this) {
+	RootGui.pushDialog(%this);
+}
+
+function MPDedicatedServerDlg::close(%this) {
+	RootGui.popDialog(%this);
+}
+
+function MPDedicatedServerDlg::resetSettings(%this) {
+	%this.settings = 0;
+}
+
+function MPDedicatedServerDlg::addSetting(%this, %id, %name, %value, %type, %min, %max) {
+	%this.setting[%id] = %this.settings;
+	%this.setting[%this.settings] = %id;
+	%this.setting[%this.settings, "id"]    = %id;
+	%this.setting[%this.settings, "name"]  = %name;
+	%this.setting[%this.settings, "value"] = %value;
+	%this.setting[%this.settings, "type"]  = %type;
+	%this.setting[%this.settings, "min"]   = %min;
+	%this.setting[%this.settings, "max"]   = %max;
+
+	%this.settings ++;
+}
+
+function MPDedicatedServerDlg::generateSettings(%this) {
+	MPDServerSettingsBox.clear();
+	for (%i = 0; %i < %this.settings; %i ++) {
+		if (%this.setting[%i, "type"] $= "number") {
+			%this.addNumericLabel(%this.setting[%i]);
+		} else {
+			%this.addBooleanLabel(%this.setting[%i]);
+		}
+	}
+}
+
+function MPDedicatedServerDlg::addBooleanLabel(%this, %id) {
+	%labelName = "MPDServerSetting" @ %id @ "Label";
+	%checkName = "MPDServerSetting" @ %id @ "Check";
+	MPDServerSettingsBox.add(new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0" SPC (31 * MPDServerSettingsBox.getCount());
+		extent = "285 31";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		lineSpacing = "2";
+		allowColorChars = "0";
+		maxChars = "-1";
+
+		new GuiMLTextCtrl(%labelName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "20 3";
+			extent = "223 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiCheckBoxCtrl(%checkName) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "234 0";
+			extent = "31 31";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedServerDlg.update(\"" @ %id @ "\");";
+			helpTag = "0";
+			text = "Button";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	});
+
+	%labelName.setText("<font:18>" @ %this.setting[%this.setting[%id], "name"] @ ":");
+	%checkName.setValue(%this.setting[%this.setting[%id], "value"]);
+
+	MPDServerSettingsBox.setExtent(285 SPC (31 * MPDServerSettingsBox.getCount()));
+}
+
+function MPDedicatedServerDlg::addNumericLabel(%this, %id) {
+	%labelName = "MPDServerSetting" @ %id @ "Label";
+	%minusName = "MPDServerSetting" @ %id @ "Minus";
+	%plusName = "MPDServerSetting" @ %id @ "Plus";
+	MPDServerSettingsBox.add(new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0" SPC (31 * MPDServerSettingsBox.getCount());
+		extent = "285 31";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		lineSpacing = "2";
+		allowColorChars = "0";
+		maxChars = "-1";
+
+		new GuiMLTextCtrl(%labelName) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "20 3";
+			extent = "192 21";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiBorderButtonCtrl(%minusName) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "202 0";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedServerDlg.decrement(\"" @ %id @ "\");";
+			helpTag = "0";
+			text = "-";
+			groupNum = "-1";
+			buttonType = "RepeaterButton";
+			repeatPeriod = "200";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(%plusName) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "bottom";
+			position = "232 0";
+			extent = "35 35";
+			minExtent = "8 8";
+			visible = "1";
+			command = "MPDedicatedServerDlg.increment(\"" @ %id @ "\");";
+			helpTag = "0";
+			text = "+";
+			groupNum = "-1";
+			buttonType = "RepeaterButton";
+			repeatPeriod = "200";
+			repeatDecay = "1";
+		};
+	});
+
+	%labelName.setText("<font:18>" @ %this.setting[%this.setting[%id], "name"] @ ":" SPC %this.setting[%this.setting[%id], "value"]);
+}

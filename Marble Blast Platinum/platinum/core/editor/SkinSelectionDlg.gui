@@ -1,0 +1,226 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(SkinSelectionDlg) {
+	profile = "GuiModelessDialogProfile";
+	horizSizing = "right";
+	vertSizing = "bottom";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+
+	new GuiWindowCtrl(SkinSelectionWindow) {
+		profile = "GuiWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "157 92";
+		extent = "326 295";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		maxLength = "255";
+		resizeWidth = "0";
+		resizeHeight = "0";
+		canMove = "1";
+		canClose = "1";
+		canMinimize = "1";
+		canMaximize = "1";
+		minSize = "326 150";
+			over = "0";
+
+		new GuiObjectView(SkinSelectionObjectView) {
+			profile = "GuiButtonProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "73 34";
+			extent = "179 179";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			cameraZRot = "0";
+			forceFOV = "0";
+			skin = "base";
+			cameraRotX = "0.3";
+			cameraZRotSpeed = "0.0004";
+			orbitDistance = "1.39886";
+			autoSize = "1";
+		};
+		new GuiButtonCtrl(SkinSelectionNext) {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "235 220";
+			extent = "75 30";
+			minExtent = "8 8";
+			visible = "1";
+			command = "SkinSelectionDlg.next();";
+			helpTag = "0";
+			text = "Next";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				over = "0";
+		};
+		new GuiButtonCtrl(SkinSelectionPrev) {
+			profile = "GuiButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "18 220";
+			extent = "75 30";
+			minExtent = "8 8";
+			visible = "1";
+			command = "SkinSelectionDlg.prev();";
+			helpTag = "0";
+			text = "Prev";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				over = "0";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "125 255";
+			extent = "75 30";
+			minExtent = "8 8";
+			visible = "1";
+			command = "SkinSelectionDlg.confirm();";
+			helpTag = "0";
+			text = "Confirm";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				over = "0";
+		};
+		new GuiPopUpMenuCtrl(SkinSelectionList) {
+			profile = "GuiPopUpMenuProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "98 220";
+			extent = "130 30";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			maxLength = "255";
+			maxPopupHeight = "200";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+$SkinEditorObject = -1;
+
+if (!isObject(SkinArray)) {
+	RootGroup.add(Array(SkinArray));
+}
+
+function showSkinSelectionDlg(%object) {
+	$SkinEditorObject = %object;
+	$SkinEditorIndex = 0;
+	RootGui.pushDialog(SkinSelectionDlg);
+}
+
+function SkinSelectionDlg::onWake(%this) {
+	// set model viewer.
+	%skin = trim($SkinEditorObject.skin) $= "" ? "base" : $SkinEditorObject.skin;
+	SkinSelectionObjectView.setModel($SkinEditorObject.getDatablock().shapeFile, %skin);
+
+	// set title of skin selector window
+	SkinSelectionWindow.setText("Skin Selector:" SPC $SkinEditorObject.getId());
+
+	// build skin list from datablock
+	%this.buildSkinList();
+}
+
+function SkinSelectionDlg::buildSkinList(%this) {
+	SkinSelectionList.clear();
+	SkinArray.clear();
+	%datablock = $SkinEditorObject.getDatablock();
+	%i = 0;
+
+	while (%datablock.skin[%i] !$= "") {
+		SkinSelectionList.add(%datablock.skin[%i], %i);
+		SkinArray.addEntry(%datablock.skin[%i]);
+		%i++;
+	}
+
+	// if there's only one, disable the other buttons
+	if (SkinArray.getSize() == 1) {
+		SkinSelectionPrev.setActive(false);
+		SkinSelectionNext.setActive(false);
+		return;
+	}
+	SkinSelectionPrev.setActive(true);
+	SkinSelectionNext.setActive(true);
+
+	// choose what skin we are currently.
+	// O(n)
+	%skin = trim($SkinEditorObject.skin) $= "" ? "base" : $SkinEditorObject.skin;
+	%count = SkinArray.getSize();
+	for (%i = 0; %i < %count; %i++) {
+		if (SkinArray.getEntryByIndex(%i) $= %skin) {
+			SkinSelectionList.setSelected(%i);
+			$SkinEditorIndex = %i;
+			return;
+		}
+	}
+	SkinSelectionList.setSelected(0);
+	$SkinEditorIndex = 0;
+}
+
+function SkinSelectionDlg::prev(%this) {
+	$SkinEditorIndex--;
+	if ($SkinEditorIndex < 0)
+		$SkinEditorIndex = SkinArray.getSize() - 1;
+	%skin = SkinArray.getEntryByIndex($SkinEditorIndex);
+	SkinSelectionObjectView.setModel($SkinEditorObject.getDatablock().shapeFile, %skin);
+	SkinSelectionList.setSelected($SkinEditorIndex);
+}
+
+function SkinSelectionDlg::next(%this) {
+	$SkinEditorIndex++;
+	if ($SkinEditorIndex >= SkinArray.getSize())
+		$SkinEditorIndex = 0;
+	%skin = SkinArray.getEntryByIndex($SkinEditorIndex);
+	SkinSelectionObjectView.setModel($SkinEditorObject.getDatablock().shapeFile, %skin);
+	SkinSelectionList.setSelected($SkinEditorIndex);
+}
+
+function SkinSelectionDlg::confirm(%this) {
+	%skin = SkinArray.getEntryByIndex($SkinEditorIndex);
+	EWorldEditor.applySkin(%skin);
+	RootGui.popDialog(%this);
+	$SkinEditorObject = -1;
+}
+
+function SkinSelectionList::onSelect(%this, %id, %text) {
+	$SkinEditorIndex = %id;
+	%skin = SkinArray.getEntryByIndex($SkinEditorIndex);
+	SkinSelectionObjectView.setModel($SkinEditorObject.getDatablock().shapeFile, %skin);
+}

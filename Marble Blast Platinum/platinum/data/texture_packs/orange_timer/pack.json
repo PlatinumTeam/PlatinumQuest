@@ -1,0 +1,15 @@
+{
+  "identifier": "orange_timer",
+  "name": "Orange Timer",
+  "author": "Platinum Team",
+  "description": "Classic light mode's orange timer",
+  "timer_color": {
+    "normal": "255 200 30 255",
+    "stopped": "40 255 75 255",
+    "danger": "255 0 30 255"
+  },
+  "bitmap_swaps": {
+    "platinum/client/ui/game/transparency": "./transparency",
+    "platinum/client/ui/game/laps/transparency_laps": "./transparency_laps"
+  }
+}

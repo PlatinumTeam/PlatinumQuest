@@ -1,0 +1,250 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         goldTime = "22500";
+         alarmStartTime = "20";
+         type = "Intermediate";
+         time = "90000";
+         level = "14";
+         music = "Groove Police.ogg";
+         startHelpText = "You need to take both the high road and the low road to collect both of the gems.";
+         artist = "Kevin Ryan";
+         desc = "You need to take both the high road and the low road to collect both of the gems.";
+         name = "Take the High Road";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569861149077900047473967104.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160049016675429178998259712.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.4423429 0.4750249 -0.7607129";
+      color = "1.400000 1.200000 0.500000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         locked = "true";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "-2.08781e-08 -2.4 490.1";
+         rotation = "0 0 1 178.945";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "6.55651e-07 14.2 497";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new SimGroup(Triggers) {
+
+      new Trigger(Bounds) {
+         position = "-168.473 147.617 452";
+         rotation = "1 0 0 0";
+         scale = "327.77 304.932 200";
+         dataBlock = "InBoundsTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+      };
+   };
+   new InteriorInstance() {
+      position = "0.0479157 -2.41775 490";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/intermediate/inthighroadlowroad.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "0.442968 9.29719 489.858";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "2.41762 -4.68765 500.943";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-15.7753 -21.1459 483.046";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8.20736 -1.93599 482.9";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "0.229484 14.5438 501.983";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "-19.68208 -36.22523 491.1657";
+         rotation = "0.5345135 -0.1983932 0.8215446 48.62598";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "5000";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath2) {
+         position = "-19.68208 -36.22523 499.9157";
+         rotation = "0.5345135 -0.1983932 0.8215446 48.62598";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath3) {
+         position = "29.77372 0.1890766 504.256";
+         rotation = "-0.1365238 -0.299314 0.944337 226.6063";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath4) {
+         position = "34.99006 -10.6257 502.3361";
+         rotation = "0.1962185 0.2962693 -0.9347314 116.4792";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath5) {
+         position = "35.28882 -21.4066 500.1945";
+         rotation = "0.2812153 0.2601585 -0.9237075 90.0877";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+            useRotation = "1";
+            timeToNext = "2700";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath6) {
+         position = "29.06006 -27.31231 498.0056";
+         rotation = "0.3231445 0.1785238 -0.9293584 61.45883";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+            useRotation = "1";
+            timeToNext = "2700";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath7) {
+         position = "20.61576 -27.9131 496.3309";
+         rotation = "0.3230298 0.1062512 -0.9404055 38.55609";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            Spline = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+            useRotation = "1";
+            timeToNext = "3000";
+            usePosition = "1";
+            placed = "1";
+      };
+      new StaticShape(CameraPath8) {
+         position = "9.272815 -24.60508 494.7286";
+         rotation = "0.4312223 0.06770993 -0.8997015 19.79944";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+            usePosition = "1";
+            placed = "1";
+      };
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

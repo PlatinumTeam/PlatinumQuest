@@ -1,0 +1,108 @@
+Shapes
+
+Candycane.dts
+	base.sock
+_________
+//''T'' behind number means how many tiles wide lights are
+ChristmasLights_2T.dts
+ChristmasLights_3T.dts
+ChristmasLights_6T.dts
+ChristmasLights_9T.dts
+	Annimation names: ambient ambient2 !
+	Both annimations must run at same time for each of them.
+
+	ColorShine.ifl (Has 80 frames in total and will run fine as long as total framecount in .ifl is 80)
+	
+	Lights.ifl	(Has 80 frames in total and will run fine as long as total framecount in .ifl is 80)
+	Feel free to make your own light paterns
+	
+StaticTextures:
+	treescenery
+____________________________________________
+ChristmasTreeDecorated.dts
+	treescenery
+	boulbes
+
+	Animation names: ambient ambient2 !
+	Both must run at same time for each of them.
+	
+
+	ColorShine.ifl (Has 80 frames in total and will run fine as long as total framecount in .ifl is 80)
+	
+	Lights.ifl	(Has 80 frames in total and will run fine as long as total framecount in .ifl is 80)
+ChristmasTreeNormal.dts
+	treescenery
+________________________________________
+GiftCrateNormalOpen.dts	
+ Skins		
+	base.giftcrate
+	Regcrate1.giftcrate
+	Regcrate2.giftcrate
+GiftCrateBigNormal.dts
+ Skins
+	base.giftcrate
+	Regcrate1.giftcrate
+	Regcrate2.giftcrate
+GiftCrateNormalClosed.dts
+ Skins
+	base.giftcrate
+	Regcrate1.giftcrate
+	Regcrate2.giftcrate
+------------------------------
+GiftBoxNormal.dts
+ Skins
+	base.giftcrate
+	Flatcrate1.giftcrate
+	Flatcrate3.giftcrate
+	Flatcrate3.giftcrate
+GiftBoxTeared
+ Skins
+	base.giftcrate
+	Flatcrate1.giftcrate
+	Flatcrate3.giftcrate
+	Flatcrate3.giftcrate
+________________________________________
+Mistletoes.dts
+	mistletoe
+__________________________________
+snowman.dts
+ static texture
+	snow
+ skins
+	base.snowman
+	regular.snowman
+_________________________________
+Snowpatch_1.dts
+Snowpatch_2.dts
+Snowpatch_3.dts
+Snowpatch_4.dts
+Snowpatch_5.dts
+Snowpatch_6.dts
+	SnowPatches
+___________________
+SockwGame.dts
+ static textures
+	gamecover_front
+	gamecover_back
+ Skins
+	base.sock
+	Aayrl.sock
+	Buzzmusic.sock
+Sockwgift.dts
+ Skins
+	base.sock
+	Aayrl.sock
+	Buzzmusic.sock
+SockwNobody.dts
+ Skins
+	base.sock
+	Aayrl.sock
+	Buzzmusic.sock
+_______________________
+TheGame_box.dts
+static textures
+	gamecover_front
+	gamecover_back
+_________________________________
+SnowGlobe.dts (aka christmas easter egg)
+Animation name: ambient

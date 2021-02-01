@@ -1,0 +1,1024 @@
+//-----------------------------------------------------------------------------
+// Portions Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Torque Game Engine
+//
+// Portions Copyright (c) 2001 GarageGames.Com
+//-----------------------------------------------------------------------------
+
+$Gui::clipboardFile      = expandFilename("./cache/clipboard.gui");
+$Gui::backupFile         = expandFilename("./cache/.backup.gui");
+
+//----------------------------------------------------------------
+
+new GuiControlProfile(BackFillProfile) {
+	opaque = true;
+	fillColor = "0 94 94";
+	border = true;
+	borderColor = "255 128 128";
+	fontType = "Arial";
+	fontSize = 12;
+	fontColor = "0 0 0";
+	fontColorHL = "32 100 100";
+	fixedExtent = true;
+	justify = "center";
+};
+
+new GuiControlProfile(GuiEditScrollProfile : GuiScrollProfile) {
+	opaque = false;
+	fillColor = "0 0 0 0";
+	border = true;
+	borderColor = "255 255 255";
+};
+
+new GuiControl(GuiEditorGui) {
+	profile = GuiDefaultProfile;
+	position = "0 0";
+	extent = "800 600";
+	helpPage = "3. GUI Editor";
+		disableControls = "1";
+
+	new GuiControl() { // background
+		profile = "BackFillProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 0";
+		extent = "800 600";
+	};
+	new GuiMenuBar(GuiEditorMenu) {
+		profile = "GuiMenuBarProfile";
+		horizSizing = "width";
+		vertSizing = "bottom";
+		position = "0 0";
+		extent = "800 18";
+	};
+	new GuiFrameSetCtrl() {
+		position = "0 18";
+		extent = "800 582";
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		columns = "0 640";
+		rows = "0";
+
+		new GuiScrollCtrl() {
+			profile = "GuiEditScrollProfile";
+			horizSizing = "height";
+			vertSizing = "width";
+			position = "0 18";
+			extent = "640 582";
+			hScrollBar = "dynamic";
+			vScrollBar = "dynamic";
+			childMargin = "0 0";
+			constantThumbHeight = "0";
+
+			new GuiControl(GuiEditorContent) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "640 480";
+			};
+			new GuiEditCtrl(GuiEditor)
+			{
+				profile = "GuiTextEditProfile"; // so it's tabable
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 0";
+				extent = "640 582";
+			};
+		};
+		new GuiFrameSetCtrl() {
+			position = "640 18";
+			extent = "160 582";
+			profile = "GuiButtonProfile";
+			horizSizing = "width";
+			vertSizing = "height";
+			columns = "0";
+			rows = "0 291";
+
+			//----------------------------------------
+			// Tree View
+			new GuiScrollCtrl() {
+				profile = "GuiScrollProfile";
+				position = "0 0";
+				extent = "160 291";
+				horizSizing = "width";
+				vertSizing = "height";
+				vScrollBar = "alwaysOn";
+				hScrollBar = "dynamic";
+
+				new GuiTreeViewCtrl(GuiEditorTreeView) {
+					profile = "GuiTreeViewProfile";
+					position = "0 0";
+					horizSizing = "width";
+				};
+			};
+			//----------------------------------------
+			// Inspector
+			new GuiControl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "160 291";
+
+				new GuiButtonCtrl() {
+					profile = "GuiButtonSmProfile";
+					position = "6, 16";
+					extent = "40 16";
+					font = "12 252 Arial";
+					fontHL = "12 253 Arial";
+					text = "APPLY";
+					command = "GuiEditorInspectApply();";
+					fillColor = "249";
+					borderColor = "249";
+					selectBorderColor = "255";
+				};
+
+				new GuiTextCtrl() {
+					profile = "GuiTextProfile";
+					position = "52 4";
+					extent = "30 16";
+					font = "12 244 Arial";
+					text = "Name:";
+				};
+
+				new GuiTextEditCtrl(GuiEditorInspectName) {
+					profile = "GuiTextEditProfile";
+					position = "84 3";
+					extent = "72 18";
+					text = "";
+					horizSizing = "width";
+					vertSizing = "bottom";
+				};
+
+				new GuiScrollCtrl() {
+					profile = "GuiScrollProfile";
+					position = "0 24";
+					extent = "160 267";
+					horizSizing = "width";
+					vertSizing = "height";
+					vScrollBar = "alwaysOn";
+					hScrollBar = "alwaysOff";
+
+					new GuiControl(GuiEditorInspectFields) {
+						profile = "GuiDefaultProfile";
+						position = "0 0";
+						extent = "140 0";
+						horizSizing = "width";
+						vertSizing = "bottom";
+					};
+				};
+			};
+		};
+	};
+};
+
+
+//----------------------------------------
+new GuiControl(NewGuiDialog) {
+	profile = "GuiDialogProfile";
+	position = "0 0";
+	extent = "640 480";
+
+	new GuiWindowCtrl(NewGuiWindow) {
+		profile = "GuiWindowProfile";
+		position = "220 146";
+		extent = "200 188";
+		text = "Create new GUI";
+		canMove = "false";
+		canClose = "false";
+		canMinimize = "false";
+		canMaximize = "false";
+		horizSizing = "center";
+		vertSizing = "center";
+
+		new GuiTextCtrl() {
+			profile = "GuiTextProfile";
+			position = "20 28";
+			text = "New GUI Name:";
+		};
+		new GuiTextEditCtrl(NewGuiDialogName) {
+			profile = "GuiTextEditProfile";
+			position = "20 44";
+			extent = "160 20";
+		};
+		new GuiTextCtrl(NewGuiClassText) {
+			profile = "GuiTextProfile";
+			position = "20 68";
+			text = "Class:";
+		};
+		new GuiControlListPopup(NewGuiDialogClass) {
+			profile = "GuiControlListPopupProfile";
+			position = "20 84";
+			extent = "160 20";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			position = "56 156";
+			extent = "40 16";
+			text = "Create";
+			command = "GuiEditorCreate();";
+		};
+		new GuiButtonCtrl() {
+			profile = "GuiButtonProfile";
+			position = "104 156";
+			extent = "40 16";
+			text = "Cancel";
+			command = "RootGui.popDialog(NewGuiDialog);";
+		};
+	};
+};
+
+function GuiEditorGui::onSleep(%this) {
+}
+
+//----------------------------------------
+function GuiEditorStartCreate()
+{
+	$guiEditorDuplicate = false;
+	NewGuiDialogClass.setText("GuiControl");
+	NewGuiDialogClass.sort();
+	NewGuiDialogClass.setVisible(true);
+	NewGuiClassText.setVisible(true);
+	NewGuiDialogName.setValue("NewGui");
+	NewGuiWindow.setText("Create new GUI");
+	Canvas.pushDialog(NewGuiDialog);
+}
+
+//----------------------------------------
+function GuiEditorStartDuplicate()
+{
+	$guiEditorDuplicate = true;
+	NewGuiDialogClass.setText($GuiEditorGui.getClassName());
+	NewGuiDialogClass.sort();
+	NewGuiDialogClass.setVisible(false);
+	NewGuiClassText.setVisible(false);
+	NewGuiDialogName.setValue("NewGui");
+	NewGuiWindow.setText("Duplicate" SPC $GuiEditorGui.getName());
+	Canvas.pushDialog(NewGuiDialog);
+}
+
+//----------------------------------------
+function GuiEditorCreate()
+{
+	if ($guiEditorDuplicate) {
+		%name = NewGuiDialogName.getValue();
+		Canvas.popDialog(NewGuiDialog);
+		%gui = nameToId($GuiEditorGui);
+		%oldName = %gui.getName();
+		%gui.setName(%name);
+		%gui.save($Gui::clipboardFile);
+		%gui.setName(%oldName);
+		exec($Gui::clipboardFile);
+		GuiGroup.add(%name);
+		GuiEditorOpen(%name);
+	} else {
+		%name = NewGuiDialogName.getValue();
+		%class = NewGuiDialogClass.getText();
+		Canvas.popDialog(NewGuiDialog);
+		%obj = new (%class)(%name);
+		GuiEditorOpen(%obj);
+	}
+}
+
+//----------------------------------------
+function GuiEditorSaveGui()
+{
+	%obj = GuiEditorContent.getObject(0);
+	if(%obj == -1 || %obj.getName() $= "")
+		return;
+	%name = %obj.getName() @ ".gui";
+	getSaveFilename("*.gui", "GuiEditorSaveGuiCallback", %name);
+}
+
+function GuiEditorSaveGuiCallback(%name)
+{
+	%obj = GuiEditorContent.getObject(0);
+	%obj.onGuiEditorPreSave();
+
+	$GuiEditorDirty = false;
+	$GuiEditorSaveFilename = %name;
+
+	// Fix transparency
+	%guiObjects = %obj.getSet();
+	%obj.onGuiEditorPreSave();
+	while (%guiObjects.getCount()) {
+		%_obj = %guiObjects.getObject(0);
+		%_obj.onGuiEditorPreSave();
+		if (isObject(%_obj) && %guiObjects.isMember(%_obj)) {
+			%guiObjects.remove(%_obj);
+		}
+	}
+
+	// make sure it is saved...
+	if(!%obj.save(%name))
+	{
+		MessageBoxOK("GuiEditor Save Failure", "Failed to save '" @ %name @ "'. The file may be read-only.");
+	}
+	MessageBoxOK("Formatting", "Stripping tabs...");
+	Canvas.repaint();
+
+	//Formatting
+	%conts = fread(%name);
+
+	//Replace starting spaces with tabs
+	%going = false;
+	%lines = getRecordCount(%conts);
+	for (%i = 0; %i < %lines; %i ++) {
+		if (%i % 100 == 0) {
+			MessageBoxOK("Formatting", "Stripping tabs... Line " @ %i @ " / " @ %lines);
+			Canvas.repaint();
+		}
+		%line = getRecord(%conts, %i);
+		%len = strlen(%line);
+
+		if (%line $= "//--- OBJECT WRITE BEGIN ---") {
+			%going = true;
+			continue;
+		}
+		if (%line $= "//--- OBJECT WRITE END ---") {
+			%going = false;
+			break;
+		}
+
+		if (%going) {
+			//# of spaces
+			for (%pos = 0; %pos < %len; %pos ++) {
+				if (strpos(%line, "   ", %pos) == %pos) {
+					%line = getSubStr(%line, 0, %pos) @ "\t" @ getSubStr(%line, %pos + 3, %len);
+					%len -= 2;
+				} else {
+					break;
+				}
+			}
+			%conts = setRecord(%conts, %i, %line);
+		}
+	}
+
+	//Strip ending newlines
+	for (%i = %lines - 1; %i >= 0; %i --) {
+		if (getRecord(%conts, %i) $= "") {
+			%conts = removeRecord(%conts, %i);
+		} else {
+			break;
+		}
+	}
+
+	fwrite(%name, %conts);
+
+	%guiObjects = %obj.getSet();
+	%obj.onGuiEditorPostSave();
+	while (%guiObjects.getCount()) {
+		%_obj = %guiObjects.getObject(0);
+		%_obj.onGuiEditorPostSave();
+		if (isObject(%_obj) && %guiObjects.isMember(%_obj)) {
+			%guiObjects.remove(%_obj);
+		}
+	}
+
+	%obj.onGuiEditorPostSave();
+	%guiObjects.delete();
+
+	MessageBoxOK("Saved", "Saved GUI to '" @ %name @ "'.");
+}
+
+function GuiControl::onGuiEditorPreSave(%this) {
+	%this.tooltipPos = "";
+	%this.showingTooltip = "";
+}
+
+function GuiControl::onGuiEditorPostSave(%this) {
+
+}
+
+//----------------------------------------
+function GuiEdit(%val)
+{
+	if(%val != 0)
+		return;
+
+	$GuiEditorLastGui = "";
+
+	%content = Canvas.getContent();
+
+	if(%content == GuiEditorGui.getId())
+	{
+		//GlobalActionMap.bind(mouse, button1, mouselook);
+
+		%obj = GuiEditorContent.getObject(0);
+		if(%obj != -1)
+		{
+			GuiGroup.add(%obj);
+			RootGui.setContent(%obj);
+			%obj.onGuiEditDone();
+		}
+	}
+	else
+	{
+		if ($GuiEditorPrevSize $= "")
+			$GuiEditorPrevSize = "640 480";
+		//GlobalActionMap.unbind(mouse, button1);
+		// Open a dialog if it's pushed
+		%content = Canvas.getObject(Canvas.getCount() - 1);
+		if (%content.getName() $= "ControllerGui") {
+			%content = Canvas.getObject(Canvas.getCount() - 2);
+		}
+		if (%content._guiSize !$= "")
+			$GuiEditorPrevSize = %content._guiSize;
+		GuiEditorOpen(%content);
+	}
+}
+
+$Gui::MenuHeight = 16;
+
+//----------------------------------------
+function GuiEditorOpen(%content)
+{
+	if (!isObject(%content)) return;
+
+	if (!$GuiEditorMade) {
+		$GuiEditorMade = true;
+		MakeInspector(GuiEditorInspectFields);
+	}
+
+	%content = nameToId(%content);
+
+	Canvas.setContent(GuiEditorGui);
+	%content.onGuiEdit();
+	while((%obj = GuiEditorContent.getObject(0)) != -1)
+		GuiGroup.add(%obj); // get rid of anything being edited
+
+	$GuiEditorSelected = "";
+	$GuiEditorGui = %content;
+	$GuiEditorDirty = false;
+	$GuiEditorSaveFilename = "";
+
+	%name = %content.getName();
+	%content._name = %name;
+	%content.setName("GuiBackup");
+	%content.save($Gui::Backupfile);
+	%content._name = "";
+	%content.setName(%name);
+
+	GuiEditorContent.add(%content);
+
+	if(%content.getName() $= "")
+		%name = "(unnamed) - " @ %content;
+	else
+		%name = %content.getName() @ " - " @ %content;
+
+	GuiEditor.setRoot(%content);
+	GuiEditorTreeView.open(%content);
+	GuiEditorContent.resize(0, 0, getWord($GuiEditorPrevSize, 0), getWord($GuiEditorPrevSize, 1));
+	// Resize the content too
+	%content.resize(0, 0, getWord($GuiEditorPrevSize, 0), getWord($GuiEditorPrevSize, 1));
+	GuiEditor.resize(0, 0, getWord($GuiEditorPrevSize, 0) * 2, getWord($GuiEditorPrevSize, 1) * 2);
+
+	//----------------
+	// Menus
+
+	GuiEditorMenu.clearMenus();
+	GuiEditorMenu.contentMenus = 0;
+	GuiEditorMenu.controlMenus = 0;
+
+	%menus = 0;
+
+	//----------------
+	// File menu
+
+	GuiEditorMenu.addMenu("File", %menus ++);
+
+	GuiEditorMenu.addMenuItem("File", "New...",       1, "Ctrl N");
+	GuiEditorMenu.addMenuItem("File", "Load GUI...",  2, "Ctrl O");
+	GuiEditorMenu.addMenuItem("File", "Save",         3, "Ctrl S");
+	GuiEditorMenu.addMenuItem("File", "Save As...",   4, "Ctrl Shift S");
+	GuiEditorMenu.addMenuItem("File", "-",            0);
+	GuiEditorMenu.addMenuItem("File", "Duplicate...", 5);
+	GuiEditorMenu.addMenuItem("File", "Revert",       6);
+	GuiEditorMenu.addMenuItem("File", "Re-execute",   7);
+
+	//----------------
+	// Edit menu
+
+	GuiEditorMenu.addMenu("Edit", %menus ++);
+
+	GuiEditorMenu.addMenuItem("Edit", "Copy",  1, "Ctrl C");
+	GuiEditorMenu.addMenuItem("Edit", "Cut",   2, "Ctrl X");
+	GuiEditorMenu.addMenuItem("Edit", "Paste", 3, "Ctrl V");
+	GuiEditorMenu.addMenuItem("Edit", "-", 0);
+	GuiEditorMenu.addMenuItem("Edit", "Wrap in GuiControl", 4);
+	GuiEditorMenu.addMenuItem("Edit", "Wrap in GuiScrollCtrl", 5);
+
+	//----------------
+	// Size
+	GuiEditorMenu.addMenu("Size", %menus ++);
+
+	GuiEditorMenu.addMenuItem("Size", " 640 x 480",   1, "Ctrl Shift 1");
+	GuiEditorMenu.addMenuItem("Size", " 800 x 600",   2, "Ctrl Shift 2");
+	GuiEditorMenu.addMenuItem("Size", " 1024 x 768",  3, "Ctrl Shift 3");
+	GuiEditorMenu.addMenuItem("Size", " 1280 x 720",  4, "Ctrl Shift 4");
+	GuiEditorMenu.addMenuItem("Size", " 1536 x 1024", 5, "Ctrl Shift 5");
+	GuiEditorMenu.addMenuItem("Size", " 1920 x 1080", 6, "Ctrl Shift 6");
+
+	//----------------
+	// Content menu
+	GuiEditorMenu.addMenu("Content", %menus ++);
+
+	for (%i = 0; %i < Canvas.getCount(); %i ++) {
+		%obj = Canvas.getObject(%i);
+		if (%obj.getName() $= "GuiEditorGui" || %obj.getName() $= "Canvas") //That would be *very* bad
+			continue;
+		GuiEditorMenu.addMenuItem("Content", %obj.getName(), %i + 1);
+	}
+
+	GuiEditorMenu.addMenuItem("Content", %content.getName(), %start + 1);
+
+	%start = %i + 2;
+
+	if (isObject($GuiEditorLastGui)) {
+		GuiEditorMenu.addMenuItem("Content", $GuiEditorLastGui.getName(), %start + 1);
+		%start ++;
+	}
+
+	GuiEditorMenu.addMenuItem("Content", "-", 0);
+	%guis = new SimGroup(GuiEditorGuisGroup);
+	for (%i = 0; %i < GuiGroup.getCount(); %i ++) {
+		%obj = GuiGroup.getObject(%i);
+		if (%obj.getName() $= "GuiEditorGui" || %obj.getName() $= "Canvas") //That would be *very* bad
+			continue;
+		%insert = new ScriptObject() {value = %obj.getName();};
+		if ((%previous = %guis.containsval(%insert)) != -1) {
+			echo("We have a previous for" SPC %obj.getName() SPC "with obj" SPC %previous);
+			//Remove the old one so we only get the newest
+			if (%previous.value.getId() < %obj.getId())
+				%guis.remove(%previous);
+			else if (%previous.value.getId() > %obj.getId())
+				continue;
+		}
+		%guis.add(%insert);
+	}
+	sortByAlpha(%guis);
+
+	%max = mFloor(getWord(Canvas.getExtent(), 1) / $Gui::MenuHeight);
+
+	for (%i = 0; %i < %guis.getCount(); %i ++) {
+		%obj = %guis.getObject(%i);
+		if (%obj.value $= "GuiEditorGui" || %obj.getName() $= "Canvas") //That would be *very* bad
+			continue;
+		GuiEditorMenu.addMenuItem(%menus, %obj.value, %start + %i);
+		if ((%i + 2 + %start) % %max == 0) {
+			GuiEditorMenu.addMenu("(...)", %menus ++);
+			GuiEditorMenu.contentMenus ++;
+		}
+	}
+
+	%guis.delete();
+
+	//----------------
+	// Object menu
+
+	GuiEditorMenu.addMenu("Controls", %menus ++);
+	$GuiControlsMenuStart = %menus;
+
+	%classes = "GuiControl - DebugView EditManager EditTSCtrl GameTSCtrl GuiArrayCtrl GuiBackgroundCtrl GuiBitmapBorderCtrl GuiBitmapButtonCtrl GuiBitmapButtonTextCtrl GuiBitmapCtrl GuiBorderButtonCtrl GuiButtonBaseCtrl GuiButtonCtrl GuiCheckBoxCtrl GuiChunkedBitmapCtrl GuiConsole GuiConsoleEditCtrl GuiConsoleTextCtrl GuiControl GuiControlListPopUp GuiFadeinBitmapCtrl GuiFrameSetCtrl GuiMenuBar GuiMessageVectorCtrl GuiMLTextCtrl GuiMLTextEditCtrl GuiObjectView GuiPopUpMenuCtrl GuiProgressCtrl GuiRadioCtrl GuiScrollCtrl GuiSliderCtrl GuiSplashScreen GuiTextCtrl GuiTextEditCtrl GuiTextEditSliderCtrl GuiTextListCtrl GuiTSCtrl GuiWindowCtrl WorldEditor" @ ($Gui::ShowBuggy ? " - CreatorTree DgbFileView GuiAviBitmapCtrl GuiBubbleTextCtrl GuiCanvas GuiEditCtrl GuiFilterCtrl GuiInputCtrl GuiInspector GuiMouseEventCtrl GuiNoMouseCtrl GuiPlayerView ShowTSCtrl" : "");
+
+	%hyphens = 0;
+
+	for (%i = 0; %i < getWordCount(%classes); %i ++) {
+		GuiEditorMenu.addMenuItem(%menus, getWord(%classes, %i), %i);
+		if (getWord(%classes, %i) $= "-")
+			%hyphens ++;
+		if ((%i + 2 + %hyphens) % %max == 0) {
+			GuiEditorMenu.addMenu("(...)", %menus ++);
+			GuiEditorMenu.controlMenus ++;
+		}
+	}
+
+	//----------------
+	// Move menu
+
+	GuiEditorMenu.addMenu("Move", %menus ++);
+	GuiEditorMenu.addMenuItem("Move", "Nudge Up", 1, "w");
+	GuiEditorMenu.addMenuItem("Move", "Nudge Left", 2, "a");
+	GuiEditorMenu.addMenuItem("Move", "Nudge Down", 3, "s");
+	GuiEditorMenu.addMenuItem("Move", "Nudge Right", 4, "d");
+	GuiEditorMenu.addMenuItem("Move", "-", 0);
+	GuiEditorMenu.addMenuItem("Move", "Shift Up", 5, "Shift W");
+	GuiEditorMenu.addMenuItem("Move", "Shift Left", 6, "Shift A");
+	GuiEditorMenu.addMenuItem("Move", "Shift Down", 7, "Shift S");
+	GuiEditorMenu.addMenuItem("Move", "Shift Right", 8, "Shift D");
+	GuiEditorMenu.addMenuItem("Move", "-", 0);
+	GuiEditorMenu.addMenuItem("Move", "Bring to Front", 9, "Ctrl F");
+	GuiEditorMenu.addMenuItem("Move", "Send to Back", 10, "Ctrl B");
+	if ($Gui::ShowBuggy) {
+		GuiEditorMenu.addMenuItem("Move", "Bring Forward", 11, "Ctrl Shift F");
+		GuiEditorMenu.addMenuItem("Move", "Send Backward", 12, "Ctrl Shift B");
+	}
+	GuiEditorMenu.addMenuItem("Move", "-", 0);
+	GuiEditorMenu.addMenuItem("Move", "Align Left", 13, "Ctrl 1");
+	GuiEditorMenu.addMenuItem("Move", "Align Right", 14, "Ctrl 2");
+	GuiEditorMenu.addMenuItem("Move", "Align Top", 15, "Ctrl 3");
+	GuiEditorMenu.addMenuItem("Move", "Align Bottom", 16, "Ctrl 4");
+	GuiEditorMenu.addMenuItem("Move", "Center Horizontally", 17, "Ctrl 5");
+	GuiEditorMenu.addMenuItem("Move", "Space Horizontally", 18, "Ctrl 6");
+	GuiEditorMenu.addMenuItem("Move", "Space Vertically", 19, "Ctrl 7");
+}
+
+function sortByAlpha(%grp) {
+	%ngrp = new SimGroup(SortGroup);
+	while (%grp.getCount())
+		%ngrp.add(%grp.getObject(0));
+
+	while (%ngrp.getCount()) {
+		%lowest = %ngrp.getObject(0);
+		for (%i = 1; %i < %ngrp.getCount(); %i ++) {
+			if (stricmp(%lowest.value, %ngrp.getObject(%i).value) == 1)
+				%lowest = %ngrp.getObject(%i);
+		}
+		%grp.add(%lowest);
+	}
+	%ngrp.delete();
+}
+
+function GuiEditorMenu::onMenuSelect(%this, %menuId, %menu) {
+	if (%menu $= "File")
+		%this.setMenuItemEnable("File", "Save", true);
+	if (%menu $= "Edit")
+		%this.setMenuItemEnable("Edit", "Paste", isFile($Gui::clipboardFile));
+}
+
+function GuiEditorMenu::onMenuItemSelect(%this, %menuId, %menu, %itemId, %item) {
+	switch$ (%menu) {
+	case "File":
+		%this.fileMenu(%itemId, %item);
+	case "Edit":
+		%this.editMenu(%itemId, %item);
+	case "Size":
+		%this.sizeMenu(%itemId, %item);
+	case "Content":
+		%this.contentMenu(%itemId, %item);
+	case "Controls":
+		%this.controlsMenu(%itemId, %item);
+	case "Move":
+		%this.moveMenu(%itemId, %item);
+	case "(...)":
+		if (%menuId < $GuiControlsMenuStart + %this.contentMenus)
+			%this.contentMenu(%itemId, %item);
+		else
+			%this.controlsMenu(%itemId, %item);
+	}
+}
+
+function GuiEditorMenu::fileMenu(%this, %itemId, %item) {
+	switch$ (%item) {
+	case "New...":
+		GuiEditorStartCreate();
+	case "Load GUI...":
+		getLoadFilename("*.gui", "GuiEditorFinishOpen");
+	case "Save":
+		if ($GuiEditorSaveFilename $= "")
+			GuiEditorSaveGui();
+		else
+			GuiEditorSaveGuiCallback($GuiEditorSaveFilename);
+	case "Save As...":
+		GuiEditorSaveGui();
+	case "Duplicate...":
+		GuiEditorStartDuplicate();
+	case "Revert":
+		GuiEditorRevert();
+	case "Re-execute":
+		GuiEditorReexec();
+	}
+}
+
+function GuiEditorMenu::editMenu(%this, %itemId, %item) {
+	switch$ (%item) {
+	case "Copy":
+		GuiEditorCopy();
+	case "Cut":
+		GuiEditorCopy();
+		GuiEditorDeleteSelected(1);
+	case "Paste":
+		GuiEditorPaste();
+	case "Wrap in GuiControl":
+		GuiEditorWrapControl("GuiControl", "GuiDefaultProfile");
+	case "Wrap in GuiScrollCtrl":
+		GuiEditorWrapControl("GuiScrollCtrl", "PQScrollProfile");
+	}
+}
+
+function GuiEditorMenu::sizeMenu(%this, %itemId, %item) {
+	// " 640 x 480"
+	%width  = getWord(%item, 1);
+	%height = getWord(%item, 3);
+
+	GuiEditorContent.resize(0, 0, %width, %height);
+	// TIL you have to resize the GUI editor as well
+	GuiEditor.resize(0, 0, %width * 2, %height * 2);
+	$GuiEditorGui.resize(0, 0, %width, %height);
+	$GuiEditorGui._guiSize = %width SPC %height;
+
+	// Save this incase it's needed
+	$GuiEditorPrevSize = %width SPC %height;
+}
+
+function GuiEditorMenu::moveMenu(%this, %itemId, %item) {
+	%selected = $GuiEditorSelected;
+	echo("Item:" SPC %item SPC %itemID SPC "obj" SPC $GuiEditorSelected);
+	if (!isObject(%selected))
+		return;
+	if (%selected.getId() == $GuiEditorGui.getId())
+		return;
+	switch$ (%item) {
+	case "Nudge Up":
+		%selected.resize(getWord(%selected.position, 0), getWord(%selected.position, 1) - 1, getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Nudge Left":
+		%selected.resize(getWord(%selected.position, 0) - 1, getWord(%selected.position, 1), getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Nudge Down":
+		%selected.resize(getWord(%selected.position, 0), getWord(%selected.position, 1) + 1, getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Nudge Right":
+		%selected.resize(getWord(%selected.position, 0) + 1, getWord(%selected.position, 1), getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Shift Up":
+		%selected.resize(getWord(%selected.position, 0), getWord(%selected.position, 1) - 10, getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Shift Left":
+		%selected.resize(getWord(%selected.position, 0) - 10, getWord(%selected.position, 1), getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Shift Down":
+		%selected.resize(getWord(%selected.position, 0), getWord(%selected.position, 1) + 10, getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Shift Right":
+		%selected.resize(getWord(%selected.position, 0) + 10, getWord(%selected.position, 1), getWord(%selected.extent, 0), getWord(%selected.extent, 1));
+	case "Bring to Front": //These are reversed >_<
+		GuiEditor.pushToBack();
+	case "Send to Back": //Reversal time
+		GuiEditor.bringToFront();
+	case "Bring Forward":
+		%going = 0;
+		%grp = %selected.getGroup();
+		RootGroup.add(new SimGroup(TempGrp));
+		for (%i = 0; %i < %grp.getCount(); %i ++) {
+			%obj = %grp.getObject(%i);
+			switch (%going) {
+			case 0:
+				if (%obj.getId() == %selected.getId()) {
+					RootGroup.add(%selected);
+					%going = 1;
+				}
+			case 1:
+				%going = 2;
+				continue;
+			case 2:
+				TempGrp.add(%obj);
+			}
+		}
+		%grp.add(%selected);
+		for (%i = 0; %i < TempGrp.getCount(); %i ++)
+			%grp.add(TempGrp.getObject(%i));
+		TempGrp.delete();
+	case "Send Backward":
+		%going = 0;
+		%grp = %selected.getGroup();
+		RootGroup.add(new SimGroup(TempGrp));
+		for (%i = 0; %i < %grp.getCount(); %i ++) {
+			%obj = %grp.getObject(%i);
+			switch (%going) {
+			case 0:
+				if (%obj.getId() == %selected.getId()) {
+					if (%i == 0)
+						return;
+					%before = %grp.getObject(%i - 1);
+					RootGroup.add(%before);
+					%going = 1;
+				}
+			case 1:
+				TempGrp.add(%obj);
+			}
+		}
+		%grp.add(%before);
+		for (%i = 0; %i < TempGrp.getCount(); %i ++)
+			%grp.add(TempGrp.getObject(%i));
+		TempGrp.delete();
+	case "Align Left":
+		GuiEditor.justify(0);
+	case "Center Horizontally":
+		GuiEditor.justify(1);
+	case "Align Right":
+		GuiEditor.justify(2);
+	case "Align Up":
+		GuiEditor.justify(3);
+	case "Align Down":
+		GuiEditor.justify(4);
+	case "Space Vertically":
+		GuiEditor.justify(5);
+	case "Space Horizontally":
+		GuiEditor.justify(6);
+	}
+}
+
+function GuiEditorMenu::contentMenu(%this, %itemId, %item) {
+	if ($GuiEditorDirty) {
+		MessageBoxYesNo("Discard Changes?", "Your Gui has unsaved changes! Click yes to discard changes and switch to" SPC %item, "GuiEditorOpen(" @ %item @ ");", "");
+		return;
+	}
+	$GuiEditorLastGui = $GuiEditorGui;
+	GuiEditorOpen(%item);
+}
+
+function GuiEditorMenu::controlsMenu(%this, %itemId, %item) {
+	GuiEditorCreateObject(%item);
+}
+
+//----------------------------------------
+
+function GuiEditorRevert() {
+	MessageBoxYesNo("Revert Gui", "Are you sure you want to revert the GUI? You cannot undo this action.", "GuiEditorRevertDo();", "");
+}
+
+// Every time you open the GUI editor, it saves the current GUI to a
+// backup file.
+function GuiEditorRevertDo() {
+	$GuiEditorGui.delete();
+	exec($Gui::BackupFile);
+	%gui = nameToId("GuiBackup");
+	%gui.setName(%gui._name);
+	%gui._name = "";
+	GuiEditorOpen(%gui);
+}
+
+//----------------------------------------
+
+function GuiEditorReexec() {
+	MessageBoxYesNo("Re-execute Gui", "Are you sure you want to reexec the GUI? You cannot undo this action.", "GuiEditorReexecDo();", "");
+}
+
+function GuiEditorReexecDo() {
+	//Try to find it
+	%name = $GuiEditorGui.getName();
+	%old = $GuiEditorGui.getId();
+	if (exec2(%name)) {
+		%old.delete();
+		GuiEditorOpen(%name);
+	} else {
+		MessageBoxOK("Error Re-exec", $ScriptError);
+	}
+}
+
+//----------------------------------------
+// I had written these methods before I had realized that
+// $Gui::ClipboardFile had been removed, and didn't realize that the Gui editor
+// has built-in copypaste support. Who knew?
+
+function GuiEditorCopy() {
+	return; //Unneeded
+	if (isObject($GuiEditorSelected)) {
+		%obj = $GuiEditorSelected;
+		%obj._name = %obj.getName();
+		%obj.setName("GuiClipboard");
+		%obj.save($Gui::clipboardFile);
+		%obj.setName(%obj._name);
+	}
+}
+
+//----------------------------------------
+
+function GuiEditorPaste() {
+	return; //Unneeded
+	if (isFile($Gui::clipboardFile)) {
+		exec($Gui::clipboardFile);
+		%obj = GuiClipboard.getId();
+		%obj.setName(%obj.name);
+		%obj._name = "";
+		if ($GuiEditorSelected !$= "")
+			$GuiEditorSelected.getGroup().add(%obj);
+		else
+			$GuiEditorGui.add(%obj);
+	}
+}
+
+//----------------------------------------
+
+function GuiEditorWrapControl(%type, %profile) {
+	if (isObject($GuiEditorSelected)) {
+		%obj = $GuiEditorSelected;
+		%ctrl = new (%type)() {
+			profile = %profile;
+			horizSizing = %obj.horizSizing;
+			vertSizing = %obj.vertSizing;
+			position = %obj.position;
+			extent = %obj.extent;
+			minExtent = %obj.minExtent;
+			visible = %obj.visible;
+		};
+		%obj.getGroup().add(%ctrl);
+		%ctrl.add(%obj);
+		%obj.position = "0 0";
+		%obj.horizSizing = "width";
+		%obj.vertSizing = "height";
+	}
+}
+
+//----------------------------------------
+
+function GuiEditorFinishOpen(%filename) {
+	exec(%filename);
+
+}
+
+//----------------------------------------
+function GuiEditorContentList::onSelect(%this, %id)
+{
+	GuiEditorOpen(%id);
+}
+
+//----------------------------------------
+function GuiEditorCreateObject(%object)
+{
+	// I learned this is possible from T3D, who knew?
+	%obj = new (%object)();
+	GuiEditor.addNewCtrl(%obj);
+}
+
+//----------------------------------------
+function GuiEditorTreeView::onSelect(%this, %obj, %rightMouse)
+{
+	if(%rightMouse)
+		GuiEditor.setCurrentAddSet(%obj);
+	else
+	{
+		$GuiEditorDirty = true;
+		$GuiEditorSelected = %obj;
+		GuiEditorInspectFields.inspector.inspect(%obj);
+		GuiEditorInspectName.setValue(%obj.getName());
+		GuiEditor.select(%obj);
+	}
+}
+
+//----------------------------------------
+function GuiEditorInspectApply()
+{
+	GuiEditorInspectFields.inspector.apply(GuiEditorInspectName.getValue());
+	$GuiEditorSelected.onInspectApply();
+}
+
+function GuiControl::onInspectApply() {}
+
+//----------------------------------------
+function GuiEditor::onSelect(%this, %ctrl)
+{
+	$GuiEditorDirty = true;
+	$GuiEditorSelected = %ctrl;
+	GuiEditorInspectFields.inspector.inspect(%ctrl);
+	GuiEditorInspectName.setValue(%ctrl.getName());
+	GuiEditor.select(%ctrl);
+}
+function GuiEditorDeleteSelected( %val ) {
+	if( %val ) {
+		$GuiEditorSelected.getGroup().pushToBack($GuiEditorSelected);
+		GuiEditor.deleteSelection();
+		echo("Delete selected");
+	}
+}
+function GuiEditorAddToObj() {
+	%to = trim(GuiEditorAddToObjTextEdit.getValue());
+	%from = trim(GuiEditorAddFromObjTextEdit.getValue());
+	GuiEditorAddFromObjTextEdit.setValue("");
+	GuiEditorAddToObjTextEdit.setValue("");
+	if (!isObject(%to) || !isObject(%from)) {
+		MessageBoxWarn("Warning!","You must enter correct ID numbers.");
+		return;
+	}
+	%to.add(%from);
+}
+
+GlobalActionMap.bind(keyboard, "f10", GuiEdit);
+
+function GuiControl::onGuiEdit(%this) {}
+function GuiControl::onGuiEditDone(%this) {}
+
+function SimGroup::containsval(%this, %item) {
+	for (%i = 0; %i < %this.getCount(); %i ++) {
+		if (%this.getObject(%i).value $= %item.value)
+			return %item;
+	}
+	return -1;
+}

@@ -1,0 +1,281 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         alarmStartTime = "20";
+         artist = "Alex Swanson";
+         desc = "Use the tornado to your mega advantage!";
+         game = "Custom";
+         gameMode = "mega";
+         level = "2";
+         music = "Beach Party.ogg";
+         name = "Eye of the Mega Storm";
+         noDownload = "1";
+         overviewHeight = "15";
+         time = "240000";
+         type = "Advanced";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "10000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 7.45949e-31 1.3684e-38";
+      fogVolume2 = "-1 1.07208e-14 8.756e-14";
+      fogVolume3 = "-1 5.1012e-10 2.05098e-08";
+      materialList = "~/data/skies/Cloudy/cloudy.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+   };
+   new Sun() {
+      direction = "0.638261 0.459006 -0.61801";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new StaticShape() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "10000 10000 10000";
+      dataBlock = "Dusk";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/lbinteriors_mbg/addon/eyeofthestorm.dif";
+      showTerrainInside = "0";
+   };
+   new Trigger(Bounds) {
+      position = "-25 22 -5";
+      rotation = "1 0 0 0";
+      scale = "50 40 500";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "0.06875 3.62188 0.4125";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new Item() {
+      position = "7.25 -3.5 5.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "4.9 7.45 1.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-1.9 -6.9 1.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "1.4 13.8 6.85";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-11 2.3 3.19";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-4.73 -2.2 1.7";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "2.64 0.93 0.43";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "13.5 -7 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "11 5 4.071596";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "1.5 5.25 21";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup(SpawnPoints) {
+
+      new Trigger() {
+         position = "-2.5 4 2";
+         rotation = "0 0 1 89.99999";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "1 0 2";
+         rotation = "0 0 1 180";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "3 3.1 2";
+         rotation = "0 0 -1 89.99999";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "0 7 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "3.4 6.7 2";
+         rotation = "0 0 1 45.00001";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "4 1 2";
+         rotation = "0 0 1 125";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "-2.5 6 2";
+         rotation = "0 0 -1 45.00001";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+      new Trigger() {
+         position = "-3 0.5 2";
+         rotation = "0 0 1 225";
+         scale = "1 1 1";
+         dataBlock = "SpawnTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            add = "0 0 1";
+      };
+   };
+   new Item() {
+      position = "-2.5 4.75 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "8.75 11.75 8.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-9.75 -5.25 5.822591";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-6.75 11.75 6";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "MegaMarbleItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Comforting Mystery.ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,449 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc = "Elevator mayhem!";
+         name = "Tower Maze";
+         artist = "Alex Swanson";
+         goldTime = "22000";
+         type = "advanced";
+         time = "30000";
+         level = "29";
+         startHelpText = "The goal is above you, find the fastest route to the top!";
+         music = "Classic Vibe.ogg";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 7.45949e-31 1.3684e-38";
+      fogVolume2 = "-1 1.07208e-14 8.756e-14";
+      fogVolume3 = "-1 5.1012e-10 2.05098e-08";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+   };
+   new Sun() {
+      direction = "0.459006 0.638261 -0.61801";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors_mbg/addon/towermaze.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 0 -12";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "0 0 16";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "-4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4.5 0 -8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-4.5 0 -8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "platinum/data/interiors_mbg/addon/towermaze.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "0 4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "0 4.5 -8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "0 4.5 -8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "0 4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "0 4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "platinum/data/interiors_mbg/addon/towermaze.dif";
+         interiorIndex = "1";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "4.5 0 -4";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "4.5 0 -4";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "4.5 0 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "platinum/data/interiors_mbg/addon/towermaze.dif";
+         interiorIndex = "2";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "0 -4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "0 -4.5 -4";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "0 -4.5 -4";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "0 -4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "1500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "0 -4.5 -12";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "platinum/data/interiors_mbg/addon/towermaze.dif";
+         interiorIndex = "3";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new Trigger(Bounds) {
+      position = "-15.5376 17.1036 -13.1366";
+      rotation = "1 0 0 0";
+      scale = "32.5383 31.8957 46.1366";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "10.00281 -12.30067 -6.754785";
+         rotation = "0.4328237 0.1453831 -0.8896782 41.36765";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath2";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath2) {
+         position = "-1.841073 -14.04719 -3.021652";
+         rotation = "0.7325711 -0.05121376 0.6787612 11.761";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath3";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath3) {
+         position = "-13.14413 -10.22153 1.478652";
+         rotation = "0.2264283 -0.1240033 0.9661022 59.09477";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath4";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath4) {
+         position = "-16.78303 4.612163 4.775552";
+         rotation = "0.07493864 -0.1047325 0.991673 109.2836";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath5";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath5) {
+         position = "-4.290317 13.58299 9.350312";
+         rotation = "0.01936308 -0.1452805 0.989201 164.9787";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath6";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath6) {
+         position = "11.08758 15.42052 13.7622";
+         rotation = "-0.05409905 -0.1500185 0.987202 219.1915";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath7";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath7) {
+         position = "15.77348 0.2623695 17.89043";
+         rotation = "0.1538827 0.1487765 -0.9768243 89.41";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            Spline = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath8";
+            useRotation = "1";
+            timeToNext = "3000";
+      };
+      new StaticShape(CameraPath8) {
+         position = "9.678954 -15.79757 22.5544";
+         rotation = "0.5088588 0.1380971 -0.8497011 35.42588";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath9";
+            useRotation = "1";
+            timeToNext = "5000";
+      };
+      new StaticShape(CameraPath9) {
+         position = "9.678954 -15.79757 22.5544";
+         rotation = "0.5088588 0.1380971 -0.8497011 35.42588";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            usePosition = "1";
+            placed = "1";
+            reverseRotation = "0";
+            useScale = "0";
+            nextNode = "CameraPath1";
+            useRotation = "1";
+            timeToNext = "0";
+      };
+   };
+   new StaticShape() {
+      position = "0.0197326 0.127713 23.4222";
+      rotation = "0 0 -1 30.93968";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/music/Pianoforte (Guitar Remix).ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

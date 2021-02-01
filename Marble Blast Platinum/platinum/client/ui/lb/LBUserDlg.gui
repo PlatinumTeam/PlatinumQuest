@@ -1,0 +1,558 @@
+//-----------------------------------------------------------------------------
+// LBUserDlg.gui
+//
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiChunkedBitmapCtrl(LBUserDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "~/client/ui/exit/black";
+	useVariable = "0";
+	tile = "0";
+		_guiSize = "800 600";
+		loading = "1";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "-5 20";
+		extent = "649 440";
+		minExtent = "61 61";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBitmapCtrl(LBUserAvatar) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "33 33";
+			extent = "72 72";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			bitmap = "./avatars/nophoto.jpg";
+			wrap = "0";
+		};
+		new GuiBorderButtonCtrl(LBUserFriend) {
+			profile = "PQButtonProfile";
+			horizSizing = "left";
+			vertSizing = "top";
+			position = "476 368";
+			extent = "146 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBUserDlg.addFriend();";
+			helpTag = "0";
+			text = "Add Friend";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiScrollCtrl() {
+			profile = "PQScrollProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "113 38";
+			extent = "503 66";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			willFirstRespond = "1";
+			hScrollBar = "alwaysOff";
+			vScrollBar = "alwaysOn";
+			constantThumbHeight = "0";
+			childMargin = "0 0";
+
+			new GuiMLTextCtrl(LBUserNameDetails) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "0 0";
+				extent = "487 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+			new GuiBitmapCtrl(LBUserFlair) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "3 13";
+				extent = "14 14";
+				minExtent = "8 8";
+				visible = "0";
+				helpTag = "0";
+				bitmap = "./chat/flair/newyear.png";
+				wrap = "0";
+			};
+		};
+		new GuiControl(LBFriendsContainer) {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "377 106";
+			extent = "250 267";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 35";
+				extent = "224 219";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "0 0";
+
+				new GuiTextListCtrl(LBFriendList) {
+					profile = "PQTextListProfile";
+					horizSizing = "right";
+					vertSizing = "bottom";
+					position = "0 0";
+					extent = "224 8";
+					minExtent = "8 8";
+					visible = "1";
+					command = "LBUserDlg.selectFriend();";
+					helpTag = "0";
+					enumerate = "0";
+					resizeCell = "1";
+					columns = "0";
+					fitParentWidth = "1";
+					clipColumnText = "0";
+				};
+			};
+			new GuiMLTextCtrl(LBUserFriendsTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "12 12";
+				extent = "226 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiControl(LBUserInfoPanel) {
+			profile = "PQPanelProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 106";
+			extent = "365 267";
+			minExtent = "41 41";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiScrollCtrl() {
+				profile = "PQScrollProfile";
+				horizSizing = "width";
+				vertSizing = "height";
+				position = "13 36";
+				extent = "339 218";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				willFirstRespond = "1";
+				hScrollBar = "alwaysOff";
+				vScrollBar = "dynamic";
+				constantThumbHeight = "0";
+				childMargin = "2 2";
+
+				new GuiMLTextCtrl(LBUserStats) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "width";
+					vertSizing = "bottom";
+					position = "2 2";
+					extent = "319 14";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+				};
+			};
+			new GuiMLTextCtrl(LBUserStatsTitle) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "width";
+				vertSizing = "bottom";
+				position = "12 12";
+				extent = "341 14";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+			};
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "27 368";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(LBUserDlg);";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "121 368";
+			extent = "154 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBUserDlg.showAchievements();";
+			helpTag = "0";
+			text = "Achievements";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "275 368";
+			extent = "107 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBUserDlg.showStatistics();";
+			helpTag = "0";
+			text = "Statistics";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+		new GuiBorderButtonCtrl(LBUserBlock) {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "382 368";
+			extent = "94 45";
+			minExtent = "8 8";
+			visible = "1";
+			command = "LBUserDlg.blockUser();";
+			helpTag = "0";
+			text = "Block";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function LBUserDlg::show(%this, %user) {
+	%this.user = trim(stripCols(%user));
+	RootGui.pushDialog(%this);
+
+	// you can't have friends if you're a guest.
+	// become a real user.  Maybe then....maybe
+	LBUserFriend.setActive(!$LB::Guest);
+	LBUserBlock.setActive(!$LB::Guest);
+}
+
+function LBUserDlg::onWake(%this) {
+	%this.updateBlockFriend();
+	LBUserStatsTitle.setText("<font:24><just:center>User Information");
+	LBUserFriendsTitle.setText("<font:24><just:center>Friends");
+
+	LBFriendsContainer.setExtent(%this.user $= $LB::Username ? "250 312" : "250 267");
+
+	%this.loading = true;
+	%this.updateInfo();
+	%this.loadInfo();
+}
+
+// decide to activate or deactive the button
+function LBUserDlg::updateBlockFriend(%this) {
+	%friend = false;
+	for (%i = 0; %i < $LB::FriendListCount; %i ++) {
+		if (getField($LB::FriendListUser[%i], 1) $= %this.user) {
+			%friend = true;
+			break;
+		}
+	}
+	%block = false;
+	for (%i = 0; %i < $LB::BlockListCount; %i ++) {
+		if (getField($LB::BlockListUser[%i], 1) $= %this.user) {
+			%block = true;
+			break;
+		}
+	}
+
+	LBUserFriend.setVisible(%this.user !$= $LB::username);
+	LBUserBlock.setVisible(%this.user !$= $LB::username);
+
+	LBUserFriend.setText(%friend ? "Remove Friend" : "Add Friend");
+	LBUserBlock.setText(%block ? "Unblock" : "Block");
+}
+
+// view achievements
+function LBUserDlg::showAchievements(%this) {
+	Canvas.popDialog(LBUserDlg);
+	LBAchievementsDlg.show(%this.user);
+}
+
+// view statistics
+function LBUserDlg::showStatistics(%this) {
+	Canvas.popDialog(LBUserDlg);
+	LBStatsDlg.show(%this.user);
+}
+
+// Block the person
+function LBUserDlg::blockUser(%this) {
+	%block = false;
+	for (%i = 0; %i < $LB::BlockListCount; %i ++) {
+		if (getField($LB::BlockListUser[%i], 1) $= %this.user) {
+			%block = true;
+			break;
+		}
+	}
+
+	if (%block) {
+		//Remove from block list
+		for (%i = 0; %i < $LB::BlockListCount; %i ++) {
+			if (getField($LB::BlockListUser[%i], 1) $= %this.user) {
+				for (%j = %i; %j < $LB::BlockListCount; %j ++) {
+					$LB::BlockListUser[%j] = $LB::BlockListUser[%j + 1];
+				}
+				$LB::BlockListCount --;
+				$LB::BlockListUser[$LB::BlockListCount] = "";
+				%i --;
+			}
+		}
+
+		LBNetwork.unblockUser(%this.user);
+	} else {
+		//Add to block list
+		$LB::BlockListUser[$LB::BlockListCount] = %this.playerProfileInfo[%this.user].display TAB %this.user;
+		$LB::BlockListCount ++;
+		LBNetwork.blockUser(%this.user);
+	}
+
+	savePrefs();
+	%this.updateBlockFriend();
+}
+
+// add a friend
+function LBUserDlg::addFriend(%this) {
+	%friend = false;
+	for (%i = 0; %i < $LB::FriendListCount; %i ++) {
+		if (getField($LB::FriendListUser[%i], 1) $= %this.user) {
+			%friend = true;
+			break;
+		}
+	}
+
+	if (%friend) {
+		//Remove from friend list
+		for (%i = 0; %i < $LB::FriendListCount; %i ++) {
+			if (getField($LB::FriendListUser[%i], 1) $= %this.user) {
+				for (%j = %i; %j < $LB::FriendListCount; %j ++) {
+					$LB::FriendListUser[%j] = $LB::FriendListUser[%j + 1];
+				}
+				$LB::FriendListCount --;
+				$LB::FriendListUser[$LB::FriendListCount] = "";
+				%i --;
+			}
+		}
+
+		LBNetwork.deleteFriend(%this.user);
+	} else {
+		//Add to friend list
+		$LB::FriendListUser[$LB::FriendListCount] = %this.playerProfileInfo[%this.user].display TAB %this.user;
+		$LB::FriendListCount ++;
+		LBNetwork.addFriend(%this.user);
+	}
+
+	savePrefs();
+	%this.updateBlockFriend();
+}
+
+// when a friend is selected
+function LBUserDlg::selectFriend(%this) {
+	cancel(%this.dblreset);
+	if (%this.dbl) {
+		%this.dbl = false;
+		RootGui.popDialog(%this);
+		%this.show(getField(LBFriendList.getRowTextById(LBFriendList.getSelectedId()), 1));
+	} else {
+		%this.dbl = true;
+		%this.dblreset = %this.schedule(500, "resetDbl");
+	}
+}
+
+function LBUserDlg::resetDbl(%this) {
+	%this.dbl = false;
+	cancel(%this.dblreset);
+}
+
+function LBUserDlg::updateInfo(%this) {
+	%stats = %this.playerProfileInfo[%this.user];
+
+	if (isObject(%stats)) {
+		%display = %stats.display;
+		//Prefix + Suffix
+		if (%stats.titles.prefix !$= "" && !%notitle)
+			%display = %stats.titles.prefix SPC %display;
+		if (%stats.titles.suffix !$= "" && !%notitle)
+			%display = %display SPC %stats.titles.suffix;
+
+		//Flair icon
+		if (%stats.titles.flair !$= "") {
+			%flair = $usermods @ "/client/ui/lb/chat/flair/" @ %stats.titles.flair @ ".png";
+			LBUserFlair.setBitmap(%flair);
+			LBUserFlair.setVisible(true);
+			%tab = 20;
+		} else {
+			LBUserFlair.setVisible(false);
+			%tab = 0;
+		}
+
+		//Display name and status text
+		%display = shrinkToFit(%display, $DefaultFont["Bold"], 32, 14, getWord(LBUserNameDetails.getExtent(), 0) - %tab);
+		%display = LBResolveChatColors(LBColorFormat(%this.user, %display, %stats.access), "chat");
+		%text = "<bold:28><tab:" @ %tab @ ">\t" @ %display;
+		%text = %text NL "<font:17>" @ destroyTorqueML(%stats.status);
+		LBUserNameDetails.setText(%text);
+
+		//Avatar
+		if (isFile($LBPref::AvatarCache[%this.user, "path"])) {
+			LBUserAvatar.setBitmap($LBPref::AvatarCache[%this.user, "path"]);
+		} else {
+			LBUserAvatar.setBitmap($usermods @ "/client/ui/lb/avatars/nophoto.jpg");
+		}
+
+		%access = LBAccountType(%stats.access);
+
+		%text = "<bold:18><tab:120>Name: <font:18>\t"              @ LBResolveChatColors(LBColorFormat(%this.user, %stats.display, %stats.access), "chat");
+		%text = %text NL "<bold:18>Username: <font:18>\t"          @ %stats.username;
+		%text = %text NL "<bold:18>Account Type: <font:18>\t"      @ %access;
+		%text = %text NL "<bold:18>Register Date: <font:18>\t"     @ %stats.registerDate;
+		%text = %text NL "<bold:18>Account Age: <font:18>\t"       @ %stats.accountAge;
+		%text = %text NL "<bold:18>Total Time Online: <font:18>\t" @ formatTimeHours(%stats.totalTime);
+		%text = %text NL "<bold:18>Last Level Played: <font:18>\t" @ %stats.lastLevel;
+
+		%text = %text NL "<tab:90,135>";
+		%text = %text NL  "<just:left><bold:18>Overall Rank: <font:18>\t" @ formatScore(%stats.ranking.rating_general);
+		%text = %text TAB "<bold:18>Total Rating: <font:18><just:right>"  @ formatScore(%stats.rating.rating_general);
+		%text = %text NL  "<just:left><bold:18>Rank MBG: <font:18>\t"     @ formatScore(%stats.ranking.rating_mbg);
+		%text = %text TAB "<bold:18>Rating MBG: <font:18><just:right>"    @ formatScore(%stats.rating.rating_mbg);
+		%text = %text NL  "<just:left><bold:18>Rank MBP: <font:18>\t"     @ formatScore(%stats.ranking.rating_mbp);
+		%text = %text TAB "<bold:18>Rating MBP: <font:18><just:right>"    @ formatScore(%stats.rating.rating_mbp);
+		%text = %text NL  "<just:left><bold:18>Rank MBU: <font:18>\t"     @ formatScore(%stats.ranking.rating_mbu);
+		%text = %text TAB "<bold:18>Rating MBU: <font:18><just:right>"    @ formatScore(%stats.rating.rating_mbu);
+		%text = %text NL  "<just:left><bold:18>Rank PQ: <font:18>\t"      @ formatScore(%stats.ranking.rating_pq);
+		%text = %text TAB "<bold:18>Rating PQ: <font:18><just:right>"     @ formatScore(%stats.rating.rating_pq);
+		%text = %text NL  "<just:left><bold:18>Rank Custom: <font:18>\t"  @ formatScore(%stats.ranking.rating_custom);
+		%text = %text TAB "<bold:18>Rating Custom: <font:18><just:right>" @ formatScore(%stats.rating.rating_custom);
+		%text = %text NL "<tab:90,135>";
+		%text = %text NL  "<just:left><bold:18>MP Rank: <font:18>\t"       @ formatScore(%stats.ranking.rating_mp);
+		%text = %text TAB "<bold:18>Total Points: <font:18><just:right>"   @ formatScore(%stats.rating.rating_mp);
+		%text = %text NL  "<just:left><bold:18>Level: <font:18>\t"         @ formatLevel(%stats.rating.rating_mp);
+		%text = %text TAB "<bold:18>Points to Next: <font:18><just:right>" @ formatExperience(%stats.rating.rating_mp);
+		%text = %text NL "<tab:90,135>";
+		%text = %text NL  "<just:left><bold:18>Multiplayer Games (1st Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_games.getFieldValue("1")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Games (2nd Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_games.getFieldValue("2")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Games (3rd Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_games.getFieldValue("3")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Games (4th+ Place):<just:right><font:18>" @ formatCommas(mFloor(%stats.mp_games.getFieldValue("4"))) @ "\n";
+		%text = %text NL  "<just:left><bold:18>Multiplayer Teams (1st Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_team_games.getFieldValue("1")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Teams (2nd Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_team_games.getFieldValue("2")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Teams (3rd Place):<just:right><font:18>"  @ formatCommas(mFloor(%stats.mp_team_games.getFieldValue("3")));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Teams (4th+ Place):<just:right><font:18>" @ formatCommas(mFloor(%stats.mp_team_games.getFieldValue("4"))) @ "\n";
+		%text = %text NL  "<just:left><bold:18>Multiplayer Red Gems:<just:right><font:18>"           @ formatCommas(mFloor(%stats.mp_gems.red));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Yellow Gems:<just:right><font:18>"        @ formatCommas(mFloor(%stats.mp_gems.yellow));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Blue Gems:<just:right><font:18>"          @ formatCommas(mFloor(%stats.mp_gems.blue));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Platinum Gems:<just:right><font:18>"      @ formatCommas(mFloor(%stats.mp_gems.platinum));
+		%text = %text NL  "<just:left><bold:18>Multiplayer Total Gems:<just:right><font:18>"         @ formatCommas(%stats.mp_gems.red + %stats.mp_gems.yellow + %stats.mp_gems.blue + %stats.mp_gems.platinum);
+		%text = %text NL  "<just:left><bold:18>Multiplayer Total Points:<just:right><font:18>"       @ formatCommas((%stats.mp_gems.red) + (%stats.mp_gems.yellow * 2) + (%stats.mp_gems.blue * 5) + (%stats.mp_gems.platinum * 10)) @ "\n";
+		%text = %text NL  "<just:left><bold:18>Best Score (MP):<just:right><font:18>"                @ %stats.mp_best;
+		%text = %text NL  "<just:left><bold:18>Average Score (MP):<just:right><font:18>"             @ %stats.mp_average;
+
+		LBUserStats.setText(%text);
+
+		LBFriendList.clear();
+		for (%i = 0; %i < %stats.friends.getSize(); %i ++) {
+			%friend = %stats.friends.getEntry(%i);
+			LBFriendList.addRow(LBFriendList.rowCount(), %friend.name TAB %friend.username);
+		}
+	} else {
+		//Loading stuff
+		LBUserNameDetails.setText("<bold:28>Loading...");
+		LBUserStats.setText("");
+		LBUserFlair.setVisible(false);
+		LBUserAvatar.setBitmap($usermods @ "/client/ui/lb/avatars/nophoto.jpg");
+		LBFriendList.clear();
+	}
+}
+
+function LBUserDlg::onPlayerAvatarUpdate(%this) {
+	%this.updateInfo();
+}
+
+function LBUserDlg::onPlayerProfileInfoUpdate(%this, %parsed) {
+	%this.playerProfileInfo[%parsed.username] = %parsed;
+	%this.updateInfo();
+}
+
+function LBUserDlg::loadInfo(%this) {
+	if (!isFile($LBPref::AvatarCache[%this.user, "path"])) {
+		statsGetPlayerAvatar(%this.user);
+	}
+	%this.onPlayerAvatarUpdate();
+
+	statsGetPlayerProfileInfo(%this.user);
+}

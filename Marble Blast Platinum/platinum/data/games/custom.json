@@ -1,0 +1,10 @@
+{
+	"name": "Custom",
+	"display": "Custom",
+	"order": 1000,
+	"custom": true,
+	"customPaths":
+	[
+		"platinum/data/missions"
+	]
+}

@@ -1,0 +1,353 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(ExitGameDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "1024 768";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	wrap = "0";
+		_guiSize = "1024 768";
+		commandSelect = "hideControllerUI(); ExitGameDlg.close(); ExitGameDlg.end();";
+		commandCancel = "hideControllerUI(); ExitGameDlg.close(); resumeGame();";
+		commandAlt1 = "hideControllerUI(); ExitGameDlg.close(); resumeGame(); restartLevel(true);";
+		commandLT = "OptionsGui.show(\"exit\");";
+		commandRT = "RootGui.pushDialog(JukeboxDlg);";
+		commandNameSelect = "Exit";
+		commandNameCancel = "Resume";
+		commandNameAlt1 = "Restart";
+		commandNameLT = "Options";
+		commandNameRT = "Jukebox";
+
+	new GuiBitmapCtrl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "height";
+		position = "0 0";
+		extent = "1024 768";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+		bitmap = "./exit/black";
+		wrap = "0";
+	};
+	new GuiControl() {
+		profile = "GuiDefaultProfile";
+		horizSizing = "width";
+		vertSizing = "center";
+		position = "0 0";
+		extent = "1024 600";
+		minExtent = "8 8";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiControl() {
+			profile = "GuiDefaultProfile";
+			horizSizing = "width";
+			vertSizing = "bottom";
+			position = "400 46";
+			extent = "800 264";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+
+			new GuiBitmapCtrl() {
+				profile = "GuiDefaultProfile";
+				horizSizing = "center";
+				vertSizing = "height";
+				position = "100 0";
+				extent = "600 264";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./loading/loading_main_text";
+				wrap = "0";
+			};
+			new GuiMLTextCtrl(ExitGameInfo) {
+				profile = "GuiMLTextProfile";
+				horizSizing = "center";
+				vertSizing = "bottom";
+				position = "150 0";
+				extent = "500 74";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				lineSpacing = "2";
+				allowColorChars = "0";
+				maxChars = "-1";
+					wrap = "0";
+			};
+		};
+		new GuiBitmapButtonTextCtrl(ExitGameYes) {
+			profile = "MenuButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "75 226";
+			extent = "500 84";
+			minExtent = "8 8";
+			visible = "1";
+			command = "ExitGameDlg.close(); ExitGameDlg.end();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "           Exit";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./menu/menu";
+		};
+		new GuiBitmapButtonTextCtrl(ExitGameNo) {
+			profile = "MenuButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "75 46";
+			extent = "500 84";
+			minExtent = "8 8";
+			visible = "1";
+			command = "hideControllerUI(); ExitGameDlg.close(); resumeGame();";
+			accelerator = "escape";
+			helpTag = "0";
+			text = "           Resume";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./menu/menu";
+		};
+		new GuiBitmapButtonTextCtrl(ExitGameRestart) {
+			profile = "MenuButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "75 136";
+			extent = "500 84";
+			minExtent = "8 8";
+			visible = "1";
+			command = "hideControllerUI(); ExitGameDlg.close(); resumeGame(); restartLevel(true);";
+			helpTag = "0";
+			text = "           Restart";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./menu/menu";
+		};
+		new GuiBitmapButtonTextCtrl(ExitGameOptions) {
+			profile = "MenuButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "75 406";
+			extent = "500 84";
+			minExtent = "8 8";
+			visible = "1";
+			command = "OptionsGui.show(\"exit\");";
+			helpTag = "0";
+			text = "           Options";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./menu/menu";
+		};
+		new GuiBitmapButtonTextCtrl(ExitGameJukebox) {
+			profile = "MenuButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "75 496";
+			extent = "500 84";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.pushDialog(JukeboxDlg);";
+			helpTag = "0";
+			text = "           Music";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+			bitmap = "./menu/menu";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function ExitGameDlg::end() {
+	//If we're waiting to end a recording, do that before anything else
+	if (recordEnd("ExitGameDlg.end();")) {
+		return;
+	}
+
+	if ($Game::Introduction) {
+		resumeGame();
+		menuOnPostIntroduction();
+	} else {
+		menuMissionExit();
+	}
+}
+
+function ExitGameDlg::onWake(%this) {
+	%info = getMissionInfo($Client::MissionFile);
+
+	%text = "<shadow:1:1><shadowcolor:000000bf><just:center>" @ shrinkToFit(%info.name, $DefaultFont["Bold"], 42, 24, getWord(ExitGameInfo.getExtent(), 0)) @ "<font:32>";
+
+	%showAwesome = ((Unlock::getMissionCompletion(%info) & $Completion::Awesome) == $Completion::Awesome) || $Unlock::DisplayAll;
+
+	//Challenge times
+	%parTimeLabel      = (%info.time         ? formatTime(%info.time)         : "N/A");
+	%goldTimeLabel     = (%info.goldTime     ? formatTime(%info.goldTime)     : "N/A");
+	%platinumTimeLabel = (%info.platinumTime ? formatTime(%info.platinumTime) : "N/A");
+	%ultimateTimeLabel = (%info.ultimateTime ? formatTime(%info.ultimateTime) : "N/A");
+	%awesomeTimeLabel  = (%info.awesomeTime  ? formatTime(%info.awesomeTime)  : "N/A");
+	//Challenge scores
+	%parScoreLabel      = (%info.score         !$= "" ? formatScore(%info.score)         : "N/A");
+	%goldScoreLabel     = (%info.goldScore     !$= "" ? formatScore(%info.goldScore)     : "N/A");
+	%platinumScoreLabel = (%info.platinumScore !$= "" ? formatScore(%info.platinumScore) : "N/A");
+	%ultimateScoreLabel = (%info.ultimateScore !$= "" ? formatScore(%info.ultimateScore) : "N/A");
+	%awesomeScoreLabel  = (%info.awesomeScore  !$= "" ? formatScore(%info.awesomeScore)  : "N/A");
+
+	if (mp()) {
+		//See if we have more than one other player
+		%vs = !$Server::Hosting //Not host, so there must be someone else who is
+			|| (!$Server::_Dedicated && ClientGroup.getCount() > 1) //Hosting local, another player
+			|| ($Server::_Dedicated && isObject(ScoreList.player[1])); //Hosting dedicated, hack but should work
+
+		%index = (%vs ? 0 : 1);
+
+		//The MP indexed scores override any previously set scores. But don't override
+		// unless we actually have one.
+		%parScoreLabel      = (%info.score[%index]         !$= "" ? formatScore(%info.score[%index])         : %parScoreLabel);
+		%platinumScoreLabel = (%info.platinumScore[%index] !$= "" ? formatScore(%info.platinumScore[%index]) : %platinumScoreLabel);
+		%ultimateScoreLabel = (%info.ultimateScore[%index] !$= "" ? formatScore(%info.ultimateScore[%index]) : %ultimateScoreLabel);
+		%awesomeScoreLabel  = (%info.awesomeScore[%index]  !$= "" ? formatScore(%info.awesomeScore[%index])  : %awesomeScoreLabel);
+	}
+	//Use score if a time isn't available
+	%parLabel      = (%parScoreLabel     $= "N/A" ? %parTimeLabel       : %parScoreLabel);
+	%goldLabel     = (%goldTimeLabel     $= "N/A" ? %goldScoreLabel     : %goldTimeLabel);
+	%platinumLabel = (%platinumTimeLabel $= "N/A" ? %platinumScoreLabel : %platinumTimeLabel);
+	%ultimateLabel = (%ultimateTimeLabel $= "N/A" ? %ultimateScoreLabel : %ultimateTimeLabel);
+	%awesomeLabel  = (%awesomeTimeLabel  $= "N/A" ? %awesomeScoreLabel  : %awesomeTimeLabel);
+	%parType      = (%parScoreLabel     $= "N/A" ? "Time" : "Score");
+	%goldType     = (%goldTimeLabel     $= "N/A" ? "Score" : "Time");
+	%platinumType = (%platinumTimeLabel $= "N/A" ? "Score" : "Time");
+	%ultimateType = (%ultimateTimeLabel $= "N/A" ? "Score" : "Time");
+	%awesomeType  = (%awesomeTimeLabel  $= "N/A" ? "Score" : "Time");
+
+	//Figure out what times/scores it needs
+	%defined = "Gold Platinum Ultra PlatinumQuest LBCustom";
+	%game = ((findWord(%defined, $CurrentGame) == -1) ? resolveMissionModification(%info) : $CurrentGame);
+	switch$ (%game) {
+	case "Gold":
+		//Need qualify and gold times
+		%parTitle = "Qualify";
+		%goldTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFFF00>Gold";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum"; // For hunt maps, just in case
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate"; // For hunt maps, just in case
+		%awesomeTitle = "";
+	case "Platinum":
+		//Need par / platinum / ultimate
+		%parTitle = "Par";
+		%goldTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum"; // For hunt maps, just in case
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate";
+		%awesomeTitle = "";
+	case "Ultra":
+		//Need par / gold / ultimate
+		%parTitle = "Par";
+		%goldTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFFF00>Gold";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum"; // For hunt maps, just in case
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate";
+		%awesomeTitle = "";
+	case "PlatinumQuest":
+		//Need par / platinum / ultimate / (awesome?)
+		%parTitle = "Par";
+		%goldTitle = "";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum";
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate";
+		%awesomeTitle = "<shadow:1:1><shadowcolor:000000bf><color:FF4444>Awesome";
+	case "LBCustom":
+		//Not really sure with these, just assume platinum
+		%parTitle = "Par";
+		%goldTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum"; // For hunt maps, just in case
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate";
+		%awesomeTitle = "<shadow:1:1><shadowcolor:000000bf><color:FF4444>Awesome";
+	default:
+		//It's custom, we're not really sure here
+		%parTitle = "Par";
+		%goldTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFFF00>Gold";
+		%platinumTitle = "<shadow:1:1><shadowcolor:000000bf><color:CCCCCC>Platinum";
+		%ultimateTitle = "<shadow:1:1><shadowcolor:000000bf><color:FFCC33>Ultimate";
+		%awesomeTitle = "<shadow:1:1><shadowcolor:000000bf><color:FF4444>Awesome";
+	}
+
+	%parText      = %parTitle;
+	%goldText     = %goldTitle;
+	%platinumText = %platinumTitle;
+	%ultimateText = %ultimateTitle;
+	%awesomeText  = %awesomeTitle;
+
+	//Par can have both time and score
+	if (ClientMode::callbackForMission(%info, "timeMultiplier", 1) > 0) {
+		if (%parTimeLabel !$= "N/A") {
+			%text = %text NL "<just:left><spush>" @ %parText @ ":<spop><just:right>" @ %parTimeLabel;
+		}
+	}
+	if (%parScoreLabel !$= "N/A") {
+		%text = %text NL "<just:left><spush>" @ %parTitle SPC "Score:<spop><just:right>" @ %parScoreLabel;
+	}
+
+	//Show what we need to
+	if (%goldTitle     !$= "" && %goldLabel     !$= "N/A") %text = %text NL "<just:left><spush>" @ %goldText @ ":<spop><just:right>" @ %goldLabel;
+	if (%platinumTitle !$= "" && %platinumLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %platinumText @ ":<spop><just:right>" @ %platinumLabel;
+	if (%ultimateTitle !$= "" && %ultimateLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %ultimateText @ ":<spop><just:right>" @ %ultimateLabel;
+
+	if (%showAwesome) {
+		if (%awesomeTitle !$= "" && %awesomeLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %awesomeText @ ":<spop><just:right>" @ %awesomeLabel;
+	}
+
+	%text = %text NL "";
+
+	//Game modes display
+	%modes = resolveMissionGameModes(%info.gameMode);
+	%modes = formatGameModes(%modes);
+	for (%i = 0; %i < getWordCount(%modes); %i ++) {
+		%mode = getWord(%modes, %i);
+		%minfo = getModeInfo(%mode);
+		%text = %text NL "<bold:22><just:left>" @ %minfo.name @ ": <font:22>" @ %minfo.desc;
+	}
+
+	ExitGameInfo.setText(%text);
+}
+
+function ExitGameDlg::onSleep(%this) {
+	//if ($Game::DoPushMoveMap) {
+	//	MoveMap.push();
+	//	$Game::DoPushMoveMap = false;
+	//}
+}
+
+function ExitGameDlg::close(%this) {
+	RootGui.popDialog(%this);
+}

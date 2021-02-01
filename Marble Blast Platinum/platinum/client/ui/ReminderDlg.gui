@@ -1,0 +1,108 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2021 The Platinum Team
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new GuiBitmapCtrl(ReminderDlg) {
+	profile = "GuiDefaultProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "1024 768";
+	minExtent = "8 8";
+	visible = "1";
+	helpTag = "0";
+	bitmap = "./exit/black";
+	wrap = "0";
+		tile = "0";
+
+	new GuiControl() {
+		profile = "PQWindowProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "342 272";
+		extent = "339 224";
+		minExtent = "41 41";
+		visible = "1";
+		helpTag = "0";
+
+		new GuiBorderButtonCtrl() {
+			profile = "PQButtonProfile";
+			horizSizing = "right";
+			vertSizing = "top";
+			position = "234 166";
+			extent = "88 41";
+			minExtent = "8 8";
+			visible = "1";
+			command = "RootGui.popDialog(ReminderDlg); PlayMissionGui.showBody();";
+			accelerator = "return";
+			helpTag = "0";
+			text = "Close";
+			groupNum = "-1";
+			buttonType = "PushButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+				simpleStyle = "0";
+		};
+		new GuiMLTextCtrl(ReminderText) {
+			profile = "GuiMLTextProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "22 20";
+			extent = "295 14";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			lineSpacing = "2";
+			allowColorChars = "0";
+			maxChars = "-1";
+		};
+		new GuiCheckBoxCtrl(ReminderCheck) {
+			profile = "PQCheckboxProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "19 171";
+			extent = "221 31";
+			minExtent = "8 8";
+			visible = "1";
+			helpTag = "0";
+			text = "Show this reminder again";
+			groupNum = "-1";
+			buttonType = "ToggleButton";
+			repeatPeriod = "1000";
+			repeatDecay = "1";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+$ReminderDlg::EditorNoSave = 0;
+$ReminderDlg::OnlineNoLB = 1;
+
+function remind(%text, %idx) {
+	if ($pref::hideReminder[%idx] !$= "" && !$pref::hideReminder[%idx])
+		return;
+
+	RootGui.pushDialog(ReminderDlg);
+	ReminderText.setText("<font:24><just:center>" @ %text);
+	ReminderCheck.variable = "$pref::hideReminder" @ %idx;
+	ReminderCheck.setValue(1);
+}
