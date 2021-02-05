@@ -863,7 +863,8 @@ function PlayGui::displayGemMessage(%this, %amount, %color) {
 	if (%color $= "")
 		%color = "ffcc66";
 
-	%obj.setText("<just:center><bold:48><color:" @ %color @ ">" @ shadow("1 1", "0000007f") @ %amount);
+	%font = $DefaultFont["PointPopups"]; // default <bold:48>
+	%obj.setText("<just:center>" @ %font @ "<color:" @ %color @ ">" @ shadow("1 1", "0000007f") @ %amount);
 	%this.updateGemMessage(%obj);
 	%obj.schedule(700, "delete");
 }
