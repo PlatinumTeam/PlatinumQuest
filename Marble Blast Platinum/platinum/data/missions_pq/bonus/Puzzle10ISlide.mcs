@@ -15,7 +15,7 @@ new ScriptObject() {
 		platinumTime = "155000";
 		ultimateTime = "95000";
 		awesomeTime = "52500";
-		generalHint = "The level itself is rather straight-forwards, but there are a few chokepoints which lead to Gems that otherwise you can\'t get.";
+		generalHint = "The level itself is rather straight-forward, but there are a few chokepoints which lead to Gems that otherwise you can\'t get.";
 		ultimateHint = "Use the Super Speeds and loop around the block!";
 		awesomeHint = "While the trigger means you have no control over the marble, it only extends up to a certain height. You must be very aggressive with the grass squares, as jumping on them can give you big boosts.";
 		eggHint = "There are a couple of ways to get it, either using a Super Speed, or a teleporter.";
