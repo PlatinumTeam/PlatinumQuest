@@ -13,6 +13,7 @@ useUltraMarble = "1";
          music = "Tim Trance.ogg";
 	  goldTime = "44000";
       ultimateTime = "7500";
+      startHelpText = "Can you face the mountain?";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/wintry/front.png";
@@ -76,14 +77,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "4.48336 -14.7998 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Can you face the mountain?";
    };
    new StaticShape() {
       position = "0 13 8.5";
