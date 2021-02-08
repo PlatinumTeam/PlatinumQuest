@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "3";
+	 startHelpText = "You must collect the hidden gems before you may finish.";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -76,14 +77,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-23.5 11.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "You must collect the hidden gems before you may finish.";
    };
    new StaticShape(EndPoint) {
       position = "4 10 0";

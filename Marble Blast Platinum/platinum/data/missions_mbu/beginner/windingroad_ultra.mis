@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "15000";
       ultimateTime = "11500";
+      startHelpText = "Follow the winding road, using the powerups to cross the gaps!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -74,14 +75,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-37.5 49 4";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Follow the winding road, using the powerups to cross the gaps!";
    };
    new StaticShape(EndPoint) {
       position = "-36 -36.5 24";
