@@ -1250,7 +1250,9 @@ function LBSetMode(%status, %ow) {
 	if ($LB::Away && !%ow) return;
 	//echo("Setting mode to" SPC %Status);
 	LBSetModeForMe(%status);
-	LBNetwork.setMode(%status);
+	if (isObject(LBNetwork)) {
+		LBNetwork.setMode(%status);
+	}
 }
 
 // this is used so the sender gets the update immediatly

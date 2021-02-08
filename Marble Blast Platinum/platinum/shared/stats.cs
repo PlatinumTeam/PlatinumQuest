@@ -186,6 +186,23 @@ function statsGetServerVersionLine(%line) {
 
 //-----------------------------------------------------------------------------
 
+function statsCheckLogin(%version) {
+	%params = LBDefaultQuery();
+	%params = addParam(%params, "version", %version);
+	statsPost("api/Player/CheckLogin.php", %params);
+}
+
+function statsCheckLoginLine(%line) {
+	//#devstart
+	fwrite("platinum/json/checkLogin.json", %line);
+	//#devend
+
+	%parsed = jsonParse(%line);
+	LBLoginGui.onLoginStatus(%parsed);
+}
+
+//-----------------------------------------------------------------------------
+
 function statsRegisterUser(%username, %password, %email) {
 	%params = "username=" @ %username;
 	%params = addParam(%params, "password", %password);
@@ -1061,14 +1078,13 @@ function statsRecordMatchLine(%line) {
 //-----------------------------------------------------------------------------
 
 function statsVerifyPlayer(%client, %session) {
-	if ($Server::Dedicated && $Server::Offline) {
+	if ($Server::Offline) {
 		%client.completeValidation(true);
-		return true;
+		return;
 	}
 
 	%req = statsPost("api/Multiplayer/VerifyPlayer.php", "username=" @ %client.getUsername() @ "&session=" @ %session);
 	%req.client = %client;
-	return true;
 }
 
 function statsVerifyPlayerLine(%line, %req) {

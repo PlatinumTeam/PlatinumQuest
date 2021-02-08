@@ -578,7 +578,10 @@ function LBDefaultQuery(%username, %password) {
 
 	%key = strRand(40);
 	%Version = $MP::RevisionOn;
-	return "username=" @ %username @ "&password=" @ %password @ "&joomlaAuth=0&key=" @ %key @ "&version=" @ %version;
+	if ($LB::ChatKey $= "")
+		return "username=" @ %username @ "&password=" @ %password @ "&joomlaAuth=0&key=" @ %key @ "&version=" @ %version;
+	else
+		return "username=" @ %username @ "&joomlaAuth=0&key=" @ $LB::ChatKey @ "&version=" @ %version;
 }
 
 //------------------------------------------------------------------------------
