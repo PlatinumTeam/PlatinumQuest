@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "35000";
       ultimateTime = "17500";
+      startHelpText = "Don't get clobbered!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -74,14 +75,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-99.5 35.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Don't get clobbered!";
    };
    new StaticShape(EndPoint) {
       position = "86 -62 41.9875";

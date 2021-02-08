@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "30000";
       ultimateTime = "12500";
+      startHelpText = "Jumping in slippery areas can help your navigation.";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -110,14 +111,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "4.91316 -8.7316 2";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Jumping in slippery areas can help your navigation.";
    };
    new StaticShape(EndPoint) {
       position = "8.5 -59 -12.5";
