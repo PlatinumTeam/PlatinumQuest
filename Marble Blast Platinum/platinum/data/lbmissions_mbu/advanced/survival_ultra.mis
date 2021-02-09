@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "37000";
       ultimateTime = "25000";
+      startHelpText = "Stay on the platform to survive!";
    };
    new Sky(GlobalSky) {
       sphereFront = $usermods @ "/data/shapes/skies/wintry/front.png";
@@ -61,14 +62,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-130.9 1.5 4";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-      text = "Stay on the platform to survive!";
    };
    new StaticShape(EndPoint) {
       position = "145.4 0 4";
