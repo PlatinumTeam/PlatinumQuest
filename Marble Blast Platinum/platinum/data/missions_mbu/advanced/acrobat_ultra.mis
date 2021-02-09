@@ -12,6 +12,7 @@ useUltraMarble = "1";
       music = "Tim Trance.ogg";
 	  goldTime = "25000";
       ultimateTime = "14000";
+      startHelpText = "Control your spin when you are about to land.";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/wintry/front.png";
@@ -101,14 +102,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "4.5 -4.5 8";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Control your spin when you are about to land.";
    };
    new Item() {
       position = "0.162516 -0.151839 8.187";

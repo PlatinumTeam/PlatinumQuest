@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "14";
+	 startHelpText = "Caution: Ice Ahead!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -76,14 +77,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "53.6384 -5.20118 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Caution: Ice Ahead!";
    };
    new StaticShape(EndPoint) {
       position = "-79.9295 -27.0818 -2.38419e-07";

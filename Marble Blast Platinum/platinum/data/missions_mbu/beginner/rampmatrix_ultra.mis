@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "30000";
       ultimateTime = "23000";
+      startHelpText = "Find 10 gems!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -270,14 +271,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-1.5 1.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Find 10 gems!";
    };
    new StaticShape(EndPoint) {
       position = "0 0 -15";

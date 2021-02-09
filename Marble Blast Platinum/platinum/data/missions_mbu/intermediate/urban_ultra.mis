@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "2";
+	 startHelpText = "Welcome to the jungle!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -363,14 +364,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-84.5 -15.5 22";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Welcome to the jungle!";
    };
    new StaticShape(EndPoint) {
       position = "-83 -23 22";
