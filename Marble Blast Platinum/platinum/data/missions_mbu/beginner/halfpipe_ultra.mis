@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "18";
+	 startHelpText = "Speed around the half-pipe and collect the gems!";
    };
    new Sky(Sky) {
       position = "336 136 0";
@@ -336,14 +337,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-1.5 -15 1";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Speed around the half-pipe and collect the gems!";
    };
    new StaticShape(EndPoint) {
       position = "15.5 32 8.5";

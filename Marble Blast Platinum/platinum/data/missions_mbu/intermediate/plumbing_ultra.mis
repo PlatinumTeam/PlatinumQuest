@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "35000";
       ultimateTime = "17500";
+      startHelpText = "Collect the gems, then speed to the finish!";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/dusk/front.png";
@@ -76,14 +77,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-31.5 -12.5 4";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Collect the gems, then speed to the finish!";
    };
    new Trigger(Bounds) {
       position = "-35 24.4553 -20.1095";

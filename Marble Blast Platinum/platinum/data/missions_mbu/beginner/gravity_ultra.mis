@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "12";
+	 startHelpText = "Pick up the Gravity Modifiers to roll to the finish!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -74,14 +75,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-64.5 0.5 -2";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Pick up the Gravity Modifiers to roll to the finish!";
    };
    new StaticShape(EndPoint) {
       position = "83 -1 -2";

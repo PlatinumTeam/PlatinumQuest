@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "13";
+	 startHelpText = "See how quickly you can find all the gems!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -76,14 +77,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-1.5 -10.5 -1.4";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "See how quickly you can find all the gems!";
    };
    new StaticShape(EndPoint) {
       position = "-1.34749 67.545 5";

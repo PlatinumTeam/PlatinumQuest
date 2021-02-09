@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "33000";
       ultimateTime = "24000";
+      startHelpText = "Show off some of your crazy moves!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -74,14 +75,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-25.466 -14.0375 100.042";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Show off some of your crazy moves!";
    };
    new StaticShape(EndPoint) {
       position = "19.3242 -12.0392 99.9883";
