@@ -1101,8 +1101,8 @@ function BlastItem::onPickup(%this, %obj, %user, %amount) {
 //-----------------------------------------------------------------------------
 
 datablock AudioProfile(doMegaMarbleSfx) {
-	filename    = "~/data/sound/doSuperJump.wav";
-//   filename    = "~/data/sound/doMegaMarble.wav";
+//	filename    = "~/data/sound/doSuperJump.wav";
+  filename    = "~/data/sound/doMegaMarble.wav";
 	description = AudioDefault3d;
 	preload     = true;
 };
@@ -1399,7 +1399,14 @@ datablock AudioProfile(PuBubbleVoiceSfx) {
 datablock AudioProfile(DoBubbleSfx) {
 	//filename    = "~/data/sound/doBubble.wav";
 	filename    = "~/data/sound/puBubbleVoice.wav"; // TODO?
+	// main_gi: what is the point of this code, I'm pretty sure this never triggers...
 	description = AudioDefault3d;
+	preload = true;
+};
+
+datablock AudioProfile(BubbleLoopSfx) {
+	filename    = "~/data/sound/bubble.wav";
+	description = AudioClosestLooping3d;
 	preload = true;
 };
 
@@ -1413,7 +1420,7 @@ datablock ShapeBaseImageData(BubbleImage) {
 	mountPoint = 0;
 	offset = "0 0 0";
 	stateName[0] = "Blah";
-	stateSound[0] = SuperBounceLoopSfx;
+	stateSound[0] = BubbleLoopSfx;
 };
 
 datablock ItemData(BubbleItem) {
