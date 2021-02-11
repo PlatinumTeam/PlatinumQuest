@@ -1,6 +1,6 @@
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function LB_PQ_TripleTrail_GetMissionInfo() {
+function PQ_TripleTrail_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Triple Trail";
@@ -23,8 +23,8 @@ new ScriptObject() {
 		blueSpawnChance = "0.45";
 		platinumSpawnChance = "0.3";
 		generalHint = "The cannons aren\'t the only way to move between islands. Try using a powerup, or find a teleporter!";
-		ultimateHint = "You can add up to a full minute or so to your time limit by collecting the Time Travels in a very smart manner.";
-		awesomeHint = "I played this for a few hours and honestly it just came down to luck. I thought my skills were good enough and yes I got very consistent scores but to truly get the Awesome Score I just needed the stupidest luck.";
+		ultimateHint = "All Time Travels take 80 seconds to respawn, so you can collect each of them twice, adding a full minute to your time limit. Keeping track of the islands may also help for pathing.";
+		awesomeHint = "Ideally, you want a starting spawn with two blues or more, and the yellow island potentially spawns four blues in one cluster. Try to have at least 80 gems as the clock hits 1 minute, this includes collecting three Time Travels.";
 		CustomRadarRule = $Radar::Flags::Gems | $Radar::Flags::TimeTravels | $Radar::Flags::Cannons | $Radar::Flags::Powerups;
 		alarmStartTime = "20";
 		easterEgg = "0";
@@ -33,7 +33,7 @@ new ScriptObject() {
 		gems10 = "4";
 		gems2 = "177";
 		gems5 = "45";
-		interior0 = $usermods @ "/data/lbinteriors_pq/intermediate/TripleTrail.dif";
+		interior0 = $usermods @ "/data/interiors_pq/intermediate/TripleTrail.dif";
 		interiors = "1";
 		maxScore = "912";
 		trivia = "Older versions of this level allowed the player to gain an infinite amount of time through collecting the then-quickly respawning Time Travels over and over again.";
@@ -43,7 +43,7 @@ new ScriptObject() {
 //--- UNLOCK BEGIN ---
 //In the event that you want this mission to be locked by a function, here's
 // where you should put that. Just uncomment this function and fill it out:
-//function unlock_LB_MissionNameHere(%mission) { //%mission is the MissionInfo
+//function unlock_MissionNameHere(%mission) { //%mission is the MissionInfo
 //	return true; //True if the mission is unlocked
 //}
 //--- UNLOCK END ---
@@ -61,7 +61,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE TripleTrail
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function LB_PQ_TripleTrail_LoadMission() {
+function PQ_TripleTrail_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 
@@ -112,7 +112,7 @@ new SimGroup(MissionGroup) {
 			position = "0 0 0";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			interiorFile = "~/data/lbinteriors_pq/intermediate/TripleTrail.dif";
+			interiorFile = "~/data/interiors_pq/intermediate/TripleTrail.dif";
 			showTerrainInside = "0";
 		};
 	};
