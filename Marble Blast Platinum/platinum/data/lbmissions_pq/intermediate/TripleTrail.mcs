@@ -1,6 +1,6 @@
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function PQ_TripleTrail_GetMissionInfo() {
+function LB_PQ_TripleTrail_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Triple Trail";
@@ -33,7 +33,7 @@ new ScriptObject() {
 		gems10 = "4";
 		gems2 = "177";
 		gems5 = "45";
-		interior0 = $usermods @ "/data/interiors_pq/intermediate/TripleTrail.dif";
+		interior0 = $usermods @ "/data/lbinteriors_pq/intermediate/TripleTrail.dif";
 		interiors = "1";
 		maxScore = "912";
 		trivia = "Older versions of this level allowed the player to gain an infinite amount of time through collecting the then-quickly respawning Time Travels over and over again.";
@@ -43,7 +43,7 @@ new ScriptObject() {
 //--- UNLOCK BEGIN ---
 //In the event that you want this mission to be locked by a function, here's
 // where you should put that. Just uncomment this function and fill it out:
-//function unlock_MissionNameHere(%mission) { //%mission is the MissionInfo
+//function unlock_LB_MissionNameHere(%mission) { //%mission is the MissionInfo
 //	return true; //True if the mission is unlocked
 //}
 //--- UNLOCK END ---
@@ -61,7 +61,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE TripleTrail
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_TripleTrail_LoadMission() {
+function LB_PQ_TripleTrail_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 
@@ -112,7 +112,7 @@ new SimGroup(MissionGroup) {
 			position = "0 0 0";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			interiorFile = "~/data/interiors_pq/intermediate/TripleTrail.dif";
+			interiorFile = "~/data/lbinteriors_pq/intermediate/TripleTrail.dif";
 			showTerrainInside = "0";
 		};
 	};
