@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "2600";
       ultimateTime = "2050";
+      startHelpText = "Build up momentum to reach the bottom quickly!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -72,14 +73,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "10.5 1.5 -2";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Build up momentum to reach the bottom quickly!";
    };
    new Item() {
       position = "-9 15 -3.5";

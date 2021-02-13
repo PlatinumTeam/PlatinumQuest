@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "10000";
       ultimateTime = "3150";
+      startHelpText = "Not all surfaces are the same!";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/clear/front.png";
@@ -66,14 +67,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "2.5 -4.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Not all surfaces are the same!";
    };
    new StaticShape(EndPoint) {
       position = "16 -6 0";

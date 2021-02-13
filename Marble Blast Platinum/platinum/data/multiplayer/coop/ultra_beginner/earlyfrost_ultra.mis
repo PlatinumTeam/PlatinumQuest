@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "13000";
       ultimateTime = "9000";
+      startHelpText = "Caution: Ice Ahead!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -75,14 +76,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "53.6384 -5.20118 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Caution: Ice Ahead!";
    };
    new StaticShape(EndPoint) {
       position = "-79.9295 -27.0818 -2.38419e-007";
