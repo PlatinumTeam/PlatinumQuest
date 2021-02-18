@@ -27,6 +27,10 @@ function Mode_GemMadness::onLoad(%this) {
 	%this.registerCallback("onFoundGem");
 	%this.registerCallback("shouldRespawnGems");
 	%this.registerCallback("shouldRestartOnOOB");
+	%this.registerCallback("onOutOfBounds"); 	// main_gi: As part of a change for Singleplayer Gem Madness to instead finish the level on OOB, this is used on OOB.
+
+	%this.registerCallback("onMissionReset");
+
 	%this.registerCallback("shouldResetTime");
 	%this.registerCallback("shouldResetGem");
 	%this.registerCallback("getStartTime");
@@ -86,8 +90,18 @@ function Mode_GemMadness::shouldRestorePowerup(%this, %object) {
 function Mode_GemMadness::shouldRestartOnOOB(%this, %object) {
 	// If singleplayer, gem madness restarts. In multiplayer
 	// you wouldn't restart the whole mission if someone screws up.
-	return ($Server::ServerType $= "SinglePlayer");
+	//return ($Server::ServerType $= "SinglePlayer");
+
+	// main_gi: As part of a change for Singleplayer Gem Madness to instead finish the level on OOB, this becomes false always.
+	return false;
 }
+function Mode_GemMadness::onOutOfBounds(%this, %object) {
+	if ($Server::ServerType $= "SinglePlayer") {
+		$Game::FinishClient = %object.client;
+		endGameSetup();
+	}
+}
+
 function Mode_GemMadness::shouldResetTime(%this, %object) {
 	// The timer should reset only for singleplayer when the marble goes oob
 	return ($Server::ServerType $= "SinglePlayer");
