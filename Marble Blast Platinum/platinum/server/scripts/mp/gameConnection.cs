@@ -405,3 +405,29 @@ function transformToNearestGem(%gravity, %pos) {
 
 	return %angle TAB %pitch;
 }
+
+
+function GameConnection::pointToHighestValueNearestGem(%this) {
+	%pos = %this.player.getPosition();
+	%yp = transformToHighestValueNearestGem(%this.player.getGravityRot(), %pos);
+
+	%this.player.setCameraYaw(getField(%yp, 0));
+	%this.player.setCameraPitch(getField(%yp, 1));
+}
+
+function transformToHighestValueNearestGem(%gravity, %pos) {
+	%nearest = getHighestValueNearestGem(%pos);
+	if (%nearest == -1)
+		return;
+
+	%dist = VectorSub(getWords(%nearest.getTransform(), 0, 2), %pos);
+	%dist = MatrixMulVector("0 0 0" SPC RotMultiply(%gravity, "1 0 0 3.1415926"), %dist);
+
+	%angle = mAtan(getWord(%dist, 0), getWord(%dist, 1));
+
+	%dist = setWord(%dist, 2, getWord(%dist, 2) - 2);
+	%hypo = VectorLen(%dist);
+	%pitch = -mAsin((getWord(%dist, 2) / %hypo) * 0.7);
+
+	return %angle TAB %pitch;
+}
