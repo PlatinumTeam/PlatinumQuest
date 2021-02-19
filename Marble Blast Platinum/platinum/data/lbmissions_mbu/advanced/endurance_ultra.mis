@@ -13,6 +13,7 @@ new SimGroup(MissionGroup) {
          game = "Ultra";
 useUltraMarble = "1";
          level = "10";
+	 startHelpText = "Don\'t fall behind the platform - there\'s no going back!";
    };
    new Sky(Sky) {
       position = "336 136 0";
@@ -63,14 +64,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "129.5 137 6";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-         text = "Don\'t fall behind the platform - there\'s no going back!";
    };
    new StaticShape(EndPoint) {
       position = "-131.5 135.5 6";
