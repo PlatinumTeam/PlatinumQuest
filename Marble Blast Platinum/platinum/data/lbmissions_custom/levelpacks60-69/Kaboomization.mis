@@ -312,7 +312,7 @@ new SimGroup(MissionGroup) {
             displayonce = "0";
             extended = "0";
             persistTime = "5000";
-            text = "Make you way past the striped bridge while jumping over the rushing landmines.";
+            text = "Make your way past the striped bridge while jumping over the rushing landmines.";
             triggerRadius = "4";
       };
       new StaticShape() {
