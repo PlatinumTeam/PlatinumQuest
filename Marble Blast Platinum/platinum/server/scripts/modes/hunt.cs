@@ -82,16 +82,17 @@ function Mode_hunt::onMissionReset(%this, %object) {
 		$Game::FirstSpawn = false;
 
 		//Orient all clients to face the gemspawn
+		// main_gi: I want this to point at the highest value gem.
 		for (%i = 0; %i < ClientGroup.getCount(); %i ++) {
 			%client = ClientGroup.getObject(%i);
 			if (!%client.spectating) {
-				%client.pointToNearestGem();
+				%client.pointToHighestValueNearestGem();
 			}
 		}
 	}
 }
 function Mode_hunt::onRespawnPlayer(%this, %object) {
-	%object.client.pointToNearestGem();
+	%object.client.pointToHighestValueNearestGem();
 }
 function Mode_hunt::getStartTime(%this) {
 	return (MissionInfo.time ? MissionInfo.time : 300000);
