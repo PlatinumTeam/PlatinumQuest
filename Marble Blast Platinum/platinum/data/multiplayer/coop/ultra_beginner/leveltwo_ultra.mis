@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "7000";
       ultimateTime = "3000";
+      startHelpText = "The Super Jump powerup can be used to vault taller barriers.";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -72,14 +73,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "14.5 -0.3 0.5";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "The Super Jump powerup can be used to vault taller barriers.";
    };
    new Item() {
       position = "10.122 -2.02413 0.7";

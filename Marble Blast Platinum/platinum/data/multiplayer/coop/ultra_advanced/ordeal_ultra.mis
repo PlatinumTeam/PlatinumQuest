@@ -21,6 +21,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "30000";
       ultimateTime = "16000";
+      startHelpText = "Strength, speed and stealth are the keys to the trials ahead!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -136,14 +137,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-7.5 -0.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Strength, speed and stealth are the keys to the trials ahead!";
    };
    new StaticShape(EndPoint) {
       position = "74.5 42.5 20";

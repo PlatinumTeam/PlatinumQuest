@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "30000";
       ultimateTime = "17500";
+      startHelpText = "Don't let these hazards throw you off the track to the finish!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -352,14 +353,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "10.5 -10.5 0.5";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Don't let these hazards throw you off the track to the finish!";
    };
    new StaticShape(EndPoint) {
       position = "2 8 38.5";

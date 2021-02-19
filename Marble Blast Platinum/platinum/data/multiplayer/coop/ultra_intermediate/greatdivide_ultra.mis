@@ -60,6 +60,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "75000";
       ultimateTime = "20000";
+      startHelpText = "Climb over the pass and speed down the other side!";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/dusk/front.png";
@@ -124,14 +125,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-202.5 2.5 -0.5";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Climb over the pass and speed down the other side!";
    };
    new SimGroup(MustChange_g) {
       new Path() {

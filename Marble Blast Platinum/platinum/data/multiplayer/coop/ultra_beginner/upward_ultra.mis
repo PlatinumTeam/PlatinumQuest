@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "25000";
       ultimateTime = "14000";
+      startHelpText = "Climb upward to reach the goal!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -111,14 +112,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "8.5 10.5 0.5";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Climb upward to reach the goal!";
    };
    new StaticShape(EndPoint) {
       position = "-1.17426 -10.1432 124.35";
