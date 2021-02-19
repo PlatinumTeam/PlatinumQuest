@@ -193,9 +193,7 @@ function statsCheckLogin(%version) {
 }
 
 function statsCheckLoginLine(%line) {
-	//#devstart
 	fwrite("platinum/json/checkLogin.json", %line);
-	//#devend
 
 	%parsed = jsonParse(%line);
 	LBLoginGui.onLoginStatus(%parsed);
