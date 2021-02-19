@@ -1437,6 +1437,37 @@ function getNearestGem(%pos) {
 	return %nearest;
 }
 
+
+function GameConnection::getHighestValueNearestGem(%this) {
+	if (isObject(%this.player)) {
+		return getHighestValueNearestGem(%this.player.getTransform());
+	}
+	return getHighestValueNearestGem("0 0 0");
+}
+
+// main_gi: New function for respawns to point at.
+function getHighestValueNearestGem(%pos) {
+	%nearest = -1;
+	%nearDist = 999999;
+	%highest = -1;
+
+	%group = ($Server::Hosting && !$Server::_Dedicated ? MissionGroup : ServerConnection);
+
+	MakeGemGroup(%group, true);
+	for (%i = 0; %i < $GemsCount; %i ++) {
+		%gem = $Gems[%i];
+		if (%gem.isHidden())
+			continue;
+		%dist = VectorDist(getWords(%gem.getTransform(), 0, 2), %pos);
+		if (%gem._huntDatablock.huntExtraValue > %highest || (%gem._huntDatablock.huntExtraValue == %highest && %dist < %nearDist)) { // Higher value, OR it's equal value but closer distance.
+			%nearest = %gem;
+			%nearDist = %dist;
+			%highest = %gem._huntDatablock.huntExtraValue;
+		}
+	}
+	return %nearest;
+}
+
 function getActivePlayerCount() {
 	%players = 0;
 	for (%i = 0; %i < ClientGroup.getCount(); %i ++) {
