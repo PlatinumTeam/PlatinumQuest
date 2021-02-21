@@ -246,6 +246,21 @@ function PlayGui::lockPowerup(%this, %locked) {
 
 //-----------------------------------------------------------------------------
 
+function quotaCompleteParty() { // code half taken from \platinum\client\ui\MainMenuGui.gui
+	cancel($quotacompleteparty);
+	$hue++;
+
+	GemsFoundHundred.setNumberColor(PlayGui.GemsFoundHundredTracked, HSVtoRGB($hue+90, 1, 1));
+	GemsFoundTen.setNumberColor(PlayGui.GemsFoundTenTracked, HSVtoRGB($hue+75, 1, 1));
+	GemsFoundOne.setNumberColor(PlayGui.GemsFoundOneTracked, HSVtoRGB($hue+60, 1, 1));
+	GemsSlash.setNumberColor("slash", HSVtoRGB($hue+45, 1, 1));
+	GemsTotalHundred.setNumberColor(PlayGui.GemsTotalHundredTracked, HSVtoRGB($hue+30, 1, 1));
+	GemsTotalTen.setNumberColor(PlayGui.GemsTotalTenTracked, HSVtoRGB($hue+15, 1, 1));
+	GemsTotalOne.setNumberColor(PlayGui.GemsTotalOneTracked, HSVtoRGB($hue, 1, 1));
+
+	$quotacompleteparty = schedule(5, 0, quotaCompleteParty);
+}
+
 function PlayGui::setMaxGems(%this,%count) {
 	%this.maxGems = %count;
 	%this.updateGems();
@@ -290,6 +305,7 @@ function PlayGui::updateGems(%this) {
 	if (!ClientMode::callback("shouldUpdateGems", true))
 		return;
 
+
 	//If the mode changes this
 	%count = %this.gemCount;
 	%max = %this.maxGems;
@@ -297,7 +313,18 @@ function PlayGui::updateGems(%this) {
 	if (!%max)
 		return;
 
+	if (%this.gemRainbow) {
+		quotaCompleteParty();
+		%max = %this.gemRainbowNewMax; // example: on 100%, gem counter goes from 40/20 to 40/40.
+	}
+
 	%color = (%this.gemGreen ? $TimeColor["stopped"] : $TimeColor["normal"]);
+	GemsSlash.setNumberColor("slash", %color);
+
+
+	%maxNeedsToUpdate = (%this.GemsTotalTracked != %this.maxGems || %this.ColorTracked != %color || %this.gemRainbow);
+	%this.GemsTotalTracked = %max;
+	%this.ColorTracked = %color;
 
 	%one = %count % 10;
 	%ten = ((%count - %one) / 10) % 10;
@@ -306,13 +333,49 @@ function PlayGui::updateGems(%this) {
 	GemsFoundTen.setNumberColor(%ten, %color);
 	GemsFoundOne.setNumberColor(%one, %color);
 
-	%one = %max % 10;
-	%ten = ((%max - %one) / 10) % 10;
-	%hundred = ((%max - %one) / 10 - %ten) / 10;
-	GemsTotalHundred.setNumberColor(%hundred, %color);
-	GemsTotalTen.setNumberColor(%ten, %color);
-	GemsTotalOne.setNumberColor(%one, %color);
-	GemsSlash.setNumberColor("slash", %color);
+	GemsFoundHundred.setVisible(!(%hundred == 0)); 
+	GemsFoundTen.setVisible(!(%hundred == 0 && %ten == 0)); 
+
+	%this.GemsFoundHundredTracked = %hundred;
+	%this.GemsFoundTenTracked = %ten;
+	%this.GemsFoundOneTracked = %one;
+
+	if (%maxNeedsToUpdate) {
+		%one = %max % 10;
+		%ten = ((%max - %one) / 10) % 10;
+		%hundred = ((%max - %one) / 10 - %ten) / 10;
+
+		if (%hundred == 0) { // Gem total is 0__
+			if (!(%ten == 0)) { // Gem total is 0X_
+				GemsTotalHundred.setNumberColor(%ten, %color);
+				GemsTotalTen.setNumberColor(%one, %color);
+				GemsTotalTen.setVisible(true);
+				GemsTotalOne.setVisible(false);
+				%this.GemsTotalHundredTracked = %ten;
+				%this.GemsTotalTenTracked = %one;
+				GemsQuota.position = "182 28";
+			} else { // Gem total is 00_
+				GemsTotalHundred.setNumberColor(%one, %color);
+				GemsTotalTen.setVisible(false);
+				GemsTotalOne.setVisible(false);
+				%this.GemsTotalHundredTracked = %one;
+				GemsQuota.position = "160 28";
+			}
+		} else { // Gem total is using all 3 digits, default behavior
+			GemsTotalHundred.setNumberColor(%hundred, %color);
+			GemsTotalTen.setNumberColor(%ten, %color);
+			GemsTotalOne.setNumberColor(%one, %color);
+			%this.GemsTotalHundredTracked = %hundred;
+			%this.GemsTotalTenTracked = %ten;
+			%this.GemsTotalOneTracked = %one;
+			GemsTotalTen.setVisible(true);
+			GemsTotalOne.setVisible(true);
+			GemsQuota.position = "205 28";
+		}
+
+	}
+
+
 }
 
 //-----------------------------------------------------------------------------
