@@ -313,9 +313,11 @@ function PlayGui::updateGems(%this) {
 	if (!%max)
 		return;
 
-	if (%this.gemRainbow) {
+	if (%this.gemRainbow && %count >= %max) {
 		quotaCompleteParty();
 		%max = %this.gemRainbowNewMax; // example: on 100%, gem counter goes from 40/20 to 40/40.
+	} else {
+		cancel($quotacompleteparty);
 	}
 
 	%color = (%this.gemGreen ? $TimeColor["stopped"] : $TimeColor["normal"]);
