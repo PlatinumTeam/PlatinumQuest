@@ -29,8 +29,6 @@ function Mode_GemMadness::onLoad(%this) {
 	%this.registerCallback("shouldRestartOnOOB");
 	%this.registerCallback("onOutOfBounds");
 
-	%this.registerCallback("onMissionReset");
-
 	%this.registerCallback("shouldResetTime");
 	%this.registerCallback("shouldResetGem");
 	%this.registerCallback("getStartTime");
@@ -88,11 +86,7 @@ function Mode_GemMadness::shouldRestorePowerup(%this, %object) {
 	return true;
 }
 function Mode_GemMadness::shouldRestartOnOOB(%this, %object) {
-	// If singleplayer, gem madness restarts. In multiplayer
-	// you wouldn't restart the whole mission if someone screws up.
-	//return ($Server::ServerType $= "SinglePlayer");
-
-	// Making a change for Singleplayer Gem Madness to instead finish the level on OOB, this is set to always false.
+	// previously restarted on singleplayer, now oob finishes level with current score
 	return false;
 }
 function Mode_GemMadness::onOutOfBounds(%this, %object) {
