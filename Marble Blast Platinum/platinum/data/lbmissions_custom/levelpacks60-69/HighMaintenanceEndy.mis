@@ -197,11 +197,10 @@ new SimGroup(MissionGroup) {
       };
       new StaticShape() {
          position = "46.5649 -150.682 302.291";
-         rotation = "0 0 1 90";
+         rotation = "0 0 1 178.719";
          scale = "0.675 0.675 0.675";
          dataBlock = "Window04_3x3";
             Parent = "finishplatform";
-            parentModTrans = "0 0.45 -4.46 0 0 1 1.565";
             parentOffset = "0 0 0";
             parentSimple = "0";
       };
