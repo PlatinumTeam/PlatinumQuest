@@ -17,4 +17,4 @@ While there's no formal CLA, your contributions, if included, will also be relea
 
 There is no linter for Torque Script, but we do have a coding style used throughout the project. Please try to follow it.
 
-If you need help with anything, we have a [Discord server](https://discord.gg/aXggYvkh) for discussing PQ development.
+If you need help with anything, we have a [Discord server](https://discord.gg/7MzhTgRN5s) for discussing PQ development.
