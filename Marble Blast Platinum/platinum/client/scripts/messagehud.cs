@@ -34,12 +34,12 @@ function PlayGui::positionMessageHud(%this) {
 	%hideChat      = $pref::ScreenshotMode > 0 || %isEndGame || isCannonActive();
 	%hideTimer     = $pref::ScreenshotMode == 2;
 
-	%height = 180;
+	%height = 60 + (20 * $LBPref::ChatMessageSize); // From 80 - 160
 
 	%chatWidth = %w;
 	%chatStartX = 0;
 
-	%chatHeight = %height - 60;
+	%chatHeight = %height - 60; // Originally just -60
 
 	%entryStart = (%mp || %ultra) && $chathud ? 135 : 0;
 
@@ -107,7 +107,7 @@ function PlayGui::updateMessageHud(%this) {
 	%isEndGame     = (isObject(EndGameDlg.getGroup()) && EndGameDlg.getGroup().getName() $= "Canvas");
 	%hideChat      = $pref::ScreenshotMode > 0 || %isEndGame || isCannonActive();
 
-	%height = 180;
+	%height = 60 + (20 * $LBPref::ChatMessageSize); // From 80 - 160
 
 	%chatWidth = %w;
 	%chatStartX = 0;
