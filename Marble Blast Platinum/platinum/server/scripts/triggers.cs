@@ -375,6 +375,45 @@ function UsePowerupTrigger::onAdd(%this, %obj) {
 		%obj.powerup = "SuperJumpItem";
 }
 
+
+//-----------------------------------------------------------------------------
+
+datablock TriggerData(GemChangeTrigger) {
+	tickPeriodMS = 50;
+	greenMessageColor = "99ff99";
+	grayMessageColor = "cccccc";
+	redMessageColor = "ff9999";
+
+	customField[0, "field"  ] = "gemBonus";
+	customField[0, "type"   ] = "numeric";
+	customField[0, "name"   ] = "Gem Change Amount";
+	customField[0, "desc"   ] = "How many points to add or subtract.";
+	customField[0, "default"] = -1;
+};
+
+function GemChangeTrigger::onEnterTrigger(%this,%trigger,%obj) {
+	if (%trigger.gemBonus $= "")
+		%trigger.gemBonus = -1; // made default, the "-1" here and in the later part of the code, are because -1 is the default
+
+	if (%trigger.gemBonus < 0 && %obj.client.gemCount < mAbs(%trigger.gemBonus)) { // in the case where gems would subtract into the negative
+		if (%obj.client.gemCount != 0) { // give no call to the client if they already have 0 gems
+			%obj.client.gemCount = 0;   // - works only silently, doesn't update gem counter
+			%obj.client.setGemCount(0); // - works only visually, updates only gem counter
+		}
+	} else {
+		%obj.client.gemCount += %trigger.gemBonus;
+		%obj.client.setGemCount(%obj.client.gemCount + %trigger.gemBonus);
+
+	}
+
+	%bonus = (%trigger.gemBonus $= "" ? -1 : %trigger.gemBonus);
+	%color = (%bonus == 0 ? %this.grayMessageColor : (%bonus < 0 ? %this.redMessageColor : %this.greenMessageColor));
+	%sign = (%bonus > 0 ? "+" : "");
+
+	//Show a message
+	%obj.client.displayGemMessage(%sign @ %bonus, %color);
+}
+
 //-----------------------------------------------------------------------------
 
 datablock TriggerData(TimeTravelTrigger) {
