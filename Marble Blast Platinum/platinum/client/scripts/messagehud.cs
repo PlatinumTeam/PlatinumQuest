@@ -91,7 +91,7 @@ function PlayGui::positionMessageHud(%this) {
 	%blastY = getWord(VectorSub(PlayGui.getExtent(), (lb() && !%hideChat ? "0 155" : "0 35")), 1);
 	PG_BlastBar.setPosition(6 SPC %blastY);
 
-	PG_MessageListBox.setHeight(%h - 100 - (lb() && !%hideChat ? 100 : 0) - (shouldEnableBlast() ? 34 : 0));
+	PG_MessageListBox.setHeight(%h - (lb() && !%hideChat ? (20 * $LBPref::ChatMessageSize) + 100 : 100) - (shouldEnableBlast() ? 34 : 0));
 
 	%this.updateMessageHud();
 }
