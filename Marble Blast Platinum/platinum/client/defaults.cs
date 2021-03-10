@@ -105,6 +105,7 @@ $Pref::Unix::OpenALFrequency = 44100;
 $LBPref::Server = 0;
 $LBPref::MaxChatLines = 1000;
 $LBPref::GlobalPageSize = 5;
+$LBPref::ChatMessageSize = 6;
 $pref::SSL::VerifyPeer = 1;
 $LBPref::ShowRecords = false;
 
