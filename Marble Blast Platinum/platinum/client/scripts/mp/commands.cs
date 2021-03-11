@@ -123,7 +123,7 @@ function clientCmdFoundEgg(%time, %eggName, %eggPickup) {
 
 	statsGetTopScoreModes(PlayMissionGui.getMissionInfo()); // For the egg on pause screen.
 	$Game::GotEggThisSession = true;
-	
+
 	//Record the egg
 	$Game::EasterEgg = true;
 
