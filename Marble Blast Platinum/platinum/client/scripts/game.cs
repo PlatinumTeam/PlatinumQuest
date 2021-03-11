@@ -65,7 +65,6 @@ function clientCmdGameStart() {
 
 // Called when you respawn
 function clientCmdGameRespawn() {
-
 }
 
 function updateGameDiscordStatus() {
@@ -717,14 +716,16 @@ function reformatGameEndText() {
 	ClientMode::callback("updateEndGame");
 }
 
-function getScoreFormatting(%score, %info, %showAwesome) {
+function getScoreFormatting(%score, %info, %showAwesome, %placement) {
 	if (%info $= "")
 		%info = MissionInfo;
 	%flags = Unlock::getMissionScoreFlags(%info, %score);
 	if (%showAwesome $= "")
 		%showAwesome = $pref::ShowAwesomeHints;
 
-	if (%showAwesome && (%flags & $Completion::Awesome))
+	if (%placement == 1)
+		return "<shadow:1:1><shadowcolor:0000007F><color:0060f0>";
+	else if (%showAwesome && (%flags & $Completion::Awesome))
 		return "<shadow:1:1><shadowcolor:0000007F><color:FF4444>";
 	else if (%flags & $Completion::Ultimate)
 		return "<shadow:1:1><shadowcolor:0000007F><color:FFCC33>";
