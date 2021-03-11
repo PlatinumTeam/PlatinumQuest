@@ -576,14 +576,22 @@ function ExitGameDlg::onWake(%this) {
 	%info = PlayMissionGui.getMissionInfo();
 	%pbType = getField($hs[0], 0);
 	%pbLabel = %pbType == 0 ? formatTime(getField($hs[0], 1)) : formatScore(getField($hs[0], 1));
-	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2);
+	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2); // Technically no record (offline) and score of 0 counts as a record, but PB should not show in that case.
 	%pbEggLabel = formatTime(getField($hs["egg"], 0));
 
 	%pbTitle = "<shadow:1:1><shadowcolor:000000bf>Personal Best";
 	%pbEggTitle = "<shadow:1:1><shadowcolor:000000bf><color:4580ff>Egg Best";
 
-	ExitGameInfoPersonalBestTitle.setText("<just:center><font:24>" @ %pbColor @ %pbTitle);
-	ExitGameInfoPersonalBestTime.setText("<just:center><font:32>" @ %pbLabel);
+	if ((%pbType == 0 && getSubStr(%pbLabel, 0, 5) $= "99:59") || (%pbType == 1 && getField($hs[0], 1) == 0)) {
+		ExitGameInfoPersonalBestTitle.setVisible(false);
+		ExitGameInfoPersonalBestTime.setVisible(false);
+	} else {
+		ExitGameInfoPersonalBestTitle.setText("<just:center><font:24>" @ %pbColor @ %pbTitle);
+		ExitGameInfoPersonalBestTime.setText("<just:center><font:32>" @ %pbLabel);
+		ExitGameInfoPersonalBestTitle.setVisible(true);
+		ExitGameInfoPersonalBestTime.setVisible(true);
+	}
+
 
 	if ($Game::GotEggThisSession) {
 		ExitGameInfoPersonalBestModeTitle.setText("<just:center><font:24>" @ %pbEggTitle);
