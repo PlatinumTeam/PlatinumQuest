@@ -297,7 +297,7 @@ $Options::Name    ["Graphics", $i++] = "interiorShaders";
 $Options::Title   ["Graphics", $i  ] = "Material Quality";
 $Options::Type    ["Graphics", $i  ] = "value";
 $Options::Name    ["Graphics", $i++] = "animateBackground";
-$Options::Title   ["Graphics", $i  ] = "Animate Background";
+$Options::Title   ["Graphics", $i  ] = "Preload Levels";
 $Options::Type    ["Graphics", $i  ] = "boolean";
 if (canSupportAntiAliasing()) { //This is not available on mac
 	$Options::Name ["Graphics", $i++] = "antiAliasing";
