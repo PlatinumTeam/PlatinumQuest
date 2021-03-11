@@ -350,6 +350,7 @@ function statsRecordEgg(%mission, %time) {
 function statsRecordEggLine(%line) {
 	if (%line $= "SUCCESS") {
 		echo("Stats: Egg recorded");
+		statsGetTopScoreModes(getMissionInfo($Client::MissionFile));
 	} else if (%line $= "FAILURE") {
 		echo("Stats: Egg record failure");
 	} else if (%line $= "ALREADY") {

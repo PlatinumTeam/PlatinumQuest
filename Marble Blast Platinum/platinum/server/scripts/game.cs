@@ -713,7 +713,6 @@ function GameConnection::onClientLeaveGame(%this) {
 	if (%this.player.isFrozen) {
 		%this.player.iceShard.getDatablock().unfreeze(%this.player.iceShard, %this.player, true);
 	}
-
 	cancel(%this.stateSchedule);
 
 	if (isObject(%this.camera))

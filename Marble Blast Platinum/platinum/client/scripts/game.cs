@@ -65,7 +65,6 @@ function clientCmdGameStart() {
 
 // Called when you respawn
 function clientCmdGameRespawn() {
-
 }
 
 function updateGameDiscordStatus() {
@@ -717,14 +716,16 @@ function reformatGameEndText() {
 	ClientMode::callback("updateEndGame");
 }
 
-function getScoreFormatting(%score, %info, %showAwesome) {
+function getScoreFormatting(%score, %info, %showAwesome, %placement) {
 	if (%info $= "")
 		%info = MissionInfo;
 	%flags = Unlock::getMissionScoreFlags(%info, %score);
 	if (%showAwesome $= "")
 		%showAwesome = $pref::ShowAwesomeHints;
 
-	if (%showAwesome && (%flags & $Completion::Awesome))
+	if (%placement == 1)
+		return "<shadow:1:1><shadowcolor:0000007F><color:0060f0>";
+	else if (%showAwesome && (%flags & $Completion::Awesome))
 		return "<shadow:1:1><shadowcolor:0000007F><color:FF4444>";
 	else if (%flags & $Completion::Ultimate)
 		return "<shadow:1:1><shadowcolor:0000007F><color:FFCC33>";
@@ -951,4 +952,17 @@ function formatLevel(%points, %size) {
 
 function formatExperience(%points) {
 	return levelDeltaPoints(pointsToLevel(%points)) - (levelTotalPoints(pointsToLevel(%points) + 1) - %points);
+}
+
+function removeLeadingZerosFromTime(%time) { // 00:25.45 -> 25.45
+	if (getSubStr(%time, 0, 1) $= "0" && %time !$= "0") { // %time !$= "0" just checks that it's not a score.
+		if (getSubStr(%time, 1, 1) $= "0") {
+			if (getSubStr(%time, 3, 1) $= "0") {
+				return getSubStr(%time, 4, 10);
+			}
+			return getSubStr(%time, 3, 10); // 3, not 2, to remove the colon too
+		}
+		return getSubStr(%time, 1, 10);
+	}
+	return %time;
 }

@@ -3264,36 +3264,20 @@ function PlayMissionGui::loadOnlineScores(%this) {
 		%this.personalScoreCacheLoading[%this.getMissionInfo().id] = true;
 		%this.globalScoreCacheFailed[%this.getMissionInfo().id] = false;
 		%this.personalScoreCacheFailed[%this.getMissionInfo().id] = false;
-	}
-
-	//Get new scores
-	statsGetGlobalTopScores(%this.getMissionInfo());
-
-	if (!$LB::Guest) {
-		statsGetPersonalTopScores(%this.getMissionInfo());
-	}
-
-	if (%this.globalScoreMode !$= "") {
-		%this.loadOnlineScoreModes();
-	}
-}
-
-function PlayMissionGui::loadOnlineScoreModes(%this) {
-	//Reset current scores
-	if (%this.getMissionInfo().id !$= "") {
 		%this.globalScoreModeCacheLoading[%this.getMissionInfo().id] = true;
 		%this.globalScoreModeCacheFailed[%this.getMissionInfo().id] = false;
 	}
 
 	//Get new scores
+	statsGetGlobalTopScores(%this.getMissionInfo());
 	statsGetTopScoreModes(%this.getMissionInfo());
+
+	if (!$LB::Guest) {
+		statsGetPersonalTopScores(%this.getMissionInfo());
+	}
 }
 
 function PlayMissionGui::setScoreMode(%this, %mode) {
-	if ($ThisControl.getValue() && %this.globalScoreMode $= "") {
-		%this.loadOnlineScoreModes();
-	}
-
 	%this.globalScoreMode = ($ThisControl.getValue() ? %mode : "");
 	%this.globalPage = %this.getInitialScoresPage();
 	%this.updateMissionInfo();
