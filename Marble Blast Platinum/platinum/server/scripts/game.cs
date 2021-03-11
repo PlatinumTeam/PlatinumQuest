@@ -714,7 +714,7 @@ function GameConnection::onClientLeaveGame(%this) {
 		%this.player.iceShard.getDatablock().unfreeze(%this.player.iceShard, %this.player, true);
 	}
 	
-	$Game::GotEggThisSession = false;
+	$Game::GotEggThisSession = false; // main_gi: For the egg on pause screen.
 
 	cancel(%this.stateSchedule);
 
