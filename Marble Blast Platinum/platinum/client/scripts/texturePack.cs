@@ -68,6 +68,8 @@ function activateTexturePack(%packName) {
 	%pack.identifier = %packName;
 	%pack.base = %packBase;
 
+	PlayGui.updateGems();
+
 	warn("Loading texture pack: " @ %pack.name);
 	ActiveTexturePacks.addEntry(%pack);
 }
