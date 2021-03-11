@@ -297,7 +297,7 @@ $Options::Name    ["Graphics", $i++] = "interiorShaders";
 $Options::Title   ["Graphics", $i  ] = "Material Quality";
 $Options::Type    ["Graphics", $i  ] = "value";
 $Options::Name    ["Graphics", $i++] = "animateBackground";
-$Options::Title   ["Graphics", $i  ] = "Preload Levels";
+$Options::Title   ["Graphics", $i  ] = "Animate Background";
 $Options::Type    ["Graphics", $i  ] = "boolean";
 if (canSupportAntiAliasing()) { //This is not available on mac
 	$Options::Name ["Graphics", $i++] = "antiAliasing";
@@ -446,7 +446,7 @@ $Options::Name    ["Online", 5] = "globalSize";
 $Options::Title   ["Online", 5] = "Global Score Page Size";
 $Options::Type    ["Online", 5] = "value";
 $Options::Name    ["Online", 6] = "chatMessageSize";
-$Options::Title   ["Online", 6] = "Ingame Lines of Chat";
+$Options::Title   ["Online", 6] = "In-Game Lines of Chat";
 $Options::Type    ["Online", 6] = "value";
 $Options::Name    ["Online", 7] = "autoLogin";
 $Options::Title   ["Online", 7] = "Auto Login";
