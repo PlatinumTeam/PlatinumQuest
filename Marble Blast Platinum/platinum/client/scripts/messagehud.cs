@@ -34,12 +34,12 @@ function PlayGui::positionMessageHud(%this) {
 	%hideChat      = $pref::ScreenshotMode > 0 || %isEndGame || isCannonActive();
 	%hideTimer     = $pref::ScreenshotMode == 2;
 
-	%height = 180;
+	%height = 60 + (20 * $LBPref::ChatMessageSize); // From 80 - 160
 
 	%chatWidth = %w;
 	%chatStartX = 0;
 
-	%chatHeight = %height - 60;
+	%chatHeight = %height - 60; // Originally just -60
 
 	%entryStart = (%mp || %ultra) && $chathud ? 135 : 0;
 
@@ -91,7 +91,7 @@ function PlayGui::positionMessageHud(%this) {
 	%blastY = getWord(VectorSub(PlayGui.getExtent(), (lb() && !%hideChat ? "0 155" : "0 35")), 1);
 	PG_BlastBar.setPosition(6 SPC %blastY);
 
-	PG_MessageListBox.setHeight(%h - 100 - (lb() && !%hideChat ? 100 : 0) - (shouldEnableBlast() ? 34 : 0));
+	PG_MessageListBox.setHeight(%h - (lb() && !%hideChat ? (20 * $LBPref::ChatMessageSize) + 100 : 100) - (shouldEnableBlast() ? 34 : 0));
 
 	%this.updateMessageHud();
 }
@@ -107,7 +107,7 @@ function PlayGui::updateMessageHud(%this) {
 	%isEndGame     = (isObject(EndGameDlg.getGroup()) && EndGameDlg.getGroup().getName() $= "Canvas");
 	%hideChat      = $pref::ScreenshotMode > 0 || %isEndGame || isCannonActive();
 
-	%height = 180;
+	%height = 60 + (20 * $LBPref::ChatMessageSize); // From 80 - 160
 
 	%chatWidth = %w;
 	%chatStartX = 0;

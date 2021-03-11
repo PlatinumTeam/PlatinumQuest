@@ -445,12 +445,15 @@ $Options::Type    ["Online", 4] = "boolean";
 $Options::Name    ["Online", 5] = "globalSize";
 $Options::Title   ["Online", 5] = "Global Score Page Size";
 $Options::Type    ["Online", 5] = "value";
-$Options::Name    ["Online", 6] = "autoLogin";
-$Options::Title   ["Online", 6] = "Auto Login";
-$Options::Type    ["Online", 6] = "boolean";
+$Options::Name    ["Online", 6] = "chatMessageSize";
+$Options::Title   ["Online", 6] = "In-Game Lines of Chat";
+$Options::Type    ["Online", 6] = "value";
+$Options::Name    ["Online", 7] = "autoLogin";
+$Options::Title   ["Online", 7] = "Auto Login";
+$Options::Type    ["Online", 7] = "boolean";
 
-$Options::AutoLoginUserField = 7;
-$Options::AutoLoginPassField = 8;
+$Options::AutoLoginUserField = 8;
+$Options::AutoLoginPassField = 9;
 
 $Options::Name    ["Online", $Options::AutoLoginUserField] = "autoLoginUsername";
 $Options::Title   ["Online", $Options::AutoLoginUserField] = "Username";
@@ -477,6 +480,14 @@ ProfanityFilterArray.addEntry("Strong"  TAB 2);
 Array(GlobalSizeArray);
 GlobalSizeArray.addEntry("5"  TAB 5);
 GlobalSizeArray.addEntry("10" TAB 10);
+
+Array(ChatMessageSizeArray);
+ChatMessageSizeArray.addEntry("1" TAB 1);
+ChatMessageSizeArray.addEntry("2" TAB 2);
+ChatMessageSizeArray.addEntry("3" TAB 3);
+ChatMessageSizeArray.addEntry("4" TAB 4);
+ChatMessageSizeArray.addEntry("5" TAB 5);
+ChatMessageSizeArray.addEntry("6" TAB 6);
 
 //-----------------------------------------------------------------------------
 // Graphics Functions.
@@ -1345,6 +1356,41 @@ function Opt_globalSize_increase() {
 		%index = 0;
 	}
 	$LBPref::GlobalPageSize = getField(GlobalSizeArray.getEntry(%index), 1);
+}
+
+
+//-----------------------------------------------------------------------------
+
+function Opt_chatMessageSize_getDisplay() {
+	%entry = ChatMessageSizeArray.getEntryByField($LBPref::ChatMessageSize, 1);
+	if (%entry $= "") {
+		return $LBPref::ChatMessageSize;
+	}
+	return getField(%entry, 0);
+}
+
+function Opt_chatMessageSize_getValue() {
+	return $LBPref::ChatMessageSize;
+}
+
+function Opt_chatMessageSize_decrease() {
+	%index = ChatMessageSizeArray.getIndexByField($LBPref::ChatMessageSize, 1);
+	%index --;
+	if (%index < 0) {
+		%index = ChatMessageSizeArray.getSize() - 1;
+	}
+	$LBPref::ChatMessageSize = getField(ChatMessageSizeArray.getEntry(%index), 1);
+	PlayGui.positionMessageHud();
+}
+
+function Opt_chatMessageSize_increase() {
+	%index = ChatMessageSizeArray.getIndexByField($LBPref::ChatMessageSize, 1);
+	%index ++;
+	if (%index >= ChatMessageSizeArray.getSize()) {
+		%index = 0;
+	}
+	$LBPref::ChatMessageSize = getField(ChatMessageSizeArray.getEntry(%index), 1);
+	PlayGui.positionMessageHud();
 }
 
 //-----------------------------------------------------------------------------
