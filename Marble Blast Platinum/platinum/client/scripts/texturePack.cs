@@ -70,6 +70,8 @@ function activateTexturePack(%packName) {
 
 	warn("Loading texture pack: " @ %pack.name);
 	ActiveTexturePacks.addEntry(%pack);
+
+	PlayGui.updateGems();
 }
 
 function deactivateTexturePack(%packName) {

@@ -257,7 +257,8 @@ function PlayGui::setGemCount(%this,%count,%green) {
 	%this.updateGems();
 }
 
-function PlayGui::updateGems(%this) {
+
+function PlayGui::updateGems(%this, %updateMax) {
 	%count = %this.gemCount;
 	%max = %this.maxGems;
 
@@ -290,6 +291,7 @@ function PlayGui::updateGems(%this) {
 	if (!ClientMode::callback("shouldUpdateGems", true))
 		return;
 
+
 	//If the mode changes this
 	%count = %this.gemCount;
 	%max = %this.maxGems;
@@ -298,6 +300,11 @@ function PlayGui::updateGems(%this) {
 		return;
 
 	%color = (%this.gemGreen ? $TimeColor["stopped"] : $TimeColor["normal"]);
+	GemsSlash.setNumberColor("slash", %color);
+
+	%maxNeedsToUpdate = (%this.GemsTotalTracked != %this.maxGems || %this.ColorTracked != %color || %updateMax);
+	%this.GemsTotalTracked = %max;
+	%this.ColorTracked = %color;
 
 	%one = %count % 10;
 	%ten = ((%count - %one) / 10) % 10;
@@ -306,13 +313,57 @@ function PlayGui::updateGems(%this) {
 	GemsFoundTen.setNumberColor(%ten, %color);
 	GemsFoundOne.setNumberColor(%one, %color);
 
-	%one = %max % 10;
-	%ten = ((%max - %one) / 10) % 10;
-	%hundred = ((%max - %one) / 10 - %ten) / 10;
-	GemsTotalHundred.setNumberColor(%hundred, %color);
-	GemsTotalTen.setNumberColor(%ten, %color);
-	GemsTotalOne.setNumberColor(%one, %color);
-	GemsSlash.setNumberColor("slash", %color);
+	GemsFoundHundred.setVisible(!(%hundred == 0)); 
+	GemsFoundTen.setVisible(!(%hundred == 0 && %ten == 0)); 
+
+	if (%maxNeedsToUpdate) {
+		%one = %max % 10;
+		%ten = ((%max - %one) / 10) % 10;
+		%hundred = ((%max - %one) / 10 - %ten) / 10;
+
+		if (%hundred == 0) { // Gem total is 0__
+			if (!(%ten == 0)) { // Gem total is 0XX
+				GemsTotalHundred.setNumberColor(%ten, %color);
+				GemsTotalTen.setNumberColor(%one, %color);
+				GemsTotalTen.setVisible(true);
+				GemsTotalOne.setVisible(false);
+				GemsQuota.setPosition("162 28");
+
+				GemsFoundTen.setPosition("30 0");
+				GemsFoundOne.setPosition("54 0");
+				GemsSlash.setPosition("77 0");
+				GemsTotalHundred.setPosition("96 0");
+				GemsTotalTen.setPosition("120 0");
+			} else { // Gem total is 00X
+				GemsTotalHundred.setNumberColor(%one, %color);
+				GemsTotalTen.setVisible(false);
+				GemsTotalOne.setVisible(false);
+				GemsQuota.setPosition("136 28");
+
+				GemsFoundOne.setPosition("54 0");
+				GemsSlash.setPosition("77 0");
+				GemsTotalHundred.setPosition("96 0");
+			}
+		} else { // Gem total is using all 3 digits, default behavior
+			GemsTotalHundred.setNumberColor(%hundred, %color);
+			GemsTotalTen.setNumberColor(%ten, %color);
+			GemsTotalOne.setNumberColor(%one, %color);
+			GemsTotalTen.setVisible(true);
+			GemsTotalOne.setVisible(true);
+			GemsQuota.setPosition("205 28");
+
+			GemsFoundHundred.setPosition("30 0");
+			GemsFoundTen.setPosition("54 0");
+			GemsFoundOne.setPosition("78 0"); // 78 + 23 = 101
+			GemsSlash.setPosition("101 0"); // 101 + 19 = 20
+			GemsTotalHundred.setPosition("120 0");
+			GemsTotalTen.setPosition("144 0");
+			GemsTotalOne.setPosition("168 0");
+		}
+
+	}
+
+
 }
 
 //-----------------------------------------------------------------------------
