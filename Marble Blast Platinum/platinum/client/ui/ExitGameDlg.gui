@@ -458,11 +458,11 @@ function ExitGameDlg::onWake(%this) {
 	%showAwesome = ((Unlock::getMissionCompletion(%info) & $Completion::Awesome) == $Completion::Awesome) || $Unlock::DisplayAll;
 
 	//Challenge times
-	%parTimeLabel      = (%info.time         ? formatTime(%info.time)         : "N/A");
-	%goldTimeLabel     = (%info.goldTime     ? formatTime(%info.goldTime)     : "N/A");
-	%platinumTimeLabel = (%info.platinumTime ? formatTime(%info.platinumTime) : "N/A");
-	%ultimateTimeLabel = (%info.ultimateTime ? formatTime(%info.ultimateTime) : "N/A");
-	%awesomeTimeLabel  = (%info.awesomeTime  ? formatTime(%info.awesomeTime)  : "N/A");
+	%parTimeLabel      = (%info.time         ? removeLeadingZerosFromTime(formatTime(%info.time))         : "N/A");
+	%goldTimeLabel     = (%info.goldTime     ? removeLeadingZerosFromTime(formatTime(%info.goldTime))     : "N/A");
+	%platinumTimeLabel = (%info.platinumTime ? removeLeadingZerosFromTime(formatTime(%info.platinumTime)) : "N/A");
+	%ultimateTimeLabel = (%info.ultimateTime ? removeLeadingZerosFromTime(formatTime(%info.ultimateTime)) : "N/A");
+	%awesomeTimeLabel  = (%info.awesomeTime  ? removeLeadingZerosFromTime(formatTime(%info.awesomeTime))  : "N/A");
 	//Challenge scores
 	%parScoreLabel      = (%info.score         !$= "" ? formatScore(%info.score)         : "N/A");
 	%goldScoreLabel     = (%info.goldScore     !$= "" ? formatScore(%info.goldScore)     : "N/A");
@@ -546,7 +546,7 @@ function ExitGameDlg::onWake(%this) {
 	}
 
 	%recordTitle   = "<shadow:1:1><shadowcolor:000000bf><color:0060f0>Record";
-	%eggRecordTitle = "<shadow:1:1><shadowcolor:000000bf><color:4580ff>Egg Record";
+	%eggRecordTitle = "<shadow:1:1><shadowcolor:000000bf>" @ %eggThemeColor @ "Egg Record";
 
 	//Get the world record
 	%record = false;
@@ -558,7 +558,7 @@ function ExitGameDlg::onWake(%this) {
 			if (%scores.getSize()) {
 				%record = %scores.getEntry(0).score;
 				%recordType = %scores.getEntry(0).score_type;
-				%recordLabel = (%recordType $= "time" ? formatTime(%record) : formatScore(%record));
+				%recordLabel = (%recordType $= "time" ? removeLeadingZerosFromTime(formatTime(%record)) : formatScore(%record));
 			}
 		}
 
@@ -566,7 +566,7 @@ function ExitGameDlg::onWake(%this) {
 		if (isObject(%cache)) {
 			%scores = %cache.getFieldValue("egg").scores; // Egg scores
 			if (%scores.getSize()) {
-				%eggRecordLabel = formatTime(%scores.getEntry(0).time);
+				%eggRecordLabel = removeLeadingZerosFromTime(formatTime(%scores.getEntry(0).time));
 			}
 		}
 	}
@@ -575,14 +575,16 @@ function ExitGameDlg::onWake(%this) {
 
 	%info = PlayMissionGui.getMissionInfo();
 	%pbType = getField($hs[0], 0);
-	%pbLabel = %pbType == 0 ? formatTime(getField($hs[0], 1)) : formatScore(getField($hs[0], 1));
+	%pbLabel = %pbType == 0 ? removeLeadingZerosFromTime(formatTime(getField($hs[0], 1))) : formatScore(getField($hs[0], 1));
 	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2); // Technically no record (offline) and score of 0 counts as a record, but PB should not show in that case.
-	%pbEggLabel = formatTime(getField($hs["egg"], 0));
+	%pbEggLabel = removeLeadingZerosFromTime(formatTime(getField($hs["egg"], 0)));
+
+	%eggThemeColor = (%game $= "PlatinumQuest") ? "<color:cccc99>" : "<color:4580ff>";
 
 	%pbTitle = "<shadow:1:1><shadowcolor:000000bf>Personal Best";
-	%pbEggTitle = "<shadow:1:1><shadowcolor:000000bf><color:4580ff>Egg Best";
+	%pbEggTitle = "<shadow:1:1><shadowcolor:000000bf>" @ %eggThemeColor @ "Egg Best";
 
-	if ((%pbType == 0 && getSubStr(%pbLabel, 0, 5) $= "99:59") || (%pbType == 1 && getField($hs[0], 1) == 0)) {
+	if (getField($hs[0], 2) $= "Matan W." && (%pbType == 0 && getSubStr(%pbLabel, 0, 5) $= "99:59") || (%pbType == 1 && getField($hs[0], 1) == 0)) {
 		ExitGameInfoPersonalBestTitle.setVisible(false);
 		ExitGameInfoPersonalBestTime.setVisible(false);
 	} else {
@@ -596,12 +598,18 @@ function ExitGameDlg::onWake(%this) {
 	if ($Game::GotEggThisSession) {
 		ExitGameInfoPersonalBestModeTitle.setText("<just:center><font:24>" @ %pbEggTitle);
 		ExitGameInfoPersonalBestModeTime.setText("<just:center><font:32>" @ %pbEggLabel);
-		ExitGameInfoRecordModeTitle.setText("<just:center><font:24>" @ %eggRecordTitle);
-		ExitGameInfoRecordModeTime.setText("<just:center><font:32>" @ %eggRecordLabel);
 		ExitGameInfoPersonalBestModeTitle.setVisible(true);
 		ExitGameInfoPersonalBestModeTime.setVisible(true);
-		ExitGameInfoRecordModeTitle.setVisible(true);
-		ExitGameInfoRecordModeTime.setVisible(true);
+		if (lb()) {
+			ExitGameInfoRecordModeTitle.setText("<just:center><font:24>" @ %eggThemeColor @ %eggRecordTitle);
+			ExitGameInfoRecordModeTime.setText("<just:center><font:32>" @ %eggRecordLabel);
+			ExitGameInfoRecordModeTitle.setVisible(true);
+			ExitGameInfoRecordModeTime.setVisible(true);
+		} else {
+			ExitGameInfoRecordModeTitle.setVisible(false);
+			ExitGameInfoRecordModeTime.setVisible(false);
+		}
+
 	} else {
 		ExitGameInfoPersonalBestModeTitle.setVisible(false);
 		ExitGameInfoPersonalBestModeTime.setVisible(false);
@@ -645,7 +653,7 @@ function ExitGameDlg::onWake(%this) {
 
 	// The display is size 1 through 4, and there are five unique positionings (left, l-center, center, r-center, right). Get rid of some of these times if our PB is higher.
 	// ----- 1 -----
-	// 1 --------- 2
+	// --- 2 - 3 ---
 	// 1 --- 2 --- 3
 	// 1 - 2 - 3 - 4
 
@@ -654,10 +662,10 @@ function ExitGameDlg::onWake(%this) {
 		ExitGameInfoCenterChallengeTitle.setText(%challengeTitles);
 		ExitGameInfoCenterChallengeTime.setText(%challengeTimes);
 	} else if (%challengeLength == 2) {
-		ExitGameInfoLeftmostChallengeTitle.setText(getWord(%challengeTitles, 0));
-		ExitGameInfoLeftmostChallengeTime.setText(getWord(%challengeTimes, 0));
-		ExitGameInfoRightmostChallengeTitle.setText(getWord(%challengeTitles, 1));
-		ExitGameInfoRightmostChallengeTime.setText(getWord(%challengeTimes, 1));
+		ExitGameInfoLeftcenterChallengeTitle.setText(getWord(%challengeTitles, 0));
+		ExitGameInfoLeftcenterChallengeTime.setText(getWord(%challengeTimes, 0));
+		ExitGameInfoRightcenterChallengeTitle.setText(getWord(%challengeTitles, 1));
+		ExitGameInfoRightcenterChallengeTime.setText(getWord(%challengeTimes, 1));
 	} else if (%challengeLength == 3) {
 		ExitGameInfoLeftmostChallengeTitle.setText(getWord(%challengeTitles, 0));
 		ExitGameInfoLeftmostChallengeTime.setText(getWord(%challengeTimes, 0));
@@ -686,14 +694,14 @@ function ExitGameDlg::onWake(%this) {
 	}
 	ExitGameInfoCenterChallengeTitle.setVisible(%challengeLength == 1 || %challengeLength == 3);
 	ExitGameInfoCenterChallengeTime.setVisible(%challengeLength == 1 || %challengeLength == 3);
-	ExitGameInfoLeftmostChallengeTitle.setVisible(%challengeLength != 1);
-	ExitGameInfoLeftmostChallengeTime.setVisible(%challengeLength != 1);
-	ExitGameInfoRightmostChallengeTitle.setVisible(%challengeLength != 1);
-	ExitGameInfoRightmostChallengeTime.setVisible(%challengeLength != 1);
-	ExitGameInfoLeftcenterChallengeTitle.setVisible(%challengeLength >= 4);
-	ExitGameInfoLeftcenterChallengeTime.setVisible(%challengeLength >= 4);
-	ExitGameInfoRightcenterChallengeTitle.setVisible(%challengeLength >= 4);
-	ExitGameInfoRightcenterChallengeTime.setVisible(%challengeLength >= 4);
+	ExitGameInfoLeftmostChallengeTitle.setVisible(%challengeLength >= 3);
+	ExitGameInfoLeftmostChallengeTime.setVisible(%challengeLength >= 3);
+	ExitGameInfoRightmostChallengeTitle.setVisible(%challengeLength >= 3);
+	ExitGameInfoRightmostChallengeTime.setVisible(%challengeLength >= 3);
+	ExitGameInfoLeftcenterChallengeTitle.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoLeftcenterChallengeTime.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoRightcenterChallengeTitle.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoRightcenterChallengeTime.setVisible(%challengeLength == 2 || %challengeLength >= 4);
 
 
 
