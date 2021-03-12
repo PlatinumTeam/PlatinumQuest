@@ -953,3 +953,16 @@ function formatLevel(%points, %size) {
 function formatExperience(%points) {
 	return levelDeltaPoints(pointsToLevel(%points)) - (levelTotalPoints(pointsToLevel(%points) + 1) - %points);
 }
+
+function removeLeadingZerosFromTime(%time) { // 00:25.45 -> 25.45
+	if (getSubStr(%time, 0, 1) $= "0" && %time !$= "0") { // %time !$= "0" just checks that it's not a score.
+		if (getSubStr(%time, 1, 1) $= "0") {
+			if (getSubStr(%time, 3, 1) $= "0") {
+				return getSubStr(%time, 4, 10);
+			}
+			return getSubStr(%time, 3, 10); // 3, not 2, to remove the colon too
+		}
+		return getSubStr(%time, 1, 10);
+	}
+	return %time;
+}
