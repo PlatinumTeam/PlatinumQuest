@@ -121,7 +121,10 @@ function clientCmdUpdateMarbleShape(%marble) {
 function clientCmdFoundEgg(%time, %eggName, %eggPickup) {
 	PlayGui.showEggTime(%time);
 
-	statsGetTopScoreModes(PlayMissionGui.getMissionInfo()); // For the egg on pause screen.
+	if (lb()) {
+		statsGetTopScoreModes(PlayMissionGui.getMissionInfo()); // For the egg on pause screen.
+	}
+
 	$Game::GotEggThisSession = true;
 
 	//Record the egg
