@@ -133,7 +133,7 @@ new GuiControl(ExitGameDlg) {
 				profile = "GuiMLTextProfile";
 				horizSizing = "left";
 				vertSizing = "bottom";
-				position = "238 51"; // 50% of 500, -12
+				position = "238 51"; // 50% of 500, then -12
 				extent = "150 32";
 				minExtent = "8 8";
 				visible = "1";
@@ -549,7 +549,7 @@ function ExitGameDlg::onWake(%this) {
 	%eggRecordTitle = "<shadow:1:1><shadowcolor:000000bf>" @ %eggThemeColor @ "Egg Record";
 
 	//Get the world record
-	%record = false;
+	%record = -1;
 	if (lb()) {
 		
 		%cache = PlayMissionGui.globalScoreCache[PlayMissionGui.getMissionInfo().id];
@@ -576,7 +576,7 @@ function ExitGameDlg::onWake(%this) {
 	%info = PlayMissionGui.getMissionInfo();
 	%pbType = getField($hs[0], 0);
 	%pbLabel = %pbType == 0 ? removeLeadingZerosFromTime(formatTime(getField($hs[0], 1))) : formatScore(getField($hs[0], 1));
-	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2); // Technically no record (offline) and score of 0 counts as a record, but PB should not show in that case.
+	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2); // If record is unset, it would be -1 and never trigger.
 	%pbEggLabel = removeLeadingZerosFromTime(formatTime(getField($hs["egg"], 0)));
 
 	%eggThemeColor = (%game $= "PlatinumQuest") ? "<color:cccc99>" : "<color:4580ff>";
