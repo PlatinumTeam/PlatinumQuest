@@ -100,6 +100,11 @@ $pref::Audio::AudioPack = "";
 $Pref::EnableDirectInput = true;
 $Pref::Unix::OpenALFrequency = 44100;
 
+$pref::CannonAimIterations = 125;
+$pref::CannonAimPrecision = 0.01;
+$pref::CannonAimIterationsFast = 24;
+$pref::CannonAimPrecisionFast = 0.1;
+
 //LBPrefs
 
 $LBPref::Server = 0;
