@@ -843,6 +843,20 @@ function refreshCenterTextCtrl() {
 
 //-----------------------------------------------------------------------------
 
+// Do this once the first time, not every time a gem message appears. Called in texturePack.cs
+function PlayGui::classicStyleFontCheck(%this) {
+	$DefaultFontPointPopups = $pref::DefaultFontPointPopups;
+	if ($DefaultFontPointPopups $= "") {
+		$DefaultFontPointPopups = "<bold:48>";
+		for (%i = 0; %i < ActiveTexturePacks.getSize(); %i ++) {
+			%packname = ActiveTexturePacks.getEntry(%i).identifier;
+			if (%packname $= "classic") {
+				$DefaultFontPointPopups = "<font:Marker Felt:48>";
+				break;
+			}
+		}
+	}
+}
 function PlayGui::displayGemMessage(%this, %amount, %color) {
 	%startCenter = VectorMult(%this.getExtent(), "0.5 0.5");
 	%startPos = VectorSub(%startCenter, "200 50");
@@ -863,7 +877,7 @@ function PlayGui::displayGemMessage(%this, %amount, %color) {
 	if (%color $= "")
 		%color = "ffcc66";
 
-	%font = $DefaultFont["PointPopups"]; // default <bold:48>
+	%font = $DefaultFontPointPopups; // default <bold:48>
 	%obj.setText("<just:center>" @ %font @ "<color:" @ %color @ ">" @ shadow("1 1", "0000007f") @ %amount);
 	%this.updateGemMessage(%obj);
 	%obj.schedule(700, "delete");

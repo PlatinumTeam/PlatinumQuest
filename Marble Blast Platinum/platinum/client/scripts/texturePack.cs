@@ -70,7 +70,10 @@ function activateTexturePack(%packName) {
 
 	warn("Loading texture pack: " @ %pack.name);
 	ActiveTexturePacks.addEntry(%pack);
+	PlayGui.updateGems(true);
+	PlayGui.classicStyleFontCheck();
 }
+PlayGui.classicStyleFontCheck(); // Because texturepack.cs loads after playgui, so playgui cannot detect ActiveTexturePacks or something
 
 function deactivateTexturePack(%packName) {
 	//Unload this pack
