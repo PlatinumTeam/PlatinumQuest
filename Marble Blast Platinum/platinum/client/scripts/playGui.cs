@@ -892,8 +892,16 @@ function PlayGui::updateLaps(%this) {
 
 	PGLapsTenComplete.setNumberColor(%completeTen, %color);
 	PGLapsOneComplete.setNumberColor(%completeOne, %color);
-	PGLapsTenTotal.setNumberColor(%totalTen, %color);
-	PGLapsOneTotal.setNumberColor(%totalOne, %color);
+	PGLapsTenComplete.setVisible(%completeTen != 0);
+
+	if (%totalTen != 0) {
+		PGLapsTenTotal.setNumberColor(%totalTen, %color);
+		PGLapsOneTotal.setNumberColor(%totalOne, %color);
+		PGLapsOneTotal.setVisible(true);
+	} else {
+		PGLapsTenTotal.setNumberColor(%totalOne, %color);
+		PGLapsOneTotal.setVisible(false);
+	}
 	PGLapsSlash.setNumberColor("slash", %color);
 
 	PGLapsLabel.setBitmap("platinum/client/ui/game/laps/laps_label");
