@@ -1180,6 +1180,53 @@ new GuiControl(PlayGui) {
 				wrap = "0";
 			};
 		};
+		new GuiControl(PGCountdownTT) {
+			profile = "GuiDefaultProfile";
+			horizSizing = "center";
+			vertSizing = "bottom";
+			position = "316 12"; // to the right of the timer
+			extent = "345 41";
+			minExtent = "8 8";
+			visible = "0";
+			helpTag = "0";
+
+			new GuiBitmapCtrl(PGCountdownTTImage) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "273 3";
+				extent = "36 36";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./game/countdown/timerTimeTravel";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl(PGCountdownTTTen) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "305 0";
+				extent = "28 37";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./game/numbers/0";
+				wrap = "0";
+			};
+			new GuiBitmapCtrl(PGCountdownTTOne) {
+				profile = "GuiDefaultProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "321 0";
+				extent = "28 37";
+				minExtent = "8 8";
+				visible = "1";
+				helpTag = "0";
+				bitmap = "./game/numbers/0";
+				wrap = "0";
+			};
+		};
 		new GuiControl(PG_MessageListBox) {
 			profile = "GuiDefaultProfile";
 			horizSizing = "right";
