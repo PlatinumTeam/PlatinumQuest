@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "30000";
       ultimateTime = "13500";
+      startHelpText = "Ride the moving platforms to reach the finish!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -72,14 +73,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-11.75 31.25 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Ride the moving platforms to reach the finish!";
    };
    new StaticShape(EndPoint) {
       position = "-3 42 16";

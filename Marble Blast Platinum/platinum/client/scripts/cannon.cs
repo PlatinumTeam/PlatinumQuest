@@ -601,9 +601,15 @@ function updateCannonAim(%ctrl) {
 	%gravity = VectorScale(getGravityDir(), %beforeGravity);
 
 	//How long each iteration will take (seconds)
-	%timeStep = mClamp(%force * 0.001, 0.01, 0.1);
+	%timeStep = mClamp(%force * 0.001, $pref::CannonAimPrecision, $pref::CannonAimPrecision * 10);
+	%iSteps = $pref::CannonAimIterations;
 
-	%iSteps = 125;
+	//This is turbo slow, so provide a less precise but fast option
+	if ($pref::FastMode) {
+		%timeStep = mClamp(%force * 0.001, $pref::CannonAimPrecisionFast, $pref::CannonAimPrecisionFast * 10);
+		%iSteps = $pref::CannonAimIterationsFast;
+	}
+
 	for (%i = 0; %i < %iSteps; %i ++) {
 		if (%cannon.aimTriggers) {
 			//I don't know where I'm going, but I'm on my way.

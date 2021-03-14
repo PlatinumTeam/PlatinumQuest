@@ -100,11 +100,17 @@ $pref::Audio::AudioPack = "";
 $Pref::EnableDirectInput = true;
 $Pref::Unix::OpenALFrequency = 44100;
 
+$pref::CannonAimIterations = 125;
+$pref::CannonAimPrecision = 0.01;
+$pref::CannonAimIterationsFast = 24;
+$pref::CannonAimPrecisionFast = 0.1;
+
 //LBPrefs
 
 $LBPref::Server = 0;
 $LBPref::MaxChatLines = 1000;
 $LBPref::GlobalPageSize = 5;
+$LBPref::ChatMessageSize = 6;
 $pref::SSL::VerifyPeer = 1;
 $LBPref::ShowRecords = false;
 

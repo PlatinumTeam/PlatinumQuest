@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "10000";
       ultimateTime = "7500";
+      startHelpText = "Use the Gyrocopter powerup to float across the gap safely.";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/clear/front.png";
@@ -66,14 +67,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "123.5 1.5 56";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Use the Gyrocopter powerup to float across the gap safely.";
    };
    new Item() {
       position = "24 0 31.7686";

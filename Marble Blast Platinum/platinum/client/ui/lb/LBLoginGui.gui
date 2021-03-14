@@ -294,7 +294,20 @@ function LBLoginGui::enableLogin(%this) {
 	LBLoginButton.setActive(!%this.checking && %this.online);
 	LBLoginGuest.setActive(!%this.checking && %this.online);
 
-	LBLoginPlayers.setText("<bold:21><just:left>" @(%this.checking ? "Requesting Status..." : (%this.online ? %this.players SPC "Player" @(%this.players == 1 ? "" : "s") @ " Online" : %this.error)));
+	%message = "Unknown Status!";
+	if (%this.checking) {
+		%message = "Requesting Status...";
+	} else if (%this.online) {
+		if ($LBPref::DisableChat) {
+			%message = "Chat Disabled";
+		} else {
+			%message = %this.players SPC "Player" @ (%this.players == 1 ? "" : "s") @ " Online";
+		}
+	} else {
+		%message = %this.error;
+	}
+
+	LBLoginPlayers.setText("<bold:21><just:left>" @ %message);
 
 	$LBPref::Username = %username;
 	if ($LBPref::RememberPassword)
@@ -355,9 +368,70 @@ function LBLoginGui::login(%this, %auto) {
 
 	// log into the leaderboards!
 	$LB::LoggedIn = false;
-	LBconnect();
+	statsCheckLogin($MP::RevisionOn);
+
+	LBMessage("Connecting...", "LBdisconnect();");
 
 	setTimeScale(1.0);
+}
+
+function LBLoginGui::onLoginStatus(%this, %info) {
+	if (!%info.success) {
+		switch$ (%info.reason) {
+		case "username":
+			LBAssert("Login Failed", "Invalid username or password, please try again!", "LBdisconnect();");
+		case "password":
+			LBAssert("Login Failed", "Invalid username or password, please try again!", "LBdisconnect();");
+		case "version":
+			LBAssert("Error!", "Out of date client, please update your game!", "LBdisconnect();");
+		case "activate":
+			LBAssert("Login Failed", "Please activate your account first. Check your email for a link with your activation code.", "LBdisconnect();");
+		case "banned":
+			%reason = %info.ban_reason;
+			if (%reason !$= "") {
+				LBAssert("You are Banned", "You have been banned from the leaderboards!\n\nBan message: " @ %reason, "LBdisconnect();");
+			} else {
+				LBAssert("You are Banned", "You have been banned from the leaderboards!", "LBdisconnect();");
+			}
+		}
+	} else {
+		$LB::ChatKey = %info.key;
+		if ($LBPref::DisableChat) {
+			%lmao = new SimObject(lmao);
+			for (%i = 0; %i < %info.settings.getSize(); %i ++) {
+				%line = %info.settings.getEntry(%i);
+
+				//Lines are always in the form of <cmd> <data>
+				%cmd  = firstWord(%line);
+				%data = restWords(%line);
+
+				// Cursed fucken shit
+				switch$ (%cmd) {
+				case "INFO":
+					LBNetwork::on_info(%lmao, %data);
+				case "LOGGED":
+					LBNetwork::finishLogin(%lmao);
+				case "FRIEND":
+					LBNetwork::on_friend(%lmao, %data);
+				case "BLOCK":
+					LBNetwork::on_block(%lmao, %data);
+				case "FLAIR":
+					LBNetwork::on_flair(%lmao, %data);
+				case "WINTER":
+					LBNetwork::on_winter(%lmao, %data);
+				case "2SPOOKY":
+					LBNetwork::on_2spooky(%lmao, %data);
+				case "STATUS":
+					LBNetwork::on_status(%lmao, %data);
+				case "COLOR":
+					LBNetwork::on_color(%lmao, %data);
+				}
+			}
+			%lmao.delete();
+		} else {
+			LBconnect();
+		}
+	}
 }
 
 function LBLoginGui::guestLogin(%this) {

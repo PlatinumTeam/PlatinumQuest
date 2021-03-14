@@ -14,7 +14,7 @@ new ScriptObject() {
 		platinumTime = "25000";
 		ultimateTime = "14500";
 		generalHint = "Don\'t listen to the help text at the start.";
-		ultimateHint = "Figure out the path through this madness and preform it quickly. Nothing else to it.";
+		ultimateHint = "Figure out the path through this madness and perform it quickly. Nothing else to it.";
 		eggHint = "Fake it out.";
 		CustomRadarRule = $Radar::Flags::None;
 		easterEgg = "1";

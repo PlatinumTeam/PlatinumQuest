@@ -186,6 +186,21 @@ function statsGetServerVersionLine(%line) {
 
 //-----------------------------------------------------------------------------
 
+function statsCheckLogin(%version) {
+	%params = LBDefaultQuery();
+	%params = addParam(%params, "version", %version);
+	statsPost("api/Player/CheckLogin.php", %params);
+}
+
+function statsCheckLoginLine(%line) {
+	fwrite("platinum/json/checkLogin.json", %line);
+
+	%parsed = jsonParse(%line);
+	LBLoginGui.onLoginStatus(%parsed);
+}
+
+//-----------------------------------------------------------------------------
+
 function statsRegisterUser(%username, %password, %email) {
 	%params = "username=" @ %username;
 	%params = addParam(%params, "password", %password);
@@ -335,6 +350,7 @@ function statsRecordEgg(%mission, %time) {
 function statsRecordEggLine(%line) {
 	if (%line $= "SUCCESS") {
 		echo("Stats: Egg recorded");
+		statsGetTopScoreModes(getMissionInfo($Client::MissionFile));
 	} else if (%line $= "FAILURE") {
 		echo("Stats: Egg record failure");
 	} else if (%line $= "ALREADY") {
@@ -1061,14 +1077,13 @@ function statsRecordMatchLine(%line) {
 //-----------------------------------------------------------------------------
 
 function statsVerifyPlayer(%client, %session) {
-	if ($Server::Dedicated && $Server::Offline) {
+	if ($Server::Offline) {
 		%client.completeValidation(true);
-		return true;
+		return;
 	}
 
 	%req = statsPost("api/Multiplayer/VerifyPlayer.php", "username=" @ %client.getUsername() @ "&session=" @ %session);
 	%req.client = %client;
-	return true;
 }
 
 function statsVerifyPlayerLine(%line, %req) {

@@ -3,7 +3,7 @@ new SimGroup(MissionGroup) {
 
    new ScriptObject(MissionInfo) {
          artist = "Buzzmusic100";
-         desc = "This is a tricky forest. You will have to make your way through the wacky rocks and branches created my the odd nature of Marble Blast Gold! It will be a trail you won\'t soon forget.";
+         desc = "This is a tricky forest. You will have to make your way through the wacky rocks and branches created by the odd nature of Marble Blast Gold! It will be a trail you won\'t soon forget.";
          level = "48";
          startHelpText = "Shape up your bouncing and climbing skills. This place is full of dangerous slopes!";
          name = "The Orange Forest";

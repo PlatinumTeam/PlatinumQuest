@@ -22,7 +22,7 @@ new ScriptObject() {
 		blueSpawnChance = "0.45";
 		platinumSpawnChance = "0.3";
 		generalHint = "The cannons aren\'t the only way to move between islands. Try using a powerup, or find a teleporter!";
-		ultimateHint = "You can add up to a full minute or so to your time limit by collecting the Time Travels in a very smart manner.";
+		ultimateHint = "All Time Travels take 80 seconds to respawn, so you can collect each of them twice, adding a full minute to your time limit. Keeping track of the islands may also help for pathing.";
 		CustomRadarRule = $Radar::Flags::Gems | $Radar::Flags::TimeTravels | $Radar::Flags::Cannons | $Radar::Flags::Powerups;
 		alarmStartTime = "20";
 		easterEgg = "0";

@@ -2399,10 +2399,10 @@ function PlayMissionGui::updateMissionInfo(%this) {
 							//TODO: More types of these things?
 							switch$ (%type) {
 							case "time":
-								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Time TAB %value, %info, %showAwesome) : "");
+								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Time TAB %value, %info, %showAwesome, %row.placement) : "");
 								%value = formatTime(%value);
 							case "score":
-								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Score TAB %value, %info, %showAwesome) : "");
+								%format = (%col.type $= "" ? getScoreFormatting($ScoreType::Score TAB %value, %info, %showAwesome, %row.placement) : "");
 								%value = formatScore(%value);
 							case "place":
 								%format = "";
@@ -2594,7 +2594,14 @@ function PlayMissionGui::updateMissionInfo(%this) {
 			%score = getField($hs[%i], 1);
 			%name = getField($hs[%i], 2);
 
-			%color = getScoreFormatting($hs[%i], %info);
+			%placement = 0;
+			//Same logic as updateMissionFrame, mark as world record if we have the record
+			if (lb() && %i == 0 && isObject(%this.personalScoreListCache) && isObject(%this.personalScoreListCache.record)
+				&& %this.personalScoreListCache.record.containsEntry(%info.id)) {
+				%placement = 1;
+			}
+
+			%color = getScoreFormatting($hs[%i], %info, 1, %placement);
 			%formatted = %color @ (%type == $ScoreType::Time ? formatTime(%score) : formatScore(%score));
 			%text2 = %text2 NL "<spush><just:left>" @ %name @ "<just:right>" @ %formatted @ "<spop>";
 		}
@@ -3264,36 +3271,20 @@ function PlayMissionGui::loadOnlineScores(%this) {
 		%this.personalScoreCacheLoading[%this.getMissionInfo().id] = true;
 		%this.globalScoreCacheFailed[%this.getMissionInfo().id] = false;
 		%this.personalScoreCacheFailed[%this.getMissionInfo().id] = false;
-	}
-
-	//Get new scores
-	statsGetGlobalTopScores(%this.getMissionInfo());
-
-	if (!$LB::Guest) {
-		statsGetPersonalTopScores(%this.getMissionInfo());
-	}
-
-	if (%this.globalScoreMode !$= "") {
-		%this.loadOnlineScoreModes();
-	}
-}
-
-function PlayMissionGui::loadOnlineScoreModes(%this) {
-	//Reset current scores
-	if (%this.getMissionInfo().id !$= "") {
 		%this.globalScoreModeCacheLoading[%this.getMissionInfo().id] = true;
 		%this.globalScoreModeCacheFailed[%this.getMissionInfo().id] = false;
 	}
 
 	//Get new scores
+	statsGetGlobalTopScores(%this.getMissionInfo());
 	statsGetTopScoreModes(%this.getMissionInfo());
+
+	if (!$LB::Guest) {
+		statsGetPersonalTopScores(%this.getMissionInfo());
+	}
 }
 
 function PlayMissionGui::setScoreMode(%this, %mode) {
-	if ($ThisControl.getValue() && %this.globalScoreMode $= "") {
-		%this.loadOnlineScoreModes();
-	}
-
 	%this.globalScoreMode = ($ThisControl.getValue() ? %mode : "");
 	%this.globalPage = %this.getInitialScoresPage();
 	%this.updateMissionInfo();

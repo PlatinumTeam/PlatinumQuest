@@ -15,4 +15,6 @@ Assets are released here but not under any license. Contact us if you want to us
 ## Contributing
 While there's no formal CLA, your contributions, if included, will also be released here under the MIT license and included in binary form in the game.
 
-While there is no linter for Torque Script, we do have a coding style used throughout the project. Please try to follow it.
+There is no linter for Torque Script, but we do have a coding style used throughout the project. Please try to follow it.
+
+If you need help with anything, we have a [Discord server](https://discord.gg/7MzhTgRN5s) for discussing PQ development.
