@@ -473,6 +473,7 @@ function PlayGui::resetTimer(%this,%dt) {
 
 	%this.stopCountdown();
 	%this.updateCountdown();
+	%this.updateTimeTravelCountdown();
 	%this.updateControls();
 	%this.stopTimer();
 }
@@ -739,6 +740,7 @@ function PlayGui::updateTimer(%this, %timeInc) {
 			%this.bonusTime = 0;
 		}
 	}
+	%this.updateTimeTravelCountdown();
 	if (!%this.stopped && !%this.bonusTime) {
 		alxStop($BonusSfx);
 		$BonusSfx = "";
@@ -759,6 +761,22 @@ function PlayGui::updateTimer(%this, %timeInc) {
 	}
 
 	%this.updateControls();
+}
+function PlayGui::updateTimeTravelCountdown(%this) {
+	%secondsLeft = mCeil(%this.bonusTime / 1000); // It's ceil so a 7s timer will fully see the "7" for a second, and there won't be a "0".
+	%one = mFloor(%secondsLeft) % 10;
+	%ten = mFloor(%secondsLeft / 10) % 10;
+	if (%secondsLeft >= 99) {
+		PGCountdownTTTen.setNumberColor(9, $TimeColor["stopped"]);
+		PGCountdownTTOne.setNumberColor(9, $TimeColor["stopped"]);
+	} else if (%secondsLeft >= 10) {
+		PGCountdownTTTen.setNumberColor(%ten, $TimeColor["stopped"]);
+		PGCountdownTTOne.setNumberColor(%one, $TimeColor["stopped"]);
+	} else {
+		PGCountdownTTTen.setNumberColor(%one, $TimeColor["stopped"]);
+	}
+	PGCountdownTTOne.setVisible(%secondsLeft >= 10);
+	PGCountdownTT.setVisible(%this.bonusTime);
 }
 
 function PlayGui::updateControls(%this) {
