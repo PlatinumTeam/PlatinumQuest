@@ -43,6 +43,7 @@ function PlayGui::updateSpeedometer(%this) {
 		PGSPDDigitTen.setPosition("26 0");
 		PGSPDDigitHun.setVisible(true);
 	}
+	PGSPDDigitTen.setVisible(%velocity >= 10);
 
 	//Extract digits from the velocity
 	%one = mFloor(%velocity) % 10;
