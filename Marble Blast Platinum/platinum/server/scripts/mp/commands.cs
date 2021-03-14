@@ -236,6 +236,7 @@ function serverCmdFileCRC(%client, %file, %crc) {
 // Make this "true" in the release build. We need this false for
 // dedicated server though.
 $CRC_NOPE = (!$Server::Dedicated);
+$LB::ValidateSessions = true;
 
 function serverCmdFinishCRC(%client, %cFiles) {
 	if (%client.failedCRC) {
@@ -322,10 +323,8 @@ function serverCmdVerifySession(%client, %session, %dev) {
 	%client.dev = %dev;
 
 	// So we have their session... now let's verify it with the server
-	if (!statsVerifyPlayer(%client, %session)) {
-		%client.completeValidation(false, "VALID_FAIL");
-		return;
-	}
+	// This function will call completeValidation() with the results
+	statsVerifyPlayer(%client, %session);
 }
 
 function GameConnection::completeValidation(%this, %valid, %message) {
@@ -333,11 +332,16 @@ function GameConnection::completeValidation(%this, %valid, %message) {
 	if (%this.verified)
 		return;
 
-	if (!%valid && !%this.isSuperAdmin) {
-		// Bahahahahahaha, you fail!
-		devecho("\c2Client" @ %client._name SPC "validation error: \"" @ %message @ "\"!");
-		%this.delete(%message $= "" ? "VALID_FAIL" : %message);
-		return;
+	if (!%valid) {
+		if (!%this.isSuperAdmin) {
+			// Bahahahahahaha, you fail!
+			devecho("\c2Client" @ %client._name SPC "validation error: \"" @ %message @ "\"!");
+			%this.delete(%message $= "" ? "VALID_FAIL" : %message);
+			return;
+		} else {
+			// Host and not valid... playing offline or something?
+			$Server::Offline = true;
+		}
 	}
 
 	commandToClient(%this, 'VerifySuccess');

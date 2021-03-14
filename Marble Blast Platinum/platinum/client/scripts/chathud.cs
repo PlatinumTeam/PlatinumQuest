@@ -415,7 +415,7 @@ function updateBubbleAnimation(%progress) {
 	%moveChatUp = (lb() && $pref::ScreenshotMode == 0) || isCannonActive();
 
 	if (%moveChatUp) {
-		%textSize += 110;
+		%textSize += (20 * ($LBPref::ChatMessageSize)) - 10; // previously 110 without the ChatMessageSize change
 	}
 
 	//Update the progress of the bubble

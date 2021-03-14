@@ -59,7 +59,7 @@ new GuiControl(ExitGameDlg) {
 		profile = "GuiDefaultProfile";
 		horizSizing = "width";
 		vertSizing = "center";
-		position = "0 0";
+		position = "0 84";
 		extent = "1024 600";
 		minExtent = "8 8";
 		visible = "1";
@@ -86,20 +86,259 @@ new GuiControl(ExitGameDlg) {
 				helpTag = "0";
 				bitmap = "./loading/loading_main_text";
 				wrap = "0";
-			};
-			new GuiMLTextCtrl(ExitGameInfo) {
-				profile = "GuiMLTextProfile";
-				horizSizing = "center";
-				vertSizing = "bottom";
-				position = "150 0";
-				extent = "500 74";
-				minExtent = "8 8";
-				visible = "1";
-				helpTag = "0";
-				lineSpacing = "2";
-				allowColorChars = "0";
-				maxChars = "-1";
-					wrap = "0";
+
+				new GuiMLTextCtrl(ExitGameInfoTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "center";
+					vertSizing = "bottom";
+					position = "50 0";
+					extent = "500 48";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoLeftmostChallengeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "15 51";
+					extent = "150 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoLeftcenterChallengeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "155 51";
+					extent = "150 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoCenterChallengeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "225 51";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRightcenterChallengeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "295 51";
+					extent = "150 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRightmostChallengeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "435 51";
+					extent = "150 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoLeftmostChallengeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "15 71";
+					extent = "150 36";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoLeftcenterChallengeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "155 71";
+					extent = "150 36";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoCenterChallengeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "225 71";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRightcenterChallengeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "295 71";
+					extent = "150 36";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRightmostChallengeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "435 71";
+					extent = "150 36";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoPersonalBestTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "225 106";
+					extent = "150 27";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoPersonalBestTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "225 126";
+					extent = "150 36";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoPersonalBestModeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "15 106";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoPersonalBestModeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "15 126";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRecordModeTitle) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "435 106";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfoRecordModeTime) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "left";
+					vertSizing = "bottom";
+					position = "435 126";
+					extent = "150 14";
+					minExtent = "8 8";
+					visible = "0";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
+				new GuiMLTextCtrl(ExitGameInfo) {
+					profile = "GuiMLTextProfile";
+					horizSizing = "center";
+					vertSizing = "bottom";
+					position = "50 100";
+					extent = "500 120";
+					minExtent = "8 8";
+					visible = "1";
+					helpTag = "0";
+					lineSpacing = "2";
+					allowColorChars = "0";
+					maxChars = "-1";
+						wrap = "0";
+				};
 			};
 		};
 		new GuiBitmapButtonTextCtrl(ExitGameYes) {
@@ -210,16 +449,20 @@ function ExitGameDlg::end() {
 function ExitGameDlg::onWake(%this) {
 	%info = getMissionInfo($Client::MissionFile);
 
-	%text = "<shadow:1:1><shadowcolor:000000bf><just:center>" @ shrinkToFit(%info.name, $DefaultFont["Bold"], 42, 24, getWord(ExitGameInfo.getExtent(), 0)) @ "<font:32>";
+	%title = "<shadow:1:1><shadowcolor:000000bf><just:center>" @ shrinkToFit(%info.name, $DefaultFont["Bold"], 42, 24, getWord(ExitGameInfo.getExtent(), 0));
+	ExitGameInfoTitle.setText(%title);
+	%text = "<shadow:1:1><shadowcolor:000000bf><font:32>";
 
-	%showAwesome = ((Unlock::getMissionCompletion(%info) & $Completion::Awesome) == $Completion::Awesome) || $Unlock::DisplayAll;
+	%completion = Unlock::getMissionCompletion(%info);
+	%showAwesome = ((%completion & $Completion::Awesome) == $Completion::Awesome) || $Unlock::DisplayAll;
+	%showEgg = ((%completion & $Completion::EasterEgg) == $Completion::EasterEgg) || $Unlock::DisplayAll;
 
 	//Challenge times
-	%parTimeLabel      = (%info.time         ? formatTime(%info.time)         : "N/A");
-	%goldTimeLabel     = (%info.goldTime     ? formatTime(%info.goldTime)     : "N/A");
-	%platinumTimeLabel = (%info.platinumTime ? formatTime(%info.platinumTime) : "N/A");
-	%ultimateTimeLabel = (%info.ultimateTime ? formatTime(%info.ultimateTime) : "N/A");
-	%awesomeTimeLabel  = (%info.awesomeTime  ? formatTime(%info.awesomeTime)  : "N/A");
+	%parTimeLabel      = (%info.time         ? removeLeadingZerosFromTime(formatTime(%info.time))         : "N/A");
+	%goldTimeLabel     = (%info.goldTime     ? removeLeadingZerosFromTime(formatTime(%info.goldTime))     : "N/A");
+	%platinumTimeLabel = (%info.platinumTime ? removeLeadingZerosFromTime(formatTime(%info.platinumTime)) : "N/A");
+	%ultimateTimeLabel = (%info.ultimateTime ? removeLeadingZerosFromTime(formatTime(%info.ultimateTime)) : "N/A");
+	%awesomeTimeLabel  = (%info.awesomeTime  ? removeLeadingZerosFromTime(formatTime(%info.awesomeTime))  : "N/A");
 	//Challenge scores
 	%parScoreLabel      = (%info.score         !$= "" ? formatScore(%info.score)         : "N/A");
 	%goldScoreLabel     = (%info.goldScore     !$= "" ? formatScore(%info.goldScore)     : "N/A");
@@ -302,30 +545,165 @@ function ExitGameDlg::onWake(%this) {
 		%awesomeTitle = "<shadow:1:1><shadowcolor:000000bf><color:FF4444>Awesome";
 	}
 
-	%parText      = %parTitle;
-	%goldText     = %goldTitle;
-	%platinumText = %platinumTitle;
-	%ultimateText = %ultimateTitle;
-	%awesomeText  = %awesomeTitle;
+	%recordTitle   = "<shadow:1:1><shadowcolor:000000bf><color:0060f0>Record";
+	%eggRecordTitle = "<shadow:1:1><shadowcolor:000000bf><color:0060f0>" @ %eggThemeColor @ "Egg Record";
 
-	//Par can have both time and score
-	if (ClientMode::callbackForMission(%info, "timeMultiplier", 1) > 0) {
-		if (%parTimeLabel !$= "N/A") {
-			%text = %text NL "<just:left><spush>" @ %parText @ ":<spop><just:right>" @ %parTimeLabel;
+	//Get the world record
+	%record = -1;
+	if (lb()) {
+
+		%cache = PlayMissionGui.globalScoreCache[PlayMissionGui.getMissionInfo().id];
+		if (isObject(%cache)) {
+			%scores = %cache.scores;
+			if (%scores.getSize()) {
+				%record = %scores.getEntry(0).score;
+				%recordType = %scores.getEntry(0).score_type;
+				%recordLabel = (%recordType $= "time" ? removeLeadingZerosFromTime(formatTime(%record)) : formatScore(%record));
+			}
+		}
+
+		%cache = PlayMissionGui.globalScoreModeCache[PlayMissionGui.getMissionInfo().id];
+		if (isObject(%cache)) {
+			%scores = %cache.getFieldValue("egg").scores; // Egg scores
+			if (%scores.getSize()) {
+				%eggRecordLabel = removeLeadingZerosFromTime(formatTime(%scores.getEntry(0).time));
+			}
 		}
 	}
-	if (%parScoreLabel !$= "N/A") {
-		%text = %text NL "<just:left><spush>" @ %parTitle SPC "Score:<spop><just:right>" @ %parScoreLabel;
+	%challengeTitles = "";
+	%challengeTimes = "";
+
+	%info = PlayMissionGui.getMissionInfo();
+	%pbType = getField($hs[0], 0);
+	%pbLabel = %pbType == 0 ? removeLeadingZerosFromTime(formatTime(getField($hs[0], 1))) : formatScore(getField($hs[0], 1));
+	%pbColor = getScoreFormatting($hs[0], %info, "", (%record == getField($hs[0], 1))? 1 : 2); // If record is unset, it would be -1 and never trigger.
+	%pbEggLabel = removeLeadingZerosFromTime(formatTime(getField($hs["egg"], 0)));
+
+	%eggThemeColor = (%game $= "PlatinumQuest") ? "<color:cccc99>" : "<color:4580ff>";
+
+	%pbTitle = "<shadow:1:1><shadowcolor:000000bf>Personal Best";
+	%pbEggTitle = "<shadow:1:1><shadowcolor:000000bf>" @ %eggThemeColor @ "Egg Best";
+
+	if (getField($hs[0], 2) $= "Matan W." && (%pbType == 0 && getSubStr(%pbLabel, 0, 5) $= "99:59") || (%pbType == 1 && getField($hs[0], 1) == 0)) {
+		ExitGameInfoPersonalBestTitle.setVisible(false);
+		ExitGameInfoPersonalBestTime.setVisible(false);
+	} else {
+		ExitGameInfoPersonalBestTitle.setText("<just:center><font:24>" @ %pbColor @ %pbTitle);
+		ExitGameInfoPersonalBestTime.setText("<just:center><font:32>" @ %pbLabel);
+		ExitGameInfoPersonalBestTitle.setVisible(true);
+		ExitGameInfoPersonalBestTime.setVisible(true);
+	}
+
+
+	if (%showEgg) {
+		ExitGameInfoPersonalBestModeTitle.setText("<just:center><font:24>" @ %pbEggTitle);
+		ExitGameInfoPersonalBestModeTime.setText("<just:center><font:32>" @ %pbEggLabel);
+		ExitGameInfoPersonalBestModeTitle.setVisible(true);
+		ExitGameInfoPersonalBestModeTime.setVisible(true);
+		if (lb()) {
+			ExitGameInfoRecordModeTitle.setText("<just:center><font:24>" @ %eggThemeColor @ %eggRecordTitle);
+			ExitGameInfoRecordModeTime.setText("<just:center><font:32>" @ %eggRecordLabel);
+			ExitGameInfoRecordModeTitle.setVisible(true);
+			ExitGameInfoRecordModeTime.setVisible(true);
+		} else {
+			ExitGameInfoRecordModeTitle.setVisible(false);
+			ExitGameInfoRecordModeTime.setVisible(false);
+		}
+
+	} else {
+		ExitGameInfoPersonalBestModeTitle.setVisible(false);
+		ExitGameInfoPersonalBestModeTime.setVisible(false);
+		ExitGameInfoRecordModeTitle.setVisible(false);
+		ExitGameInfoRecordModeTime.setVisible(false);
 	}
 
 	//Show what we need to
-	if (%goldTitle     !$= "" && %goldLabel     !$= "N/A") %text = %text NL "<just:left><spush>" @ %goldText @ ":<spop><just:right>" @ %goldLabel;
-	if (%platinumTitle !$= "" && %platinumLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %platinumText @ ":<spop><just:right>" @ %platinumLabel;
-	if (%ultimateTitle !$= "" && %ultimateLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %ultimateText @ ":<spop><just:right>" @ %ultimateLabel;
-
-	if (%showAwesome) {
-		if (%awesomeTitle !$= "" && %awesomeLabel !$= "N/A") %text = %text NL "<just:left><spush>" @ %awesomeText @ ":<spop><just:right>" @ %awesomeLabel;
+	if (ClientMode::callbackForMission(%info, "timeMultiplier", 1) > 0 && (%parTimeLabel !$= "N/A")) {	//Par can have both time and score
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %parTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %parTimeLabel;
+	} else if (%parScoreLabel !$= "N/A") { // It shouldn't be possible to have both at once though
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %parTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %parScoreLabel;
 	}
+
+	if (%goldTitle     !$= "" && %goldLabel     !$= "N/A") {
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %goldTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %goldLabel;
+	}
+	if (%platinumTitle !$= "" && %platinumLabel !$= "N/A") {
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %platinumTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %platinumLabel;
+	}
+	if (%ultimateTitle !$= "" && %ultimateLabel !$= "N/A") {
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %ultimateTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %ultimateLabel;
+	}
+	if (%showAwesome && %awesomeTitle !$= "" && %awesomeLabel !$= "N/A") {
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %awesomeTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %awesomeLabel;
+	}
+
+	if (lb() && (%showAwesome || $LBPref::ShowRecords) && (%recordLabel !$= "")) {
+		%challengeTitles = %challengeTitles SPC "<just:center><font:24>" @ %recordTitle;
+		%challengeTimes  = %challengeTimes  SPC "<just:center><font:32>" @ %recordLabel;
+	}
+	%challengeTitles = ltrim(%challengeTitles); // trim the first space
+	%challengeTimes = ltrim(%challengeTimes);
+	%challengeLength = getWordCount(%challengeTitles);
+
+	// The display is size 1 through 4, and there are five unique positionings (left, l-center, center, r-center, right). Get rid of some of these times if our PB is higher.
+	// ----- 1 -----
+	// --- 2 - 3 ---
+	// 1 --- 2 --- 3
+	// 1 - 2 - 3 - 4
+
+
+	if (%challengeLength == 1) {
+		ExitGameInfoCenterChallengeTitle.setText(%challengeTitles);
+		ExitGameInfoCenterChallengeTime.setText(%challengeTimes);
+	} else if (%challengeLength == 2) {
+		ExitGameInfoLeftcenterChallengeTitle.setText(getWord(%challengeTitles, 0));
+		ExitGameInfoLeftcenterChallengeTime.setText(getWord(%challengeTimes, 0));
+		ExitGameInfoRightcenterChallengeTitle.setText(getWord(%challengeTitles, 1));
+		ExitGameInfoRightcenterChallengeTime.setText(getWord(%challengeTimes, 1));
+	} else if (%challengeLength == 3) {
+		ExitGameInfoLeftmostChallengeTitle.setText(getWord(%challengeTitles, 0));
+		ExitGameInfoLeftmostChallengeTime.setText(getWord(%challengeTimes, 0));
+		ExitGameInfoCenterChallengeTitle.setText(getWord(%challengeTitles, 1));
+		ExitGameInfoCenterChallengeTime.setText(getWord(%challengeTimes, 1));
+		ExitGameInfoRightmostChallengeTitle.setText(getWord(%challengeTitles, 2));
+		ExitGameInfoRightmostChallengeTime.setText(getWord(%challengeTimes, 2));
+	} else if (%challengeLength == 4) {
+		ExitGameInfoLeftmostChallengeTitle.setText(getWord(%challengeTitles, 0));
+		ExitGameInfoLeftmostChallengeTime.setText(getWord(%challengeTimes, 0));
+		ExitGameInfoLeftcenterChallengeTitle.setText(getWord(%challengeTitles, 1));
+		ExitGameInfoLeftcenterChallengeTime.setText(getWord(%challengeTimes, 1));
+		ExitGameInfoRightcenterChallengeTitle.setText(getWord(%challengeTitles, 2));
+		ExitGameInfoRightcenterChallengeTime.setText(getWord(%challengeTimes, 2));
+		ExitGameInfoRightmostChallengeTitle.setText(getWord(%challengeTitles, 3));
+		ExitGameInfoRightmostChallengeTime.setText(getWord(%challengeTimes, 3));
+	} else if (%challengeLength >= 5) { // Meaning it's all five, par, platinum, ultimate, awesome, record - prerequisite for this if-condition is %showAwesome, which means the player already beat awesome, so hide platinum. Par could be hidden too, but that one seems more relevant to me.
+		ExitGameInfoLeftmostChallengeTitle.setText(getWord(%challengeTitles, 0));
+		ExitGameInfoLeftmostChallengeTime.setText(getWord(%challengeTimes, 0));
+		ExitGameInfoLeftcenterChallengeTitle.setText(getWord(%challengeTitles, 2));
+		ExitGameInfoLeftcenterChallengeTime.setText(getWord(%challengeTimes, 2));
+		ExitGameInfoRightcenterChallengeTitle.setText(getWord(%challengeTitles, 3));
+		ExitGameInfoRightcenterChallengeTime.setText(getWord(%challengeTimes, 3));
+		ExitGameInfoRightmostChallengeTitle.setText(getWord(%challengeTitles, 4));
+		ExitGameInfoRightmostChallengeTime.setText(getWord(%challengeTimes, 4));
+	}
+	ExitGameInfoCenterChallengeTitle.setVisible(%challengeLength == 1 || %challengeLength == 3);
+	ExitGameInfoCenterChallengeTime.setVisible(%challengeLength == 1 || %challengeLength == 3);
+	ExitGameInfoLeftmostChallengeTitle.setVisible(%challengeLength >= 3);
+	ExitGameInfoLeftmostChallengeTime.setVisible(%challengeLength >= 3);
+	ExitGameInfoRightmostChallengeTitle.setVisible(%challengeLength >= 3);
+	ExitGameInfoRightmostChallengeTime.setVisible(%challengeLength >= 3);
+	ExitGameInfoLeftcenterChallengeTitle.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoLeftcenterChallengeTime.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoRightcenterChallengeTitle.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+	ExitGameInfoRightcenterChallengeTime.setVisible(%challengeLength == 2 || %challengeLength >= 4);
+
+
 
 	%text = %text NL "";
 

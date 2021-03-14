@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "10000";
       ultimateTime = "5400";
+      startHelpText = "Pick up the Gravity Modifiers to roll to the finish!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -73,14 +74,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-64.5 0.5 -2";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Pick up the Gravity Modifiers to roll to the finish!";
    };
    new StaticShape(EndPoint) {
       position = "83 -1 -2";

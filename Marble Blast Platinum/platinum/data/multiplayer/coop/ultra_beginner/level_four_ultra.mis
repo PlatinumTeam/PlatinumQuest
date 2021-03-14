@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "17500";
       ultimateTime = "12000";
+      startHelpText = "Be careful not to fall off open edges!";
    };
    new Sky(Sky) {
       sphereFront = "platinum/data/shapes/skies/clear/front.png";
@@ -60,14 +61,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "112.5 45.5 20";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Be careful not to fall off open edges!";
    };
    new StaticShape(EndPoint) {
       position = "-24 -42 20";

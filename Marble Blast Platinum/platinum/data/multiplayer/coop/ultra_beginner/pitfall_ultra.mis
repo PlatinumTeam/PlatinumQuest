@@ -12,6 +12,7 @@ useUltraMarble = "1";
 	  music = "Tim Trance.ogg";
 	  goldTime = "20000";
       ultimateTime = "13000";
+      startHelpText = "Practice your rolling skills by avoiding the gaps in the floor!";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -75,14 +76,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-11.5 -16.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0 0.0 0.0 1.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 1.0";
-      text = "Practice your rolling skills by avoiding the gaps in the floor!";
    };
    new StaticShape(EndPoint) {
       position = "14 -54.5 28";

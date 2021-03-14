@@ -142,7 +142,12 @@ function LBTermsDlg::decline(%this) {
 }
 
 function LBTermsDlg::accept(%this) {
-	LBNetwork.send("ACCEPTTOS\n");
+	if (isObject(LBNetwork)) {
+		LBNetwork.send("ACCEPTTOS\n");
+	} else {
+		LBAssert("Cannot Accept TOS", "Your game has disconnected from the leaderboards and cannot verify the TOS. Try again later.", "LBdisconnect();");
+		return;
+	}
 
 	if ($LB::LoggedIn)
 		RootGui.setContent(LBChatGui);

@@ -24,6 +24,13 @@
 			"missionDirectory": "platinum/data/missions_mbg/advanced",
 			"bitmapDirectory": "platinum/data/missions_mbg/advanced",
 			"previewDirectory": "platinum/data/previews_mbg/advanced"
+		},
+		{
+			"name": "Bonus",
+			"display": "Bonus",
+			"missionDirectory": "platinum/data/missions_mbg/bonus",
+			"bitmapDirectory": "platinum/data/missions_mbg/bonus",
+			"previewDirectory": "platinum/data/previews_mbg/bonus"
 		}
 	],
 	"customPaths":

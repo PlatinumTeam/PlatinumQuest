@@ -132,12 +132,12 @@ new SimGroup(MissionGroup) {
          dataBlock = "Window01_3x3";
       };
       new StaticShape() {
-         position = "48.5649 -148.757 302.291";
+         position = "48.65 -148.75 312.033";
          rotation = "1 0 0 0";
          scale = "0.675 0.675 0.675";
          dataBlock = "Window04_3x3";
             Parent = "finishplatform";
-            parentModTrans = "2 2.375 -4.46 1 0 0 0";
+            parentModTrans = "2.0851 2.382 -4.46802 1 0 0 0";
             parentOffset = "0 0 0";
             parentSimple = "0";
       };
@@ -196,13 +196,11 @@ new SimGroup(MissionGroup) {
          dataBlock = "Window01_3x3";
       };
       new StaticShape() {
-         position = "46.5649 -150.682 302.291";
-         rotation = "0 0 1 178.719";
-         scale = "0.675 0.675 0.675";
-         dataBlock = "Window04_3x3";
-            Parent = "finishplatform";
-            parentOffset = "0 0 0";
-            parentSimple = "0";
+         position = "101.951 -141.03 212.502";
+         rotation = "1 0 0 0";
+         scale = "10 10 10";
+         dataBlock = "OrbitingClouds";
+            reverse = "0";
       };
       new StaticShape() {
          position = "66.4033 -177.814 306.763";
@@ -218,15 +216,11 @@ new SimGroup(MissionGroup) {
             Path = "windowspinidle";
       };
       new StaticShape() {
-         position = "44.5649 -148.757 302.291";
+         position = "101.951 -141.03 212.502";
          rotation = "1 0 0 0";
-         scale = "0.675 0.675 0.675";
-         dataBlock = "Window04_3x3";
-            Parent = "finishplatform";
-            parentModTrans = "-2 2.375 -4.46 1 0 0 0";
-            parentOffset = "0 0 0";
-            parentSimple = "0";
-            skin = "base";
+         scale = "10 10 10";
+         dataBlock = "OrbitingClouds";
+            reverse = "0";
       };
       new StaticShape() {
          position = "88.4565 -151.807 305.425";
@@ -241,14 +235,11 @@ new SimGroup(MissionGroup) {
          dataBlock = "Fern01";
       };
       new StaticShape() {
-         position = "46.5649 -146.832 302.291";
-         rotation = "0 0 1 178.719";
-         scale = "0.675 0.675 0.675";
-         dataBlock = "Window04_3x3";
-            Parent = "finishplatform";
-            parentModTrans = "0 4.3 -4.46 0 0 90 1.565";
-            parentOffset = "0 0 0";
-            parentSimple = "0";
+         position = "101.951 -141.03 212.502";
+         rotation = "1 0 0 0";
+         scale = "10 10 10";
+         dataBlock = "OrbitingClouds";
+            reverse = "0";
       };
       new StaticShape() {
          position = "82.6088 -70.3814 267.574";
@@ -385,25 +376,34 @@ new SimGroup(MissionGroup) {
             skin = "light";
       };
       new StaticShape() {
-         position = "101.951 -141.03 212.502";
+         position = "44.45 -148.75 312.033";
          rotation = "1 0 0 0";
-         scale = "10 10 10";
-         dataBlock = "OrbitingClouds";
-            reverse = "0";
+         scale = "0.675 0.675 0.675";
+         dataBlock = "Window04_3x3";
+            Parent = "finishplatform";
+            parentModTrans = "-2.1149 2.382 -4.46802 1 0 0 0";
+            parentOffset = "0 0 0";
+            parentSimple = "0";
       };
       new StaticShape() {
-         position = "101.951 -141.03 212.502";
-         rotation = "1 0 0 0";
-         scale = "10 10 10";
-         dataBlock = "OrbitingClouds";
-            reverse = "0";
+         position = "46.55 -146.65 312.033";
+         rotation = "0 0 1 90.0002";
+         scale = "0.675 0.675 0.675";
+         dataBlock = "Window04_3x3";
+            Parent = "finishplatform";
+            parentModTrans = "-0.0149002 4.48201 -4.46802 0 0 1 1.5708";
+            parentOffset = "0 0 0";
+            parentSimple = "0";
       };
       new StaticShape() {
-         position = "101.951 -141.03 212.502";
-         rotation = "1 0 0 0";
-         scale = "10 10 10";
-         dataBlock = "OrbitingClouds";
-            reverse = "0";
+         position = "46.55 -150.85 312.033";
+         rotation = "0 0 1 90.0002";
+         scale = "0.675 0.675 0.675";
+         dataBlock = "Window04_3x3";
+            Parent = "finishplatform";
+            parentModTrans = "-0.0149002 0.281998 -4.46802 0 0 1 1.5708";
+            parentOffset = "0 0 0";
+            parentSimple = "0";
       };
    };
    new InteriorInstance() {
@@ -1724,7 +1724,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "fantriggeron";
    };
    new Trigger(fantriggeron) {
@@ -1753,7 +1753,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "1";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "shrinkydink";
          triggerObject2 = "dooropened";
    };
@@ -1795,7 +1795,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "1";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "cannondoor";
    };
    new StaticShape() {
@@ -2129,7 +2129,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "sidefantriggeroff";
    };
    new TSStatic(sidefanoff1a) {
@@ -2180,7 +2180,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "sidefantriggeron";
    };
    new Trigger(sidefantriggeron) {
@@ -2318,7 +2318,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "movebridge1";
    };
    new Trigger() {
@@ -2618,7 +2618,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "1";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "activateteleportertrigger";
    };
    new Trigger() {
@@ -2779,28 +2779,28 @@ new SimGroup(MissionGroup) {
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "272.029 -279.596 315.989";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "274.028 -279.596 315.989";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "276.028 -283.597 317.486";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "250.136 -157.035 309.469";
@@ -2868,28 +2868,28 @@ new SimGroup(MissionGroup) {
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "270.031 -275.595 313.735";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "270.031 -277.598 314.486";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "270.028 -281.596 315.236";
       rotation = "0 0 -1 90.0002";
       scale = "1 1 1";
       dataBlock = "TrapDoor_PQ";
-         resettime = "6000";
+         resetTime = "6000";
    };
    new StaticShape() {
       position = "202.837 -259.103 335.761";
@@ -2921,7 +2921,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "1";
          objectMethod = "onEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "TPFanTrigger";
    };
    new StaticShape(TPFanOn) {
@@ -2993,7 +2993,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "OnEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "activatedestinationtrigger";
    };
    new Item() {
@@ -3337,7 +3337,7 @@ new SimGroup(MissionGroup) {
       dataBlock = "PushButton_PQ";
          TriggerOnce = "0";
          objectMethod = "OnEnterTrigger()";
-         resettime = "5000";
+         resetTime = "5000";
          triggerObject = "finishtrig";
    };
    new InteriorInstance(finishplatform) {
@@ -3389,9 +3389,6 @@ new SimGroup(MissionGroup) {
    new FileObject(RecordFO) {
    };
    new FileObject(RecordFO) {
-         _lastPhysicspowerUpTime[3] = "5000";
-         _lastPhysicspowerUpTime[4] = "5000";
-         _lastPhysicspowerUpTime[5] = "5000";
    };
 };
 //--- OBJECT WRITE END ---

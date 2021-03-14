@@ -12,6 +12,7 @@ useUltraMarble = "1";
       goldTime = "7000";
       ultimateTime = "3000";
       music = "Tim Trance.ogg";
+      startHelpText = "Welcome to Marble Blast Ultra!\nUse the <func:bind moveforward>, <func:bind moveleft>, <func:bind movebackward>, <func:bind moveright> keys to roll the marble.";
    };
    new Sky(GlobalSky) {
       sphereFront = "platinum/data/shapes/skies/clear/front.png";
@@ -59,14 +60,6 @@ useUltraMarble = "1";
          scale = "1 1 1";
          dataBlock = "StartPad";
       };
-   };
-   new Trigger() {
-      position = "-1.5 1.5 0";
-      rotation = "1 0 0 0";
-      scale = "3 3 2";
-      dataBlock = "HelpTrigger";
-      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
-      text = "Welcome to Marble Blast Ultra!\nUse the <func:bind moveforward>, <func:bind moveleft>, <func:bind movebackward>, <func:bind moveright> keys to roll the marble.";
    };
    new StaticShape(EndPoint) {
       position = "18 6 6.5";
