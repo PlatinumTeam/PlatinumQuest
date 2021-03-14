@@ -838,8 +838,8 @@ new SimGroup(MissionGroup) {
 				pitch = "0";
 				pitchBoundLow = "-15";
 				pitchBoundHigh = "40";
-				yawBoundLeft = "0";
-				yawBoundRight = "0";
+				yawBoundLeft = "2.5";
+				yawBoundRight = "2.5";
 				yawLimit = "1";
 				instant = "0";
 				instantDelayTime = "0";
@@ -895,8 +895,8 @@ new SimGroup(MissionGroup) {
 				pitch = "0";
 				pitchBoundLow = "-5";
 				pitchBoundHigh = "52.5";
-				yawBoundLeft = "0";
-				yawBoundRight = "0";
+				yawBoundLeft = "15";
+				yawBoundRight = "15";
 				yawLimit = "1";
 				instant = "0";
 				instantDelayTime = "0";
@@ -923,8 +923,8 @@ new SimGroup(MissionGroup) {
 				pitch = "0";
 				pitchBoundLow = "-5";
 				pitchBoundHigh = "45";
-				yawBoundLeft = "0";
-				yawBoundRight = "0";
+				yawBoundLeft = "15";
+				yawBoundRight = "15";
 				yawLimit = "1";
 				instant = "0";
 				instantDelayTime = "0";
@@ -951,8 +951,8 @@ new SimGroup(MissionGroup) {
 				pitch = "0";
 				pitchBoundLow = "-5";
 				pitchBoundHigh = "45";
-				yawBoundLeft = "0";
-				yawBoundRight = "0";
+				yawBoundLeft = "15";
+				yawBoundRight = "15";
 				yawLimit = "1";
 				instant = "0";
 				instantDelayTime = "0";
