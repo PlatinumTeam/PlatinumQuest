@@ -1409,16 +1409,17 @@ function countVisibleGems(%group) {
 	return %gems;
 }
 
-function GameConnection::getNearestGem(%this) {
+function GameConnection::getNearestGem(%this, %highestValue) {
 	if (isObject(%this.player)) {
-		return getNearestGem(%this.player.getTransform());
+		return getNearestGem(%this.player.getTransform(), %highestValue);
 	}
-	return getNearestGem("0 0 0");
+	return getNearestGem("0 0 0", %highestValue);
 }
 
-function getNearestGem(%pos) {
+function getNearestGem(%pos, %highestValue) {
 	%nearest = -1;
 	%nearDist = 999999;
+	%highest = -1;
 
 	%group = ($Server::Hosting && !$Server::_Dedicated ? MissionGroup : ServerConnection);
 
@@ -1428,9 +1429,21 @@ function getNearestGem(%pos) {
 		if (%gem.isHidden())
 			continue;
 		%dist = VectorDist(getWords(%gem.getTransform(), 0, 2), %pos);
-		if (%dist < %nearDist) {
-			%nearest = %gem;
-			%nearDist = %dist;
+
+		if (%highestValue) {
+			// Higher value, OR it's equal value but closer distance.
+			%value = %gem._huntDatablock.huntExtraValue + 1;
+			if (%value > %highest || (%value == %highest && %dist < %nearDist)) {
+				%nearest = %gem;
+				%nearDist = %dist;
+				%highest = %value;
+			}
+		} else {
+			// Nearest only
+			if (%dist < %nearDist) {
+				%nearest = %gem;
+				%nearDist = %dist;
+			}
 		}
 	}
 	return %nearest;

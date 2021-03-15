@@ -335,7 +335,7 @@ function GameConnection::getFurthestSpawnTrigger(%this) {
 	// The gem positions are kinda like the marble's pos... I guess?
 	// If this happens, see ya on the other side of the level, sucker
 	if ($Game::IsMode["hunt"] && getRandom(0, 50) > 5)
-		%playerPos = %this.getNearestGem().getPosition();
+		%playerPos = %this.getNearestGem(true).getPosition();
 
 	if (!isObject(%this.player)) // We don't know *where* we'll spawn!
 		return SpawnPointSet.getObject(getRandom(0, %spawnCount - 1));
@@ -383,14 +383,14 @@ function GameConnection::getRandomSpawnTrigger(%this) {
 
 function GameConnection::pointToNearestGem(%this) {
 	%pos = %this.player.getPosition();
-	%yp = transformToNearestGem(%this.player.getGravityRot(), %pos);
+	%yp = transformToNearestGem(%this.player.getGravityRot(), %pos, true);
 
 	%this.player.setCameraYaw(getField(%yp, 0));
 	%this.player.setCameraPitch(getField(%yp, 1));
 }
 
-function transformToNearestGem(%gravity, %pos) {
-	%nearest = getNearestGem(%pos);
+function transformToNearestGem(%gravity, %pos, %highestValue) {
+	%nearest = getNearestGem(%pos, %highestValue);
 	if (%nearest == -1)
 		return;
 
