@@ -37,11 +37,10 @@ $DefaultFont                = ($pref::DefaultFont                $= "" ? "Whatne
 $DefaultFont["Bold"]        = ($pref::DefaultFont["Bold"]        $= "" ? "Squishney"      : $pref::DefaultFont["Bold"]);
 $DefaultFont["Italic"]      = ($pref::DefaultFont["Italic"]      $= "" ? "Whatney Italic" : $pref::DefaultFont["Italic"]);
 $DefaultFont["Condensed"]   = ($pref::DefaultFont["Condensed"]   $= "" ? "Squatney"       : $pref::DefaultFont["Condensed"]);
-$DefaultSmallFont           = ($pref::DefaultSmallFont           $= "" ? "Arial"          : $pref::DefaultSmallFont);
-$DefaultSmallFont["Bold"]   = ($pref::DefaultSmallFont["Bold"]   $= "" ? "Arial Bold"     : $pref::DefaultSmallFont["Bold"]);
-$DefaultSmallFont["Italic"] = ($pref::DefaultSmallFont["Italic"] $= "" ? "Arial Italic"   : $pref::DefaultSmallFont["Italic"]);
-// Gem and TT indicators
-$DefaultFont["PointPopups"] = ($pref::DefaultFont["PointPopups"] $= "" ? "Whitney"        : $pref::DefaultFont["PointPopups"]);
+$DefaultFont["PointPopups"] = ($pref::DefaultFont["PointPopups"] $= "" ? "Squishney"      : $pref::DefaultFont["PointPopups"]); // Gem and TT indicators
+$DefaultFont["Small"]       = ($pref::DefaultFont["Small"]       $= "" ? "Arial"          : $pref::DefaultFont["Small"]);
+$DefaultFont["SmallBold"]   = ($pref::DefaultFont["SmallBold"]   $= "" ? "Arial Bold"     : $pref::DefaultFont["SmallBold"]);
+$DefaultFont["SmallItalic"] = ($pref::DefaultFont["SmallItalic"] $= "" ? "Arial Italic"   : $pref::DefaultFont["SmallItalic"]);
 
 // GuiDefaultProfile is a special case, all other profiles are initialized
 // to the contents of this profile first then the profile specific
@@ -66,7 +65,7 @@ if (!isObject(GuiDefaultProfile)) new GuiControlProfile(GuiDefaultProfile) {
 	borderColorNA = "64 64 64";
 
 	// font
-	fontType = $DefaultSmallFont;
+	fontType = $DefaultFont["Small"];
 	fontSize = 14;
 
 	fontColor = "0 0 0";
@@ -228,14 +227,14 @@ if (!isObject(GuiTextProfile)) new GuiControlProfile(GuiTextProfile) {
 };
 
 if (!isObject(EditorTextProfile)) new GuiControlProfile(EditorTextProfile) {
-	fontType = $DefaultSmallFont["Bold"];
+	fontType = $DefaultFont["SmallBold"];
 	fontColor = "0 0 0";
 	autoSizeWidth = true;
 	autoSizeHeight = true;
 };
 
 if (!isObject(EditorTextProfileWhite)) new GuiControlProfile(EditorTextProfileWhite) {
-	fontType = $DefaultSmallFont["Bold"];
+	fontType = $DefaultFont["SmallBold"];
 	fontColor = "255 255 255";
 	autoSizeWidth = true;
 	autoSizeHeight = true;
