@@ -71,7 +71,7 @@ function activateTexturePack(%packName) {
 	warn("Loading texture pack: " @ %pack.name);
 	ActiveTexturePacks.addEntry(%pack);
 
-	PlayGui.updateGems();
+	PlayGui.updateGems(true);
 }
 
 function deactivateTexturePack(%packName) {
@@ -242,6 +242,59 @@ function loadTexturePackFields(%pack) {
 	if (%pack.invert_text_colors !$= "") {
 		$TexturePack::InvertTextColors = %pack.invert_text_colors;
 	}
+	if (%pack.fonts) {
+		// Save existing fonts first, for restoring later
+		if ($TexturePack::OldFont $= "") {
+			$TexturePack::OldFont = $DefaultFont;
+		}
+		if ($TexturePack::OldFont["Bold"] $= "") {
+			$TexturePack::OldFont["Bold"] = $DefaultFont["Bold"];
+		}
+		if ($TexturePack::OldFont["Italic"] $= "") {
+			$TexturePack::OldFont["Italic"] = $DefaultFont["Italic"];
+		}
+		if ($TexturePack::OldFont["Condensed"] $= "") {
+			$TexturePack::OldFont["Condensed"] = $DefaultFont["Condensed"];
+		}
+		if ($TexturePack::OldFont["PointPopups"] $= "") {
+			$TexturePack::OldFont["PointPopups"] = $DefaultFont["PointPopups"];
+		}
+		if ($TexturePack::OldFont["Small"] $= "") {
+			$TexturePack::OldFont["Small"] = $DefaultFont["Small"];
+		}
+		if ($TexturePack::OldFont["SmallBold"] $= "") {
+			$TexturePack::OldFont["SmallBold"] = $DefaultFont["SmallBold"];
+		}
+		if ($TexturePack::OldFont["SmallItalic"] $= "") {
+			$TexturePack::OldFont["SmallItalic"] = $DefaultFont["SmallItalic"];
+		}
+
+		// Then apply new fonts
+		if (%pack.fonts.font !$= "") {
+			$DefaultFont = %pack.fonts.font;
+		}
+		if (%pack.fonts.bold !$= "") {
+			$DefaultFont["Bold"] = %pack.fonts.bold;
+		}
+		if (%pack.fonts.italic !$= "") {
+			$DefaultFont["Italic"] = %pack.fonts.italic;
+		}
+		if (%pack.fonts.condensed !$= "") {
+			$DefaultFont["Condensed"] = %pack.fonts.condensed;
+		}
+		if (%pack.fonts.pointPopups !$= "") {
+			$DefaultFont["PointPopups"] = %pack.fonts.pointPopups;
+		}
+		if (%pack.fonts.small !$= "") {
+			$DefaultFont["Small"] = %pack.fonts.small;
+		}
+		if (%pack.fonts.smallBold !$= "") {
+			$DefaultFont["SmallBold"] = %pack.fonts.smallBold;
+		}
+		if (%pack.fonts.smallItalic !$= "") {
+			$DefaultFont["SmallItalic"] = %pack.fonts.smallItalic;
+		}
+	}
 	//Find all the GuiMLTextCtrls and update their text
 	texturePackRecurse(GuiGroup);
 }
@@ -294,6 +347,32 @@ function unloadTexturePack(%pack) {
 					texturePackFieldRestore(%object, %field);
 				}
 			}
+		}
+	}
+	if (%pack.fonts) {
+		if ($TexturePack::OldFont !$= "") {
+			$DefaultFont = $TexturePack::OldFont;
+		}
+		if ($TexturePack::OldFont["Bold"] !$= "") {
+			$DefaultFont["Bold"] = $TexturePack::OldFont["Bold"];
+		}
+		if ($TexturePack::OldFont["Italic"] !$= "") {
+			$DefaultFont["Italic"] = $TexturePack::OldFont["Italic"];
+		}
+		if ($TexturePack::OldFont["Condensed"] !$= "") {
+			$DefaultFont["Condensed"] = $TexturePack::OldFont["Condensed"];
+		}
+		if ($TexturePack::OldFont["PointPopups"] !$= "") {
+			$DefaultFont["PointPopups"] = $TexturePack::OldFont["PointPopups"];
+		}
+		if ($TexturePack::OldFont["Small"] !$= "") {
+			$DefaultFont["Small"] = $TexturePack::OldFont["Small"];
+		}
+		if ($TexturePack::OldFont["SmallBold"] !$= "") {
+			$DefaultFont["SmallBold"] = $TexturePack::OldFont["SmallBold"];
+		}
+		if ($TexturePack::OldFont["SmallItalic"] !$= "") {
+			$DefaultFont["SmallItalic"] = $TexturePack::OldFont["SmallItalic"];
 		}
 	}
 }

@@ -36,5 +36,8 @@
     "GuiRoundBorderThinProfile": {
       "fillColor": "174 143 133"
     }
+  },
+  "fonts": {
+    "pointPopups": "Marker Felt"
   }
 }

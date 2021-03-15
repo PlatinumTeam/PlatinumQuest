@@ -360,10 +360,7 @@ function PlayGui::updateGems(%this, %updateMax) {
 			GemsTotalTen.setPosition("144 0");
 			GemsTotalOne.setPosition("168 0");
 		}
-
 	}
-
-
 }
 
 //-----------------------------------------------------------------------------
