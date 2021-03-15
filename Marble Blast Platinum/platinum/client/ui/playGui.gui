@@ -845,23 +845,11 @@ new GuiControl(PlayGui) {
 				bitmap = "./game/laps/laps_label";
 				wrap = "0";
 			};
-			new GuiBitmapCtrl(PGLapsTenComplete) {
-				profile = "GuiDefaultProfile";
-				horizSizing = "right";
-				vertSizing = "bottom";
-				position = "64 0";
-				extent = "28 37";
-				minExtent = "8 8";
-				visible = "1";
-				helpTag = "0";
-				bitmap = "./game/numbers/0";
-				wrap = "0";
-			};
 			new GuiBitmapCtrl(PGLapsOneComplete) {
 				profile = "GuiDefaultProfile";
 				horizSizing = "right";
 				vertSizing = "bottom";
-				position = "79 0";
+				position = "99 0";
 				extent = "28 37";
 				minExtent = "8 8";
 				visible = "1";
@@ -873,7 +861,7 @@ new GuiControl(PlayGui) {
 				profile = "GuiDefaultProfile";
 				horizSizing = "right";
 				vertSizing = "bottom";
-				position = "95 0";
+				position = "115 0";
 				extent = "28 37";
 				minExtent = "8 8";
 				visible = "1";
@@ -881,23 +869,11 @@ new GuiControl(PlayGui) {
 				bitmap = "./game/numbers/slash";
 				wrap = "0";
 			};
-			new GuiBitmapCtrl(PGLapsTenTotal) {
-				profile = "GuiDefaultProfile";
-				horizSizing = "right";
-				vertSizing = "bottom";
-				position = "112 0";
-				extent = "28 37";
-				minExtent = "8 8";
-				visible = "1";
-				helpTag = "0";
-				bitmap = "./game/numbers/0";
-				wrap = "0";
-			};
 			new GuiBitmapCtrl(PGLapsOneTotal) {
 				profile = "GuiDefaultProfile";
 				horizSizing = "right";
 				vertSizing = "bottom";
-				position = "127 0";
+				position = "132 0";
 				extent = "28 37";
 				minExtent = "8 8";
 				visible = "1";

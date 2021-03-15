@@ -313,8 +313,8 @@ function PlayGui::updateGems(%this, %updateMax) {
 	GemsFoundTen.setNumberColor(%ten, %color);
 	GemsFoundOne.setNumberColor(%one, %color);
 
-	GemsFoundHundred.setVisible(!(%hundred == 0)); 
-	GemsFoundTen.setVisible(!(%hundred == 0 && %ten == 0)); 
+	GemsFoundHundred.setVisible(!(%hundred == 0));
+	GemsFoundTen.setVisible(!(%hundred == 0 && %ten == 0));
 
 	if (%maxNeedsToUpdate) {
 		%one = %max % 10;
@@ -935,24 +935,12 @@ function PlayGui::updateGemMessage(%this, %obj, %num) {
 
 function PlayGui::updateLaps(%this) {
 	%completeOne = (%this.lapsComplete % 10);
-	%completeTen = ((%this.lapsComplete - %completeOne) / 10);
 	%totalOne = (%this.lapsTotal % 10);
-	%totalTen = ((%this.lapsTotal - %totalOne) / 10);
 
 	%color = (%this.lapsComplete >= %this.lapsTotal ? $TimeColor["stopped"] : $TimeColor["normal"]);
 
-	PGLapsTenComplete.setNumberColor(%completeTen, %color);
 	PGLapsOneComplete.setNumberColor(%completeOne, %color);
-	PGLapsTenComplete.setVisible(%completeTen != 0);
-
-	if (%totalTen != 0) {
-		PGLapsTenTotal.setNumberColor(%totalTen, %color);
-		PGLapsOneTotal.setNumberColor(%totalOne, %color);
-		PGLapsOneTotal.setVisible(true);
-	} else {
-		PGLapsTenTotal.setNumberColor(%totalOne, %color);
-		PGLapsOneTotal.setVisible(false);
-	}
+	PGLapsOneTotal.setNumberColor(%totalOne, %color);
 	PGLapsSlash.setNumberColor("slash", %color);
 
 	PGLapsLabel.setBitmap("platinum/client/ui/game/laps/laps_label");
