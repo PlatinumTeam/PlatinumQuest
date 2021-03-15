@@ -40,9 +40,8 @@ $DefaultFont["Condensed"]   = ($pref::DefaultFont["Condensed"]   $= "" ? "Squatn
 $DefaultSmallFont           = ($pref::DefaultSmallFont           $= "" ? "Arial"          : $pref::DefaultSmallFont);
 $DefaultSmallFont["Bold"]   = ($pref::DefaultSmallFont["Bold"]   $= "" ? "Arial Bold"     : $pref::DefaultSmallFont["Bold"]);
 $DefaultSmallFont["Italic"] = ($pref::DefaultSmallFont["Italic"] $= "" ? "Arial Italic"   : $pref::DefaultSmallFont["Italic"]);
-
-// Gem and TT indicators, defined this way to allow for different font sizes
-$DefaultFont["PointPopups"] = ($pref::DefaultFont["PointPopups"] $= "" ? "<bold:48>"      : $pref::DefaultFont["PointPopups"]);
+// Gem and TT indicators
+$DefaultFont["PointPopups"] = ($pref::DefaultFont["PointPopups"] $= "" ? "Whitney"        : $pref::DefaultFont["PointPopups"]);
 
 // GuiDefaultProfile is a special case, all other profiles are initialized
 // to the contents of this profile first then the profile specific
