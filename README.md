@@ -2,7 +2,7 @@
 
 This is the main repository for the public release of the game data and scripts for PQ.
 
-**No longer actively maintained!** As of March 2021, this project is no longer maintained due to a lack of willing maintainers. The repository is preserved as a reference but no further changes are planned to be accepted and no future builds are planned.
+**Under new maintenance** As of mid 2021 (public as of February 2022), a new team is maintaining this project. You can send new pull requests and issues to [their clone of this repository, located here](https://github.com/The-New-Platinum-Team/PlatinumQuest-Dev). ~~As of March 2021, this project is no longer maintained due to a lack of willing maintainers. The repository is preserved as a reference but no further changes are planned to be accepted and no future builds are planned.~~
 
 See [MBExtender](https://github.com/PlatinumTeam/MBExtender) for the C++ engine modification source code.
 
